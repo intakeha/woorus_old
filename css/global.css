@@ -1,0 +1,227 @@
+/* CSS reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset,
+form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, 
+footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+	text-align:center;
+	color: #666;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Woorus color palette 
+	#99B8D7 (Light Blue Sky)
+	#4980B7 (Medium Blue Sky - Two)
+	#215086 (Deep Blue - Top of Water)
+	#000418 (Dark Blue/Black - Deep Ocean)
+	#78BCE3 (Medium Highlighted Blue - Shadows)
+*/
+
+/* Page styles */
+ul {
+	list-style-type: none;
+}
+
+span {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+a:link, a:active, a:visited {
+	color: #4980B7;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #4980B7;
+	text-decoration: underline;
+}
+
+.globalContainer {
+	width: 1200px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin:0px auto;
+}
+ 
+/* Header */
+.header {
+	background: url(../images/global/header.jpg) no-repeat;
+	height: 160px;
+	text-align: left;
+}
+
+#top_menu {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	height: 110px;
+	position: relative;
+}
+
+#menu li {
+	margin: 36px 0px 0px 0px;
+	float:left;
+}
+
+#menu a {
+	display:block;
+	width: 70px;
+	height: 75px;
+}
+
+a#nav_logo {
+	width: 400px;
+}
+
+div#nav_space {
+	width: 280px;
+	height: 75px;
+}
+
+a#nav_home {
+	background:url(../images/global/home.png) no-repeat;
+	background-repeat: no-repeat;
+}
+
+a#nav_home:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_home_1 {
+	background:url(../images/global/home.png) no-repeat;
+	background-position: 0px -150px;
+}
+
+a#nav_mosaic {
+	background:url(../images/global/mosaic.png) no-repeat;
+}
+
+a#nav_mosaic:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_mosaic_1 {
+	background:url(../images/global/mosaic.png) no-repeat;
+	background-position: 0px -150px;
+}
+
+a#nav_search {
+	background:url(../images/global/search.png);
+}
+
+a#nav_search:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_search_1 {
+	background:url(../images/global/search.png);
+	background-position: 0px -150px;
+}
+
+a#nav_contacts {
+	background:url(../images/global/contacts.png);
+}
+
+a#nav_contacts:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_contacts_1 {
+	background:url(../images/global/contacts.png);
+	background-position: 0px -150px;
+}
+
+a#nav_lounge {
+	background:url(../images/global/lounge.png);
+}
+
+a#nav_lounge:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_lounge_1 {
+	background:url(../images/global/lounge.png);
+	background-position: 0px -150px;
+}
+
+a#nav_mail {
+	background:url(../images/global/mail.png);
+}
+
+a#nav_mail:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_mail_1 {
+	background:url(../images/global/mail.png);
+	background-position: 0px -150px;
+}
+
+a#nav_trends {
+	background:url(../images/global/trends.png);
+}
+
+a#nav_trends:hover {
+	background-position: 0px -75px;
+}
+
+a#nav_trends_1 {
+	background:url(../images/global/trends.png);
+	background-position: 0px -150px;
+}
+
+#sub_menu {
+	height: 40px;
+	text-align: right;
+	padding: 10px;
+}
+
+/* Footer */
+.footer {
+	background: url(../images/global/footer.png);
+	height: 106px;
+	font-size: 20px;
+	color: #FFF;
+	text-align: center;
+}
+
+.footer a:link, .footer a:active, .footer a:visited {
+	color: #FFF;
+	text-decoration: none;
+}
+
+.footer a:hover {
+	color: #4980B7;
+	text-decoration: none;
+}
+
+#nav_footer {
+	padding: 45px;
+}

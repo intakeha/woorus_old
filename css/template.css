@@ -1,0 +1,372 @@
+/* Index */
+.bg_canvas {
+	height: 254px;
+	background-image: url(../images/global/home_bg_header.jpg);
+	background-repeat: repeat-x;
+}
+
+#indexContainer {
+	margin-top: -254px;
+}
+
+#header {
+	width: 1200px;
+	height: 450px;
+	background: url(../images/global/home_bg_banner.jpg) no-repeat;
+	text-align: left;
+}
+
+#logo {
+	display: block;
+	width: 300px;
+	height: 60px;
+	float: left;
+	margin: 30px 0px 0px 100px;
+}
+
+#login_panel {
+	width: 591px;
+	height: 89px;
+	text-align: center;
+	background: url(../images/global/login_bg.png) no-repeat;
+	float: right;
+	font-size: 18px;
+}
+
+#login_form {
+	margin-top: 20px;
+	color: #215086;	
+}
+
+.login_text{
+	width: 156px;
+	font-size: 18px;
+	color: #666;
+}
+
+#login_button {
+	font-size: 18px;
+	color: #FFF;
+	background-color: #215086;
+	border: 2px solid #FFF;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+#forgot_password {
+	font-size: 12px;
+	margin: 5px 120px 0px 0px;
+	float: right;
+}
+
+#indexContent {
+	width: 1200px;
+	height: 400px;
+	margin-bottom: 20px;
+}
+
+#slide_show {
+	width: 600px;
+	height: 400px;
+	border-right: 1px solid #CCC;
+	float: left;
+}
+
+#sign_up {
+	width: 539px;
+	height: 400px;
+	margin-left: 60px;
+	text-align: left;
+	line-height: 30px;
+	float: left;
+}
+
+#facebook_login {
+	margin-left: 150px;
+}
+
+#signup_form {
+	font-size: 18px;
+	color: #215086;	
+}
+
+#signup_form li {
+	line-height: 35px;
+}
+
+#signup_form label {
+	width: 150px;
+	display: inline-block;
+}
+
+#signup_form select {
+	width: 80px;
+	font-size: 18px;
+	color: #666;
+}
+
+.text_form {
+	width: 250px;
+	font-size: 18px;
+	color: #666;
+}
+
+#join_button {
+	width: 100px;
+	font-size: 18px;
+	color: #FFF;
+	border: 2px solid #4980B7;
+	background: #215086;
+	margin-top: 20px;
+	margin-left: 300px;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+/* Home - Internal Profile */
+#iprofile {
+	width: 1120px;
+	height:	540px;
+	margin:0px auto;
+}
+
+#profile {
+	width: 400px;
+	height: 540px;
+	float: left;
+	color: #4980B7;
+	text-align: left;
+}
+
+#profile_frame {
+	position: relative;
+	margin: -300px 0px 0px 0px;
+}
+
+#profile_frame a {
+	width: 400px;
+	height: 300px;
+	display: block;
+	background: url(../images/global/profile_frame.png) no-repeat;
+}
+
+#profile_frame a:hover{
+	width: 400px;
+	height: 300px;
+	display: block;
+	background: url(../images/global/profile_frame.png) no-repeat;
+	background-position: 0px -300px;
+}
+
+#profile_pic {
+	width: 350px;
+	height: 250px;
+	margin: 25px;
+	background: url(../images/global/user_pic.png) no-repeat;
+}
+
+#profile_name {
+	text-align: left;
+	line-height: 20px;
+	margin: 15px;
+}
+
+#online_status {
+	width: 72px;
+	height: 28px;
+	background: url(../images/global/online.png) no-repeat;
+	float: right;
+}
+
+#announcement {
+	display : block;
+	width: 370px;
+	height: 120px;
+	margin: 20px 0px 0px 15px;
+	background:url(../images/global/announcements.png) no-repeat;
+}
+
+#announcement div{
+	margin-left: 95px;
+	line-height: 20px;
+	padding: 10px;
+	text-align: center;
+}
+
+#social_status {
+	width: 80px;
+	height: 540px;
+	float: left;
+	text-align: left;
+}
+
+#butterfly {
+	width: 50px;
+	height: 40px;
+	background:url(../images/global/social_status.png) no-repeat;
+	background-position: 0px 0px;
+}
+
+#warning {
+	width: 50px;
+	height: 40px;
+	background:url(../images/global/social_status.png) no-repeat;
+	background-position: 0px -40px;
+}
+
+
+.pagination {
+	width: 70px;
+	height: 500px;
+	float: left;
+}
+
+.pagination a {
+	display: block;
+	width: 70px;
+	height: 60px;
+	margin: 225px 0px 0px 0px;
+}
+
+#pagination_left {
+	background: url(../images/global/page_left.png) no-repeat;
+}
+
+#pagination_right {
+	background: url(../images/global/page_right.png) no-repeat;
+	background-position: 20px 0px;
+}
+
+#feeds {
+	width: 500px;
+	height: 500px;
+	float: left;
+}
+
+.feed_entry {
+	width: 500px;
+	height: 100px;
+	text-align: left;
+	border-top: 1px solid #99B8D7;
+}
+
+#feed_last_entry {
+	border-top: 1px solid #99B8D7;
+	border-bottom: 1px solid #99B8D7;
+}
+
+.feed_content {
+	width: 490px;
+	height: 90px;
+	margin-top: 10px;
+}
+
+.feed_profile {
+	width: 90px;
+	height: 80px;
+	float: left;
+}
+
+.feed_display {
+	width: 380px;
+	float: left;
+}
+
+.feed_update {
+	width: 358px;
+	height: 28px;
+}
+
+.feed_message {
+	width: 300px;
+	height: 28px;
+	line-height: 16px;
+	float: left;
+}
+
+.feed_message a {
+	font-weight: bold;
+}
+
+.feed_message font {
+	font-size: 11px;
+	font-style: italic;
+	color: #CCC;
+}
+
+.feed_online_status {
+	width: 28px;
+	height: 28px;
+	float: left;
+	background: url(../images/global/online.png) no-repeat;
+	background-position: 0px 0px;
+}
+
+.feed_social_status {
+	width: 30px;
+	height: 28px;
+	float: left;
+	background:url(../images/global/social_status_sm.png) no-repeat;
+	background-position: 0px 0px;
+}
+
+.feed_links {
+	width: 358px;
+	height: 50px;
+}
+
+.feed_interest {
+	float: left;
+	margin-top: 8px;
+}
+
+.feed_actions {
+	width: 186px;
+	height: 50px;
+	float: right;
+}
+
+.talk_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: 0px 0px;
+	float: right;
+}
+
+.write_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -62px 0px;
+	float: right;
+}
+
+.add_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -124px 0px;
+	float: right;
+}
+
+.block_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -186px 0px;
+	float: right;
+}
+
+.archive_button {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-top: 30px;
+	float: right;
+	background:url(../images/global/archive.png) no-repeat;
+}
