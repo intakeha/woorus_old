@@ -15,7 +15,7 @@
 		<div id="header">
 			<a id="logo" href="#"></a>
 			<div id="login_panel">
-				<form id="login_form" action="" method="POST">
+				<form id="login_form" action="/actions/login.php" method="POST">
 					Email <input class="login_text" type="text" name="username"> &nbsp; 
                     Password <input class="login_text" type="password" name="password"> &nbsp; 
                     <input id="login_button" type="submit" name="login" value="Login">
@@ -30,14 +30,14 @@
             <div id="sign_up">
             	<div id="facebook_login"><a href="#"><img src="images/global/facebook.jpg"></a><br>
                 <span>&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;</span></div>
-				<form action="" method="POST">
+				<form action="/actions/register.php" method="POST">
                     <ul id="signup_form">
                         <li><label>First Name</label><input class="text_form" type="text" name="first_name"></li>
                         <li><label>Last Name</label><input class="text_form" type="text" name="last_name"></li>
                         <li><label>Email</label><input class="text_form" type="text" name="email"></li>
                         <li><label>Confirm Email</label><input class="text_form" type="text" name="confirm_email"></li>
                         <li><label>Password</label><input class="text_form"  type="password" name="password"></li>
-                        <li><label>Gender</label><select name="gender"><option value="-1"> Select </option><option value="f"> Female </option><option value="m"> Male </option></select></li>
+                        <li><label>Gender</label><select name="gender"><option value="-1"> Select </option><option value="F"> Female </option><option value="M"> Male </option></select></li>
                         <li><label>Birthday</label><select name="birthday_month">
                             <option value="-1">Month</option>
                             <option value="1">Jan</option>
