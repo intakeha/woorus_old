@@ -1,1 +1,1 @@
-Testing Removal (Changed file owner)
+Testing Removal (Changed file owner... add /bin/rm)
