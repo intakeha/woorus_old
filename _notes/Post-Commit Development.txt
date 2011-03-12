@@ -1,1 +1,4 @@
-Testing Removal (chmod works - trying rm line - added apache to dev group)
+Testing svn update
+
+File Removal (permission denied)
+
