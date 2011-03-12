@@ -1,2 +1,2 @@
-Testing permission - chown of pup
+Testing permission - removed all text from post-commit
 
