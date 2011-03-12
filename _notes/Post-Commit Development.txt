@@ -1,4 +1,2 @@
-Testing svn update
-
-File Removal (permission denied)
+Testing svn update (separating cd and svn)
 
