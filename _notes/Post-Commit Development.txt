@@ -1,2 +1,2 @@
-Testing permission - removed all text from post-commit
+Post commit - sh script
 
