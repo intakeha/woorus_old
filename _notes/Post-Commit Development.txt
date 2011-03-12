@@ -1,2 +1,2 @@
-Testing svn update (separating cd and svn)
+Testing permission - sh created for bin
 
