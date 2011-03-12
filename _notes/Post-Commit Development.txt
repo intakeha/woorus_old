@@ -1,2 +1,3 @@
 Testing permission - updated post-commit w/ bin/sh, .c, .sh
+(chown of binary)
 
