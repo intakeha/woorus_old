@@ -1,2 +1,2 @@
-Testing permission - sh created for bin 
+Testing permission - updated post-commit, .c, .sh
 
