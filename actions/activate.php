@@ -1,12 +1,12 @@
 <?php
 require('connect.php');
 
-//$id = $_GET['id'];
-//$token = $_GET['token'];
+$id = $_GET['id'];
+$token = $_GET['token'];
 
 //for testing
-$id = "12";
-$token = "79003140";
+//$id = "12";
+//$token = "79003140";
 
 if ($id&&$token)
 {
