@@ -8,7 +8,7 @@ $id = 12;
 $first_name = "Alison" 
 $email_address_old = strtolower("testEmail3@gmail.com");
 $email_address_new = strtolower("testEmailChange@gmail.com");
-$token = "23456789";
+$email_token = "23456789";
 
 
 /*

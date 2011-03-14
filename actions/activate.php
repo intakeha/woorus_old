@@ -15,7 +15,7 @@ if ($id&&$token)
 	mysql_select_db($db_name);
 
 	//check if id & token combination exists
-	$query = "SELECT id from `users` WHERE id = '$id' AND token = '$token'";
+	$query = "SELECT id from `users` WHERE id = '$id' AND email_token = '$token'";
 	$result = mysql_query($query, $connection) or die ("Error");
 
 	// if row exists -> id/token combination is correct

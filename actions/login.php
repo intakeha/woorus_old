@@ -3,8 +3,8 @@
 session_start();
 require('connect.php');
 
-//for testing, set to these variables
-$f_email_address = strtolower(strip_tags($_POST['username']));
+//get from the form
+$f_email_address = strtolower(strip_tags($_POST['email']));
 $f_password = md5($_POST['password']);
 
 

@@ -25,8 +25,8 @@ $f_user_city_id = "1"; //need to do based on lookup
 
 
 //encrypt password
-$f_password = md5($f_password);
-$f_password_check = md5($f_password_check);
+$f_password_old = md5($f_password_old);
+
 
 //check the data the user entered in each field
 $forms_correct = false;

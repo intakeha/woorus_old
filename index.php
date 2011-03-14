@@ -16,7 +16,7 @@
 			<a id="logo" href="#"></a>
 			<div id="login_panel">
 				<form id="login_form" action="/actions/login.php" method="POST">
-					Email <input class="login_text" type="text" name="username"> &nbsp; 
+					Email <input class="login_text" type="text" name="email"> &nbsp; 
                     Password <input class="login_text" type="password" name="password"> &nbsp; 
                     <input id="login_button" type="submit" name="login" value="Login">
                     <a id="forgot_password" href="#">Forgot your password?</a>
