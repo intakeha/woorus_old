@@ -225,3 +225,9 @@ a#nav_trends_1 {
 #nav_footer {
 	padding: 45px;
 }
+
+.error_text {
+	font-size: 12px;
+	color: #C00;
+	font-weight: bold;
+}

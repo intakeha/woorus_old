@@ -24,18 +24,14 @@
 	margin: 30px 0px 0px 100px;
 }
 
-#login_panel {
+#panel {
 	width: 591px;
 	height: 89px;
 	text-align: center;
 	background: url(../images/global/login_bg.png) no-repeat;
 	float: right;
 	font-size: 18px;
-}
-
-#login_form {
-	margin-top: 20px;
-	color: #215086;	
+	padding-top: 20px;
 }
 
 .login_text{
@@ -53,10 +49,28 @@
 	cursor: hand; 
 }
 
-#forgot_password {
+.switch_link {
 	font-size: 12px;
 	margin: 5px 120px 0px 0px;
 	float: right;
+}
+
+#forgot_button {
+	width: 180px;
+	font-size: 18px;
+	color: #FFF;
+	background-color: #215086;
+	border: 2px solid #FFF;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+#auth_error{
+	margin: 5px 0px 0px -35px;
+}
+
+#registration_error{
+	margin: -35px 0px 0px 0px;
 }
 
 #indexContent {
@@ -85,24 +99,25 @@
 	margin-left: 150px;
 }
 
-#signup_form {
+#registration_form li {
 	font-size: 18px;
 	color: #215086;	
-}
-
-#signup_form li {
 	line-height: 35px;
 }
 
-#signup_form label {
+#registration_form label {
 	width: 150px;
 	display: inline-block;
 }
 
-#signup_form select {
+#registration_form select {
 	width: 80px;
 	font-size: 18px;
 	color: #666;
+}
+
+select#gender {
+	width: 165px;
 }
 
 .text_form {
@@ -121,6 +136,14 @@
 	margin-left: 300px;
 	cursor: pointer; 
 	cursor: hand; 
+}
+
+#registration_error label{
+	width: 250px;
+	text-align: left;
+	line-height: 20px;
+	padding-left: 5px;
+	border-left: 3px solid #C00;
 }
 
 /* Home - Internal Profile */
