@@ -20,7 +20,7 @@
 			<a id="logo" href="#"></a>
 			<div id="panel">
 				<div class="login_panel">
-					<form id="login_form" action="" method="POST">
+					<form id="login_form" action="actions/login.php" method="POST">
 						Email <input class="login_text" type="text" name="email"> &nbsp; 
 						Password <input class="login_text" type="password" name="password"> &nbsp; 
 						<input id="login_button" type="submit" name="login" value="Login">
@@ -28,7 +28,7 @@
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Forgot your password?</a>
 				</div>
 				<div class="login_panel" style="display: none;">
-					<form id="recover_form" action="" method="POST">
+					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" type="text" name="email"> &nbsp; 
 						<input id="forgot_button" type="submit" name="forgot" value="Reset Password">
 					</form>
@@ -46,7 +46,7 @@
 					<a href="#"><img src="images/global/facebook.jpg"></a><br>
 					<span>&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;</span>
 				</div>
-				<form id="registration_form" action="" method="POST">
+				<form id="registration_form" action="actions/register.php" method="POST">
 				    <ul>
 					<li><label>First Name</label><input class="text_form" type="text" name="first_name"></li>
 					<li><label>Last Name</label><input class="text_form" type="text" name="last_name"></li>
