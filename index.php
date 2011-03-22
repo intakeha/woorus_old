@@ -8,10 +8,9 @@
 	<meta name="description" content="Connecting people through interests">
 	<link href="css/global.css" rel="stylesheet" type="text/css">
 	<link href="css/template.css" rel="stylesheet" type="text/css">
-	<link href="css/template.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
    	<script type="text/javascript" src="js/jquery.validate.js"></script>  
-   	<script type="text/javascript" src="js/woorus.js"></script>
+   	<script type="text/javascript" src="js/iwoorus.js"></script>
 </head>
 <body>
 	<div class="bg_canvas"></div>

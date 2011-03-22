@@ -8,9 +8,12 @@
 	<meta name="description" content="Connecting people through interests">
 	<link href="css/global.css" rel="stylesheet" type="text/css">
 	<link href="css/template.css" rel="stylesheet" type="text/css">
+   	<script type="text/javascript" src="js/jquery.min.js"></script>
+   	<script type="text/javascript" src="js/jquery.validate.js"></script>  
+   	<script type="text/javascript" src="js/woorus.js"></script>
 	<?php 
 		$page = $_REQUEST['page'];
-		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends");
+		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "settings");
 		if (!in_array($page, $pages)) header("location: canvas.php?page=home");
 	?>
 </head>
