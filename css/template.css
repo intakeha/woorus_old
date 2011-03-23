@@ -431,5 +431,10 @@ select#gender {
 	margin-top: 310px;
 }
 
+#deactivate {
+	background: #ccc;
+	font-size: 15px;
+}
+
 
 

@@ -183,8 +183,9 @@
             <li><input type="checkbox" name="mail_contact" checked="checked"/> Adds you to a contact list</li>
             <li><input type="checkbox" name="mail_calls" checked="checked"/> Calls you while you're away</li>
             </ul>
-            <input id="save_settings" class="buttons" type="submit" name="update" value="Save">
+            <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
             <div id="settings_error" class="error_text">Please fill in valid email.</div>
         </div>
     </form>
 </div>        
+<div style="text-align:right;"><a id="deactivate" href="#">| Deactivate your acount |</a></div>
