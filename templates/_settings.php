@@ -178,10 +178,10 @@
         <div id="settings_column2">
         	<ul>
             <li style="margin-bottom: 10px;">Notifications:</li>
-            <li><input type="checkbox" name="mail_interest" checked="checked"/> Someone adds a similar interst</li>
-            <li><input type="checkbox" name="mail_message" checked="checked"/> Someone sends you a message</li>
-            <li><input type="checkbox" name="mail_contact" checked="checked"/> Someone adds you to a his/her contact list</li>
-            <li><input type="checkbox" name="mail_calls" checked="checked"/> You received missed calls</li>
+            <li><input type="checkbox" name="mail_interest" checked="checked"/> Has similar interests as you</li>
+            <li><input type="checkbox" name="mail_message" checked="checked"/> Sends you a message</li>
+            <li><input type="checkbox" name="mail_contact" checked="checked"/> Adds you to a contact list</li>
+            <li><input type="checkbox" name="mail_calls" checked="checked"/> Calls you while you're away</li>
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save">
             <div id="settings_error" class="error_text">Please fill in valid email.</div>
