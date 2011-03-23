@@ -195,7 +195,7 @@ function validateGender($gender)
 	{
 		die("Please select your gender.");
 	}
-	elseif(!($gender=="M" | $gender == "F")
+	elseif(!($gender=="M" | $gender == "F"))
 	{
 		die("Please select male or female.");
 	}
