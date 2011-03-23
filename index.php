@@ -22,14 +22,14 @@
 					<form id="login_form" action="actions/login.php" method="POST">
 						Email <input class="login_text" type="text" name="email"> &nbsp; 
 						Password <input class="login_text" type="password" name="password"> &nbsp; 
-						<input id="login_button" type="submit" name="login" value="Login">
+						<input id="login_button" class="buttons" type="submit" name="login" value="Login">
 					</form>
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Forgot your password?</a>
 				</div>
 				<div class="login_panel" style="display: none;">
 					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" type="text" name="email"> &nbsp; 
-						<input id="forgot_button" type="submit" name="forgot" value="Reset Password">
+						<input id="forgot_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Log in</a>
 				</div>
@@ -213,7 +213,7 @@
 					    <option value="1905">1905</option>
 					</select></li>
 					<li><label>City</label><input class="text_form" type="text" name="city"></li>
-					<li><input id="join_button" type="submit" name="join" value="Join"></li>
+					<li><input id="join_button" class="buttons" type="submit" name="join" value="Join"></li>
 				    </ul><div id="registration_error" class="error_text"></div>
 				</form>
 			</div>        

@@ -231,3 +231,12 @@ a#nav_trends_1 {
 	color: #C00;
 	font-weight: bold;
 }
+
+.buttons {
+	font-size: 18px;
+	color: #FFF;
+	cursor: pointer; 
+	cursor: hand; 
+	background: #215086;
+	border: 2px solid #4980B7;
+}

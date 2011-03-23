@@ -1,7 +1,7 @@
 <div class="header">
 	<div id="top_menu">
 		<ul id="menu">
-			<li><a id="nav_logo" href="#"></a></li>
+			<li><a id="nav_logo" href="index.php"></a></li>
 			<li><div id="nav_space"></div></li>
 			<li><a id="nav_home<?php if ($page=="home") echo "_1"; ?>" href="canvas.php?page=home"></a></li>
 			<li><a id="nav_mosaic<?php if ($page=="mosaic") echo "_1"; ?>" href="canvas.php?page=mosaic"></a></li>
@@ -13,6 +13,6 @@
 		</ul>
 	</div>
 	<div id="sub_menu">
-    	alison.murphy@woorus.com | invite a friend | settings | logout
+    	alison.murphy@woorus.com | invite a friend | <a href="canvas.php?page=settings">settings</a> | logout
 	</div>
 </div>
