@@ -188,4 +188,4 @@
         </div>
     </form>
 </div>        
-<div style="text-align:right;"><a id="deactivate" href="#">| Deactivate your acount |</a></div>
+<div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
