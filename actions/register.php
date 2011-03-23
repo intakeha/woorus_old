@@ -136,13 +136,12 @@ function validateLastName($name)
 
 //check valid email--email format & escapes the string
 function validateEmail($email)
-{
+{	
 	if($email == NULL | strlen($email) == 0)
 	{
 		die("Please fill in your email address.");
 	}
-	$regexp = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
-	elseif (!preg_match $regexp, $email))
+	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
 		die ("Please enter a valid email address.");
 	}
