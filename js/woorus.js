@@ -1,34 +1,8 @@
 // Validate forms via jQuery
 $(document).ready(function(){
-	// Validate login form
-	$("#login_form").validate({
-		rules: {						// Adding validation rules for each input
-			email: "email",
-			password: "required"			
-		},
-		messages: {						// Customized error messages for each error
-			email: "Please enter a valid email address.",
-			password: "Please enter a password."	
-		},
-		groups: {						// Group form fields to get on error message
-			email: "email password"
-		},
-		errorLabelContainer: $("#auth_error")	// Assign error output div
-	});	
 	
-	// Validate login form
-	$("#recover_form").validate({
-		rules: {
-			email: "email"
-		},
-		messages: {
-			email: "Please enter a valid email address."
-		},
-		errorLabelContainer: $("#auth_error")
-	});	
-	
-	// Validate registration form
-	$("#registration_form").validate({
+	// Validate settings form
+	$("#settings_form").validate({
 		rules: {
 			first_name: {
 				required: true,
@@ -40,17 +14,18 @@ $(document).ready(function(){
 				validname: true,
 				minlength: 2			
 			},
-			email: {
-				required: true,
+			new_email: {
 				email: true
 			},
-			confirm_email: {
-				required: true,
-				equalTo: "#email"
-			},
-			password: {
-				required: true,
+			old_password: {
 				rangelength: [6,20]
+			},
+			new_password: {
+				rangelength: [6,20]
+			},
+			confirm_password: {
+				rangelength: [6,20],
+				equalTo: "#new_password"
 			},
 			gender: {
 				selectfield: true
@@ -79,17 +54,17 @@ $(document).ready(function(){
 				validname: "Last name contains invalid characters.",
 				minlength: "Please provide your real last name."			
 			},
-			email: {
-				required: "Please fill in your email address.",
+			new_email: {
 				email: "Please enter a valid email address."
 			},
-			confirm_email: {
-				required: "Please fill in your email address.",
-				equalTo: "Your emails do not match."
-			},
-			password: {
-				required: "Please fill in your password.",
+			old_password: {
 				rangelength: "Your password must be between 6 and 20 characters long."
+			},
+			new_password: {
+				rangelength: "Your password must be between 6 and 20 characters long.",
+			},
+			confirm_password: {
+				equalTo: "Your new passwords do not match.",
 			},
 			gender: {
 				selectfield: "Please select your gender."
@@ -108,9 +83,9 @@ $(document).ready(function(){
 			}
 		},
 		groups: {						// Group form fields to get on error message
-			first_name: "first_name last_name email confirm_email password gender birthday_month birthday_day birthday_year city"
+			first_name: "first_name last_name new_email old_password new_password confirm_password gender birthday_month birthday_day birthday_year city"
 		},
-		errorLabelContainer: $("#registration_error")
+		errorLabelContainer: $("#settings_error")
 	});	
 	
 });

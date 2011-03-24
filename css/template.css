@@ -416,7 +416,7 @@ select#gender {
 	line-height: 20px;
 }
 
-#settings_error{
+#settings_error label{
 	width: 400px;
 	text-align: left;
 	line-height: 20px;

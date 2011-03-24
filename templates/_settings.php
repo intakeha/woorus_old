@@ -2,15 +2,15 @@
     <form id="settings_form" action="" method="POST">
 	    <div id="settings_column1">
             <ul>
-            <li><label>First Name</label><input class="text_form" type="text" name="first_name"></li>
-            <li><label>Last Name</label><input class="text_form" type="text" name="last_name"></li>
+            <li><label>First Name</label><input class="text_form" type="text" name="first_name" value="Alison"></li>
+            <li><label>Last Name</label><input class="text_form" type="text" name="last_name" value="Murphy"></li>
             <li>&nbsp;</li>
             <li><label>Contact Email</label>alison.murphy@woorus.com</li>
             <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email"></li>
             <li>&nbsp;</li>
-            <li><label>Old Password</label><input class="text_form"  type="password" name="old_password"></li>
-            <li><label>New Password</label><input class="text_form"  type="password" name="new_password"></li>
-            <li><label>Confirm Password</label><input class="text_form"  type="password" name="confirm_password"></li>
+            <li><label>Old Password</label><input class="text_form" type="password" name="old_password"></li>
+            <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password"></li>
+            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password"></li>
             <li>&nbsp;</li>
             <li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="f"> Female </option><option value="m"> Male </option></select></li>
             <li><label>Birthday</label><select name="birthday_month">
@@ -184,7 +184,7 @@
             <li><input type="checkbox" name="mail_calls" checked="checked"/> Calls you while you're away</li>
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
-            <div id="settings_error" class="error_text">Please fill in valid email.</div>
+            <div id="settings_error" class="error_text"></div>
         </div>
     </form>
 </div>        
