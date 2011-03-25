@@ -1,6 +1,5 @@
 <?php
 require('connect.php');
-require('validations.php');
 
 //need to check for under 13
 
