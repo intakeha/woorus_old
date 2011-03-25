@@ -1,5 +1,8 @@
 <?php
 require('connect.php');
+require('validations.php');
+
+//need to check for under 13
 
 //set variables--will use POST to get from html
 
@@ -7,7 +10,7 @@ $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
 
 $f_email_address = validateEmail($_POST['email']);
-$f_email_check = validateEmail($_POST['confirm_email']);
+$f_email_check = $_POST['confirm_email'];
 $email_match = checkEmail($f_email_address, $f_email_check);
 
 $f_password = validatePassword($_POST['password']);
@@ -16,7 +19,7 @@ $f_gender = validateGender($_POST['gender']);
 $f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
 $f_birthday_day = ValidateBirthdayDay($_POST['birthday_day']);
 $f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
-$f_birthday = $f_birthday_year."-".$f_birthday_month."-".$f_birthday_day;   //"YYYY-MM-DD";
+$f_birthday = ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year);
 
 $f_user_city = validateCity($_POST['city']);
 
@@ -34,6 +37,9 @@ $temp_email_verified = "0"; //default value
 
 //encrypt password
 $f_password = md5($f_password);
+
+//set email to lower-case
+$f_email_address = strtolower($f_email_address);
 
 //open database connection
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
@@ -68,196 +74,6 @@ if ($id_count != 0)
 	$user_id = $row['id']; 
 }
 
-
-
-//validation functions
-
-
-//helper function for validateName convert to camel case (also looks at apostrophe's & dashes)
-function ucname($string) 
-{
-	$string =ucwords(strtolower($string));
-
-	foreach (array('-', '\'') as $delimiter) {
-		if (strpos($string, $delimiter)!==false) 
-		{
-		$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
-		}
-	}
-    return $string;
-}
-
-//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & escapes the string
-function validateFirstName($name)
-{
-	if($name == NULL | strlen($name) == 0)
-	{
-		die("Please fill in your first name");
-	}
-	elseif(strlen($name) < 2)
-	{
-		die("Please fill in your real first name");
-	}
-	elseif (!preg_match('[a-zA-Z\-\'\s]', $name))
-	{
-		die ("First name contains invalid characters");
-	}
-	else
-	{
-	return mysql_real_escape_string(ucname(strip_tags($name)));
-	}
-
-}
-
-//check valid birthday--check if 13 or older, check if not -1 for any value, 
-
-
-//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & escapes the string
-function validateLastName($name)
-{
-	if($name == NULL | strlen($name) == 0)
-	{
-		die("Please fill in your last name");
-	}
-	elseif(strlen($name) < 2)
-	{
-		die("Please fill in your real last name");
-	}
-	elseif (!preg_match('[a-zA-Z\-\'\s]', $name))
-	{
-		die ("Last name contains invalid characters");
-	}
-	else
-	{
-	return mysql_real_escape_string(ucname(strip_tags($name)));
-	}
-
-}
-
-//check valid email--email format & escapes the string
-function validateEmail($email)
-{	
-	if($email == NULL | strlen($email) == 0)
-	{
-		die("Please fill in your email address.");
-	}
-	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
-	{
-		die ("Please enter a valid email address.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($email));
-	}
-
-}
-
-//check email match--matches
-function checkEmail($email, $confirm_email)
-{
-	if (strlen($confirm_email) == 0)
-	{
-		die("Please confirm your email address.");
-	}
-	
-	elseif ($email != $confirm_email)
-	{
-		die("Your emails do not match.");
-	}
-	else 
-	{
-		return 1;
-	}
-}
-
-//check password length--between 6-20chars
-function validatePassword($password)
-{
-	if (strlen($password) == 0)
-	{
-		die("Please fill in your password.");
-	}
-	elseif (strlen($password) <6 | strlen($password) > 20)
-	{
-		die("Your password must be between 6 and 20 characters long.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($password));
-	}
-	
-}
-
-//check gender selected--check not -1
-function validateGender($gender)
-{
-	if ($gender == -1)
-	{
-		die("Please select your gender.");
-	}
-	elseif(!($gender=="M" | $gender == "F"))
-	{
-		die("Please select male or female.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($gender));
-	}
-}
-
-//check birthday month--check not -1
-function validateBirthdayMonth($month)
-{
-	if ($month == -1)
-	{
-		die("Please select your birthday month.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($month));
-	}
-}
-
-//check birthday day--check not -1
-function validateBirthdayDay($day)
-{
-	if ($day == -1)
-	{
-		die("Please select your birthday day.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($day));
-	}
-}
-
-//check birthday year--check not -1
-function validateBirthdayYear($year)
-{
-	if ($year == -1)
-	{
-		die("Please select your birthday year.");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($year));
-	}
-}
-
-//check user entered in city (check not null
-function validateCity($city)
-{
-	if ($city == NULL | strlen($city) == 0)
-	{
-		die("Please fill in your city");
-	}
-	else
-	{
-		return mysql_real_escape_string(strip_tags($city));
-	}
-}
-
-
 /*
 //send activation email (turn into a function)
 $to = $f_email_address;
@@ -277,5 +93,238 @@ mail($to, $subject, $body, $headers);
 */
 
 echo "You have been registered to woorus! Please check your email to activate your account \n";
+
+
+//-------------------------validation functions-----------------------------------------//
+
+//helper function for validateName convert to camel case (also looks at apostrophe's & dashes)
+function ucname($string) 
+{
+	$string =ucwords(strtolower($string));
+
+	foreach (array('-', '\'') as $delimiter) {
+		if (strpos($string, $delimiter)!==false) 
+		{
+			$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+		}
+	}
+	return $string;
+}
+
+//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 30 chars
+function validateFirstName($name)
+{
+	if($name == NULL | strlen($name) == 0)
+	{
+		die("Please fill in your first name.");
+	}
+	elseif(strlen($name) < 2)
+	{
+		die("Please fill in your real first name.");
+	}
+	elseif(strlen($name) > 30)
+	{
+		die("Please enter no more than 30 characters for first name.");
+	}
+	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
+	{
+		die ("First name contains invalid characters");
+	}
+	else
+	{
+		return ucname(strip_tags($name));
+	}
+
+}
+
+
+//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 60 chars
+function validateLastName($name)
+{
+	if($name == NULL | strlen($name) == 0)
+	{
+		die("Please fill in your last name.");
+	}
+	elseif(strlen($name) < 2)
+	{
+		die("Please fill in your real last name.");
+	}
+	elseif(strlen($name) > 60)
+	{
+		die("Please enter no more than 60 characters for last name.");
+	}
+	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
+	{
+		die ("Last name contains invalid characters.");
+	}
+	else
+	{
+		return ucname(strip_tags($name));
+	}
+
+}
+
+//check valid email--email format & checks length < 254
+function validateEmail($email)
+{	
+	if($email == NULL | strlen($email) == 0)
+	{
+		die("Please fill in your email address.");
+	}
+	elseif(strlen($email) > 254)
+	{
+		die("Please enter no more than 254 characters for email.");
+	}
+	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	{
+		die ("Please enter a valid email address.");
+	}
+	else
+	{
+		return strip_tags($email);
+	}
+
+}
+
+//check email match
+function checkEmail($email, $confirm_email)
+{
+	if (strlen($confirm_email) == 0)
+	{
+		die("Please confirm your email address.");
+	}
+	elseif ($email != $confirm_email)
+	{
+		die("Your emails do not match.");
+	}
+	else 
+	{
+		return ;
+	}
+}
+
+//check password length--between 6-20chars
+function validatePassword($password)
+{
+	if (strlen($password) == 0)
+	{
+		die("Please fill in your password.");
+	}
+	elseif (strlen($password) <6 | strlen($password) > 20)
+	{
+		die("Your password must be between 6 and 20 characters long.");
+	}
+	else
+	{
+		return strip_tags($password);
+	}
+	
+}
+
+//check gender selected--check not -1
+function validateGender($gender)
+{
+	if ($gender == -1)
+	{
+		die("Please select your gender.");
+	}
+	elseif(!($gender == "F" | $gender == "M"))
+	{
+		die("Please select your gender.");
+	}
+	
+	else
+	{
+		return strip_tags($gender);
+	}
+}
+
+//check birthday month--check not -1
+function validateBirthdayMonth($month)
+{
+	if ($month == -1)
+	{
+		die("Please select your birthday month.");
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $month))
+	{
+		die ("Please select your birthday month.");
+	}
+	else
+	{
+		return strip_tags($month);
+	}
+}
+
+//check birthday day--check not -1
+function validateBirthdayDay($day)
+{
+	if ($day == -1)
+	{
+		die("Please select your birthday date.");
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $day))
+	{
+		die ("Please select your birthday date.");
+	}
+	else
+	{
+		return strip_tags($day);
+	}
+}
+
+//check birthday year--check not -1, check all numbers
+function validateBirthdayYear($year)
+{
+	if ($year == -1)
+	{
+		die("Please select your birthday year.");
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $year))
+	{
+		die ("Please select your birthday year.");
+	}
+	else
+	{
+		return strip_tags($year);
+	}
+}
+
+
+function ValidateDate($birthday_month, $birthday_day, $birthday_year)
+{
+	if (!checkdate($birthday_month, $birthday_day, $birthday_year))
+	{
+		die("Please select a valid date.");
+	}
+	else
+	{
+		return $birthday_year."-".$birthday_month."-".$birthday_day;
+	}
+
+}
+
+//check valid birthday--check if 13 or older, check if not -1 for any value, 
+
+//check user entered in city (check not null
+function validateCity($city)
+{
+	if ($city == NULL | strlen($city) == 0)
+	{
+		die("Please fill in your city");
+	}
+	elseif (strlen($city) > 255)
+	{
+		die("Please enter no more than 255 characters for city.");
+	}
+	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $city))
+	{
+		die ("City contains invalid characters");
+	}
+	else
+	{
+		return ucname(strip_tags($city));
+	}
+}
 
 ?>
