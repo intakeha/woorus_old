@@ -1,19 +1,22 @@
 <?php
 
-session_start();
+//
+
+
 require('connect.php');
 
 //get from the form
-$f_email_address = gmail_check(strtolower(strip_tags($_POST['email'])));
-$f_password = md5($_POST['password']);
+$f_email_address = validateEmail($_POST['email']);
+$f_password = validatePassword($_POST['password']);
 
-
-//check that email & password entered & correct types
+//encrypt password
+$f_password = md5($f_password);
 
 //start a session if the user / password combination is found
 $returned_id = authenticate($f_email_address, $f_password);
 if ($returned_id != NULL)
 {
+	session_start();
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
 	
@@ -58,6 +61,25 @@ function authenticate($email, $pass)
 	}
 }
 
+//check valid email--check length & email format, returns lowercase, gmail-proof email
+function validateEmail($email)
+{	
+	if($email == NULL | strlen($email) == 0)
+	{
+		die("Please fill in your email address.");
+	}
+	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	{
+		die ("Please enter a valid email address.");
+	}
+	else
+	{
+		return gmail_check(strtolower(strip_tags($email)));
+	}
+
+}
+
+
 function gmail_check($email)
 {
 	if (preg_match('/gmail.com$/', $email))
@@ -70,6 +92,19 @@ function gmail_check($email)
 	{
 		return $email;
 	}
+}
+
+function validatePassword($password)
+{
+	if (strlen($password) == 0)
+	{
+		die("Please fill in your password.");
+	}
+	else
+	{
+		return strip_tags($password);
+	}
+	
 }
 
 ?>

@@ -296,6 +296,9 @@ function validateBirthdayDay($day)
 //check birthday year--check not -1, check all numbers
 function validateBirthdayYear($year)
 {
+	$today = getdate(); 
+	$cur_year = ($today['year']); 
+	
 	if ($year == -1)
 	{
 		die("Please select your birthday year.");
@@ -304,7 +307,10 @@ function validateBirthdayYear($year)
 	{
 		die ("Please select your birthday year.");
 	}
-	else
+	elseif((int)$year < 1905 | (int)$year > $cur_year)
+	{
+	
+	}else
 	{
 		return strip_tags($year);
 	}
