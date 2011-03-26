@@ -22,6 +22,8 @@ $f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
 
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
+echo $f_birthday; 
+
 $f_user_city = validateCity($_POST['city']);
 
 $f_user_country_id = ("1"); //need to do based on lookup
