@@ -4,7 +4,7 @@ session_start();
 require('connect.php');
 
 //get from the form
-$f_email_address = strtolower(strip_tags($_POST['email']));
+$f_email_address = gmail_check(strtolower(strip_tags($_POST['email'])));
 $f_password = md5($_POST['password']);
 
 
@@ -57,4 +57,19 @@ function authenticate($email, $pass)
 		return NULL;
 	}
 }
+
+function gmail_check($email)
+{
+	if (preg_match('/gmail.com$/', $email))
+	{
+		$email_substring = substr($email, 0, -10);
+		$new_email = str_replace(".", "", $email_substring)."@gmail.com";
+		return $new_email;
+	}
+	else
+	{
+		return $email;
+	}
+}
+
 ?>

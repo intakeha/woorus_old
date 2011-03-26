@@ -2,15 +2,16 @@
 require('connect.php');
 
 //need to check for under 13
-
-//set variables--will use POST to get from html
+//need to check for gmail email...
 
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
 
-$f_email_address = validateEmail($_POST['email']);
+$f_visual_email = validateEmail($_POST['email']);
+$f_email_address = gmail_check(strtolower($f_visual_email));
+
 $f_email_check = $_POST['confirm_email'];
-$email_match = checkEmail($f_email_address, $f_email_check);
+$email_match = checkEmail($f_visual_email, $f_email_check);
 
 $f_password = validatePassword($_POST['password']);
 $f_gender = validateGender($_POST['gender']);
@@ -36,9 +37,6 @@ $temp_email_verified = "0"; //default value
 
 //encrypt password
 $f_password = md5($f_password);
-
-//set email to lower-case
-$f_email_address = strtolower($f_email_address);
 
 //open database connection
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
@@ -110,6 +108,7 @@ function ucname($string)
 	return $string;
 }
 
+
 //removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 30 chars
 function validateFirstName($name)
 {
@@ -120,6 +119,10 @@ function validateFirstName($name)
 	elseif(strlen($name) < 2)
 	{
 		die("Please fill in your real first name.");
+	}
+	elseif(!preg_match('/^[A-Za-z ]/', $name))
+	{
+		die("First name should not start or end with a symbol.");
 	}
 	elseif(strlen($name) > 30)
 	{
@@ -147,6 +150,10 @@ function validateLastName($name)
 	elseif(strlen($name) < 2)
 	{
 		die("Please fill in your real last name.");
+	}
+	elseif(!preg_match('/^[A-Za-z ]/', $name))
+	{
+		die("Last name should not start or end with a symbol.");
 	}
 	elseif(strlen($name) > 60)
 	{
@@ -183,6 +190,20 @@ function validateEmail($email)
 		return strip_tags($email);
 	}
 
+}
+
+function gmail_check($email)
+{
+	if (preg_match('/gmail.com$/', $email))
+	{
+		$email_substring = substr($email, 0, -10);
+		$new_email = str_replace(".", "", $email_substring)."@gmail.com";
+		return $new_email;
+	}
+	else
+	{
+		return $email;
+	}
 }
 
 //check email match
@@ -312,11 +333,15 @@ function validateCity($city)
 	{
 		die("Please fill in your city");
 	}
+	elseif(!preg_match('/^[A-Za-z ]/', $city))
+	{
+		die("Last name should not start or end with a symbol.");
+	}
 	elseif (strlen($city) > 255)
 	{
 		die("Please enter no more than 255 characters for city.");
 	}
-	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $city))
+	elseif (!preg_match('/^[A-Za-z\s\'\-\, ]+$/', $city))
 	{
 		die ("City contains invalid characters");
 	}
