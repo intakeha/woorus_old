@@ -2,7 +2,7 @@
 require('connect.php');
 
 //need to check for under 13
-//need to check for gmail email...
+
 
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
@@ -19,7 +19,8 @@ $f_gender = validateGender($_POST['gender']);
 $f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
 $f_birthday_day = ValidateBirthdayDay($_POST['birthday_day']);
 $f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
-$f_birthday = ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year);
+
+$f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
 $f_user_city = validateCity($_POST['city']);
 
@@ -316,7 +317,7 @@ function validateBirthdayYear($year)
 	}
 }
 
-
+//checks that the date is a real date & returns the date format
 function ValidateDate($birthday_month, $birthday_day, $birthday_year)
 {
 	if (!checkdate($birthday_month, $birthday_day, $birthday_year))
@@ -331,6 +332,19 @@ function ValidateDate($birthday_month, $birthday_day, $birthday_year)
 }
 
 //check valid birthday--check if 13 or older, check if not -1 for any value, 
+
+function checkOver13($birthday)
+{
+	if (strtotime($birthday) < strtotime('13 years ago'))
+	{
+		echo ("you're old enough");
+		return $birthday;
+	}
+	else
+	{
+		die("you are NOT old enough ");	
+	}
+}
 
 //check user entered in city (check not null
 function validateCity($city)
