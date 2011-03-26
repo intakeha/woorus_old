@@ -47,12 +47,12 @@
 				</div>
 				<form id="registration_form" action="actions/register.php" method="POST">
 				    <ul>
-					<li><label>First Name</label><input class="text_form" type="text" name="first_name"></li>
-					<li><label>Last Name</label><input class="text_form" type="text" name="last_name"></li>
-					<li><label>Email</label><input class="text_form" id="email" type="text" name="email"></li>
-					<li><label>Confirm Email</label><input class="text_form" type="text" name="confirm_email"></li>
-					<li><label>Password</label><input class="text_form"  type="password" name="password"></li>
-					<li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="f"> Female </option><option value="m"> Male </option></select></li>
+					<li><label>First Name</label><input class="text_form" type="text" name="first_name" maxlength="30"></li>
+					<li><label>Last Name</label><input class="text_form" type="text" name="last_name" maxlength="60"></li>
+					<li><label>Email</label><input class="text_form" id="email" type="text" name="email" maxlength="254"></li>
+					<li><label>Confirm Email</label><input class="text_form" type="text" name="confirm_email" maxlength="254"></li>
+					<li><label>Password</label><input class="text_form"  type="password" name="password" maxlength="20"></li>
+					<li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="F"> Female </option><option value="M"> Male </option></select></li>
 					<li><label>Birthday</label><select name="birthday_month">
 					    <option value="-1">Month</option>
 					    <option value="1">Jan</option>
@@ -212,7 +212,7 @@
 					    <option value="1906">1906</option>
 					    <option value="1905">1905</option>
 					</select></li>
-					<li><label>City</label><input class="text_form" type="text" name="city"></li>
+					<li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
 					<li><input id="join_button" class="buttons" type="submit" name="join" value="Join"></li>
 				    </ul><div id="registration_error" class="error_text"></div>
 				</form>

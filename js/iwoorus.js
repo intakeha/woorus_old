@@ -2,115 +2,191 @@
 $(document).ready(function(){
 	// Validate login form
 	$("#login_form").validate({
-		rules: {						// Adding validation rules for each input
-			email: "email",
-			password: "required"			
-		},
-		messages: {						// Customized error messages for each error
-			email: "Please enter a valid email address.",
-			password: "Please enter a password."	
-		},
-		groups: {						// Group form fields to get on error message
-			email: "email password"
-		},
-		errorLabelContainer: $("#auth_error")	// Assign error output div
-	});	
-	
-	// Validate login form
-	$("#recover_form").validate({
-		rules: {
-			email: "email"
-		},
-		messages: {
-			email: "Please enter a valid email address."
-		},
-		errorLabelContainer: $("#auth_error")
-	});	
-	
-	// Validate registration form
-	$("#registration_form").validate({
-		rules: {
-			first_name: {
-				required: true,
-				validname: true,
-				minlength: 2
-			},
-			last_name: {
-				required: true,
-				validname: true,
-				minlength: 2			
-			},
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        $("#auth_error").text(validator.errorList[0].message); 
+                    }
+                },
+		errorPlacement: function(error, element) {
+                    // Override error placement to not show error messages beside elements //
+                },
+		rules: {						// Adding validation rules for each input //
 			email: {
 				required: true,
 				email: true
 			},
+			password: "required"
+		},
+		messages: {						// Customized error messages for each error //
+			email: {
+				required: "Please enter your email address.",
+				email: "Please enter a valid email address."
+			},
+			password: "Please enter a password."	
+		}
+	});	
+	
+	// Validate login form
+	$("#recover_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        $("#auth_error").text(validator.errorList[0].message); 
+                    }
+                },
+		errorPlacement: function(error, element) {
+                    // Override error placement to not show error messages beside elements //
+                },
+		rules: {
+			email: {
+				required: true,
+				email: true
+			}
+		},
+		messages: {
+			email: {
+				required: "Please enter your email address.",
+				email: "Please enter a valid email address."
+			}
+		}
+	});	
+	
+	// Validate registration form
+	$("#registration_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+                    var errors = validator.numberOfInvalids();
+                    if (errors) {
+                        $("#registration_error").text(validator.errorList[0].message); 
+                    }
+                },
+		errorPlacement: function(error, element) {
+                    // Override error placement to not show error messages beside elements //
+                },
+		rules: {
+			first_name: {
+				required: true,
+				validname: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 30
+			},
+			last_name: {
+				required: true,
+				validname: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,		
+				maxlength: 60
+			},
+			email: {
+				required: true,
+				email: true,
+				maxlength: 254
+			},
 			confirm_email: {
 				required: true,
-				equalTo: "#email"
+				equalTo: "#email",
+				maxlength: 254
 			},
 			password: {
 				required: true,
 				rangelength: [6,20]
 			},
 			gender: {
-				selectfield: true
+				selectfield: true,
+				checkgender: true
 			},
 			birthday_month: {
-				selectfield: true
+				selectfield: true,
+				range: [1, 12]
 			},
 			birthday_day: {
-				selectfield: true
+				selectfield: true,
+				range: [1, 31]
 			},
 			birthday_year: {
-				selectfield: true
+				selectfield: true,
+				range: [1905, 2011]
 			},
 			city: {
-				required: true
+				required: true,
+				validcity: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 255
 			}
 		},
 		messages: {
 			first_name: {
-				required: "Please provide your first name.",
+				required: "Please fill in all fields.",
 				validname: "First name contains invalid characters.",
-				minlength: "Please provide your real first name."
+				startsymbol: "First name should not start or end with a symbol.",
+				endsymbol: "First name should not start or end with a symbol.",
+				minlength: "Please provide your real first name.",
+				maxlength: "Please enter no more than 30 characters for first name."
 			},
 			last_name: {
-				required: "Please fill in your last name.",
+				required: "Please fill in all fields.",
 				validname: "Last name contains invalid characters.",
-				minlength: "Please provide your real last name."			
+				startsymbol: "Last name should not start or end with a symbol.",
+				endsymbol: "Last name should not start or end with a symbol.",
+				minlength: "Please provide your real last name.",
+				maxlength: "Please enter no more than 60 characters for last name."		
 			},
 			email: {
-				required: "Please fill in your email address.",
-				email: "Please enter a valid email address."
+				required: "Please fill in all fields.",
+				email: "Please enter a valid email address.",
+				maxlength: "Please enter no more than 254 characters for email."
 			},
 			confirm_email: {
-				required: "Please fill in your email address.",
-				equalTo: "Your emails do not match."
+				required: "Please fill in all fields.",
+				equalTo: "Your emails do not match.",
+				maxlength: "Please enter no more than 254 characters for email confirmation."
 			},
 			password: {
-				required: "Please fill in your password.",
+				required: "Please fill in all fields.",
 				rangelength: "Your password must be between 6 and 20 characters long."
 			},
 			gender: {
-				selectfield: "Please select your gender."
+				selectfield: "Please select your gender.",
+				checkgender: "Please select your gender."
 			},
 			birthday_month: {
-				selectfield: "Please select birthday month." 
+				selectfield: "Please select your birthday month.",
+				range: "Please select your birthday month."
 			},
 			birthday_day: {
-				selectfield: "Please select birthday date."
+				selectfield: "Please select your birthday date.",
+				range: "Please select your birthday date."
 			},
 			birthday_year: {
-				selectfield: "Please select birthday year."
+				selectfield: "Please select your birthday year.",
+				range: "Please select your birthday year."
 			},
 			city: {
-				required: "Please fill in your city."
+				required: "Please fill in all fields.",
+				validcity: "City contains invalid characters.",
+				startsymbol: "City should not start or end with a symbol.",
+				endsymbol: "City should not start or end with a symbol.",
+				minlength: "Please fill in your current city.",
+				maxlength: "Please enter no more than 255 characters for city."
 			}
-		},
-		groups: {						// Group form fields to get on error message
-			first_name: "first_name last_name email confirm_email password gender birthday_month birthday_day birthday_year city"
-		},
-		errorLabelContainer: $("#registration_error")
+		}
 	});	
 	
 });
@@ -119,6 +195,22 @@ jQuery.validator.addMethod("validname", function(value, element) {
 	return this.optional(element) || /^[a-z-'\s]+$/i.test(value);
 }, "The name contains invalid characters.");
 
+jQuery.validator.addMethod("startsymbol", function(value, element) {
+	return this.optional(element) || !value.match(/^[ |'|-]/);
+}, "The field should not start or end with a symbol.");
+
+jQuery.validator.addMethod("endsymbol", function(value, element) {
+	return this.optional(element) || !value.match(/[ |'|-]$/);
+}, "The field should not start or end with a symbol.");
+
 jQuery.validator.addMethod("selectfield", function(value, element) {
 	if(element.value == -1){return false;} else return true;
 }, "Please select an option.");
+
+jQuery.validator.addMethod("checkgender", function(value, element) {
+	if(!((element.value == "F") || (element.value == "M"))){return false;} else return true;
+}, "Please select an option.");
+
+jQuery.validator.addMethod("validcity", function(value, element) {
+	return this.optional(element) || /^[a-z-',\s]+$/i.test(value);
+}, "The name contains invalid characters.");

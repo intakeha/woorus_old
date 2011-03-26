@@ -2,17 +2,10 @@
     <form id="settings_form" action="" method="POST">
 	    <div id="settings_column1">
             <ul>
-            <li><label>First Name</label><input class="text_form" type="text" name="first_name" value="Alison"></li>
-            <li><label>Last Name</label><input class="text_form" type="text" name="last_name" value="Murphy"></li>
-            <li>&nbsp;</li>
-            <li><label>Contact Email</label>alison.murphy@woorus.com</li>
-            <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email"></li>
-            <li>&nbsp;</li>
-            <li><label>Old Password</label><input class="text_form" type="password" name="old_password"></li>
-            <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password"></li>
-            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password"></li>
-            <li>&nbsp;</li>
-            <li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="f"> Female </option><option value="m"> Male </option></select></li>
+            <li class="settings_title">About Me:</li>
+            <li><label>First Name</label><input class="text_form" type="text" name="first_name" value="Alison" maxlength="30"></li>
+            <li><label>Last Name</label><input class="text_form" type="text" name="last_name" value="Murphy" maxlength="60"></li>
+            <li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="F"> Female </option><option value="M"> Male </option></select></li>
             <li><label>Birthday</label><select name="birthday_month">
                 <option value="-1">Month</option>
                 <option value="1">Jan</option>
@@ -171,13 +164,22 @@
                 <option value="1907">1907</option>
                 <option value="1906">1906</option>
                 <option value="1905">1905</option>
-            </select></li>
-            <li><label>City</label><input class="text_form" type="text" name="city"></li>
+	            </select></li>
+            <li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
+            <li>&nbsp;</li>
+            <li class="settings_title">Change Email:</li>
+            <li><label>Contact Email</label>alison.murphy@woorus.com</li>
+            <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email" maxlength="254"></li>
+            <li>&nbsp;</li>
+            <li class="settings_title">Change Password:</li>
+            <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
+            <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
+            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>
             </ul>
         </div>
         <div id="settings_column2">
         	<ul>
-            <li style="margin-bottom: 10px;">Notifications:</li>
+            <li class="settings_title" style="margin-bottom: 10px;">Notifications:</li>
             <li><input type="checkbox" name="mail_interest" checked="checked"/> Has similar interests as you</li>
             <li><input type="checkbox" name="mail_message" checked="checked"/> Sends you a message</li>
             <li><input type="checkbox" name="mail_contact" checked="checked"/> Adds you to a contact list</li>
