@@ -53,8 +53,6 @@ if ($namecheck_count != 0)
 	die("This email address is already registered. Please use the login page to login to woorus or request a new password if you've forgotten your password \n");	
 }
 
-
-
 //enter user into system
 $query = "INSERT INTO `users` (id, first_name, last_name, email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
 (NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."', '".$temp_email_verified."')";
@@ -63,8 +61,8 @@ $result = mysql_query($query, $connection) or die ("Error 2");
 
 //re-lookup ID based on email
 $id_query = "SELECT id from users WHERE email_address = '".$f_email_address."'";
-echo $f_email_address;
-$id_result = mysql_query($id, $connection) or die ("Error 3");
+
+$id_result = mysql_query($id_query, $connection) or die ("Error 3");
 $id_count = mysql_num_rows($id_result);
 if ($id_count != 0)
 {
