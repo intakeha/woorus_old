@@ -22,8 +22,6 @@ $f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
 
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
-echo $f_birthday; 
-
 $f_user_city = validateCity($_POST['city']);
 
 $f_user_country_id = ("1"); //need to do based on lookup
@@ -65,6 +63,7 @@ $result = mysql_query($query, $connection) or die ("Error 2");
 
 //re-lookup ID based on email
 $id_query = "SELECT id from users WHERE email_address = '".$f_email_address."'";
+echo $f_email_address;
 $id_result = mysql_query($id, $connection) or die ("Error 3");
 $id_count = mysql_num_rows($id_result);
 if ($id_count != 0)
@@ -339,7 +338,7 @@ function checkOver13($birthday)
 {
 	if (strtotime($birthday) < strtotime('13 years ago'))
 	{
-		echo ("you're old enough");
+		//echo ("you're old enough");
 		return $birthday;
 	}
 	else
