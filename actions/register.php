@@ -114,11 +114,11 @@ function validateFirstName($name)
 {
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in your first name.");
+		die("Please fill in all fields.");
 	}
 	elseif(strlen($name) < 2)
 	{
-		die("Please fill in your real first name.");
+		die("Please provide your real first name.");
 	}
 	elseif(!preg_match('/^[A-Za-z ]/', $name))
 	{
@@ -126,11 +126,11 @@ function validateFirstName($name)
 	}
 	elseif(strlen($name) > 30)
 	{
-		die("Please enter no more than 30 characters for first name.");
+		die("Please enter no more than 30 characters for your first name.");
 	}
 	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
 	{
-		die ("First name contains invalid characters");
+		die ("First name contains invalid characters.");
 	}
 	else
 	{
@@ -145,11 +145,11 @@ function validateLastName($name)
 {
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in your last name.");
+		die("Please fill in all fields.");
 	}
 	elseif(strlen($name) < 2)
 	{
-		die("Please fill in your real last name.");
+		die("Please provide your real last name.");
 	}
 	elseif(!preg_match('/^[A-Za-z ]/', $name))
 	{
@@ -157,7 +157,7 @@ function validateLastName($name)
 	}
 	elseif(strlen($name) > 60)
 	{
-		die("Please enter no more than 60 characters for last name.");
+		die("Please enter no more than 60 characters for your last name.");
 	}
 	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
 	{
@@ -175,11 +175,11 @@ function validateEmail($email)
 {	
 	if($email == NULL | strlen($email) == 0)
 	{
-		die("Please fill in your email address.");
+		die("Please fill in all fields.");
 	}
 	elseif(strlen($email) > 254)
 	{
-		die("Please enter no more than 254 characters for email.");
+		die("Please enter no more than 254 characters for your email.");
 	}
 	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
@@ -211,11 +211,15 @@ function checkEmail($email, $confirm_email)
 {
 	if (strlen($confirm_email) == 0)
 	{
-		die("Please confirm your email address.");
+		die("Please fill in all fields.");
+	}
+	elseif(strlen($email) > 254)
+	{
+		die("Please enter no more than 254 characters for your email confirmation.");
 	}
 	elseif ($email != $confirm_email)
 	{
-		die("Your emails do not match.");
+		die("Please provide matching emails.");
 	}
 	else 
 	{
@@ -228,7 +232,7 @@ function validatePassword($password)
 {
 	if (strlen($password) == 0)
 	{
-		die("Please fill in your password.");
+		die("Please fill in all fields.");
 	}
 	elseif (strlen($password) <6 | strlen($password) > 20)
 	{
@@ -345,24 +349,28 @@ function checkOver13($birthday)
 	}
 }
 
-//check user entered in city (check not null
+//check user entered in city (check not null)
 function validateCity($city)
 {
 	if ($city == NULL | strlen($city) == 0)
 	{
-		die("Please fill in your city");
+		die("Please fill in all fields.");
 	}
 	elseif(!preg_match('/^[A-Za-z ]/', $city))
 	{
-		die("Last name should not start or end with a symbol.");
+		die("City should not start or end with a symbol.");
+	}
+	elseif(strlen($city) < 2)
+	{
+		die("Please provide your current city.");
 	}
 	elseif (strlen($city) > 255)
 	{
-		die("Please enter no more than 255 characters for city.");
+		die("Please enter no more than 255 characters for your city.");
 	}
 	elseif (!preg_match('/^[A-Za-z\s\'\-\, ]+$/', $city))
 	{
-		die ("City contains invalid characters");
+		die ("City contains invalid characters.");
 	}
 	else
 	{
