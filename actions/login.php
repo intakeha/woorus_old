@@ -4,10 +4,11 @@
 
 
 require('connect.php');
+require('validations.php');
 
 //get from the form
 $f_email_address = validateEmail($_POST['email']);
-$f_password = validatePassword($_POST['password']);
+$f_password = validatePasswordLogin($_POST['password']);
 
 //encrypt password
 $f_password = md5($f_password);
@@ -61,50 +62,5 @@ function authenticate($email, $pass)
 	}
 }
 
-//check valid email--check length & email format, returns lowercase, gmail-proof email
-function validateEmail($email)
-{	
-	if($email == NULL | strlen($email) == 0)
-	{
-		die("Please fill in your email address.");
-	}
-	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
-	{
-		die ("Please enter a valid email address.");
-	}
-	else
-	{
-		return gmail_check(strtolower(strip_tags($email)));
-	}
-
-}
-
-
-function gmail_check($email)
-{
-	if (preg_match('/gmail.com$/', $email))
-	{
-		$email_substring = substr($email, 0, -10);
-		$new_email = str_replace(".", "", $email_substring)."@gmail.com";
-		return $new_email;
-	}
-	else
-	{
-		return $email;
-	}
-}
-
-function validatePassword($password)
-{
-	if (strlen($password) == 0)
-	{
-		die("Please fill in your password.");
-	}
-	else
-	{
-		return strip_tags($password);
-	}
-	
-}
 
 ?>

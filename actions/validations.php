@@ -1,7 +1,8 @@
 <?php
 //validation functions
-//this is a copy of what is in registrations for testing.
 
+//-------------------------for testing-----------------------------------------//
+/*
 $f_first_name = validateFirstName("Alison");
 $f_last_name = validateLastName("Murphy");
 
@@ -31,9 +32,9 @@ echo "$f_birthday \n";
 
 $f_user_city = validateCity("Palo Alto, CA");
 
-echo "$f_user_city \n"; 
+echo "$f_user_city \n"; */
 
-//-------------------------validation functions-----------------------------------------//
+//-------------------------Register / Settings validation functions-----------------------------------------//
 
 //helper function for validateName convert to camel case (also looks at apostrophe's & dashes)
 function ucname($string) 
@@ -319,5 +320,21 @@ function validateCity($city)
 	}
 }
 
+
+//-------------------------Login validation functions-----------------------------------------//
+
+
+function validatePasswordLogin($password)
+{
+	if (strlen($password) == 0)
+	{
+		die("Please fill in your password.");
+	}
+	else
+	{
+		return strip_tags($password);
+	}
+	
+}
 
 ?>
