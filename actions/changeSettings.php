@@ -23,7 +23,7 @@ $f_gender = validateGender($_POST['gender']);
 
 $f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
 $f_birthday_day = ValidateBirthdayDay($_POST['birthday_day']);
-$f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);x
+$f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
 $f_user_city = validateCity($_POST['city']);
