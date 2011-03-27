@@ -1,6 +1,10 @@
 <?php
 
 //not done
+//assumption is that will call gmail_check(strtolower($f_visual_email)) at activation
+//check is user wants to change password--if statements, different sql update.
+//
+
 
 session_start();
 require('connect.php');
@@ -16,9 +20,11 @@ $f_last_name = validateLastName($_POST['last_name']);
 
 $f_temp_email_address = validateEmailSettings($_POST['new_email']);
 
-//$f_password_old = validatePassword($_POST['password_old']);; // need to check that this is valid
-//$f_password_new = validatePassword($_POST['password_new']);
-//$f_password_check = strip_tags("123"); // need to check that this matches
+$f_password_old = validatePasswordSettings($_POST['password_old']);; // need to check that this is valid
+$f_password_new = validatePasswordSettings($_POST['password_new']);
+$f_password_confirm = validatePasswordSettings($_POST['password_confirm']); // need to check that this matches
+
+$passwords_match = checkPassword($f_password_new, $f_password_confirm);
 
 $f_gender = validateGender($_POST['gender']);
 
@@ -42,11 +48,7 @@ mysql_select_db($db_name, $connection);
 //update all fields (keep join_date, social status, token, active account, password new, id)
 //change update time  
 
-echo $f_first_name."\n".$f_last_name."\n".$f_temp_email_address."\n".$f_gender."\n".$id."\n".$f_birthday."\n".$f_user_country_id."\n".$f_user_state_id."\n".$f_user_city_id;
-
-
-$query = "UPDATE users SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."' WHERE id = '".$id."'";
-//$query = "UPDATE users SET first_name ='".$f_first_name."' WHERE id = 20";
+$query = "UPDATE users SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
 $result = mysql_query($query, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)

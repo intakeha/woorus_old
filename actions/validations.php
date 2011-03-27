@@ -362,4 +362,43 @@ function validateEmailSettings($email)
 
 }
 
+//check password length--between 6-20chars
+function validatePasswordSettings($password)
+{
+	if (strlen($password) == 0)
+	{
+		//user doesn't want to change their password
+	}
+	elseif (strlen($password) <6 | strlen($password) > 20)
+	{
+		die("Your password must be between 6 and 20 characters long.");
+	}
+	else
+	{
+		return strip_tags($password);
+	}
+	
+}
+
+function checkPassword($password, $confirm_password)
+{
+	if (strlen($confirm_password) == 0)
+	{
+		//user doesn't want to change their password
+	}
+	elseif (strlen($password) <6 | strlen($password) > 20)
+	{
+		die("Your password must be between 6 and 20 characters long.");
+	}
+	elseif ($password != $confirm_password)
+	{
+		die("Please provide matching passwords.");
+	}
+	else 
+	{
+		return ;
+	}
+}
+
+
 ?>

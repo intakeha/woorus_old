@@ -1,5 +1,7 @@
 <?php
 
+//need to update to deal with visual email, email
+
 require('connect.php');
 
 //$id = $_GET['id'];
