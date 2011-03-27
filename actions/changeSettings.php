@@ -8,13 +8,13 @@ require('validations.php');
 
 //get ID from session variable
 //$id = 10;
-$_SESSION['id'];
+echo $_SESSION['id'];
 
 //set variables--will use POST to get from html
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
 
-$f_temp_email_address = validateEmail($_POST['new_email']);
+$f_temp_email_address = validateEmailSettings($_POST['new_email']);
 
 //$f_password_old = validatePassword($_POST['password_old']);; // need to check that this is valid
 //$f_password_new = validatePassword($_POST['password_new']);
