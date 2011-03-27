@@ -54,8 +54,8 @@ if ($namecheck_count != 0)
 }
 
 //enter user into system
-$query = "INSERT INTO `users` (id, first_name, last_name, email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
-(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."', '".$temp_email_verified."')";
+$query = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
+(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."', '".$temp_email_verified."')";
 
 $result = mysql_query($query, $connection) or die ("Error 2");
 
