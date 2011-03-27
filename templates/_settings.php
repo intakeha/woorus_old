@@ -1,5 +1,5 @@
 <div id="change_settings">
-    <form id="settings_form" action="" method="POST">
+    <form id="settings_form" action="../actions/changeSettings.php" method="POST">
 	    <div id="settings_column1">
             <ul>
             <li class="settings_title">About Me:</li>
