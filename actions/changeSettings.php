@@ -16,9 +16,9 @@ $f_last_name = validateLastName($_POST['last_name']);
 
 $f_temp_email_address = validateEmail($_POST['new_email']);
 
-$f_password_old = validatePassword($_POST['password_old']);; // need to check that this is valid
-$f_password_new = validatePassword($_POST['password_new']);
-$f_password_check = strip_tags("123"); // need to check that this matches
+//$f_password_old = validatePassword($_POST['password_old']);; // need to check that this is valid
+//$f_password_new = validatePassword($_POST['password_new']);
+//$f_password_check = strip_tags("123"); // need to check that this matches
 
 $f_gender = validateGender($_POST['gender']);
 

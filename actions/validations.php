@@ -337,4 +337,29 @@ function validatePasswordLogin($password)
 	
 }
 
+
+//-------------------------Settings validation functions-----------------------------------------//
+
+function validateEmailSettings($email)
+{	
+	if($email == NULL | strlen($email) == 0)
+	{
+		//don't update email
+		return NULL;
+	}
+	elseif(strlen($email) > 254)
+	{
+		die("Please enter no more than 254 characters for your email.");
+	}
+	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	{
+		die ("Please enter a valid email address.");
+	}
+	else
+	{
+		return strip_tags($email);
+	}
+
+}
+
 ?>
