@@ -9,6 +9,7 @@ require('validations.php');
 //get ID from session variable
 //$id = 10;
 echo $_SESSION['id'];
+echo $id;
 
 //set variables--will use POST to get from html
 $f_first_name = validateFirstName($_POST['first_name']);
@@ -36,7 +37,7 @@ $f_user_city_id = ("1"); //need to do based on lookup
 //if passes all checks for user entered data
 
 //open database connection
-$connection = mysql_connect($db_host, $db_user, $db_pass) or die("Error");
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");
 mysql_select_db($db_name);
 
 //update all fields (keep join_date, social status, token, active account, password new, id)
@@ -53,7 +54,7 @@ $query = 	"UPDATE users SET
 			user_city_id = $f_user_city_id  
 		WHERE id = $id";
 
-$result = mysql_query($query, $connection) or die ("Error");
+$result = mysql_query($query, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)
 $f_password_old = md5($f_password_old);
