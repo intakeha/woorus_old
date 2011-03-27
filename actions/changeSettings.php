@@ -7,9 +7,7 @@ require('connect.php');
 require('validations.php');
 
 //get ID from session variable
-//$id = 10;
 echo $_SESSION['id'];
-echo $id;
 
 //set variables--will use POST to get from html
 $f_first_name = validateFirstName($_POST['first_name']);
@@ -25,8 +23,8 @@ $f_gender = validateGender($_POST['gender']);
 
 $f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
 $f_birthday_day = ValidateBirthdayDay($_POST['birthday_day']);
-$f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
-$f_birthday = $f_birthday_year."-".$f_birthday_month."-".$f_birthday_day;   //"YYYY-MM-DD";
+$f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);x
+$f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
 $f_user_city = validateCity($_POST['city']);
 
@@ -42,6 +40,8 @@ mysql_select_db($db_name);
 
 //update all fields (keep join_date, social status, token, active account, password new, id)
 //change update time  
+
+echo $f_first_name.$f_last_name.$f_temp_email_address.$f_gender;
 
 $query = 	"UPDATE users SET 
 			first_name = $f_first_name, 
