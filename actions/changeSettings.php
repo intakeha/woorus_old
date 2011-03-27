@@ -52,7 +52,7 @@ $query = 	"UPDATE users SET
 			user_country_id = $f_user_country_id, 
 			user_state_id = $f_user_state_id, 
 			user_city_id = $f_user_city_id  
-		WHERE id = $id";
+		WHERE id = $_SESSION['id']";
 
 $result = mysql_query($query, $connection) or die ("Error 2");
 
