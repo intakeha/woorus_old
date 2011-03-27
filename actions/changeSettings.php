@@ -44,7 +44,9 @@ mysql_select_db($db_name);
 
 echo $f_first_name."\n".$f_last_name."\n".$f_temp_email_address."\n".$f_gender."\n".$id."\n".$f_birthday."\n".$f_user_country_id."\n".$f_user_state_id."\n".$f_user_city_id;
 
-$query = "UPDATE users SET first_name = $f_first_name, last_name = $f_last_name, temp_email_address =  $f_temp_email_address, gender = $f_gender, birthday = $f_birthday, user_country_id = $f_user_country_id, user_state_id = $f_user_state_id, user_city_id = $f_user_city_id WHERE id = $id";
+//$query = "UPDATE users SET first_name = $f_first_name, last_name = $f_last_name, temp_email_address =  $f_temp_email_address, gender = $f_gender, birthday = $f_birthday, user_country_id = $f_user_country_id, user_state_id = $f_user_state_id, user_city_id = $f_user_city_id WHERE id = $id";
+$query = "UPDATE users SET first_name = $f_first_name WHERE id = $id";
+
 
 $result = mysql_query($query, $connection) or die ("Error 2");
 
