@@ -84,7 +84,7 @@ $(document).ready(function(){
 				startsymbol: "First name should not start or end with a symbol.",
 				endsymbol: "First name should not start or end with a symbol.",
 				minlength: "Please provide your real first name.",
-				maxlength: "Please enter no more than 30 characters for first name."
+				maxlength: "Please enter no more than 30 characters for your first name."
 			},
 			last_name: {
 				required: "Please provide in your last name.",
@@ -92,7 +92,7 @@ $(document).ready(function(){
 				startsymbol: "Last name should not start or end with a symbol.",
 				endsymbol: "Last name should not start or end with a symbol.",
 				minlength: "Please provide your real last name.",
-				maxlength: "Please enter no more than 60 characters for last name."
+				maxlength: "Please enter no more than 60 characters for your last name."
 			},
 			gender: {
 				selectfield: "Please select your gender.",
@@ -115,12 +115,12 @@ $(document).ready(function(){
 				validcity: "City contains invalid characters.",
 				startsymbol: "City should not start or end with a symbol.",
 				endsymbol: "City should not start or end with a symbol.",
-				minlength: "Please fill in your city.",
-				maxlength: "Please enter no more than 255 characters for email."
+				minlength: "Please provide your current city.",
+				maxlength: "Please enter no more than 255 characters for your city."
 			},
 			new_email: {
 				email: "Please enter a valid email address.",
-				maxlength: "Please enter no more than 254 characters for email."
+				maxlength: "Please enter no more than 254 characters for your email."
 			},
 			old_password: {
 				required: "Please enter your old password.",

@@ -9,7 +9,8 @@
 	<link href="css/global.css" rel="stylesheet" type="text/css">
 	<link href="css/template.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
-   	<script type="text/javascript" src="js/jquery.validate.js"></script>  
+   	<script type="text/javascript" src="js/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
    	<script type="text/javascript" src="js/iwoorus.js"></script>
 </head>
 <body>
@@ -37,8 +38,14 @@
 			</div>
 		</div>
 		<div id="indexContent">
-			<div id="slide_show">
-				<img src="images/global/slideshow_mosaic.jpg">
+			<div id="slide_show">              
+                <a href="#" class="prev arrows"><img src="images/global/page_left.png" alt="Previous"></a>
+                <div class="slides_container">
+                    <div title="Mosaic Wall"><img src="images/global/slideshow_mosaic.jpg" /></div>
+                    <div title="Video Chats"><img src="images/global/slideshow_chat.jpg"/></div>
+                    <div title="Social Status"><img src="images/global/slideshow_social.jpg" /></div>
+                </div>
+                <a href="#" class="next arrows"><img src="images/global/page_right.png" alt="Next"></a>
 			</div>
 			<div id="sign_up">
 				<div id="facebook_login">

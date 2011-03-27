@@ -13,7 +13,7 @@
 		<div id="butterfly"></div>
 		<div id="warning"></div>
     </div>
-   	<div class="pagination"><a id="pagination_left" href="#"></a></div>
+   	<div class="pagination_home"><a class="arrows pagination_left" href="#"></a></div>
    	<div id="feeds">
     	<ul>
         	<li class="feed_entry">
@@ -121,5 +121,5 @@
         </ul>
 
     </div>
-   	<div class="pagination"><a id="pagination_right" href="#"></a></div>
+   	<div class="pagination_home"><a class="arrows pagination_right" href="#"></a></div>
 </div>

@@ -240,3 +240,47 @@ a#nav_trends_1 {
 	background: #215086;
 	border: 2px solid #4980B7;
 }
+
+
+/*	Pagination */
+
+a.arrows {
+	display: block;
+	width: 70px;
+	height: 60px;
+}
+
+.pagination_left {
+	background: url(../images/global/page_left.png) no-repeat;
+}
+
+.pagination_right {
+	background: url(../images/global/page_right.png) no-repeat;
+	background-position: 20px 0px;
+}
+
+.pagination {
+	margin:26px auto 0;
+	width:100px;
+}
+
+.pagination li {
+	float:left;
+	margin:0 1px;
+	list-style:none;
+}
+
+.pagination li a {
+	display:block;
+	width:12px;
+	height:0;
+	padding-top:12px;
+	background:url(../images/global/pagination.png) no-repeat;
+	background-position:0 0;
+	float:left;
+	overflow:hidden;
+}
+
+.pagination li.current a {
+	background-position:0 -13px;
+}

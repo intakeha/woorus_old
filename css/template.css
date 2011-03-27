@@ -75,14 +75,38 @@
 }
 
 #slide_show {
-	width: 600px;
+	width: 650px;
 	height: 400px;
 	border-right: 1px solid #CCC;
 	float: left;
 }
 
+#slide_show a {
+	float: left;
+	margin-top: 120px;
+	border: none;
+}
+
+.slides_container {
+	width: 475px;	/* size of the slides */
+	height: 350px;
+	float: left;
+}
+
+.slides_container div {
+	width: 475px;
+	height: 350px;
+	display: block;
+}
+
+div#slide_show ul {
+	position: absolute;
+	margin: 150px 0px 0px 370px;
+	z-index: 10000;
+}
+
 #sign_up {
-	width: 539px;
+	width: 469px;
 	height: 400px;
 	margin-left: 60px;
 	text-align: left;
@@ -215,26 +239,11 @@
 }
 
 
-.pagination {
+.pagination_home {
 	width: 70px;
 	height: 500px;
 	float: left;
-}
-
-.pagination a {
-	display: block;
-	width: 70px;
-	height: 60px;
-	margin: 225px 0px 0px 0px;
-}
-
-#pagination_left {
-	background: url(../images/global/page_left.png) no-repeat;
-}
-
-#pagination_right {
-	background: url(../images/global/page_right.png) no-repeat;
-	background-position: 20px 0px;
+	padding-top: 225px;
 }
 
 #feeds {

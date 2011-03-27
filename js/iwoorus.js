@@ -1,5 +1,13 @@
 // Validate forms via jQuery
 $(document).ready(function(){
+	// Slide show function with slidesjs
+	$('#slide_show').slides({
+			preload: true,
+			play: 5000,
+			pause: 2500,
+			hoverPause: true
+	});
+	
 	// Validate login form
 	$("#login_form").validate({
 		onsubmit: true,
@@ -138,7 +146,7 @@ $(document).ready(function(){
 				startsymbol: "First name should not start or end with a symbol.",
 				endsymbol: "First name should not start or end with a symbol.",
 				minlength: "Please provide your real first name.",
-				maxlength: "Please enter no more than 30 characters for first name."
+				maxlength: "Please enter no more than 30 characters for your first name."
 			},
 			last_name: {
 				required: "Please fill in all fields.",
@@ -146,17 +154,17 @@ $(document).ready(function(){
 				startsymbol: "Last name should not start or end with a symbol.",
 				endsymbol: "Last name should not start or end with a symbol.",
 				minlength: "Please provide your real last name.",
-				maxlength: "Please enter no more than 60 characters for last name."		
+				maxlength: "Please enter no more than 60 characters for your last name."		
 			},
 			email: {
 				required: "Please fill in all fields.",
 				email: "Please enter a valid email address.",
-				maxlength: "Please enter no more than 254 characters for email."
+				maxlength: "Please enter no more than 254 characters for your email."
 			},
 			confirm_email: {
 				required: "Please fill in all fields.",
-				equalTo: "Your emails do not match.",
-				maxlength: "Please enter no more than 254 characters for email confirmation."
+				equalTo: "Please provide matching emails.",
+				maxlength: "Please enter no more than 254 characters for your email confirmation."
 			},
 			password: {
 				required: "Please fill in all fields.",
@@ -183,8 +191,8 @@ $(document).ready(function(){
 				validcity: "City contains invalid characters.",
 				startsymbol: "City should not start or end with a symbol.",
 				endsymbol: "City should not start or end with a symbol.",
-				minlength: "Please fill in your current city.",
-				maxlength: "Please enter no more than 255 characters for city."
+				minlength: "Please provide your current city.",
+				maxlength: "Please enter no more than 255 characters for your city."
 			}
 		}
 	});	
