@@ -53,6 +53,7 @@ function authenticate($email, $pass)
 		
 		$id = $row['id'];
 		print "success \n";
+		header( 'Location: pup.woorus.com/canvas.php' ) ;
 		return $id;
 	}
 	else
