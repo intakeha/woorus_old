@@ -45,8 +45,8 @@ mysql_select_db($db_name, $connection);
 echo $f_first_name."\n".$f_last_name."\n".$f_temp_email_address."\n".$f_gender."\n".$id."\n".$f_birthday."\n".$f_user_country_id."\n".$f_user_state_id."\n".$f_user_city_id;
 
 
-$query = "UPDATE users SET first_name = $f_first_name, last_name = $f_last_name, temp_email_address =  $f_temp_email_address, gender = $f_gender, birthday = $f_birthday, user_country_id = $f_user_country_id, user_state_id = $f_user_state_id, user_city_id = $f_user_city_id WHERE id = 20";
-//$query = "UPDATE users SET first_name = 'Change2' WHERE id = 20";
+//$query = "UPDATE users SET first_name = $f_first_name, last_name = $f_last_name, temp_email_address =  $f_temp_email_address, gender = $f_gender, birthday = $f_birthday, user_country_id = $f_user_country_id, user_state_id = $f_user_state_id, user_city_id = $f_user_city_id WHERE id = 20";
+$query = "UPDATE users SET first_name = 'Change4' WHERE id = 20";
 $result = mysql_query($query, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)
