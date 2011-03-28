@@ -57,8 +57,8 @@ mysql_select_db($db_name, $connection);
 $query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
-$query_settings = "INSERT INTO `settings` SET user_id, interest_notify, message_notify, friend_notify, missed_call_notify WHERE id = '".$id."'";
-$result = mysql_query($query_settings, $connection) or die ("Error 2");
+//$query_settings = "INSERT INTO `settings` SET user_id, interest_notify, message_notify, friend_notify, missed_call_notify WHERE id = '".$id."'";
+//$result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)
 $f_password_old = md5($f_password_old);
