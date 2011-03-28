@@ -54,10 +54,10 @@ if ($namecheck_count != 0)
 }
 
 //enter user into system
-$query = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
+$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
 (NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."', '".$temp_email_verified."')";
 
-$result = mysql_query($query, $connection) or die ("Error 2");
+$result = mysql_query($query_users, $connection) or die ("Error 2");
 
 //re-lookup ID based on email
 $id_query = "SELECT id from users WHERE email_address = '".$f_email_address."'";
@@ -70,6 +70,11 @@ if ($id_count != 0)
 	$row = mysql_fetch_assoc($id_result);
 	$user_id = $row['id']; 
 }
+
+//once we get the ID, set the settings for that user
+$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, friend_notify, missed_call_notify) VALUES (NULL, '".$user_id."', "Y", "Y" , "Y", "Y" )";
+$result = mysql_query($query_settings, $connection) or die ("Error 2");
+
 
 /*
 //send activation email (turn into a function)
