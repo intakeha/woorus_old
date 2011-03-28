@@ -72,7 +72,7 @@ if ($id_count != 0)
 }
 
 //once we get the ID, set the settings for that user
-$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, friend_notify, missed_call_notify) VALUES (NULL, '".$user_id."', "Y", "Y" , "Y", "Y" )";
+$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, friend_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 
