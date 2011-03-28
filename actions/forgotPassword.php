@@ -3,10 +3,11 @@
 //not done
 
 require('connect.php');
+require('validations.php');
 
 //get from form
-//$f_email_address = strtolower(strip_tags($_POST['email']));
-$f_email_address = strtolower(strip_tags(alisonclairemurphy@gmail.com));
+$f_email_address = get_standard_email(validateEmail($_POST['email']));
+//$f_email_address = get_standard_email(validateEmail(alisonclairemurphy@gmail.com));
 
 //check if email is a valid email & get ID
 $returned_id = checkUser($f_email_address);
@@ -32,11 +33,6 @@ else
 {
 	exit();
 }
-
-
-
-
-
 
 function checkUser($email)
 {

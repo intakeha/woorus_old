@@ -5,12 +5,12 @@
 require('connect.php');
 require('validations.php');
 
-//$id = $_GET['id'];
-//$token = $_GET['token'];
+$id = validateID($_GET['id']);
+$token = validateToken($_GET['token']);
 
 //for testing
-$id = "";
-$token = "79003140";
+//$id = "20";
+//$token = "79003140";
 
 if ($id&&$token)
 {
@@ -29,7 +29,7 @@ if ($id&&$token)
 		$row = mysql_fetch_assoc($result);
 		$new_email_visual = $row['temp_email_address']; 
 		$activated = $row['temp_email_verified'];
-		$new_email = gmail_check(strtolower($new_email_visual));
+		$new_email = get_standard_email($new_email_visual);
 		
 		if ($activated == 0)
 		{

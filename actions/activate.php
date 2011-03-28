@@ -1,8 +1,9 @@
 <?php
 require('connect.php');
+require('validations.php');
 
-$id = $_GET['id'];
-$token = $_GET['token'];
+$id = validateID($_GET['id']);
+$token = validateToken($_GET['token']);
 
 //check if id & token are not null
 if ($id&&$token)

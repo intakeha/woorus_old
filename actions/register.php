@@ -8,7 +8,7 @@ $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
 
 $f_visual_email = validateEmail($_POST['email']);
-$f_email_address = gmail_check(strtolower($f_visual_email));
+$f_email_address = get_standard_email($f_visual_email);
 
 $f_email_check = $_POST['confirm_email'];
 $email_match = checkEmail($f_visual_email, $f_email_check);
@@ -81,7 +81,7 @@ $headers = "From: admin@woorus.com";
 $body = "
 Hello, $f_first_name, \n\n
 Please activate your woorus account with the link below: \n\n
-http://woorus.com/httpdocs/subdomains/activate.php?id=$user_id&token=$f_token \n\n
+................./activate.php?id=$user_id&token=$f_token \n\n
 Thanks and welcome to woorus!
 ";
 

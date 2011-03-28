@@ -1,13 +1,11 @@
 <?php
 
 //
-
-
 require('connect.php');
 require('validations.php');
 
 //get from the form
-$f_email_address = validateEmail($_POST['email']);
+$f_email_address = get_standard_email(validateEmail($_POST['email']));
 $f_password = validatePasswordLogin($_POST['password']);
 
 //encrypt password
@@ -52,8 +50,8 @@ function authenticate($email, $pass)
 		}
 		
 		$id = $row['id'];
-		print "success \n";
-		header( 'Location: pup.woorus.com/canvas.php' ) ;
+		//print "success \n";
+		header( 'Location: ../canvas.php' ) ;
 		return $id;
 	}
 	else

@@ -9,7 +9,7 @@ $f_last_name = validateLastName("Murphy");
 echo "$f_first_name \n $f_last_name \n";
 
 $f_visual_email = validateEmail("Alison.Claire.Murphy@gmail.com");
-$f_email_address = gmail_check(strtolower($f_visual_email));
+$f_email_address = get_standard_email($f_visual_email);
 
 $f_email_check = "Alison.Claire.Murphy@gmail.com";
 $email_match = checkEmail($f_visual_email, $f_email_check);
@@ -113,6 +113,7 @@ function validateLastName($name)
 }
 
 //check valid email--email format & checks length < 254
+//different function used for change settings script
 function validateEmail($email)
 {	
 	if($email == NULL | strlen($email) == 0)
@@ -134,17 +135,18 @@ function validateEmail($email)
 
 }
 
-function gmail_check($email)
+function get_standard_email($email)
 {
+	//google mail sends abc.abc@gmail.com & ancabc@gmail.com to the sme place
 	if (preg_match('/gmail.com$/', $email))
 	{
 		$email_substring = substr($email, 0, -10);
 		$new_email = str_replace(".", "", $email_substring)."@gmail.com";
-		return $new_email;
+		return strtolower($new_email);
 	}
 	else
 	{
-		return $email;
+		return strtolower($email);
 	}
 }
 
@@ -170,6 +172,7 @@ function checkEmail($email, $confirm_email)
 }
 
 //check password length--between 6-20chars
+//different function used for change settings
 function validatePassword($password)
 {
 	if (strlen($password) == 0)
@@ -255,7 +258,7 @@ function validateBirthdayYear($year)
 	}
 	elseif((int)$year < 1905 | (int)$year > $cur_year)
 	{
-	
+		die ("Please select your birthday year.");
 	}else
 	{
 		return strip_tags($year);
@@ -400,5 +403,43 @@ function checkPassword($password, $confirm_password)
 	}
 }
 
+
+//-------------------------Email activation validation functions-----------------------------------------//
+
+function validateID($id)
+{
+	if ($id == NULL)
+	{
+		die("Please click on the link from your email to activate.");
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $id))
+	{
+		die ("Please click on the link from your email to activate.");
+	}
+	else
+	{
+		return strip_tags($id);
+	}
+}
+
+
+function validatetoken($token)
+{
+	if ($token == NULL)
+	{
+		die("Please click on the link from your email to activate.");
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $token))
+	{
+		die ("Please click on the link from your email to activate.");
+	}
+	elseif ((int) $token< 23456789| (int)$token > 98765432)
+	{
+		die("Please click on the link from your email to activate.");
+	}else
+	{
+		return strip_tags($token);
+	}
+}
 
 ?>
