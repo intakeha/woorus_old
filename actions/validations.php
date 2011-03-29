@@ -389,7 +389,7 @@ function checkPassword($password, $confirm_password)
 	{
 		//user doesn't want to change their password
 	}
-	elseif (strlen($password) <6 | strlen($password) > 20)
+	elseif ((strlen($password) != 0) & (strlen($password) < 6 | strlen($password) > 20))
 	{
 		die("Your password must be between 6 and 20 characters long.");
 	}
@@ -401,6 +401,19 @@ function checkPassword($password, $confirm_password)
 	{
 		return ;
 	}
+}
+
+function checkboxValidate($checkbox)
+{
+	if ($checkbox == NULL | strlen($checkbox) == 0)
+	{
+		return "N";
+	}
+	else
+	{
+		return "Y";
+	}
+
 }
 
 

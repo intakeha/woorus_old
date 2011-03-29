@@ -1,6 +1,7 @@
 <?php
 
-//
+//needs to update last login table
+
 require('connect.php');
 require('validations.php');
 

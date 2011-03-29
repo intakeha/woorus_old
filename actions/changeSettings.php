@@ -38,10 +38,10 @@ $f_user_country_id = ("1"); //need to do based on lookup
 $f_user_state_id = ("1"); //need to do based on lookup
 $f_user_city_id = ("1"); //need to do based on lookup
 
-$f_mail_interest  = ($_POST['mail_interest']);
-$f_mail_message = ($_POST['mail_message']);
-$f_mail_contact = ($_POST['mail_contact']);
-$f_mail_calls = ($_POST['mail_calls']);
+$f_mail_interest  = checkboxValidate($_POST['mail_interest']);
+$f_mail_message = checkboxValidate($_POST['mail_message']);
+$f_mail_contact = checkboxValidate($_POST['mail_contact']);
+$f_mail_calls = checkboxValidate($_POST['mail_calls']);
 
 echo $f_mail_interest;
 
@@ -57,8 +57,8 @@ mysql_select_db($db_name, $connection);
 $query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
-//$query_settings = "INSERT INTO `settings` SET user_id, interest_notify, message_notify, friend_notify, missed_call_notify WHERE id = '".$id."'";
-//$result = mysql_query($query_settings, $connection) or die ("Error 2");
+$query_settings = "INSERT INTO `settings` SET interest_notify =  '".$f_mail_interest."', message_notify =  '".$f_mail_message."', contact_notify =  '".$f_mail_contact."', missed_call_notify =  '".$f_mail_calls."' WHERE user_id = '".$id."' ";
+$result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)
 $f_password_old = md5($f_password_old);
