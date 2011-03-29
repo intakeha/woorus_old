@@ -74,6 +74,7 @@ $(document).ready(function(){
 				rangelength: [6,20]
 			},
 			confirm_password: {
+				required: true,
 				equalTo: "#new_password"
 			}
 		},
@@ -131,6 +132,7 @@ $(document).ready(function(){
 				rangelength: "Your new password must be between 6 and 20 characters long."
 			},
 			confirm_password: {
+				required: "Please confirm your password.",
 				equalTo: "Your new passwords do not match."
 			}
 		}
