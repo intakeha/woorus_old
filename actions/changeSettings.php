@@ -43,7 +43,8 @@ $f_mail_message = checkboxValidate($_POST['mail_message']);
 $f_mail_contact = checkboxValidate($_POST['mail_contact']);
 $f_mail_calls = checkboxValidate($_POST['mail_calls']);
 
-echo $f_mail_interest;
+echo $f_mail_interest."\n".$f_mail_message."\n".$f_mail_contact."\n".$f_mail_calls;
+
 
 //if passes all checks for user entered data
 
@@ -57,7 +58,7 @@ mysql_select_db($db_name, $connection);
 $query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
-$query_settings = "INSERT INTO `settings` SET interest_notify =  '".$f_mail_interest."', message_notify =  '".$f_mail_message."', contact_notify =  '".$f_mail_contact."', missed_call_notify =  '".$f_mail_calls."' WHERE user_id = '".$id."' ";
+$query_settings = "UPDATE `settings` SET interest_notify =  '".$f_mail_interest."', message_notify =  '".$f_mail_message."', contact_notify =  '".$f_mail_contact."', missed_call_notify =  '".$f_mail_calls."' WHERE user_id = '".$id."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 //if user wants to change password (depends on logic for site)
