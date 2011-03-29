@@ -180,10 +180,10 @@
         <div id="settings_column2">
         	<ul>
             <li class="settings_title" style="margin-bottom: 10px;">Notifications:</li>
-            <li><input type="checkbox" name="mail_interest" checked="checked"/> Has similar interests as you</li>
-            <li><input type="checkbox" name="mail_message" checked="checked"/> Sends you a message</li>
-            <li><input type="checkbox" name="mail_contact" checked="checked"/> Adds you to a contact list</li>
-            <li><input type="checkbox" name="mail_calls" checked="checked"/> Calls you while you're away</li>
+            <li><input type="checkbox" name="mail_interest" checked="checked" value="Y"/> Has similar interests as you</li>
+            <li><input type="checkbox" name="mail_message" checked="checked" value="Y"/> Sends you a message</li>
+            <li><input type="checkbox" name="mail_contact" checked="checked" value="Y"/> Adds you to a contact list</li>
+            <li><input type="checkbox" name="mail_calls" checked="checked" value="Y"/> Calls you while you're away</li>
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
             <div id="settings_error" class="error_text"></div>
