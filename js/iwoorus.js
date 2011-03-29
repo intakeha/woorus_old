@@ -3,7 +3,7 @@ $(document).ready(function(){
 	// Slide show function with slidesjs
 	$('#slide_show').slides({
 			preload: true,
-			play: 5000,
+			play: 8000,
 			pause: 2500,
 			hoverPause: true
 	});

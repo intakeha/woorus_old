@@ -59,9 +59,12 @@
 	margin: 5px 0px 0px -35px;
 }
 
-#registration_error{
+#reg_error_container{
 	margin: -35px 0px 0px 0px;
-	width: 250px;
+	width: 250px;	
+}
+
+#registration_error{
 	text-align: left;
 	line-height: 20px;
 	padding-left: 10px;
@@ -87,6 +90,9 @@
 	border: none;
 }
 
+div#slide_show div{
+}
+
 .slides_container {
 	width: 475px;	/* size of the slides */
 	height: 350px;
@@ -97,12 +103,6 @@
 	width: 475px;
 	height: 350px;
 	display: block;
-}
-
-div#slide_show ul {
-	position: absolute;
-	margin: 150px 0px 0px 370px;
-	z-index: 10000;
 }
 
 #sign_up {

@@ -251,31 +251,31 @@ a.arrows {
 }
 
 .pagination_left {
-	background: url(../images/global/page_left.png) no-repeat;
+	background: url(../images/global/page_arrows.png) no-repeat;
 }
 
 .pagination_right {
-	background: url(../images/global/page_right.png) no-repeat;
-	background-position: 20px 0px;
+	background: url(../images/global/page_arrows.png) no-repeat;
+	background-position: 20px -60px;
 }
 
-.pagination {
-	margin:26px auto 0;
-	width:100px;
+.pagination_div{
+	width:40px;
+	float: left;
+	margin: -200px 0px 0px 370px;
+	position: relative;
+	z-index: 1000;
 }
 
 .pagination li {
 	float:left;
-	margin:0 1px;
-	list-style:none;
 }
 
 .pagination li a {
 	display:block;
 	width:12px;
-	height:0;
-	padding-top:12px;
-	background:url(../images/global/pagination.png) no-repeat;
+	height:12px;
+	background: url(../images/global/pagination.png) no-repeat;
 	background-position:0 0;
 	float:left;
 	overflow:hidden;

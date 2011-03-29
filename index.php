@@ -39,13 +39,13 @@
 		</div>
 		<div id="indexContent">
 			<div id="slide_show">              
-                <a href="#" class="prev arrows"><img src="images/global/page_left.png" alt="Previous"></a>
+                <a href="#" class="prev arrows pagination_left"></a>
                 <div class="slides_container">
                     <div title="Mosaic Wall"><img src="images/global/slideshow_mosaic.jpg" /></div>
                     <div title="Video Chats"><img src="images/global/slideshow_chat.jpg"/></div>
                     <div title="Social Status"><img src="images/global/slideshow_social.jpg" /></div>
                 </div>
-                <a href="#" class="next arrows"><img src="images/global/page_right.png" alt="Next"></a>
+                <a href="#" class="next arrows pagination_right"></a>
 			</div>
 			<div id="sign_up">
 				<div id="facebook_login">
@@ -221,7 +221,7 @@
 					</select></li>
 					<li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
 					<li><input id="join_button" class="buttons" type="submit" name="join" value="Join"></li>
-				    </ul><div id="registration_error" class="error_text"></div>
+				    </ul><div id="reg_error_container"><div id="registration_error" class="error_text"></div></div>
 				</form>
 			</div>        
 		</div>
