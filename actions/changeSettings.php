@@ -46,7 +46,6 @@ $f_mail_contact = checkboxValidate($_POST['mail_contact']);
 $f_mail_calls = checkboxValidate($_POST['mail_calls']);
 
 
-
 //if passes all checks for user entered data
 
 //open database connection
@@ -61,12 +60,28 @@ if ($f_password_new != NULL) //change password
 	authenticatePassword($id, $f_password_old); //check old password match
 	$f_password_new = md5($f_password_new); //encrypt new password
 	
-	$query_users = "UPDATE `users` SET password = '".$f_password_new."', first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
-
+	
+	if ($f_temp_email_address!= NULL) // change email (add in token) & password 
+	{
+		$email_token = rand(23456789, 98765432); //randomly generated number
+		$query_users = "UPDATE `users` SET password = '".$f_password_new."', first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', email_token = '".$email_token."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+	}
+	else	//change password, but don't change email
+	{
+		$query_users = "UPDATE `users` SET password = '".$f_password_new."', first_name = '".$f_first_name."', last_name = '".$f_last_name."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+	}
 }
 else //dont change password
 {
-	$query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+	if ($f_temp_email_address!= NULL) // change email  (add in token) & do not change password 
+	{
+		$email_token = rand(23456789, 98765432); //randomly generated number
+		$query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', email_token = '".$email_token."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+	}
+	else	//change neither email, nor password
+	{
+		$query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+	}
 }
 
 
