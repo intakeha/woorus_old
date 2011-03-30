@@ -70,7 +70,7 @@ function validateFirstName($name)
 	{
 		die("Please enter no more than 30 characters for your first name.");
 	}
-	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
 		die ("First name contains invalid characters.");
 	}
@@ -101,7 +101,7 @@ function validateLastName($name)
 	{
 		die("Please enter no more than 60 characters for your last name.");
 	}
-	elseif (!preg_match('/^[A-Za-z\s\'\- ]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
 		die ("Last name contains invalid characters.");
 	}
@@ -124,7 +124,7 @@ function validateEmail($email)
 	{
 		die("Please enter no more than 254 characters for your email.");
 	}
-	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	elseif (!preg_match ("/^[^0-9][A-z0-9_\-]+([.][A-z0-9_\-]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
 		die ("Please enter a valid email address.");
 	}
@@ -313,7 +313,7 @@ function validateCity($city)
 	{
 		die("Please enter no more than 255 characters for your city.");
 	}
-	elseif (!preg_match('/^[A-Za-z\s\'\-\, ]+$/', $city))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-\, ]+$/', $city))
 	{
 		die ("City contains invalid characters.");
 	}
@@ -343,7 +343,7 @@ function validatePasswordLogin($password)
 
 //-------------------------Settings validation functions-----------------------------------------//
 
-function validateEmailSettings($email)
+function validateEmail_emptyOK($email)
 {	
 	if($email == NULL | strlen($email) == 0)
 	{
@@ -365,43 +365,58 @@ function validateEmailSettings($email)
 
 }
 
-//check password length--between 6-20chars
-function validatePasswordSettings($password)
+//logic to check passwords
+function validateOldAndNewPassword($password_old, $password_new, $password_confirm)
 {
-	if (strlen($password) == 0)
-	{
-		//user doesn't want to change their password
-	}
-	elseif (strlen($password) <6 | strlen($password) > 20)
-	{
-		die("Your password must be between 6 and 20 characters long.");
-	}
-	else
-	{
-		return strip_tags($password);
-	}
 	
+	if (($password_old == NULL) & ($password_new == NULL))
+	{
+		//user does not want to change their password
+		if (strlen($password_confirm != NULL)) //check that they have nothing in confirm password
+		{
+			die("Your new passwords do not match.");
+		}
+		return NULL;
+	}
+	elseif (($password_old != NULL) & ($password_new == NULL))
+	{
+		die("Please enter your new password");
+	}
+	elseif (($password_old == NULL) & ($password_new != NULL))
+	{
+		die("Please enter your old password");
+	}
+	else //since neither password_old nor password_new is NULL, use wants to change their passwod
+	{
+		if (strlen($password_confirm == NULL)) //no confirm password
+		{
+			die("Please confirm your password.");
+		}
+		else
+		{
+			//check valid password
+			$password_old = validatePassword($password_old);
+			$password_new = validatePassword($password_new);
+			
+			checkPassword($password_new, $password_confirm); //if passes, passwords match
+			return $password_new;
+		}
+	}
+
 }
 
-function checkPassword($password, $confirm_password)
+function checkPassword($password, $password_confirm)
 {
-	if (strlen($confirm_password) == 0)
+	if ($password != $password_confirm)
 	{
-		//user doesn't want to change their password
-	}
-	elseif ((strlen($password) != 0) & (strlen($password) < 6 | strlen($password) > 20))
-	{
-		die("Your password must be between 6 and 20 characters long.");
-	}
-	elseif ($password != $confirm_password)
-	{
-		die("Please provide matching passwords.");
+		die("Your new passwords do not match.");
 	}
 	else 
 	{
 		return ;
 	}
 }
+
 
 function checkboxValidate($checkbox)
 {

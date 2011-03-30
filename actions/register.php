@@ -31,7 +31,7 @@ $f_user_city_id = ("1"); //need to do based on lookup
 $social_status = "a"; //default value
 $token = rand(23456789, 98765432); //randomly generated number
 $email_verified = "0"; //default value
-$temp_email_verified = "0"; //default value
+
 
 
 //at this point, user passes all checks for user entered data
@@ -54,8 +54,8 @@ if ($namecheck_count != 0)
 }
 
 //enter user into system
-$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, temp_email_verified) VALUES 
-(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."', '".$temp_email_verified."')";
+$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
+(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."')";
 
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
