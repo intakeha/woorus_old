@@ -31,7 +31,7 @@ if ($id&&$token)
 
 		//put new email in email field, set temp email to null, set temp_email_verified to 1, set email token to null
 		$new_email = get_standard_email($new_email_visual);
-		$activate_query = "UPDATE users SET temp_email_address = NULL, email_address = '".$new_email."',  visual_email_address = '"$new_email_visual"', email_token = NULL WHERE id = '".$id."' ";  
+		$activate_query = "UPDATE `users` SET temp_email_address = NULL, email_address = '".$new_email."',  visual_email_address = '".$new_email_visual."', email_token = NULL WHERE id = '".$id."' ";
 		$activate_result = mysql_query($activate_query, $connection) or die ("Error");
 		die("Account is Activated");
 }

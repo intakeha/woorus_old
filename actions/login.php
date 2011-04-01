@@ -70,11 +70,10 @@ require('connect.php');
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 
 //check if user has logged in before
-echo $id;
 $query_checkLogin = "SELECT id from `user_login` WHERE user_id = '".$id."'";
 $checkLogin_result = mysql_query($query_checkLogin, $connection) or die ("Error");
 $checkLogin_count = mysql_num_rows($checkLogin_result);
-echo $checkLogin_count; 
+
 
 	if ($checkLogin_count == 0) // user does not exist, do an insert
 	{
