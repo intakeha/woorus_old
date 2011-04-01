@@ -62,7 +62,7 @@ function authenticate($email, $pass)
 	{
 		//check is user is in the system at all
 		
-		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$f_email_address."'";
+		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$email."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 
