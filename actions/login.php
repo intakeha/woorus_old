@@ -51,7 +51,8 @@ function authenticate($email, $pass)
 		$activated = $row['email_verified'];
 		if ($activated == '0')
 		{
-			die("Your Account is not yet activated. Please check your email \n");
+			 echo ("Your Account is not yet activated. Please check your email \n");
+			 return NULL;
 		}
 		
 		$id = $row['id'];
@@ -59,8 +60,22 @@ function authenticate($email, $pass)
 	}
 	else
 	{
-		print "fail \n";
-		return NULL;
+		//check is user is in the system at all
+		
+		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$f_email_address."'";
+		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
+		$namecheck_count = mysql_num_rows($namecheck_result);
+
+		if ($namecheck_count != 0) //user is registered but has the wrong password
+		{
+			echo "You have entered the wrong password.";
+			return NULL;
+		}
+		else //user isnt even registered
+		{
+			echo "This email address is not registered to Woorus.com. Please register with the fields below.";
+			return NULL;
+		}
 	}
 }
 

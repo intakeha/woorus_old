@@ -44,7 +44,7 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to conn
 mysql_select_db($db_name);
 
 //check if email is already in system
-$namecheck_query = "SELECT email_address from users WHERE email_address = '".$f_email_address."'";
+$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$f_email_address."'";
 $namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 $namecheck_count = mysql_num_rows($namecheck_result);
 
@@ -60,7 +60,7 @@ $query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, v
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
 //re-lookup ID based on email
-$id_query = "SELECT id from users WHERE email_address = '".$f_email_address."'";
+$id_query = "SELECT id from `users` WHERE email_address = '".$f_email_address."'";
 
 $id_result = mysql_query($id_query, $connection) or die ("Error 3");
 $id_count = mysql_num_rows($id_result);
