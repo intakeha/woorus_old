@@ -10,8 +10,6 @@ $token = validateToken($_GET['token']);
 
 //for testing
 
-echo $id.$token;
-
 if ($id&&$token)
 {
 	//connect
@@ -19,7 +17,7 @@ if ($id&&$token)
 	mysql_select_db($db_name);
 
 	//check if id & token combination exists
-	$query = "SELECT id, temp_email_address, temp_email_verified from `users` WHERE id = '".$id."' AND email_token = '".$token."' ";
+	$query = "SELECT id, temp_email_address from `users` WHERE id = '".$id."' AND email_token = '".$token."' ";
 	$result = mysql_query($query, $connection) or die ("Error 1");
 	
 	// if row exists -> id/token combination is correct
