@@ -9,8 +9,8 @@ $id = validateID($_GET['id']);
 $token = validateToken($_GET['token']);
 
 //for testing
-//$id = "20";
-//$token = "79003140";
+
+echo $id.$token;
 
 if ($id&&$token)
 {
@@ -20,7 +20,7 @@ if ($id&&$token)
 
 	//check if id & token combination exists
 	$query = "SELECT id, temp_email_address, temp_email_verified from `users` WHERE id = '".$id."' AND email_token = '".$token."' ";
-	$result = mysql_query($query, $connection) or die ("Error");
+	$result = mysql_query($query, $connection) or die ("Error 1");
 	
 	// if row exists -> id/token combination is correct
 	if (mysql_num_rows($result) == 1)
@@ -32,7 +32,7 @@ if ($id&&$token)
 		//put new email in email field, set temp email to null, set temp_email_verified to 1, set email token to null
 		$new_email = get_standard_email($new_email_visual);
 		$activate_query = "UPDATE `users` SET temp_email_address = NULL, email_address = '".$new_email."',  visual_email_address = '".$new_email_visual."', email_token = NULL WHERE id = '".$id."' ";
-		$activate_result = mysql_query($activate_query, $connection) or die ("Error");
+		$activate_result = mysql_query($activate_query, $connection) or die ("Error 2");
 		die("Account is Activated");
 }
 	else
