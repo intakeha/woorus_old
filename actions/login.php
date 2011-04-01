@@ -6,7 +6,7 @@ require('connect.php');
 require('validations.php');
 
 //get from the form
-$f_email_address = get_standard_email(validateEmail($_POST['email']));
+$f_email_address = validateEmail($_POST['email']);
 $f_password = validatePasswordLogin($_POST['password']);
 
 //encrypt password
@@ -35,6 +35,8 @@ function authenticate($email, $pass)
 	require('connect.php');
 	//connect
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+	
+	$email = get_standard_email($email);
 
 	//check if user exists
 	$query = "SELECT id, email_verified from `users` WHERE email_address = '".$email."' AND password = '".$pass."'";
