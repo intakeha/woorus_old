@@ -13,6 +13,6 @@
 		</ul>
 	</div>
 	<div id="sub_menu">
-    	alison.murphy@woorus.com | invite a friend | <a href="canvas.php?page=settings">settings</a> | logout
+    	<?php session_start() echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a href="./actions/logout.php">logout</a> 
 	</div>
 </div>
