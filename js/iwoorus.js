@@ -200,7 +200,7 @@ $(document).ready(function(){
 });
 
 jQuery.validator.addMethod("validname", function(value, element) {
-	return this.optional(element) || /^[a-z-'\s]+$/i.test(value);
+	return this.optional(element) || /^[a-zÀ-ÖØ-öø-ÿ-'\s]+$/i.test(value);
 }, "The name contains invalid characters.");
 
 jQuery.validator.addMethod("startsymbol", function(value, element) {
@@ -220,5 +220,5 @@ jQuery.validator.addMethod("checkgender", function(value, element) {
 }, "Please select an option.");
 
 jQuery.validator.addMethod("validcity", function(value, element) {
-	return this.optional(element) || /^[a-z-',\s]+$/i.test(value);
+	return this.optional(element) || /^[a-zÀ-ÖØ-öø-ÿ-',\s]+$/i.test(value);
 }, "The name contains invalid characters.");
