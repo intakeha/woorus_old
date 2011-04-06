@@ -1,6 +1,44 @@
 // Validate forms via jQuery
 $(document).ready(function(){
 	
+	// Validate recover form
+	
+	$("#recover_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#recover_error").text(validator.errorList[0].message); 
+			}
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {
+			new_password: {
+				required: true,
+				rangelength: [6,20]
+			},
+			confirm_password: {
+				required: true,
+				equalTo: "#new_password"
+			}			
+		},
+		messages: {
+			new_password: {
+				required: "Please enter your new password.",
+				rangelength: "Your new password must be between 6 and 20 characters long."
+			},
+			confirm_password: {
+				required: "Please confirm your new password.",
+				equalTo: "Your new passwords do not match."
+			}
+		}
+	});	
+	
 	// Validate settings form
 	$("#settings_form").validate({
 		onsubmit: true,

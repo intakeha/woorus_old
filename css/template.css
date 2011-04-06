@@ -492,3 +492,11 @@ li.recover_title {
 	background-color: #ccc;
 	margin-top: 10px;
 }
+
+#recover_error{
+	text-align: left;
+	line-height: 20px;
+	border-left: 3px solid #C00;
+	padding-left: 10px;
+	margin: -10px 0px 0px 20px;
+}
