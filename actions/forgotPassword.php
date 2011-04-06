@@ -1,6 +1,6 @@
 <?php
 
-//not done
+//not done--needs to send email to user.
 
 require('connect.php');
 require('validations.php');
