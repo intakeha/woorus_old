@@ -3,6 +3,7 @@
 session_start();
 require('connect.php');
 require('validations.php');
+require('loginHelperFunctions.php');
 
 //get ID from session variable
 $id = $_SESSION['id'];
