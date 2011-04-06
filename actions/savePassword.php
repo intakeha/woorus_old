@@ -21,7 +21,7 @@ $query_password = "UPDATE `users` SET password = '".$f_password_new."', update_t
 $result = mysql_query($query_password, $connection) or die ("Password Update Error");
 
 //update last user login, in LoginHelperFunctions.php
-updateLoginTime($id)
+updateLoginTime($id);
 
 header( 'Location: ../canvas.php?page=settings') ;
 
