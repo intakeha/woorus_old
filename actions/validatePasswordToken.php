@@ -33,8 +33,7 @@ if ($id&&$token)
 		session_start();
 		$_SESSION['id'] = $id;
 		$_SESSION['email'] = $visual_email;
-		echo "Success";
-		//header( 'Location: ../canvas.php?page=recover') ;
+		header( 'Location: ../canvas.php?page=recover');
 		
 	}
 	else
