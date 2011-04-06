@@ -13,7 +13,7 @@
    	<script type="text/javascript" src="js/woorus.js"></script>
 	<?php 
 		$page = $_REQUEST['page'];
-		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "settings");
+		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "settings", "recover");
 		if (!in_array($page, $pages)) header("location: canvas.php?page=home");
 	?>
 </head>
