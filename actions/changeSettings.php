@@ -1,11 +1,5 @@
 <?php
 
-//not done
-//assumption is that will call gmail_check(strtolower($f_visual_email)) at activation
-//check is user wants to change password--if statements, different sql update.
-//
-
-
 session_start();
 require('connect.php');
 require('validations.php');
