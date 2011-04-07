@@ -56,6 +56,7 @@
 			</div>
 			<div id="sign_up">
 				<div id="facebook_login">
+					<div id="fb-root"></div>
 					<fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes">Login with Facebook</fb:login-button><br>
 					<span>&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;</span>
 				</div>
