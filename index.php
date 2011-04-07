@@ -12,6 +12,13 @@
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
    	<script type="text/javascript" src="js/iwoorus.js"></script>
+	<script src="http://connect.facebook.net/en_US/all.js"></script>
+	<script>
+         FB.init({ 
+            appId:113603915367848, cookie:true, 
+            status:true, xfbml:true 
+         });
+	</script>
 </head>
 <body>
 	<div class="bg_canvas"></div>
@@ -49,7 +56,7 @@
 			</div>
 			<div id="sign_up">
 				<div id="facebook_login">
-					<a href="#"><img src="images/global/facebook.jpg"></a><br>
+					<fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes">Login with Facebook</fb:login-button><br>
 					<span>&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;</span>
 				</div>
 				<form id="registration_form" action="actions/register.php" method="POST">
