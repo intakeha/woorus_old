@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
-   	<script type="text/javascript" src="js/iwoorus.js"></script>
+   	<script type="text/javascript" src="js/woorus.js"></script>
 	<script src="http://connect.facebook.net/en_US/all.js"></script>
 	<script>
          FB.init({ 
@@ -35,7 +35,7 @@
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Forgot your password?</a>
 				</div>
 				<div class="login_panel" style="display: none;">
-					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
+					<form id="forgot_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" type="text" name="email"> &nbsp; 
 						<input id="forgot_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
