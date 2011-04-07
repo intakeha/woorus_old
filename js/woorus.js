@@ -40,7 +40,7 @@ $(document).ready(function(){
 		}
 	});	
 	
-	// Validate login form
+	// Validate forgot password form
 	$("#forgot_form").validate({
 		onsubmit: true,
 		onfocusout: false,
