@@ -6,11 +6,14 @@
 	<meta http-equiv="Content-language" content="en"/>
 	<meta name="keywords" content="video chats">
 	<meta name="description" content="Connecting people through interests">
-	<link href="css/global.css" rel="stylesheet" type="text/css">
-	<link href="css/template.css" rel="stylesheet" type="text/css">
+	<link href="css/woorus.css" rel="stylesheet" type="text/css">
 	<script type="text/javascript" src="js/jquery.min.js"></script>
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
+  	<script type="text/javascript" src="js/jquery.ui.core.min.js "></script>
+   	<script type="text/javascript" src="js/jquery.ui.widget.min.js "></script>
+    <script type="text/javascript" src="js/jquery.ui.position.min.js "></script>
+    <script type="text/javascript" src="js/jquery.ui.autocomplete.min.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
 </head>
 <body>
