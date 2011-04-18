@@ -80,7 +80,7 @@ if ($session)
 			
 			//enter user into system
 			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
-			(NULL, '".$facebook_first_name."', '".$facebook_last_name."', '".$facebook_email_address."', '".$facebook_email_address_visual."', NULL, NULL , NULL, '".$facebook_gender."', '".$facebook_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), "", '".$email_verified."')";
+			(NULL, '".$facebook_first_name."', '".$facebook_last_name."', '".$facebook_email_address."', '".$facebook_email_address_visual."', NULL, NULL , NULL, '".$facebook_gender."', '".$facebook_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), , '".$email_verified."')";
 
 			$result = mysql_query($query_users, $connection) or die ("Error 1");
 
