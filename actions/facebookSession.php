@@ -70,18 +70,19 @@ if ($session)
 
 			$social_status = "a"; //default value
 			$email_verified = "1"; //default value  (no need to verify, no need for token)
-
+		
+			echo $facebook_id.$facebook_first_name.$facebook_last_name.$facebook_birthday.$facebook_gender;
 
 			//enter user into system
 			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
 			(NULL, '".$facebook_first_name."', '".$facebook_last_name."', '".$facebook_email_address."', '".$facebook_email_address_visual."', NULL, NULL , NULL, '".$facebook_gender."', '".$facebook_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), NULL, '".$email_verified."')";
 
-			$result = mysql_query($query_users, $connection) or die ("Error 2");
+			$result = mysql_query($query_users, $connection) or die ("Error 1");
 
 			//re-lookup ID based on email
 			$id_query = "SELECT id from `users` WHERE email_address = '".$facebook_email_address."'";
 
-			$id_result = mysql_query($id_query, $connection) or die ("Error 3");
+			$id_result = mysql_query($id_query, $connection) or die ("Error 2");
 			$id_count = mysql_num_rows($id_result);
 			if ($id_count != 0)
 			{
@@ -92,7 +93,7 @@ if ($session)
 
 			//once we get the ID, set the settings for that user
 			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
-			$result = mysql_query($query_settings, $connection) or die ("Error 2");
+			$result = mysql_query($query_settings, $connection) or die ("Error 3");
 
 			header( 'Location: ../canvas.php?page=settings') ;
 

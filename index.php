@@ -10,11 +10,15 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
+<<<<<<< .mine
+   	<script type="text/javascript" src="js/iwoorus.js"></script>
+=======
   	<script type="text/javascript" src="js/jquery.ui.core.min.js "></script>
    	<script type="text/javascript" src="js/jquery.ui.widget.min.js "></script>
     <script type="text/javascript" src="js/jquery.ui.position.min.js "></script>
     <script type="text/javascript" src="js/jquery.ui.autocomplete.min.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
+>>>>>>> .r121
 </head>
 <body>
 	<div class="bg_canvas"></div>
@@ -31,7 +35,7 @@
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Forgot your password?</a>
 				</div>
 				<div class="login_panel" style="display: none;">
-					<form id="forgot_form" action="actions/forgotPassword.php" method="POST">
+					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" type="text" name="email"> &nbsp; 
 						<input id="forgot_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
@@ -56,8 +60,9 @@
 					<script src="http://connect.facebook.net/en_US/all.js"></script>
 					<script>
 						 FB.init({appId:113603915367848, cookie:true, status:true, xfbml:true});
+						 FB.Event.subscribe('auth.login', function () {window.location = "../canvas.php";});
 					</script>
-					<fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes">
+					<fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">
 						 <span style="font-size:12px;">Login with Facebook</span>
 					</fb:login-button><br>
 				<span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
