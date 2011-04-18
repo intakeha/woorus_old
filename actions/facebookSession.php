@@ -56,7 +56,7 @@ if ($session)
 
 
 			$facebook_id = $me["id"]; //this is NOT woorus ID
-			$facebook_first_name =  $me["first_name"]
+			$facebook_first_name =  $me["first_name"];
 			$facebook_last_name = $me["last_name"];
 			$facebook_birthday =  $me["birthday"];
 			$facebook_city = $me["location"]["name"]; //not using yet
