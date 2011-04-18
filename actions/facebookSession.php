@@ -72,7 +72,7 @@ if ($session)
 			$social_status = "a"; //default value
 			$email_verified = "1"; //default value  (no need to verify, no need for token)
 		
-			echo $facebook_id.$facebook_first_name.$facebook_last_name.$facebook_birthday.$facebook_gender;
+			echo $facebook_id.$facebook_first_name.$facebook_last_name.$facebook_birthday.$facebook_gender.$facebook_email_address;
 
 			//connect
 			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
