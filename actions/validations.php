@@ -470,4 +470,18 @@ function validatetoken($token)
 	}
 }
 
+
+function convertGender($gender){
+
+	if ($gender == "female" or $gender == "Female")
+	{
+		return "F";
+	}else
+	{
+		return "M";
+	}
+
+}
+
+
 ?>
