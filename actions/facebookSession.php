@@ -103,7 +103,7 @@ if ($session)
 			//start the session
 			session_start();
 			$_SESSION['id'] = $user_id;
-			$_SESSION['email'] = $f_email_address;
+			$_SESSION['email'] = $facebook_email_address_visual;
 		
 			
 			header( 'Location: ../canvas.php?page=settings') ;
