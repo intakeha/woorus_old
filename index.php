@@ -60,7 +60,7 @@
 					<script src="http://connect.facebook.net/en_US/all.js"></script>
 					<script>
 						 FB.init({appId:113603915367848, cookie:true, status:true, xfbml:true});
-						 FB.Event.subscribe('auth.login', function () {window.location = "../canvas.php";});
+						 FB.Event.subscribe('auth.login', function () {window.location = "../actions/facebookSession.php";});
 					</script>
 					<fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">
 						 <span style="font-size:12px;">Login with Facebook</span>
