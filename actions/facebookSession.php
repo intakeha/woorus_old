@@ -99,7 +99,13 @@ if ($session)
 			//once we get the ID, set the settings for that user
 			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 			$result = mysql_query($query_settings, $connection) or die ("Error 3");
-
+	
+			//start the session
+			session_start();
+			$_SESSION['id'] = $user_id;
+			$_SESSION['email'] = $f_email_address;
+		
+			
 			header( 'Location: ../canvas.php?page=settings') ;
 
 		}
