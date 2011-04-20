@@ -36,7 +36,7 @@ if ($session)
 		'query' => 'SELECT birthday_date FROM user WHERE uid = me()'
 		)); 
 		
-		echo $birthday_test;
+		echo $birthday_test[0];
 		exit();
 		
 		$facebook_email_address_visual = $me["email"];
