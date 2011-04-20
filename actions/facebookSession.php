@@ -139,7 +139,7 @@ if ($session)
 				{
 					//add interest if its not there
 					$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
-											(NULL, '". $interest."' , "Employers" , '". $interest_id."', "Employers", NOW(), '". $user_id."')";
+											(NULL, '". $interest."' , 'Employers' , '". $interest_id."', 'Employers', NOW(), '". $user_id."')";
 					$result = mysql_query($query_add_interest, $connection) or die ("Error");
 					
 					//then get ID of interest, to use in other tables
