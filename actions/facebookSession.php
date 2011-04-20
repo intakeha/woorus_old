@@ -24,9 +24,21 @@ $me = null;
 // Session based API call.
 if ($session) 
 {
+	$access_token = $facebook->getAccessToken();
+	
 	try {
 		$uid = $facebook->getUser();
 		$me = $facebook->api('/me');
+		
+		//testing for bday
+		$name_test = $facebook->api(array(  
+		'method' => 'fql.query',  
+		'query' => 'SELECT name FROM user WHERE uid = me()'
+		)); 
+		
+		echo $name_test;
+		exit();
+		
 		$facebook_email_address_visual = $me["email"];
 		$facebook_email_address = get_standard_email($facebook_email_address_visual);
 
@@ -65,8 +77,7 @@ if ($session)
 			$facebook_id = $me["id"]; //this is NOT woorus ID
 			$facebook_first_name =  $me["first_name"];
 			$facebook_last_name = $me["last_name"];
-			//$facebook_birthday =  $me["birthday"];
-			$facebook_birthday = "1986-9-9";
+			$facebook_birthday =  $me["birthday_date"];
 			$facebook_city = $me["location"]["name"]; //not using yet
 			$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
 			$facebook_gender = convertGender($me["gender"]);
