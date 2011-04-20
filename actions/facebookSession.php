@@ -130,7 +130,7 @@ if ($session)
 				
 			}
 		
-			/*
+			
 			foreach ($me["education"] as $value)
 			{
 				$facebook_interest = $value["school"]["name"]."\n";
@@ -147,7 +147,6 @@ if ($session)
 				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $connection);
 				
 			}
-			*/
 
 			//start the session
 			session_start();
