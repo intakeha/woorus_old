@@ -36,11 +36,18 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$facebook_email_address."'";
+		$namecheck_query = "SELECT email_address, id from `users` WHERE email_address = '".$facebook_email_address."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		if ($namecheck_count != 0)
 		{
+			//if user has already logged in via facebook, get ID & start session
+			$row = mysql_fetch_assoc($namecheck_result);
+			$user_id = $row['id']; 
+			
+			session_start();
+			$_SESSION['id'] = $user_id;
+			$_SESSION['email'] = $facebook_email_address_visual;
 			header( 'Location: ../canvas.php' );
 		}
 		else{
@@ -104,7 +111,6 @@ if ($session)
 			session_start();
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
-		
 			
 			header( 'Location: ../canvas.php?page=settings') ;
 
