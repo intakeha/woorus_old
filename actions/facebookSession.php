@@ -163,11 +163,11 @@ if ($session)
 }
 
 
-function enterNewInterest($facebook_interest, $category, $facebook_interest_id, $facebook_category, $user_id, $connection)
+function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $connection)
 {
 
 	//check for interest
-	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$facebook_interest_id."' ";
+	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$fb_interest_id."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
 	$interest_count = mysql_num_rows($interest_result);
 	
@@ -181,11 +181,11 @@ function enterNewInterest($facebook_interest, $category, $facebook_interest_id, 
 	{
 		//add interest if its not there
 		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
-								(NULL, '". $facebook_interest."' , '". $category."' , '". $facebook_interest_id."',  '". $facebook_category."' , NOW(), '". $user_id."')";
+								(NULL, '". $fb_interest."' , '". $category."' , '". $fb_interest_id."',  '". $fb_category."' , NOW(), '". $user_id."')";
 		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 		
 		//then get ID of interest, to use in other tables
-		$id_query = "SELECT id from `interests` WHERE facebook_ID = '".$facebook_interest_id."'";
+		$id_query = "SELECT id from `interests` WHERE facebook_ID = '".$fb_interest_id."'";
 		$id_result = mysql_query($id_query, $connection) or die ("Error 3");
 		$id_count = mysql_num_rows($id_result);
 		if ($id_count != 0)
