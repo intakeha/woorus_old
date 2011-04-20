@@ -31,12 +31,12 @@ if ($session)
 		$me = $facebook->api('/me');
 		
 		//testing for bday
-		$name_test = $facebook->api(array(  
+		$birthday_test = $facebook->api(array(  
 		'method' => 'fql.query',  
-		'query' => 'SELECT name FROM user WHERE uid = me()'
+		'query' => 'SELECT birthday_date FROM user WHERE uid = me()'
 		)); 
 		
-		echo sizeof($name_test);
+		echo $birthday_test;
 		exit();
 		
 		$facebook_email_address_visual = $me["email"];
