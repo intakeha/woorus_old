@@ -482,17 +482,6 @@ function convertGender($gender){
 	{
 		return "M";
 	}
-
-}
-
-function convertBirthday($birthday){
-
-	$birthday_year = 
-	$birthday_month =
-	$birthday_day =
-
-	return $birthday_year."-".$birthday_month."-".$birthday_day;
-
 }
 
 
