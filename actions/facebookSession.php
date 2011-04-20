@@ -91,8 +91,6 @@ if ($session)
 
 			$social_status = "a"; //default value
 			$email_verified = "1"; //default value  (no need to verify, no need for token)
-		
-			echo $facebook_id.$facebook_first_name.$facebook_last_name.$facebook_birthday.$facebook_gender.$facebook_email_address;
 
 			//connect
 			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
@@ -118,6 +116,8 @@ if ($session)
 			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 			$result = mysql_query($query_settings, $connection) or die ("Error 3");
 	
+			//need to also update the login table
+	
 			//next step is to enter in all the interests we've taken from the facebook API
 			
 			//employer
@@ -128,7 +128,7 @@ if ($session)
 			
 				//check for interest
 				$query_search_interest = "'SELECT id from `interests` WHERE facebook_ID = '". $interest_id."' ";
-				$result = mysql_query($query_search_interest, $connection) or die ("Error");
+				$result = mysql_query($query_search_interest, $connection) or die ("Error 4");
 
 				// if row exists -> interest is already there from Facebook
 				if (mysql_num_rows($result) == 1)
@@ -140,7 +140,7 @@ if ($session)
 					//add interest if its not there
 					$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
 											(NULL, '". $interest."' , 'Employers' , '". $interest_id."', 'Employers', NOW(), '". $user_id."')";
-					$result = mysql_query($query_add_interest, $connection) or die ("Error");
+					$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 					
 					//then get ID of interest, to use in other tables
 				}
