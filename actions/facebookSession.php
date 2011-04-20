@@ -129,9 +129,8 @@ if ($session)
 				echo $interest.$interest_id;
 			
 				//check for interest
-				$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
-				mysql_select_db($db_name);
-				$query_search_interest = "'SELECT id from `interests` WHERE facebook_ID = '". $interest_id."' ";
+				
+				$query_search_interest = "'SELECT id from `interests` WHERE facebook_ID = '".$interest_id."' ";
 				$result = mysql_query($query_search_interest, $connection) or die ("Error 4");
 
 				// if row exists -> interest is already there from Facebook
