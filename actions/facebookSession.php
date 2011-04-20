@@ -126,7 +126,7 @@ if ($session)
 				$facebook_interest = $value["employer"]["name"]."\n";
 				$facebook_interest_id = $value["employer"]["id"]."\n";
 			
-				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id);
+				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $connection);
 				
 			}
 		
@@ -136,7 +136,7 @@ if ($session)
 				$facebook_interest = $value["school"]["name"]."\n";
 				$facebook_interest_id = $value["school"]["id"]."\n";
 				
-				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id, 'Education', $user_id);
+				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id, 'Education', $user_id, $connection);
 			}
 
 			foreach ($likes["data"] as $value){
@@ -144,7 +144,7 @@ if ($session)
 				$category = $value["category"]."\n";
 				$facebook_interest_id = $value ["id"]."\n";
 				
-				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id);
+				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $connection);
 				
 			}
 			*/
@@ -164,11 +164,11 @@ if ($session)
 }
 
 
-function enterNewInterest($facebook_interest , $category, $facebook_interest_id, $facebook_category, $user_id)
+function enterNewInterest($facebook_interest , $category, $facebook_interest_id, $facebook_category, $user_id, $connection)
 {
 
 	//check for interest
-	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$facebook_interest_id."'";
+	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$facebook_interest_id."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
 	$interest_count = mysql_num_rows($interest_result);
 	
