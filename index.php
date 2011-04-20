@@ -10,13 +10,6 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
-<<<<<<< .mine
-   	<script type="text/javascript" src="js/iwoorus.js"></script>
-=======
-  	<script type="text/javascript" src="js/jquery.ui.core.min.js "></script>
-   	<script type="text/javascript" src="js/jquery.ui.widget.min.js "></script>
-    <script type="text/javascript" src="js/jquery.ui.position.min.js "></script>
-    <script type="text/javascript" src="js/jquery.ui.autocomplete.min.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
 >>>>>>> .r121
 </head>
