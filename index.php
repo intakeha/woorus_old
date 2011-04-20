@@ -11,7 +11,6 @@
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
->>>>>>> .r121
 </head>
 <body>
 	<div class="bg_canvas"></div>
