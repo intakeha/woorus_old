@@ -193,7 +193,7 @@ function enterNewInterest($facebook_interest , $category, $facebook_interest_id,
 			//get id
 			$row = mysql_fetch_assoc($id_result);
 			$interest_id = $row['id']; 
-			return $interest_id
+			return $interest_id;
 		} 
 		else
 		{
