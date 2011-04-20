@@ -30,6 +30,7 @@ if ($session)
 		$uid = $facebook->getUser();
 		$me = $facebook->api('/me');
 		
+		/*
 		//testing for bday
 		$birthday_test = $facebook->api(array(  
 		'method' => 'fql.query',  
@@ -38,6 +39,7 @@ if ($session)
 		
 		print_r($birthday_test);
 		exit();
+		*/
 		
 		$facebook_email_address_visual = $me["email"];
 		$facebook_email_address = get_standard_email($facebook_email_address_visual);
@@ -104,12 +106,10 @@ if ($session)
 
 			//re-lookup ID based on email
 			$id_query = "SELECT id from `users` WHERE email_address = '".$facebook_email_address."'";
-
 			$id_result = mysql_query($id_query, $connection) or die ("Error 2");
 			$id_count = mysql_num_rows($id_result);
 			if ($id_count != 0)
 			{
-				//get id
 				$row = mysql_fetch_assoc($id_result);
 				$user_id = $row['id']; 
 			}
