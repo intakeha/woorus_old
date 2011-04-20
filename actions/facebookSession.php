@@ -36,7 +36,7 @@ if ($session)
 		'query' => 'SELECT name FROM user WHERE uid = me()'
 		)); 
 		
-		echo $name_test;
+		echo sizeof($name_test);
 		exit();
 		
 		$facebook_email_address_visual = $me["email"];
