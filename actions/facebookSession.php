@@ -79,7 +79,7 @@ if ($session)
 			$facebook_id = $me["id"]; //this is NOT woorus ID
 			$facebook_first_name =  $me["first_name"];
 			$facebook_last_name = $me["last_name"];
-			$facebook_birthday =  $me["birthday_date"];
+			//$facebook_birthday =  $me["birthday_date"];
 			$facebook_city = $me["location"]["name"]; //not using yet
 			$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
 			$facebook_gender = convertGender($me["gender"]);
@@ -118,6 +118,49 @@ if ($session)
 			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 			$result = mysql_query($query_settings, $connection) or die ("Error 3");
 	
+			//next step is to enter in all the interests we've taken from the facebook API
+			
+			//employer
+			foreach ($me["work"] as $value){
+			
+				$interest = $value["employer"]["name"]."\n";
+				$interest_id = $value["employer"]["id"]."\n";
+			
+				//check for interest
+				$query_search_interest = "'SELECT id from `interests` WHERE facebook_ID = '". $interest_id."' ";
+				$result = mysql_query($query_search_interest, $connection) or die ("Error");
+
+				// if row exists -> interest is already there from Facebook
+				if (mysql_num_rows($result) == 1)
+				{
+					//do not add to the interest to the table (will add to other tabes later)
+				}
+				else
+				{
+					//add interest if its not there
+					$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
+											(NULL, '". $interest."' , "Employers" , '". $interest_id."', "Employers", NOW(), '". $user_id."')";
+					$result = mysql_query($query_add_interest, $connection) or die ("Error");
+					
+					//then get ID of interest, to use in other tables
+				}
+			}
+
+				/*
+			foreach ($me["education"] as $value)
+			{
+				echo $value["school"]["name"]."\n";
+				echo $value["school"]["id"]."\n";
+			}
+
+			foreach ($likes["data"] as $value){
+				echo $value["name"]."\n";
+				echo $value["category"]."\n";
+				echo $value ["id"]."\n";
+			}
+
+			*/
+
 			//start the session
 			session_start();
 			$_SESSION['id'] = $user_id;
