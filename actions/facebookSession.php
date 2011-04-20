@@ -194,7 +194,8 @@ function enterNewInterest($facebook_interest , $category, $facebook_interest_id,
 			$row = mysql_fetch_assoc($id_result);
 			$interest_id = $row['id']; 
 			return $interest_id
-		}else
+		} 
+		else
 		{
 			return NULL; //not sure when this would happen, really only for error case
 		}
