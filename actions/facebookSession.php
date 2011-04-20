@@ -136,7 +136,7 @@ if ($session)
 				$facebook_interest = $value["school"]["name"]."\n";
 				$facebook_interest_id = $value["school"]["id"]."\n";
 				
-				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id, 'Education', $user_id, $connection);
+				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $connection);
 			}
 
 			foreach ($likes["data"] as $value){
@@ -163,7 +163,7 @@ if ($session)
 }
 
 
-function enterNewInterest($facebook_interest , $category, $facebook_interest_id, $facebook_category, $user_id, $connection)
+function enterNewInterest($facebook_interest, $category, $facebook_interest_id, $facebook_category, $user_id, $connection)
 {
 
 	//check for interest
