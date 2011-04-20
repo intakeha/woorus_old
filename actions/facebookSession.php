@@ -123,45 +123,30 @@ if ($session)
 			//employer
 			foreach ($me["work"] as $value){
 			
-				$interest = $value["employer"]["name"]."\n";
-				$interest_id = $value["employer"]["id"]."\n";
+				$facebook_interest = $value["employer"]["name"]."\n";
+				$facebook_interest_id = $value["employer"]["id"]."\n";
 			
-				//check for interest
+				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id);
 				
-				$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$interest_id."'";
-				$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
-				$interest_count = mysql_num_rows($interest_result);
-				
-				// if row exists -> interest is already there from Facebook
-				if ($interest_count != 0)
-				{
-					// its already there, so do not add to the interest to the table (will add to other tabes later)
-				}
-				else
-				{
-					//add interest if its not there
-					$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
-											(NULL, '". $interest."' , 'Employers' , '". $interest_id."', 'Employers', NOW(), '". $user_id."')";
-					$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
-					
-					//then get ID of interest, to use in other tables
-				}
 			}
 
-				/*
+		
 			foreach ($me["education"] as $value)
 			{
-				echo $value["school"]["name"]."\n";
-				echo $value["school"]["id"]."\n";
+				$facebook_interest = $value["school"]["name"]."\n";
+				$facebook_interest_id = $value["school"]["id"]."\n";
+				
+				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id, 'Education', $user_id);
 			}
 
 			foreach ($likes["data"] as $value){
-				echo $value["name"]."\n";
-				echo $value["category"]."\n";
-				echo $value ["id"]."\n";
+				$facebook_interest = $value["name"]."\n";
+				$category = $value["category"]."\n";
+				$facebook_interest_id = $value ["id"]."\n";
+				
+				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id);
+				
 			}
-
-			*/
 
 			//start the session
 			session_start();
@@ -178,7 +163,44 @@ if ($session)
 }
 
 
+function enterNewInterest($facebook_interest , $category, $facebook_interest_id, $facebook_category, $user_id)
+{
 
+	//check for interest
+	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$interest_id."'";
+	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
+	$interest_count = mysql_num_rows($interest_result);
+	
+	// if row exists -> interest is already there from Facebook
+	if ($interest_count != 0)
+	{
+		// its already there, so do not add to the interest to the table (will add to other tabes later)
+		return NULL;
+	}
+	else
+	{
+		//add interest if its not there
+		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
+								(NULL, '". $interest."' , '". $category."' , '". $interest_id."',  '". $facebook_category."' , NOW(), '". $user_id."')";
+		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
+		
+		//then get ID of interest, to use in other tables
+		$id_query = "SELECT id from `interests` WHERE facebook_ID = '".$interest_id."'";
+		$id_result = mysql_query($id_query, $connection) or die ("Error 3");
+		$id_count = mysql_num_rows($id_result);
+		if ($id_count != 0)
+		{
+			//get id
+			$row = mysql_fetch_assoc($id_result);
+			$interest_id = $row['id']; 
+			return $interest_id
+		}else
+		{
+			return NULL; //not sure when this would happen, really only for error case
+		}
+		
+	}
+}
 
 
 /*
