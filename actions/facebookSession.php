@@ -126,6 +126,8 @@ if ($session)
 				$interest = $value["employer"]["name"]."\n";
 				$interest_id = $value["employer"]["id"]."\n";
 			
+				echo $interest.$interest_id;
+			
 				//check for interest
 				$query_search_interest = "'SELECT id from `interests` WHERE facebook_ID = '". $interest_id."' ";
 				$result = mysql_query($query_search_interest, $connection) or die ("Error 4");
