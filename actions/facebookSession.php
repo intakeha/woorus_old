@@ -123,8 +123,8 @@ if ($session)
 			//employer
 			foreach ($me["work"] as $value){
 			
-				$facebook_interest = $value["employer"]["name"]."\n";
-				$facebook_interest_id = $value["employer"]["id"]."\n";
+				$facebook_interest = $value["employer"]["name"];
+				$facebook_interest_id = $value["employer"]["id"];
 			
 				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $connection);
 				
@@ -133,16 +133,16 @@ if ($session)
 			
 			foreach ($me["education"] as $value)
 			{
-				$facebook_interest = $value["school"]["name"]."\n";
-				$facebook_interest_id = $value["school"]["id"]."\n";
+				$facebook_interest = $value["school"]["name"];
+				$facebook_interest_id = $value["school"]["id"];
 				
 				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $connection);
 			}
 
 			foreach ($likes["data"] as $value){
-				$facebook_interest = $value["name"]."\n";
-				$category = $value["category"]."\n";
-				$facebook_interest_id = $value ["id"]."\n";
+				$facebook_interest = $value["name"];
+				$category = $value["category"];
+				$facebook_interest_id = $value ["id"];
 				
 				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $connection);
 				
