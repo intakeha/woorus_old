@@ -74,6 +74,8 @@
 #reg_error_captcha{
 	width: 440px;
 	margin-top: 20px;
+	font-size: 18px;
+	text-align: center;
 }
 
 #indexContent {
