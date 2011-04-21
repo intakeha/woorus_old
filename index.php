@@ -60,7 +60,7 @@
 				<span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
 				</div>
 				<form id="registration_form" action="actions/register.php" method="POST">
-				    <ul>
+				    <ul id="userInfo">
 					<li><label>First Name</label><input class="text_form" type="text" name="first_name" maxlength="30"></li>
 					<li><label>Last Name</label><input class="text_form" type="text" name="last_name" maxlength="60"></li>
 					<li><label>Email</label><input class="text_form" id="email" type="text" name="email" maxlength="254"></li>
@@ -227,8 +227,15 @@
 					    <option value="1905">1905</option>
 					</select></li>
 					<li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
+                    <li><input id="validate_button" class="buttons" type="button" name="validate" value="Validate"></li>
+					</ul><div id="reg_error_container"><div id="registration_error" class="error_text"></div></div>
+                    <ul id="captcha" style="display: none;">
+                    <li><?php require_once('actions/recaptchalib.php');
+				      $publickey = "6LfgpsMSAAAAAJ53tncUn6Ue25kAIusSyYIs-bPJ"; 
+				      echo recaptcha_get_html($publickey);
+				      ?> </li>
 					<li><input id="join_button" class="buttons" type="submit" name="join" value="Join"></li>
-				    </ul><div id="reg_error_container"><div id="registration_error" class="error_text"></div></div>
+				    </ul><div id="reg_error_captcha"></div>
 				</form>
 			</div>        
 		</div>

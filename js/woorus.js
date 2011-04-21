@@ -40,6 +40,18 @@ $(document).ready(function(){
 		}
 	});	
 	
+	// Submit login form via ajax
+	$('#login_form').submit(function(){
+				$.post(
+					"actions/login.php",
+					$('#login_form').serialize(),
+					function(data){
+						$('#auth_error').text(data); 
+					}
+				);
+				return false;
+			 }); 
+	
 	// Validate forgot password form
 	$("#forgot_form").validate({
 		onsubmit: true,
@@ -400,3 +412,8 @@ jQuery.validator.addMethod("checkgender", function(value, element) {
 jQuery.validator.addMethod("validcity", function(value, element) {
 	return this.optional(element) || /^[a-zÀ-ÖØ-öø-ÿ-',\s]+$/i.test(value);
 }, "The name contains invalid characters.");
+
+// Captcha Theme Settings //
+var RecaptchaOptions = { 
+	theme : 'clean'
+};
