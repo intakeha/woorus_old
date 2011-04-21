@@ -249,8 +249,8 @@ function lookupTileID($facebook_interest_id, $connection)
 
 function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection){
 
-	$mosaic_wall_query = "INSERT INTO `mosaic_wall` (id, user_id, row_val, column_val, tile_id, interest_id, update_time, interest_active) VALUES
-										(NULL, '". $user_id."' , '".$tile_placement."' , '".$tile_id."', '".$interest_id."', NOW(), 1 )";
+	$mosaic_wall_query = "INSERT INTO `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time, interest_active) VALUES
+										(NULL, '". $user_id."', '".$tile_placement."', '".$tile_id."', '".$interest_id."', NOW(), 1 )";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 
