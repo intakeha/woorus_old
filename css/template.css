@@ -50,7 +50,7 @@
 	float: right;
 }
 
-#forgot_button {
+#recover_button {
 	width: 180px;
 	border: 2px solid #FFF;
 }
@@ -455,18 +455,18 @@ select#gender {
 	line-height: 30px;
 }
 
-li.recover_title {
+li.forgot_title {
 	font-weight: bold;
 	margin: 20px;
 }
 
-#recover_form li {
+#forgot_form li {
 	font-size: 18px;
 	color: #215086;	
 	line-height: 35px;
 }
 
-#recover_form label {
+#forgot_form label {
 	width: 200px;
 	display: inline-block;
 	margin-left: 20px;
@@ -493,7 +493,7 @@ li.recover_title {
 	margin-top: 10px;
 }
 
-#recover_error{
+#forgot_form_error{
 	text-align: left;
 	line-height: 20px;
 	border-left: 3px solid #C00;

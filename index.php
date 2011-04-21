@@ -29,7 +29,7 @@
 				<div class="login_panel" style="display: none;">
 					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" type="text" name="email"> &nbsp; 
-						<input id="forgot_button" class="buttons" type="submit" name="forgot" value="Reset Password">
+						<input id="recover_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
 					<a class="switch_link" href="#" onClick="$('.login_panel').toggle();">Log in</a>
 				</div>

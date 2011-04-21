@@ -232,7 +232,7 @@ $(document).ready(function(){
 		invalidHandler: function(form, validator) {
 			var errors = validator.numberOfInvalids();
 			if (errors) {
-				$("#recover_error").text(validator.errorList[0].message); 
+				$("#forgot_form_error").text(validator.errorList[0].message); 
 			}
 		},
 		errorPlacement: function(error, element) {
