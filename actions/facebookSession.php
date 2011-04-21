@@ -3,6 +3,7 @@
 require('facebook.php');
 require('connect.php');
 require('validations.php');
+require('loginHelperFunctions.php');
 
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
@@ -59,6 +60,9 @@ if ($session)
 			$row = mysql_fetch_assoc($namecheck_result);
 			$user_id = $row['id']; 
 			
+			
+			updateLoginTime($user_id); //need to also update the login table
+			
 			session_start();
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
@@ -114,8 +118,7 @@ if ($session)
 			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 			$result = mysql_query($query_settings, $connection) or die ("Error 3");
 	
-			//need to also update the login table
-			
+			updateLoginTime($user_id); //need to also update the login table
 			
 			//next step is to enter in all the interests we've taken from the facebook API
 			$tile_placement= 0;
@@ -254,40 +257,5 @@ function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 
-
-/*
-if ($me)
-{
-	echo $me["id"]."\n";
-	echo $me["first_name"]."\n";
-	echo $me["last_name"]."\n";
-	echo $me["birthday"]."\n";
-	echo $me["location"]["name"]."\n";
-	echo $me["location"]["id"]."\n";
-	echo $me["gender"]."\n";
-	echo $me["email"]."\n";
-
-	foreach ($me["work"] as $value){
-		echo $value["employer"]["name"]."\n";
-		echo $value["employer"]["id"]."\n";
-	}
-
-	foreach ($me["education"] as $value){
-		echo $value["school"]["name"]."\n";
-		echo $value["school"]["id"]."\n";
-	}
-
-	foreach ($likes["data"] as $value){
-		echo $value["name"]."\n";
-		echo $value["category"]."\n";
-		echo $value ["id"]."\n";
-	}
-
-} 
-else 
-{
-	echo "Me is NULL";
-}
-*/
 
 ?>
