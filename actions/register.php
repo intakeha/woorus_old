@@ -109,6 +109,6 @@ if (!$resp->is_valid) {
 	
 	*/
 	
-	echo "<b>Welcome to Woorus!</b><br>Please check your email (".$_POST['email'].") to activate your account";
+	echo "Welcome to Woorus!<br/>Please check your email (".$_POST['email'].") to activate your account";
 }
 ?>
