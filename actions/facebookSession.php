@@ -117,16 +117,18 @@ if ($session)
 			//need to also update the login table
 	
 			//next step is to enter in all the interests we've taken from the facebook API
+	
+			//set row & column vals
 			
+			$tile_placement= 0;
+	
 			//employer
 			foreach ($me["work"] as $value){
 			
 				$facebook_interest = $value["employer"]["name"];
 				$facebook_interest_id = $value["employer"]["id"];
-				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $connection);
-				updateUserInterestTable($user_id, $interest_id, $connection);
-				//$tile_id =  updateTileTable;
-				//updateMosaicWallTable($interest_id , $tile_id);
+				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $tile_placement, $connection);
+				$tile_placement++;
 			}
 		
 			
@@ -135,7 +137,8 @@ if ($session)
 				$facebook_interest = $value["school"]["name"];
 				$facebook_interest_id = $value["school"]["id"];
 				
-				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $connection);
+				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $tile_placement, $connection);
+				$tile_placement++;
 			}
 
 			foreach ($likes["data"] as $value){
@@ -143,7 +146,8 @@ if ($session)
 				$category = $value["category"];
 				$facebook_interest_id = $value ["id"];
 				
-				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $connection);
+				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection);
+				$tile_placement++;
 				
 			}
 
@@ -162,11 +166,11 @@ if ($session)
 }
 
 
-function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $connection)
+function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $tile_placement, $connection)
 {
 
 	//check for interest
-	$interest_query = "SELECT id from `interests` WHERE facebook_ID = '".$fb_interest_id."' ";
+	$interest_query = "SELECT id from `interests` WHERE facebook_id = '".$fb_interest_id."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
 	$interest_count = mysql_num_rows($interest_result);
 	
@@ -178,16 +182,22 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 		//get id, by lookup on facebook ID
 		$row = mysql_fetch_assoc($interest_result);
 		$interest_id = $row['id']; 
+		
+		//update other tables basd on ID
+		updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
+		$tile_id = lookupTileID($facebook_interest_id, $connection)
+		//updateMosaicWallTable($interest_id , $tile_id);
+		
 	}
 	else
 	{
 		//add interest if its not there
-		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
+		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_id, facebook_category, update_time, user_id) VALUES
 								(NULL, '". $fb_interest."' , '". $category."' , '".$fb_interest_id."',  '". $fb_category."' , NOW(), '". $user_id."')";
 		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 		
 		//then get ID of interest, to use in other tables
-		$id_query = "SELECT id from `interests` WHERE facebook_ID = '".$fb_interest_id."'";
+		$id_query = "SELECT id from `interests` WHERE facebook_id = '".$fb_interest_id."'";
 		$id_result = mysql_query($id_query, $connection) or die ("Error 6");
 		$id_count = mysql_num_rows($id_result);
 		if ($id_count != 0)
@@ -196,6 +206,12 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			$row = mysql_fetch_assoc($id_result);
 			$interest_id = $row['id']; 
 			
+			//update other tables based on ID
+			updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
+			updateTileTable($user_id, $interest_id, $facebook_interest_id, $connection);  //need to deal with the facebook IMAGE
+			$tile_id = lookupTileID($facebook_interest_id, $connection)
+			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+				
 		} 
 	}
 	
@@ -205,10 +221,41 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 
 function updateUserInterestTable($user_id, $interest_id, $connection)
 {
-
 	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". $user_id."' ,  '".$interest_id."', NOW() )";
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
+
+function updateTileTable($user_id, $interest_id, $facebook_interest_id, $connection)
+{
+	
+	$tile_filename = "filename.jpg"; //need to know this before we make an entry
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".$interest_id."', '".$tile_filename."', NOW(), 0 ,'". $user_id."','". $facebook_interest_id."')";
+	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
+}
+
+function lookupTileID($facebook_interest_id, $connection)
+{
+	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$facebook_interest_id."'";
+	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
+	$tile_id_count = mysql_num_rows($tile_id_result);
+	if ($tile_id_count != 0)
+	{
+		//get id
+		$row = mysql_fetch_assoc($tile_id_result);
+		$retrieved_tile_id = $row['id']; 
+	}
+	
+	return $retrieved_tile_id;
+
+}
+
+function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection){
+
+	$mosaic_wall_query = "INSERT INTO `mosaic_wall` (id, user_id, row_val, column_val, tile_id, interest_id, update_time, interest_active) VALUES
+										(NULL, '". $user_id."' , '". $row_val."' ,  '".$column_val."', '".$tile_id."', '".$interest_id."', NOW(), 1 )";
+	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
+}
+
 
 /*
 if ($me)
