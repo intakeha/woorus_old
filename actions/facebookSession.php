@@ -74,8 +74,6 @@ if ($session)
 			$movies = $facebook->api('/me/movies');
 			$music = $facebook->api('/me/music');
 			$television = $facebook->api('/me/television');		
-
-
 			$facebook_id = $me["id"]; //this is NOT woorus ID
 			$facebook_first_name =  $me["first_name"];
 			$facebook_last_name = $me["last_name"];
@@ -125,9 +123,10 @@ if ($session)
 			
 				$facebook_interest = $value["employer"]["name"];
 				$facebook_interest_id = $value["employer"]["id"];
-			
 				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $connection);
-				
+				updateUserInterestTable($user_id, $interest_id);
+				//$tile_id =  updateTileTable;
+				//updateMosaicWallTable($interest_id , $tile_id);
 			}
 		
 			
@@ -175,34 +174,41 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 	if ($interest_count != 0)
 	{
 		// its already there, so do not add to the interest to the table (will add to other tabes later)
-		return NULL;
+	
+		//get id, by lookup on facebook ID
+		$row = mysql_fetch_assoc($interest_result);
+		$interest_id = $row['id']; 
 	}
 	else
 	{
 		//add interest if its not there
 		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_ID, facebook_category, update_time, user_id) VALUES
-								(NULL, '". $fb_interest."' , '". $category."' , '". $fb_interest_id."',  '". $fb_category."' , NOW(), '". $user_id."')";
+								(NULL, '". $fb_interest."' , '". $category."' , '".$fb_interest_id."',  '". $fb_category."' , NOW(), '". $user_id."')";
 		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 		
 		//then get ID of interest, to use in other tables
 		$id_query = "SELECT id from `interests` WHERE facebook_ID = '".$fb_interest_id."'";
-		$id_result = mysql_query($id_query, $connection) or die ("Error 3");
+		$id_result = mysql_query($id_query, $connection) or die ("Error 6");
 		$id_count = mysql_num_rows($id_result);
 		if ($id_count != 0)
 		{
 			//get id
 			$row = mysql_fetch_assoc($id_result);
 			$interest_id = $row['id']; 
-			return $interest_id;
+			
 		} 
-		else
-		{
-			return NULL; //not sure when this would happen, really only for error case
-		}
-		
 	}
+	
+	return $interest_id;
 }
 
+
+function updateUserInterestTable($user_id, $interest_id)
+{
+
+	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". $user_id."' ,  '".$interest_id."',   NOW() )";
+	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
+}
 
 /*
 if ($me)
