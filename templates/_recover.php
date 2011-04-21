@@ -1,5 +1,5 @@
 <div id="forgot_password">
-    <form id="recover_form" action="../actions/savePassword.php" method="POST">
+    <form id="forgot_form" action="../actions/savePassword.php" method="POST">
 	    <div>
             <ul>
             <li class="recover_title">Please enter a new password:</li>

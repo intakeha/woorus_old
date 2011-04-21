@@ -42,18 +42,18 @@ $(document).ready(function(){
 	
 	// Submit login form via ajax
 	$('#login_form').submit(function(){
-				$.post(
-					"actions/login.php",
-					$('#login_form').serialize(),
-					function(data){
-						$('#auth_error').text(data); 
-					}
-				);
-				return false;
-			 }); 
+		$.post(
+			"actions/login.php",
+			$('#login_form').serialize(),
+			function(data){
+				$('#auth_error').text(data); 
+			}
+		);
+		return false;
+	 }); 
 	
 	// Validate forgot password form
-	$("#forgot_form").validate({
+	$("#recover_form").validate({
 		onsubmit: true,
 		onfocusout: false,
 		onkeyup: false,
@@ -80,6 +80,18 @@ $(document).ready(function(){
 			}
 		}
 	});	
+
+	// Submit recover form via ajax	
+	$('#recover_form').submit(function(){
+		$.post(
+			"actions/forgotPassword.php",
+			$('#recover_form').serialize(),
+			function(data){
+				$('#auth_error').text(data); 
+			}
+		);
+		return false;
+	 }); 
 	
 	// Validate registration form
 	$("#registration_form").validate({
@@ -210,9 +222,9 @@ $(document).ready(function(){
 		}
 	});	
 	
-	// Validate recover form
+	// Validate forgot password form
 	
-	$("#recover_form").validate({
+	$("#forgot_form").validate({
 		onsubmit: true,
 		onfocusout: false,
 		onkeyup: false,
