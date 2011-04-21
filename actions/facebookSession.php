@@ -124,7 +124,7 @@ if ($session)
 				$facebook_interest = $value["employer"]["name"];
 				$facebook_interest_id = $value["employer"]["id"];
 				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $connection);
-				updateUserInterestTable($user_id, $interest_id);
+				updateUserInterestTable($user_id, $interest_id, $connection);
 				//$tile_id =  updateTileTable;
 				//updateMosaicWallTable($interest_id , $tile_id);
 			}
@@ -203,10 +203,10 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 }
 
 
-function updateUserInterestTable($user_id, $interest_id)
+function updateUserInterestTable($user_id, $interest_id, $connection)
 {
 
-	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". $user_id."' ,  '".$interest_id."',   NOW() )";
+	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". $user_id."' ,  '".$interest_id."', NOW() )";
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
