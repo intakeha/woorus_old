@@ -71,6 +71,11 @@
 	border-left: 3px solid #C00;
 }
 
+#reg_error_captcha{
+	width: 440px;
+	margin-top: 20px;
+}
+
 #indexContent {
 	width: 1200px;
 	height: 400px;
@@ -150,7 +155,7 @@ div#slide_show div{
 #join_button {
 	width: 100px;
 	margin-top: 20px;
-	margin-left: 300px;
+	margin-left: 340px;
 }
 
 /* Home Page - Internal Profile */

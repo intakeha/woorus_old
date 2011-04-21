@@ -64,7 +64,7 @@ $resp = recaptcha_check_answer ($privatekey,
 
 if (!$resp->is_valid) {
 	// What happens when the CAPTCHA was entered incorrectly
-	die ("The reCAPTCHA wasn't entered correctly foo. Please go back and try it again.");
+	die ("The reCAPTCHA wasn't entered correctly. Please try again.");
 } else {
 	// Your code here to handle a successful verification
 
@@ -109,6 +109,6 @@ if (!$resp->is_valid) {
 	
 	*/
 	
-	echo "You have been registered to woorus! Please check your email to activate your account \n";
+	echo "<b>Welcome to Woorus!</b><br>Please check your email (".$_POST['email'].") to activate your account";
 }
 ?>
