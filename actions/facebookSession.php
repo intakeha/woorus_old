@@ -183,8 +183,8 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 		
 		//update other tables basd on ID
 		updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
-		$tile_id = lookupTileID($facebook_interest_id, $connection);
-		//updateMosaicWallTable($interest_id , $tile_id);
+		$tile_id = lookupTileID($fb_interest_id, $connection);
+		updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 		
 	}
 	else
@@ -206,8 +206,8 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			
 			//update other tables based on ID
 			updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
-			updateTileTable($user_id, $interest_id, $facebook_interest_id, $connection);  //need to deal with the facebook IMAGE
-			$tile_id = lookupTileID($facebook_interest_id, $connection);
+			updateTileTable($user_id, $interest_id, $fb_interest_id, $connection);  //need to deal with the facebook IMAGE
+			$tile_id = lookupTileID($fb_interest_id, $connection);
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 				
 		} 
@@ -223,17 +223,17 @@ function updateUserInterestTable($user_id, $interest_id, $connection)
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
-function updateTileTable($user_id, $interest_id, $facebook_interest_id, $connection)
+function updateTileTable($user_id, $interest_id, $fb_interest_id, $connection)
 {
 	
 	$tile_filename = "filename.jpg"; //need to know this before we make an entry
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".$interest_id."', '".$tile_filename."', NOW(), 0 ,'". $user_id."','". $facebook_interest_id."')";
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".$interest_id."', '".$tile_filename."', NOW(), 0 ,'". $user_id."','". $fb_interest_id."')";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
-function lookupTileID($facebook_interest_id, $connection)
+function lookupTileID($fb_id, $connection)
 {
-	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$facebook_interest_id."'";
+	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$fb_interest_id."'";
 	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
 	$tile_id_count = mysql_num_rows($tile_id_result);
 	if ($tile_id_count != 0)
