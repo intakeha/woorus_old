@@ -286,7 +286,12 @@ $(document).ready(function(){
 			"actions/register.php",
 			$('#registration_form').serialize(),
 			function(data){
-				$('#reg_error_captcha').text(data); 
+				if (data){
+					$('#reg_error_captcha').text(data); 
+				}else{
+					$('#reg_error_captcha').html("Welcome to Woorus!<br>Please check your email to activate your account.");
+					$('#captcha').hide();
+				}
 			}
 		);
 		return false;
