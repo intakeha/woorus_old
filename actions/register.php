@@ -50,50 +50,65 @@ $namecheck_count = mysql_num_rows($namecheck_result);
 
 if ($namecheck_count != 0)
 {
-	die("This email address is already registered. Please use the login page to login to woorus or request a new password if you've forgotten your password \n");	
+	die("This email address is already registered.");	
 }
 
-//enter user into system
-$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
-(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."')";
 
-$result = mysql_query($query_users, $connection) or die ("Error 2");
+// Check if you are human via captcha
+require_once('recaptchalib.php');
+$privatekey = "6LfgpsMSAAAAALU3pPgKBcOKa3DEDPCXRRcAbWRt";
+$resp = recaptcha_check_answer ($privatekey,
+	$_SERVER["REMOTE_ADDR"],
+	$_POST["recaptcha_challenge_field"],
+	$_POST["recaptcha_response_field"]);
 
-//re-lookup ID based on email
-$id_query = "SELECT id from `users` WHERE email_address = '".$f_email_address."'";
+if (!$resp->is_valid) {
+	// What happens when the CAPTCHA was entered incorrectly
+	die ("The reCAPTCHA wasn't entered correctly foo. Please go back and try it again.");
+} else {
+	// Your code here to handle a successful verification
 
-$id_result = mysql_query($id_query, $connection) or die ("Error 3");
-$id_count = mysql_num_rows($id_result);
-if ($id_count != 0)
-{
-	//get id
-	$row = mysql_fetch_assoc($id_result);
-	$user_id = $row['id']; 
+	//enter user into system
+	$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
+	(NULL, '".$f_first_name."', '".$f_last_name."', '".$f_email_address."', '".$f_visual_email."', NULL, '".$f_password."', NULL, '".$f_gender."', '".$f_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), '".$token."', '".$email_verified."')";
+	
+	$result = mysql_query($query_users, $connection) or die ("Error 2");
+	
+	//re-lookup ID based on email
+	$id_query = "SELECT id from `users` WHERE email_address = '".$f_email_address."'";
+	
+	$id_result = mysql_query($id_query, $connection) or die ("Error 3");
+	$id_count = mysql_num_rows($id_result);
+	if ($id_count != 0)
+	{
+		//get id
+		$row = mysql_fetch_assoc($id_result);
+		$user_id = $row['id']; 
+	}
+	
+	//once we get the ID, set the settings for that user
+	$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
+	$result = mysql_query($query_settings, $connection) or die ("Error 2");
+	
+	
+	/*
+	//send activation email (turn into a function)
+	$to = $f_email_address;
+	$subject = "Activate your Woorus Account";
+	$headers = "From: admin@woorus.com";
+	
+	
+	$body = "
+	Hello, $f_first_name, \n\n
+	Please activate your woorus account with the link below: \n\n
+	................./activate.php?id=$user_id&token=$f_token \n\n
+	Thanks and welcome to woorus!
+	";
+	
+	mail($to, $subject, $body, $headers);
+	
+	*/
+	
+	echo "You have been registered to woorus! Please check your email to activate your account \n";
 }
-
-//once we get the ID, set the settings for that user
-$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
-$result = mysql_query($query_settings, $connection) or die ("Error 2");
-
-
-/*
-//send activation email (turn into a function)
-$to = $f_email_address;
-$subject = "Activate your Woorus Account";
-$headers = "From: admin@woorus.com";
-
-
-$body = "
-Hello, $f_first_name, \n\n
-Please activate your woorus account with the link below: \n\n
-................./activate.php?id=$user_id&token=$f_token \n\n
-Thanks and welcome to woorus!
-";
-
-mail($to, $subject, $body, $headers);
-
-*/
-
-echo "You have been registered to woorus! Please check your email to activate your account \n";
-
 ?>
