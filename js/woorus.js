@@ -264,7 +264,7 @@ $(document).ready(function(){
 	// Submit registration form via ajax to validate user info and show captcha	
 	$('#validate_button').click(function(){
 		$.post(
-			"actions/register_1.php",
+			"actions/register_0.php",
 			$('#registration_form').serialize(),
 			function(data){
 				if (data){
@@ -283,7 +283,7 @@ $(document).ready(function(){
 	// Submit registration form via ajax if captcha	passes
 	$('#registration_form').submit(function(){
 		$.post(
-			"actions/register_ajax.php",
+			"actions/register.php",
 			$('#registration_form').serialize(),
 			function(data){
 				$('#reg_error_captcha').text(data); 
@@ -291,7 +291,6 @@ $(document).ready(function(){
 		);
 		return false;
 	}); 
-	
 	
 	// Validate settings form in the _settings.php
 	$("#settings_form").validate({
