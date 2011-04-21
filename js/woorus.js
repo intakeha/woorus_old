@@ -222,7 +222,7 @@ $(document).ready(function(){
 		}
 	});	
 	
-	// Validate forgot password form
+	// Validate forgot password form in the _recover.php
 	
 	$("#forgot_form").validate({
 		onsubmit: true,
@@ -260,7 +260,40 @@ $(document).ready(function(){
 		}
 	});	
 	
-	// Validate settings form
+	
+	// Submit registration form via ajax to validate user info and show captcha	
+	$('#validate_button').click(function(){
+		$.post(
+			"actions/register_1.php",
+			$('#registration_form').serialize(),
+			function(data){
+				if (data){
+					$('#registration_error').text(data); 
+				}else{
+					$('#facebook_login').hide();
+					$('#userInfo').hide();
+					$('#reg_error_container').hide();
+					$('#captcha').show();
+				}
+			}
+		);
+		return false;
+	});
+	
+	// Submit registration form via ajax if captcha	passes
+	$('#registration_form').submit(function(){
+		$.post(
+			"actions/register_ajax.php",
+			$('#registration_form').serialize(),
+			function(data){
+				$('#reg_error_captcha').text(data); 
+			}
+		);
+		return false;
+	}); 
+	
+	
+	// Validate settings form in the _settings.php
 	$("#settings_form").validate({
 		onsubmit: true,
 		onfocusout: false,
