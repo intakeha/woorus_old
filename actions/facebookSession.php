@@ -233,7 +233,7 @@ function updateTileTable($user_id, $interest_id, $fb_interest_id, $connection)
 
 function lookupTileID($fb_id, $connection)
 {
-	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$fb_interest_id."'";
+	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$fb_id."'";
 	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
 	$tile_id_count = mysql_num_rows($tile_id_result);
 	if ($tile_id_count != 0)
