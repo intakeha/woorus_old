@@ -209,7 +209,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			//update other tables based on ID
 			updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
 			updateTileTable($user_id, $interest_id, $facebook_interest_id, $connection);  //need to deal with the facebook IMAGE
-			$tile_id = lookupTileID($facebook_interest_id, $connection)
+			$tile_id = lookupTileID($facebook_interest_id, $connection);
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 				
 		} 
