@@ -132,7 +132,7 @@ function validateEmail($email)
 	{
 		die("Please enter no more than 254 characters for your email.");
 	}
-	elseif (!preg_match ("/^[A-z]([.][A-z0-9_\-]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	elseif (!preg_match ("/^[A-z][A-z0-9_\-]*([.][A-z0-9_\-]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
 		die ("Please enter a valid email address.");
 	}
