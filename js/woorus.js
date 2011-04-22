@@ -289,7 +289,7 @@ $(document).ready(function(){
 				if (data){
 					$('#reg_error_captcha').text(data); 
 				}else{
-					$('#reg_error_captcha').html("<span>Welcome to Woorus!<span><br>Please check your email to activate your account.");
+					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
 					$('#captcha').hide();
 				}
 			}
