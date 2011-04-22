@@ -19,7 +19,8 @@ $(document).ready(function(){
 		invalidHandler: function(form, validator) {
                     var errors = validator.numberOfInvalids();
                     if (errors) {
-                        $("#auth_error").text(validator.errorList[0].message); 
+                        $("#auth_error").text(validator.errorList[0].message);
+						return false; 
                     } else {
 						$.post(
 							"actions/forgotPassword.php",
