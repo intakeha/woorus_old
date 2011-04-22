@@ -74,7 +74,7 @@ function validateFirstName($name)
 	{
 		die("Please enter no more than 30 characters for your first name.");
 	}
-	elseif (!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
 		die ("First name contains invalid characters.");
 	}
@@ -101,7 +101,7 @@ function validateLastName($name)
 	{
 		die("Last name should not start or end with a symbol.");
 	}
-	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name)) 
+	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name))
 	{
 		die("Last name should not start or end with a symbol.");
 	}
@@ -109,7 +109,7 @@ function validateLastName($name)
 	{
 		die("Please enter no more than 60 characters for your last name.");
 	}
-	elseif (!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
 		die ("Last name contains invalid characters.");
 	}
