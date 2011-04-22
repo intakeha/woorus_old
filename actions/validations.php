@@ -56,11 +56,11 @@ function validateFirstName($name)
 {
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields PHP.");
 	}
 	elseif(strlen($name) < 2)
 	{
-		die("Please provide your real first name.");
+		die("Please provide your real first name PHP.");
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
@@ -72,11 +72,11 @@ function validateFirstName($name)
 	}
 	elseif(strlen($name) > 30)
 	{
-		die("Please enter no more than 30 characters for your first name.");
+		die("Please enter no more than 30 characters for your first name PHP.");
 	}
-	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $name))
 	{
-		die ("First name contains invalid characters.");
+		die ("First name contains invalid characters PHP.");
 	}
 	else
 	{
