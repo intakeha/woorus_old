@@ -12,27 +12,24 @@ $(document).ready(function(){
 	
 	// Validate login form
 	$("#login_form").validate({
-		onsubmit: false,
+		onsubmit: true,
 		onfocusout: false,
 		onkeyup: false,
 		onclick: false,
 		invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        $("#auth_error").text(validator.errorList[0].message);
-                    } else {
-						$("#login_form").post(
-							"actions/login.php",
-							$("#login_form").serialize(),
-							function(data){
-								$("#auth_error").text(data); 
-							}
-						);
-					}
-                },
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#auth_error").text(validator.errorList[0].message);
+			}
+		},
+		submitHandler: function(form) {
+			jQuery(form).ajaxSubmit({
+				target: "#auth_error"
+			});
+		},
 		errorPlacement: function(error, element) {
-                    // Override error placement to not show error messages beside elements //
-                },
+			// Override error placement to not show error messages beside elements //
+		},
 		rules: {						// Adding validation rules for each input //
 			email: {
 				required: true,
