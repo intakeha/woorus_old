@@ -64,11 +64,11 @@ function validateFirstName($name)
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
-		die("First name should not start or end with a symbol.");
+		die("First name should not start or end with a symbol PHP.");
 	}
 	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name)) 
 	{
-		die("First name should not start or end with a symbol.");
+		die("First name should not start or end with a symbol PHP.");
 	}
 	elseif(strlen($name) > 30)
 	{
