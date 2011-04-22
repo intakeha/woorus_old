@@ -51,7 +51,7 @@ function ucname($string)
 }
 
 
-//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 30 chars
+//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe, space & checks between 2 & 30 chars
 function validateFirstName($name)
 {
 	$name = utf8_decode($name);
