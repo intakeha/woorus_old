@@ -42,7 +42,7 @@ $(document).ready(function(){
 	});	
 	
 	// Submit login form via ajax
-	$('#login_form').submit(function(){
+	$('#login_form1').submit(function(){
 		$.post(
 			"actions/login.php",
 			$('#login_form').serialize(),
