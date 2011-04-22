@@ -73,10 +73,16 @@
 
 #reg_error_captcha{
 	width: 440px;
-	margin-top: 10px;
+	margin-top: 20px;
 	font-size: 14px;
 	text-align: center;
 	color: #4980B7;
+	z-index: 1;
+}
+
+#reg_error_captcha span{
+	font-weight: bold;
+	font-size: 18px;
 }
 
 #indexContent {
