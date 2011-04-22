@@ -21,7 +21,7 @@ $(document).ready(function(){
                     if (errors) {
                         $("#auth_error").text(validator.errorList[0].message);
                     } else {
-						$(document).post(
+						$("#login_form").post(
 							"actions/login.php",
 							$("#login_form").serialize(),
 							function(data){
