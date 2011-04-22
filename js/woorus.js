@@ -21,11 +21,11 @@ $(document).ready(function(){
                     if (errors) {
                         $("#auth_error").text(validator.errorList[0].message);
                     } else {
-						$.post(
+						$(document).post(
 							"actions/login.php",
 							$("#login_form").serialize(),
 							function(data){
-								$('#auth_error').text(data); 
+								$("#auth_error").text(data); 
 							}
 						);
 					}
