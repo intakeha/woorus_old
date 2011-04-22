@@ -12,7 +12,7 @@ $(document).ready(function(){
 	
 	// Validate login form
 	$("#login_form").validate({
-		onsubmit: true,
+		onsubmit: false,
 		onfocusout: false,
 		onkeyup: false,
 		onclick: false,
