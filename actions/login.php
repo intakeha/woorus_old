@@ -52,7 +52,7 @@ function authenticate($email, $pass)
 		$activated = $row['email_verified'];
 		if ($activated == '0')
 		{
-			 echo ("Your Account is not yet activated. Please check your email \n");
+			 echo ("Please check your email to activate your account.");
 			 return NULL;
 		}
 		
@@ -74,7 +74,7 @@ function authenticate($email, $pass)
 		}
 		else //user isnt even registered
 		{
-			echo "This email address is not registered to Woorus.com. Please register with the fields below.";
+			echo "This email address is not registered.";
 			return NULL;
 		}
 	}
