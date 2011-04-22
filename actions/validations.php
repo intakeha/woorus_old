@@ -62,11 +62,11 @@ function validateFirstName($name)
 	{
 		die("Please provide your real first name PHP.");
 	}
-	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
+	elseif(!preg_match('/^[A-Za-zÀÁÅÃÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüışÿ]/', $name)) 
 	{
 		die("First name should not start or end with a symbol PHP.".$name);
 	}
-	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name)) 
+	elseif(!preg_match('/[A-Za-zÀÁÅÃÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüışÿ]$/', $name)) 
 	{
 		die("First name should not start or end with a symbol PHP.".$name);
 	}
