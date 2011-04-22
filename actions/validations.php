@@ -76,7 +76,7 @@ function validateFirstName($name)
 	}
 	elseif (!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
-		die ("First name contains invalid characters PHP.");
+		die ("First name contains invalid characters.");
 	}
 	else
 	{
