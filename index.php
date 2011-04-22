@@ -11,6 +11,19 @@
    	<script type="text/javascript" src="js/jquery.validate.js"></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
+    <script type="text/javascript">
+	$('#login_form').submit(function(){
+		$.post(
+			"actions/login.php",
+			$('#login_form').serialize(),
+			function(data){
+				$('#auth_error').text(data); 
+			}
+		);
+		return false;
+	 }); 
+	</script>
+    
 </head>
 <body>
 	<div class="bg_canvas"></div>
