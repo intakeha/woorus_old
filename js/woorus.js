@@ -4,6 +4,7 @@ $(document).ready(function(){
 	// Slide show function with slidesjs
 	$("#slide_show").slides({
 			preload: true,
+			preloadImage: 'images/global/loading.gif',
 			play: 8000,
 			pause: 2500,
 			hoverPause: true
