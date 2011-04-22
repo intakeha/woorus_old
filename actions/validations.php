@@ -64,19 +64,19 @@ function validateFirstName($name)
 	{
 		die("Please provide your real first name PHP.");
 	}
-	elseif(!preg_match('/^[A-Za-z\x{00C0}-\x{00FF}]/', $name)) 
+	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
-		die("First name should not start or end with a symbol PHP.".$name);
+		die("First name should not start or end with a symbol PHP.");
 	}
-	elseif(!preg_match('/[A-Za-z\x{00C0}-\x{00FF}]$/', $name)) 
+	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name)) 
 	{
-		die("First name should not start or end with a symbol PHP. End".$name);
+		die("First name should not start or end with a symbol PHP.");
 	}
 	elseif(strlen($name) > 30)
 	{
 		die("Please enter no more than 30 characters for your first name PHP.");
 	}
-	elseif (!preg_match('/^[A-Za-z\x{00C0}-\x{00FF}\s\'\-]+$/', $name))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $name))
 	{
 		die ("First name contains invalid characters PHP.");
 	}
@@ -91,6 +91,8 @@ function validateFirstName($name)
 //removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 60 chars
 function validateLastName($name)
 {
+	$name = utf8_decode($name);
+	
 	if($name == NULL | strlen($name) == 0)
 	{
 		die("Please fill in all fields.");
@@ -300,18 +302,24 @@ function checkOver13($birthday)
 	}
 	else
 	{
-		die("you are NOT old enough ");	
+		die("Sorry, kiddo. Please come back on your 13th Birthday!");	
 	}
 }
 
 //check user entered in city (check not null)
 function validateCity($city)
 {
+	$city = utf8_decode($city);
+	
 	if ($city == NULL | strlen($city) == 0)
 	{
 		die("Please fill in all fields.");
 	}
-	elseif(!preg_match('/^[A-Za-z ]/', $city))
+	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $city))
+	{
+		die("City should not start or end with a symbol.");
+	}
+	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $city))
 	{
 		die("City should not start or end with a symbol.");
 	}
@@ -323,7 +331,7 @@ function validateCity($city)
 	{
 		die("Please enter no more than 255 characters for your city.");
 	}
-	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-\, ]+$/', $city))
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-\,]+$/', $city))
 	{
 		die ("City contains invalid characters.");
 	}
