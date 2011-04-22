@@ -52,16 +52,16 @@ function checkUser($email)
 		$activated = $row['email_verified'];
 		if ($activated == '0')
 		{
-			die("Your Account is not yet activated. Please check your email \n");
+			die("Please check your email to activate your account.");
 		}
 		
 		$id = $row['id'];
-		print "success \n";
+		print "Please check your email to reset your password.";
 		return $id;
 	}
 	else
 	{
-		print "user id does not exist \n";
+		print "This email address is not registered.";
 		return NULL;
 	}
 }

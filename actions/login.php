@@ -40,7 +40,7 @@ function authenticate($email, $pass)
 	$email = get_standard_email($email);
 
 	//check if user exists
-	$query = "SELECT id, email_verified from `users` WHERE email_address = '".$email."' AND password = '".$pass."'";
+	$query = "SELECT id, email_verified from `users` WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
 	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 
@@ -63,7 +63,7 @@ function authenticate($email, $pass)
 	{
 		//check is user is in the system at all
 		
-		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".$email."'";
+		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($email)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 
