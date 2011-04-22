@@ -62,11 +62,11 @@ function validateFirstName($name)
 	{
 		die("Please provide your real first name PHP.");
 	}
-	elseif(!preg_match('/^[A-Za-zÀÁÅÃÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüışÿ]/', $name)) 
+	elseif(!preg_match('/^[A-Za-z\x{00C0}-\x{00FF}]/', $name)) 
 	{
 		die("First name should not start or end with a symbol PHP.".$name);
 	}
-	elseif(!preg_match('/[A-Za-zÀÁÅÃÆÇÈÉÊËÌÍÎÏĞÑÒÓÔÕÖØÙÚÛÜİŞßàáâãäåæçèéêëìíîïğñòóôõöøùúûüışÿ]$/', $name)) 
+	elseif(!preg_match('/[A-Za-z\x{00C0}-\x{00FF}]$/', $name)) 
 	{
 		die("First name should not start or end with a symbol PHP.".$name);
 	}
@@ -74,7 +74,7 @@ function validateFirstName($name)
 	{
 		die("Please enter no more than 30 characters for your first name PHP.");
 	}
-	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $name))
+	elseif (!preg_match('/^[A-Za-z\x{00C0}-\x{00FF}\s\'\-]+$/', $name))
 	{
 		die ("First name contains invalid characters PHP.");
 	}
