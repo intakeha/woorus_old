@@ -20,7 +20,16 @@ $(document).ready(function(){
                     var errors = validator.numberOfInvalids();
                     if (errors) {
                         $("#auth_error").text(validator.errorList[0].message); 
-                    }
+                    } else {
+						$.post(
+							"actions/forgotPassword.php",
+							$('#recover_form').serialize(),
+							function(data){
+								$('#auth_error').text(data); 
+							}
+						);
+						return false;
+					}
                 },
 		errorPlacement: function(error, element) {
                     // Override error placement to not show error messages beside elements //

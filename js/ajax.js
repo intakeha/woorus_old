@@ -14,7 +14,7 @@ $(document).ready(function(){
 	 }); 
 	
 	// Submit recover form via ajax	
-	$('#recover_form').submit(function(){
+/*	$('#recover_form').submit(function(){
 		$.post(
 			"actions/forgotPassword.php",
 			$('#recover_form').serialize(),
@@ -24,7 +24,7 @@ $(document).ready(function(){
 		);
 		return false;
 	 }); 	
-	
+*/	
 	// Submit registration form via ajax to validate user info and show captcha	
 	$('#validate_button').click(function(){
 		$.post(
