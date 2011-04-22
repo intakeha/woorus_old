@@ -23,12 +23,11 @@ $(document).ready(function(){
                     } else {
 						$.post(
 							"actions/login.php",
-							$('#login_form').serialize(),
+							$("#login_form").serialize(),
 							function(data){
 								$('#auth_error').text(data); 
 							}
 						);
-						return false; 
 					}
                 },
 		errorPlacement: function(error, element) {
