@@ -19,7 +19,7 @@ if ($returned_id != NULL)
 
 	//create new token from randomly generated number, encrypt & put into password_token
 	$token = rand(23456789, 98765432); //randomly generated number
-	$query = " UPDATE `users` SET password_token = '".$token."' WHERE id= '".$returned_id."'";
+	$query = " UPDATE `users` SET password_token = '".mysql_real_escape_string($token)."' WHERE id= '".mysql_real_escape_string($returned_id)."'";
 	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 
@@ -40,7 +40,7 @@ function checkUser($email)
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 
 	//check if user exists
-	$query = "SELECT id, email_verified from `users` WHERE email_address = '".$email."' ";
+	$query = "SELECT id, email_verified from `users` WHERE email_address = '".mysql_real_escape_string($email)."' ";
 	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 

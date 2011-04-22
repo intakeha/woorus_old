@@ -15,7 +15,7 @@ if ($id&&$token)
 	mysql_select_db($db_name);
 
 	//check if id & token combination exists
-	$query = "SELECT visual_email_address from `users` WHERE id =  '".$id."' AND password_token = '".$token."' ";
+	$query = "SELECT visual_email_address from `users` WHERE id =  '".mysql_real_escape_string($id)."' AND password_token = '".mysql_real_escape_string($token)."' ";
 	$result = mysql_query($query, $connection) or die ("Error");
 	
 	// if row exists -> id/token combination is correct
@@ -26,7 +26,7 @@ if ($id&&$token)
 		$visual_email = $row['visual_email_address']; 
 	
 		//set password token to NULL
-		$validate_query = "UPDATE users SET password_token = NULL WHERE id = '".$id."' ";  
+		$validate_query = "UPDATE users SET password_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 		$validate_result = mysql_query($validate_query, $connection) or die ("Error");
 		
 		//start session & direct to recover page.

@@ -51,7 +51,7 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address, id from `users` WHERE email_address = '".$facebook_email_address."'";
+		$namecheck_query = "SELECT email_address, id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		if ($namecheck_count != 0)
@@ -100,12 +100,12 @@ if ($session)
 			
 			//enter user into system
 			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
-			(NULL, '".$facebook_first_name."', '".$facebook_last_name."', '".$facebook_email_address."', '".$facebook_email_address_visual."', NULL, NULL, NULL, '".$facebook_gender."', '".$facebook_birthday."', '".$f_user_country_id."', '".$f_user_state_id."', '".$f_user_city_id."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."')";
+			(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".mysql_real_escape_string($social_status)."', NOW(), NOW(), NULL , '".mysql_real_escape_string($email_verified)."')";
 
 			$result = mysql_query($query_users, $connection) or die ("Error 1");
 
 			//re-lookup ID based on email
-			$id_query = "SELECT id from `users` WHERE email_address = '".$facebook_email_address."'";
+			$id_query = "SELECT id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
 			$id_result = mysql_query($id_query, $connection) or die ("Error 2");
 			$id_count = mysql_num_rows($id_result);
 			if ($id_count != 0)
@@ -115,7 +115,7 @@ if ($session)
 			}
 
 			//once we get the ID, set the settings for that user
-			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
+			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".mysql_real_escape_string($user_id)."', 'Y', 'Y' , 'Y', 'Y')";
 			$result = mysql_query($query_settings, $connection) or die ("Error 3");
 	
 			updateLoginTime($user_id); //need to also update the login table
@@ -171,7 +171,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 {
 
 	//check for interest
-	$interest_query = "SELECT id from `interests` WHERE facebook_id = '".$fb_interest_id."' ";
+	$interest_query = "SELECT id from `interests` WHERE facebook_id = '".mysql_real_escape_string($fb_interest_id)."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
 	$interest_count = mysql_num_rows($interest_result);
 	
@@ -194,11 +194,11 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 	{
 		//add interest if its not there
 		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_id, facebook_category, update_time, user_id) VALUES
-								(NULL, '". $fb_interest."' , '". $category."' , '".$fb_interest_id."',  '". $fb_category."' , NOW(), '". $user_id."')";
+								(NULL, '".mysql_real_escape_string($fb_interest)."' , '".mysql_real_escape_string($category)."' , '".mysql_real_escape_string($fb_interest_id)."',  '".mysql_real_escape_string($fb_category)."' , NOW(), '".mysql_real_escape_string($user_id.)"')";
 		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 		
 		//then get ID of interest, to use in other tables
-		$id_query = "SELECT id from `interests` WHERE facebook_id = '".$fb_interest_id."'";
+		$id_query = "SELECT id from `interests` WHERE facebook_id = '".mysql_real_escape_string($fb_interest_id)."'";
 		$id_result = mysql_query($id_query, $connection) or die ("Error 6");
 		$id_count = mysql_num_rows($id_result);
 		if ($id_count != 0)
@@ -222,7 +222,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 
 function updateUserInterestTable($user_id, $interest_id, $connection)
 {
-	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". $user_id."' ,  '".$interest_id."', NOW() )";
+	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". mysql_real_escape_string($user_id)."' ,  '".mysql_real_escape_string($interest_id)."', NOW() )";
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
@@ -230,13 +230,13 @@ function updateTileTable($user_id, $interest_id, $fb_interest_id, $connection)
 {
 	
 	$tile_filename = "filename.jpg"; //need to know this before we make an entry
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".$interest_id."', '".$tile_filename."', NOW(), 0 ,'". $user_id."','". $fb_interest_id."')";
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_filename)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."','".mysql_real_escape_string($fb_interest_id)."')";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
 function lookupTileID($fb_id, $connection)
 {
-	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".$fb_id."'";
+	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".mysql_real_escape_string($fb_id)."'";
 	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
 	$tile_id_count = mysql_num_rows($tile_id_result);
 	if ($tile_id_count != 0)
@@ -253,7 +253,7 @@ function lookupTileID($fb_id, $connection)
 function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection){
 
 	$mosaic_wall_query = "INSERT INTO `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time, interest_active) VALUES
-										(NULL, '". $user_id."', '".$tile_placement."', '".$tile_id."', '".$interest_id."', NOW(), 1 )";
+										(NULL, '".mysql_real_escape_string($user_id)."', '".mysql_real_escape_string($tile_placement)."', '".mysql_real_escape_string($tile_id)."', '".mysql_real_escape_string($interest_id)."', NOW(), 1 )";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 

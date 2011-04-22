@@ -23,7 +23,7 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");
 mysql_select_db($db_name, $connection);
 
 //update password in database.
-$query_password = "UPDATE `users` SET password = '".$f_password_new."', update_time = NOW() WHERE id = '".$id."' ";
+$query_password = "UPDATE `users` SET password = '".mysql_real_escape_string($f_password_new)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_password, $connection) or die ("Password Update Error");
 
 //update last user login, & take to main page.

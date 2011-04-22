@@ -58,11 +58,11 @@ if ($f_password_new != NULL) //change password
 	if ($f_temp_email_address!= NULL) // change email (add in token) & password 
 	{
 		$email_token = rand(23456789, 98765432); //randomly generated number
-		$query_users = "UPDATE `users` SET password = '".$f_password_new."', first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', email_token = '".$email_token."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+		$query_users = "UPDATE `users` SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
 	else	//change password, but don't change email
 	{
-		$query_users = "UPDATE `users` SET password = '".$f_password_new."', first_name = '".$f_first_name."', last_name = '".$f_last_name."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+		$query_users = "UPDATE `users` SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
 }
 else //dont change password
@@ -70,11 +70,11 @@ else //dont change password
 	if ($f_temp_email_address!= NULL) // change email  (add in token) & do not change password 
 	{
 		$email_token = rand(23456789, 98765432); //randomly generated number
-		$query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', temp_email_address =  '".$f_temp_email_address."', email_token = '".$email_token."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+		$query_users = "UPDATE `users` SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
 	else	//change neither email, nor password
 	{
-		$query_users = "UPDATE `users` SET first_name = '".$f_first_name."', last_name = '".$f_last_name."', gender = '".$f_gender."', birthday = '".$f_birthday."', user_country_id = '".$f_user_country_id."', user_state_id = '".$f_user_state_id."', user_city_id = '".$f_user_city_id."', update_time = NOW() WHERE id = '".$id."'";
+		$query_users = "UPDATE `users` SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
 }
 
@@ -83,7 +83,7 @@ else //dont change password
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
 //for both options, update settings table & redirect
-$query_settings = "UPDATE `settings` SET interest_notify =  '".$f_mail_interest."', message_notify =  '".$f_mail_message."', contact_notify =  '".$f_mail_contact."', missed_call_notify =  '".$f_mail_calls."' WHERE user_id = '".$id."' ";
+$query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_mail_interest)."', message_notify =  '".mysql_real_escape_string($f_mail_message)."', contact_notify =  '".mysql_real_escape_string($f_mail_contact)."', missed_call_notify =  '".mysql_real_escape_string($f_mail_calls)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 header( 'Location: ../canvas.php?page=settings') ;
@@ -96,7 +96,7 @@ function authenticatePassword($id, $password)
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 
 	//check password
-	$query = "SELECT id from `users` WHERE id = '".$id."' AND password = '".$password."'";
+	$query = "SELECT id from `users` WHERE id = '".mysql_real_escape_string($id)."' AND password = '".mysql_real_escape_string($password)."'";
 	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 
