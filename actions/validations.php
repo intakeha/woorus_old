@@ -54,6 +54,8 @@ function ucname($string)
 //removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe,  space & checks between 2 & 30 chars
 function validateFirstName($name)
 {
+	$name = utf8_decode($name);
+	
 	if($name == NULL | strlen($name) == 0)
 	{
 		die("Please fill in all fields PHP.");
@@ -64,11 +66,11 @@ function validateFirstName($name)
 	}
 	elseif(!preg_match('/^[A-Za-z\x{00C0}-\x{00FF}]/', $name)) 
 	{
-		die("First name should not start or end with a symbol PHP.".utf8_decode($name));
+		die("First name should not start or end with a symbol PHP."$name);
 	}
 	elseif(!preg_match('/[A-Za-z\x{00C0}-\x{00FF}]$/', $name)) 
 	{
-		die("First name should not start or end with a symbol PHP. End".utf8_decode($name));
+		die("First name should not start or end with a symbol PHP. End". $name);
 	}
 	elseif(strlen($name) > 30)
 	{
