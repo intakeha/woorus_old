@@ -64,7 +64,7 @@ $resp = recaptcha_check_answer ($privatekey,
 
 if (!$resp->is_valid) {
 	// What happens when the CAPTCHA was entered incorrectly
-	die ("The reCAPTCHA wasn't entered correctly. Please try again."."(reCAPTCHA said: " . $resp->error . ")");
+	die ("The reCAPTCHA wasn't entered correctly. Please try again.");
 } else {
 	// Your code here to handle a successful verification
 
