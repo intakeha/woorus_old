@@ -231,8 +231,6 @@
 					<li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
                     <li><input id="validate_registration" class="buttons" type="submit" name="join" value="Join"></li>
 					</ul><div id="reg_error_container"><div id="registration_error" class="error_text"></div></div>
-				</form>
-                <form id="registration_captcha" action="actions/register_submit.php" method="POST">
                     <ul id="captcha" style="display: none;">
                     <li><?php require_once('actions/recaptchalib.php');
 				      $publickey = "6LfgpsMSAAAAAJ53tncUn6Ue25kAIusSyYIs-bPJ"; 

@@ -227,7 +227,7 @@ $(document).ready(function(){
 	});	
 	
 	// Submit registration form via ajax if captcha	passes
-	$('#registration_captcha').submit(function(){
+	$('#join_button').click(function(){
 		$.post(
 			"actions/register_submit.php",
 			$('#registration_form').serialize(),
