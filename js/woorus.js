@@ -93,9 +93,21 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
-				target: "#registration_error"
-			});
+			$.post(
+				"actions/register.php",
+				$('#registration_form').serialize(),
+				function(data){
+					if (data){
+						$('#registration_error').text(data); 
+					}else{
+						$('#facebook_login').hide();
+						$('#userInfo').hide();
+						$('#reg_error_container').hide();
+						$('#captcha').show();
+						$('#reg_error_captcha').show();				
+					}
+				}
+			);
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
