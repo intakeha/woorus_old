@@ -21,7 +21,6 @@ if ($returned_id != NULL)
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
 	updateLoginTime($returned_id);
-	flush();
 	header('Location: ../canvas.php');
 	
 	exit();
