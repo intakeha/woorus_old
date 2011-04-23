@@ -226,6 +226,23 @@ $(document).ready(function(){
 		}
 	});	
 	
+	// Submit registration form via ajax if captcha	passes
+	$('#registration_captcha').submit(function(){
+		$.post(
+			"actions/register_submit.php",
+			$('#registration_form').serialize(),
+			function(data){
+				if (data){
+					$('#reg_error_captcha').text(data); 
+				}else{
+					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
+					$('#captcha').hide();
+				}
+			}
+		);
+		return false;
+	});
+	
 	// Validate forgot password form in the _recover.php
 	
 	$("#forgot_form").validate({
