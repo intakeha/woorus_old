@@ -21,7 +21,7 @@ if ($returned_id != NULL)
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
 	updateLoginTime($returned_id);
-	header( 'Location: http://woorus.com/canvas.php' ) ;
+	header( 'Location: ../canvas.php' ) ;
 	
 	exit();
 }
