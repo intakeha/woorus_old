@@ -53,14 +53,19 @@ $(document).ready(function(){
 		onkeyup: false,
 		onclick: false,
 		invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        $("#auth_error").text(validator.errorList[0].message); 
-                    }
-                },
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#auth_error").text(validator.errorList[0].message); 
+			}
+		},
+		submitHandler: function(form) {
+			jQuery(form).ajaxSubmit({
+				target: "#auth_error"
+			});
+		},
 		errorPlacement: function(error, element) {
-                    // Override error placement to not show error messages beside elements //
-                },
+			// Override error placement to not show error messages beside elements //
+		},
 		rules: {
 			email: {
 				required: true,
@@ -82,14 +87,19 @@ $(document).ready(function(){
 		onkeyup: false,
 		onclick: false,
 		invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        $("#registration_error").text(validator.errorList[0].message); 
-                    }
-                },
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#registration_error").text(validator.errorList[0].message); 
+			}
+		},
+		submitHandler: function(form) {
+			jQuery(form).ajaxSubmit({
+				target: "#registration_error"
+			});
+		},
 		errorPlacement: function(error, element) {
-                    // Override error placement to not show error messages beside elements //
-                },
+			// Override error placement to not show error messages beside elements //
+		},
 		rules: {
 			first_name: {
 				required: true,
@@ -217,6 +227,11 @@ $(document).ready(function(){
 				$("#forgot_form_error").text(validator.errorList[0].message); 
 			}
 		},
+		submitHandler: function(form) {
+			jQuery(form).ajaxSubmit({
+				target: "#forgot_form_error"
+			});
+		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
 		},
@@ -249,14 +264,19 @@ $(document).ready(function(){
 		onkeyup: false,
 		onclick: false,
 		invalidHandler: function(form, validator) {
-                    var errors = validator.numberOfInvalids();
-                    if (errors) {
-                        $("#settings_error").text(validator.errorList[0].message); 
-                    }
-                },
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#settings_error").text(validator.errorList[0].message); 
+			}
+		},
+		submitHandler: function(form) {
+			jQuery(form).ajaxSubmit({
+				target: "#settings_error"
+			});
+		},
 		errorPlacement: function(error, element) {
-                    // Override error placement to not show error messages beside elements //
-                },
+			// Override error placement to not show error messages beside elements //
+		},
 		rules: {
 			first_name: {
 				required: true,

@@ -237,7 +237,7 @@
 				      echo recaptcha_get_html($publickey);
 				      ?> </li>
 					<li><input id="join_button" class="buttons" type="submit" name="join" value="Join"></li>
-				    </ul><div id="reg_error_captcha"></div>
+				    </ul><div id="reg_error_captcha" style="display: none;"></div>
 				</form>
 			</div>        
 		</div>

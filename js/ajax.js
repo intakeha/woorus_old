@@ -38,6 +38,7 @@ $(document).ready(function(){
 					$('#userInfo').hide();
 					$('#reg_error_container').hide();
 					$('#captcha').show();
+					$('#reg_error_captcha').show();				
 				}
 			}
 		);
