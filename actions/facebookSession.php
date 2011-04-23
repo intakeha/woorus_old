@@ -194,7 +194,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 	{
 		//add interest if its not there
 		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_id, facebook_category, update_time, user_id) VALUES
-								(NULL, '".mysql_real_escape_string($fb_interest)."' , '".mysql_real_escape_string($category)."' , '".mysql_real_escape_string($fb_interest_id)."',  '".mysql_real_escape_string($fb_category)."' , NOW(), '".mysql_real_escape_string($user_id.)"')";
+								(NULL, '".mysql_real_escape_string($fb_interest)."' , '".mysql_real_escape_string($category)."' , '".mysql_real_escape_string($fb_interest_id)."',  '".mysql_real_escape_string($fb_category)."' , NOW(), '".mysql_real_escape_string($user_id)."')";
 		$result = mysql_query($query_add_interest, $connection) or die ("Error 5");
 		
 		//then get ID of interest, to use in other tables
