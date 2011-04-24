@@ -23,9 +23,17 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
-				target: "#auth_error"
-			});
+			$.post(
+				"actions/login.php",
+				$('#login_form').serialize(),
+				function(data){
+					if (data){
+						$('#auth_error').text(data); 
+					}else{
+						window.location.href = "canvas.php";			
+					}
+				}
+			);
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
