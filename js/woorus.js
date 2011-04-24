@@ -307,9 +307,17 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
-				target: "#settings_error"
-			});
+			$.post(
+				"actions/changeSettings.php",
+				$('#settings_form').serialize(),
+				function(data){
+					if (data){
+						$('#settings_error').text(data); 
+					}else{
+						window.location.href = "canvas.php?page=settings";			
+					}
+				}
+			);
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //

@@ -86,7 +86,7 @@ $result = mysql_query($query_users, $connection) or die ("Error 2");
 $query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_mail_interest)."', message_notify =  '".mysql_real_escape_string($f_mail_message)."', contact_notify =  '".mysql_real_escape_string($f_mail_contact)."', missed_call_notify =  '".mysql_real_escape_string($f_mail_calls)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
-header( 'Location: ../canvas.php?page=settings') ;
+// header( 'Location: ../canvas.php?page=settings') ;
 
 
 function authenticatePassword($id, $password)
