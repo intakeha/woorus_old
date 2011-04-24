@@ -14,14 +14,16 @@ $f_password = validatePasswordLogin($_POST['password']);
 $f_password = md5($f_password);
 
 //start a session if the user / password combination is found
+
 $returned_id = authenticate($f_email_address, $f_password);
-if ($returned_id != NULL)
+
+/*if ($returned_id != NULL)
 {
 	session_start();
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
 	updateLoginTime($returned_id);
-	// header('Location: ../canvas.php');
+	header('Location: ../canvas.php');
 	
 	exit();
 }
@@ -29,7 +31,7 @@ else
 {
 	exit();
 }
-
+*/
 
 function authenticate($email, $pass)
 {
@@ -52,8 +54,8 @@ function authenticate($email, $pass)
 		$activated = $row['email_verified'];
 		if ($activated == '0')
 		{
-			 echo ("Please check your email to activate your account.");
-			 return NULL;
+			 die ("Please check your email to activate your account.");
+			 //return NULL;
 		}
 		
 		$id = $row['id'];
@@ -69,12 +71,12 @@ function authenticate($email, $pass)
 
 		if ($namecheck_count != 0) //user is registered but has the wrong password
 		{
-			echo "You have entered the wrong password.";
+			die ("You have entered the wrong password.");
 			return NULL;
 		}
 		else //user isnt even registered
 		{
-			echo "This email address is not registered.";
+			die ("This email address is not registered.");
 			return NULL;
 		}
 	}
