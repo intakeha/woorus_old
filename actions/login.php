@@ -17,13 +17,13 @@ $f_password = md5($f_password);
 
 $returned_id = authenticate($f_email_address, $f_password);
 
-/*if ($returned_id != NULL)
+if ($returned_id != NULL)
 {
 	session_start();
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
 	updateLoginTime($returned_id);
-	header('Location: ../canvas.php');
+	//header('Location: ../canvas.php');
 	
 	exit();
 }
@@ -31,7 +31,7 @@ else
 {
 	exit();
 }
-*/
+
 
 function authenticate($email, $pass)
 {
