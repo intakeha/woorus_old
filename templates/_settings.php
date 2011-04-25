@@ -1,3 +1,18 @@
+<script type="text/javascript">
+$(document).ready(function(){
+	$.getJSON('../actions/lookupSettings.php', function(data) {
+		$('#first_name').val(data.first_name);
+		$('#last_name').val(data.last_name);
+		$('#gender').val(data.gender);
+		$('#birthday_month').val(data.birthday_month);
+		$('#birthday_day').val(data.birthday_day);
+		$('#birthday_year').val(data.birthday_year);
+		$('#vemail').text(data.email);
+	});
+});
+</script>
+
+
 <div id="change_settings">
     <form id="settings_form" action="../actions/changeSettings.php" method="POST">
 	    <div id="settings_column1">
@@ -6,7 +21,7 @@
             <li><label>First Name</label><input class="text_form" type="text" id="first_name" name="first_name" value="" maxlength="30"></li>
             <li><label>Last Name</label><input class="text_form" type="text" id="last_name" name="last_name" value="" maxlength="60"></li>
             <li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="F"> Female </option><option value="M"> Male </option></select></li>
-            <li><label>Birthday</label><select name="birthday_month">
+            <li><label>Birthday</label><select name="birthday_month" id="birthday_month">
                 <option value="-1">Month</option>
                 <option value="1">Jan</option>
                 <option value="2">Feb</option>
@@ -21,7 +36,7 @@
                 <option value="11">Nov</option>
                 <option value="12">Dec</option>
             </select>
-            <select name="birthday_day">
+            <select name="birthday_day" id="birthday_day">
                 <option value="-1">Day</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -55,7 +70,7 @@
                 <option value="30">30</option>
                 <option value="31">31</option>
             </select>
-            <select name="birthday_year">
+            <select name="birthday_year" id="birthday_year">
                 <option value="-1">Year</option>
                 <option value="2011">2011</option>
                 <option value="2010">2010</option>
@@ -165,10 +180,10 @@
                 <option value="1906">1906</option>
                 <option value="1905">1905</option>
 	            </select></li>
-            <li><label>City</label><input class="text_form" type="text" name="city" maxlength="255"></li>
+            <li><label>City</label><input class="text_form" type="text" id="city" name="city" maxlength="255"></li>
             <li>&nbsp;</li>
             <li class="settings_title">Change Email:</li>
-            <li><label>Contact Email</label>alison.murphy@woorus.com</li>
+            <li><label>Contact Email</label><span id="vemail"></span></li>
             <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email" maxlength="254"></li>
             <li>&nbsp;</li>
             <li class="settings_title">Change Password:</li>
@@ -191,24 +206,9 @@
     </form>
 </div>        
 <div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
-<script>
-$(document).ready(function() {
-	$.getJSON("../actions/lookupSettings.php", function(data){
-				alert(data);
-				//$('#settings_error').html(data.first_name);
-				//$('#first_name').val(data.first_name);
-	});
-});
 
-/*
-	$.getJSON({
-		url: "../actions/lookupSettings.php", 
-		type: "POST",
-		dataType: "json",
-		success: function(data){
-			$('#first_name').val("chonabot");
-		}
-	});
-*/
-</script>
+<a href="#" id="getdata-button">Get JSON Data</a>
+<div id="showdata"></div>
+
+
 

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns=" http://www.w3.org/1999/xhtml ">
 <head>
 	<title>Woorus - The place to share your interests</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -8,11 +8,11 @@
 	<meta name="description" content="Connecting people through interests">
 	<link href="css/woorus.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
-   	<script type="text/javascript" src="js/jquery.validate.js"></script> 
+	<script type="text/javascript" src="js/jquery.validate.js"></script> 
 	<script type="text/javascript" src="js/jquery.form.js "></script>
-   	<script type="text/javascript" src="js/slides.min.jquery.js "></script> 
-   	<script type="text/javascript" src="js/woorus.js"></script>
-    
+	<script type="text/javascript" src="js/slides.min.jquery.js "></script> 
+  	<script type="text/javascript" src="js/woorus.js"></script>
+
 	<?php 
 		$page = $_REQUEST['page'];
 		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "settings", "recover");
