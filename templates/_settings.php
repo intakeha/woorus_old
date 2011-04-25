@@ -192,14 +192,23 @@
 </div>        
 <div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
 <script>
-$.ajax({
-	url: "../test/lookupSettings.php", 
-	type: "GET",
-	dataType: "JSON",
-	success: function(data){
-		$('#first_name').val(data.first_name);
-		alert(data.first_name);
-	}
+$(document).ready(function() {
+	$.getJSON("../actions/lookupSettings.php", function(data){
+				alert(data);
+				//$('#settings_error').html(data.first_name);
+				//$('#first_name').val(data.first_name);
+	});
 });
+
+/*
+	$.getJSON({
+		url: "../actions/lookupSettings.php", 
+		type: "POST",
+		dataType: "json",
+		success: function(data){
+			$('#first_name').val("chonabot");
+		}
+	});
+*/
 </script>
 
