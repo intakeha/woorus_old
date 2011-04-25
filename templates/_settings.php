@@ -3,8 +3,8 @@
 	    <div id="settings_column1">
             <ul>
             <li class="settings_title">About Me:</li>
-            <li><label>First Name</label><input class="text_form" type="text" name="first_name" value="Alison" maxlength="30"></li>
-            <li><label>Last Name</label><input class="text_form" type="text" name="last_name" value="Murphy" maxlength="60"></li>
+            <li><label>First Name</label><input class="text_form" type="text" id="first_name" name="first_name" value="" maxlength="30"></li>
+            <li><label>Last Name</label><input class="text_form" type="text" id="last_name" name="last_name" value="" maxlength="60"></li>
             <li><label>Gender</label><select name="gender" id="gender"><option value="-1"> Select </option><option value="F"> Female </option><option value="M"> Male </option></select></li>
             <li><label>Birthday</label><select name="birthday_month">
                 <option value="-1">Month</option>
@@ -191,3 +191,15 @@
     </form>
 </div>        
 <div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
+<script>
+$.ajax({
+	url: "../test/lookupSettings.php", 
+	type: "GET",
+	dataType: "JSON",
+	success: function(data){
+		$('#first_name').val(data.first_name);
+		alert(data.first_name);
+	}
+});
+</script>
+
