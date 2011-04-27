@@ -170,7 +170,8 @@ div#slide_show div{
 #iprofile {
 	width: 1120px;
 	height:	540px;
-	margin:0px auto;
+	margin: 0px auto;
+	padding-top: 20px;
 }
 
 #profile {
@@ -518,4 +519,34 @@ li.forgot_title {
 	border-left: 3px solid #C00;
 	padding-left: 10px;
 	margin: -10px 0px 0px 20px;
+}
+
+/* Mosaic Page */
+
+#mosaic {
+	width: 1120px;
+	height:	540px;
+	margin: 0px auto;
+	padding-top: 20px;	
+}
+
+.pagination_mosaic {
+	width: 70px;
+	height: 280px;
+	float: left;
+	padding-top: 225px;
+}
+
+#tileSearch {
+	width: 400px;
+	height: 300px;
+	border: solid 1px #9F9;
+	float: left;
+}
+
+#mosaicWall {
+	width: 400px;
+	height: 300px;
+	border: solid 1px #9F9;
+	float: left;
 }
