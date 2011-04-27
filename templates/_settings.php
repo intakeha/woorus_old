@@ -207,8 +207,4 @@ $(document).ready(function(){
 </div>        
 <div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
 
-<a href="#" id="getdata-button">Get JSON Data</a>
-<div id="showdata"></div>
-
-
 
