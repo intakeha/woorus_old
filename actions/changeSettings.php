@@ -3,16 +3,23 @@
 session_start();
 require('connect.php');
 require('validations.php');
+require('facebook.php');
+
+$facebook = new Facebook(array(
+  'appId'  => '113603915367848',
+  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
+  'cookie' => true,
+));
 
 //get ID from session variable
 $id = $_SESSION['id'];
+$session = $facebook->getSession(); //if the user is a facebook user, then different rules for if they change their password
 
 //set variables--will use POST to get from html
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
 
 $f_temp_email_address = validateEmail_emptyOK($_POST['new_email']);
-
 
 $f_password_old = $_POST['old_password']; // need to check that this is valid
 $f_password_new = $_POST['new_password'];
