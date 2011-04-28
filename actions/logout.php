@@ -27,6 +27,7 @@ if ($session) {
 
 if ($me) {
 	$logoutUrl = $facebook->getLogoutUrl();
+	die("in here:".$logoutUrl);
 	header($logoutUrl);
 } 
 
