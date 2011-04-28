@@ -26,23 +26,9 @@ if ($session) {
 }
 
 if ($me) {
-	$logoutUrl = $facebook->getLogoutUrl();	
-	$logoutUrl = utf8_decode($logoutUrl);
-	header("Location: ".$logoutUrl);
+	$logoutUrl = $facebook->getLogoutUrl((array('next' => 'mysite.com'));
+	die($logoutUrl);
 } 
-
-//-------from site
-$fbCookieName = 'fbs_' . $facebook->getAppId();
-
-$domain = $facebook->getBaseDomain();
-if ($domain) {
-  $domain = '.' . $domain;
-}
-
-setcookie($fbCookieName, '', time() - 3600, '/', $domain);
-$facebook->setSession();
-
-//-------from site
 
 header('Location: ../') ;
 
