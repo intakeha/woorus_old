@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require('connect.php');
 require('facebook.php');
 
