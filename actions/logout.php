@@ -8,6 +8,13 @@ session_destroy();
 
 
 // Need to logout if a facebook user
+
+$facebook = new Facebook(array(
+  'appId'  => '113603915367848',
+  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
+  'cookie' => true,
+));
+
 $session = $facebook->getSession();
 $me = null;
 if ($session) {
