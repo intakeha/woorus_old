@@ -27,7 +27,7 @@ if ($session) {
 
 if ($me) {
 	$logoutUrl = $facebook->getLogoutUrl();	
-	$logoutUrl = html_entity_decode($logoutUrl);
+	$logoutUrl = utf8_decode($logoutUrl);
 	header("Location: ".$logoutUrl);
 } 
 
