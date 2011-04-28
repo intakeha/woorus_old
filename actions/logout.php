@@ -1,4 +1,5 @@
 <?php
+
 require('connect.php');
 require('facebook.php');
 
@@ -10,10 +11,12 @@ session_destroy();
 $session = $facebook->getSession();
 $me = null;
 if ($session) {
-  try {
+	try {
 	$me = $facebook->api('/me');
-    } catch (FacebookApiException $e) {
-    error_log($e);
+	} catch (FacebookApiException $e) {
+	error_log($e);
+	}
+}
 
 if ($me) {
 	$logoutUrl = $facebook->getLogoutUrl();
