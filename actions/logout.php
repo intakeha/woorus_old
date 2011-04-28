@@ -20,9 +20,8 @@ if ($session) {
 
 if ($me) {
 	$logoutUrl = $facebook->getLogoutUrl();
+	header($logoutUrl);
 } 
-
-header($logoutUrl);
 
 header( 'Location: ../') ;
 
