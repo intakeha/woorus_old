@@ -13,13 +13,6 @@
 		</ul>
 	</div>
 	<div id="sub_menu">
-    	<?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a id="logout" href="#">logout</a> 
+    	<?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a href="../actions/logout.php">logout</a> 
 	</div>
 </div>
-<script>
-$(document).ready(function(){
-	$("#logout").post('../actions/logout.php', function(data) {
-	  window.location.href = text(data);
-	});
-});
-</script>
