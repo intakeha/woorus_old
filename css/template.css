@@ -522,12 +522,11 @@ li.forgot_title {
 }
 
 /* Mosaic Page */
-
 #mosaic {
 	width: 1120px;
-	height:	540px;
+	height: 540px;
 	margin: 0px auto;
-	padding-top: 20px;	
+	padding-top: 20px; 
 }
 
 .pagination_mosaic {
@@ -537,16 +536,31 @@ li.forgot_title {
 	padding-top: 225px;
 }
 
-#tileSearch {
+#tiles {
 	width: 400px;
 	height: 300px;
 	border: solid 1px #9F9;
 	float: left;
 }
 
-#mosaicWall {
-	width: 400px;
-	height: 300px;
+#tiles_bank {
+	border: solid 1px #474;
+}
+
+#mosaic_wall {
+	width: 500px;
 	border: solid 1px #9F9;
 	float: left;
+}
+
+#wall {
+	border: solid 1px #474;
+}
+
+#tile_display li, #wall_display li {
+	float:left; 
+	width:75px; 
+	height:75px;
+	border: 1px solid #F00;
+	background-color:#E0E0E0; 
 }

@@ -13,6 +13,11 @@
 		</ul>
 	</div>
 	<div id="sub_menu">
-    	<?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a href="../actions/logout.php">logout</a> 
+    	<?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a onclick="logout()" href="#">logout</a> 
 	</div>
 </div>
+<script src="http://connect.facebook.net/en_US/all.js"></script>
+<script>
+	 FB.init({appId:113603915367848, cookie:true, status:true, xfbml:true});
+	 FB.Event.subscribe('auth.out', function () {window.location = "../actions/logout.php";});
+</script>
