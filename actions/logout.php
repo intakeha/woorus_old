@@ -26,7 +26,7 @@ if ($session) {
 }
 
 if ($me) {
-	$logoutUrl = $facebook->getLogoutUrl(array('next' => 'http:/pup.woorus.com'));
+	$logoutUrl = $facebook->getLogoutUrl();
 	die($logoutUrl);
 } 
 
