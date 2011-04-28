@@ -31,6 +31,19 @@ if ($me) {
 	header("Location: ".$logoutUrl);
 } 
 
+//-------from site
+$fbCookieName = 'fbs_' . $facebook->getAppId();
+
+$domain = $facebook->getBaseDomain();
+if ($domain) {
+  $domain = '.' . $domain;
+}
+
+setcookie($fbCookieName, '', time() - 3600, '/', $domain);
+$facebook->setSession();
+
+//-------from site
+
 header('Location: ../') ;
 
 ?>
