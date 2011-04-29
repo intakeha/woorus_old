@@ -46,6 +46,7 @@ $f_mail_message = checkboxValidate($_POST['mail_message']);
 $f_mail_contact = checkboxValidate($_POST['mail_contact']);
 $f_mail_calls = checkboxValidate($_POST['mail_calls']);
 
+echo $f_mail_interest.$f_mail_message.$f_mail_contact.$f_mail_calls;
 
 //if passes all checks for user entered data
 
