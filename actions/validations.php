@@ -389,7 +389,8 @@ function validateOldAndNewPassword($password_old, $password_new, $password_confi
 	
 	if (($password_old == NULL) & ($password_new == NULL))
 	{
-		//user does not want to change their password
+		//user does not want to change their password b/c old & new are blank
+		
 		if (strlen($password_confirm != NULL)) //check that they have nothing in confirm password
 		{
 			die("Your new passwords do not match.");
@@ -433,7 +434,7 @@ function validateNewPasswordOnly($password_new, $password_confirm)
 	}
 	elseif (($password_new != NULL) & ($password_confirm == NULL))
 	{
-		//user entered in password but dit not confirm it
+		//user entered in password but did not confirm it
 		die("Please confirm your password.");
 	}
 	elseif (($password_new== NULL) & ($password_confirm!= NULL))

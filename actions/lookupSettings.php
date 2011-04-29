@@ -34,11 +34,10 @@ if (mysql_num_rows($result) == 1)
 	
 	//set the notification flags to all true, in case we don't find the entry or data is bad.
 	$interest_notify = 1;
-	$message_notify = 0;
+	$message_notify = 1;
 	$contact_notify = 1;
-	$missed_call_notify = 0;
+	$missed_call_notify = 1;
 	
-	/*
 	
 	//then  lookup the notification flag.
 	$notification_query = "SELECT interest_notify, message_notify, contact_notify, missed_call_notify FROM `settings` WHERE user_id =  '".$_SESSION['id']."' ";
@@ -54,7 +53,6 @@ if (mysql_num_rows($result) == 1)
 		$missed_call_notify = convertNotifications($row['missed_call_notify']);
 	}
 
-	*/
 	
 	//set user data array & print to JavaSrcipt
 	$user_data = array('first_name'=>$first_name, 'last_name'=>$last_name, 'gender'=>$gender, 'birthday_month'=>$month, 'birthday_day'=>$day, 'birthday_year'=>$year, 'user_city_id'=>$user_city_id, 'email'=>$email, 'interest_notify'=>$interest_notify, 'message_notify'=>$message_notify, 'contact_notify'=>$contact_notify, 'missed_call_notify'=>$missed_call_notify);
@@ -66,13 +64,13 @@ if (mysql_num_rows($result) == 1)
 
 function convertNotifications($notify)
 {
-	if ($notify == 'Y')
+	if ($notify == 'N')
 	{
-		return 1;
+		return 0;
 	}
 	else
 	{
-		return 0;
+		return 1;
 	}
 }
 
