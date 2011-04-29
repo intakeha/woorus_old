@@ -209,13 +209,13 @@ $(document).ready(function(){
             <?php
 			
 			if ($_SESSION['password_created']==1) echo '
-			<li class="settings_title">Change Password:<span>(optional)</span></li>
+			<li class="settings_title">Change Password:<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></li>
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
             <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
 			
 			if ($_SESSION['password_created']==0) echo '
-			<li class="settings_title">Create Password:<span>(optional)</span></li>
+			<li class="settings_title">Create Password:<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
             <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
 			
