@@ -190,6 +190,7 @@ $(document).ready(function(){
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
             <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>
+            <?php if ($_SESSION['facebook']=1) echo "I am a facebook user!";  ?>
             </ul>
         </div>
         <div id="settings_column2">
