@@ -58,7 +58,7 @@ function validateFirstName($name)
 	
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields. PHP1");
 	}
 	elseif(strlen($name) < 2)
 	{
@@ -95,7 +95,7 @@ function validateLastName($name)
 	
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields. PHP2");
 	}
 	elseif(strlen($name) < 2)
 	{
@@ -130,7 +130,7 @@ function validateEmail($email)
 {	
 	if($email == NULL | strlen($email) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields. PHP3");
 	}
 	elseif(strlen($email) > 254)
 	{
@@ -167,7 +167,7 @@ function checkEmail($email, $confirm_email)
 {
 	if (strlen($confirm_email) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields PHP4.");
 	}
 	elseif(strlen($email) > 254)
 	{
@@ -189,7 +189,7 @@ function validatePassword($password)
 {
 	if (strlen($password) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields. PHP5");
 	}
 	elseif (strlen($password) <6 | strlen($password) > 20)
 	{
@@ -313,7 +313,7 @@ function validateCity($city)
 	
 	if ($city == NULL | strlen($city) == 0)
 	{
-		die("Please fill in all fields.");
+		die("Please fill in all fields. PHP6");
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $city))
 	{
