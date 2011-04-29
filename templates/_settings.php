@@ -202,7 +202,7 @@ $(document).ready(function(){
 	            </select></li>
             <li><label>City</label><input class="text_form" type="text" id="city" name="city" maxlength="255"></li>
             <li>&nbsp;</li>
-            <li class="settings_title">Change Email:<span>(optional)</span></li>
+            <li class="settings_title">Change Email:<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span></li>
             <li><label>Contact Email</label><span id="vemail"></span></li>
             <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email" maxlength="254"></li>
             <li>&nbsp;</li>
