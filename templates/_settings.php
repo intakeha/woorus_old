@@ -8,7 +8,17 @@ $(document).ready(function(){
 		$('#birthday_day').val(data.birthday_day);
 		$('#birthday_year').val(data.birthday_year);
 		$('#vemail').text(data.email);
-		$('#interest_notify').attr('checked', text(data.interest_notify)); 
+		if (data.interest_notify == 1) {
+			$('#interest_notify').attr('checked', true);
+		} else {
+			$('#interest_notify').attr('checked', false);
+		}
+		if (data.message_notify == 1) {
+			$('#message_notify').attr('checked', true);
+		} else {
+			$('#message_notify').attr('checked', false);
+		}
+		
 		$('#message_notify').attr('checked', text(data.message_notify)); 
 		$('#contact_notify').attr('checked', text(data.contact_notify)); 
 		$('#missed_call_notify').attr('checked', text(data.missed_call_notify)); 
@@ -192,9 +202,14 @@ $(document).ready(function(){
             <li>&nbsp;</li>
             <?php
 			
-			if ($_SESSION['facebook']==0) echo '
+			if ($_SESSION['password_created']==1) echo '
 			<li class="settings_title">Change Password:<span>(optional)</span></li>
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
+            <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
+            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
+			
+			if ($_SESSION['password_created']==0) echo '
+			<li class="settings_title">Create Password:<span>(optional)</span></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
             <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
 			
