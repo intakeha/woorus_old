@@ -9,6 +9,9 @@ $(document).ready(function(){
 		$('#birthday_year').val(data.birthday_year);
 		$('#vemail').text(data.email);
 		$('#interest_notify').attr('checked', text(data.interest_notify)); 
+		$('#message_notify').attr('checked', text(data.message_notify)); 
+		$('#contact_notify').attr('checked', text(data.contact_notify)); 
+		$('#missed_call_notify').attr('checked', text(data.missed_call_notify)); 
 	});
 });
 </script>
@@ -189,7 +192,7 @@ $(document).ready(function(){
             <li>&nbsp;</li>
             <?php
 			
-			if ($_SESSION['facebook']==1) echo '
+			if ($_SESSION['facebook']==0) echo '
 			<li class="settings_title">Change Password:<span>(optional)</span></li>
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
@@ -201,10 +204,10 @@ $(document).ready(function(){
         <div id="settings_column2">
         	<ul>
             <li class="settings_title" style="margin-bottom: 10px;">Notifications:</li>
-            <li><input id="interest_notify" type="checkbox" name="mail_interest" checked="checked" value="Y"/> Has similar interests as you</li>
-            <li><input type="checkbox" name="mail_message" checked="checked" value="Y"/> Sends you a message</li>
-            <li><input type="checkbox" name="mail_contact" checked="checked" value="Y"/> Adds you to a contact list</li>
-            <li><input type="checkbox" name="mail_calls" checked="checked" value="Y"/> Calls you while you're away</li>
+            <li><input id="interest_notify" type="checkbox" name="mail_interest" value="Y"/> Has similar interests as you</li>
+            <li><input id="message_notify" type="checkbox" name="mail_message" value="Y"/> Sends you a message</li>
+            <li><input id="contact_notify" type="checkbox" name="mail_contact" value="Y"/> Adds you to a contact list</li>
+            <li><input id="missed_call_notify" type="checkbox" name="mail_calls" value="Y"/> Calls you while you're away</li>
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
             <div id="settings_error" class="error_text"></div>
