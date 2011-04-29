@@ -8,6 +8,7 @@ $(document).ready(function(){
 		$('#birthday_day').val(data.birthday_day);
 		$('#birthday_year').val(data.birthday_year);
 		$('#vemail').text(data.email);
+		$('#interest_notify').attr('checked', text(data.interest_notify)); 
 	});
 });
 </script>
@@ -182,21 +183,25 @@ $(document).ready(function(){
 	            </select></li>
             <li><label>City</label><input class="text_form" type="text" id="city" name="city" maxlength="255"></li>
             <li>&nbsp;</li>
-            <li class="settings_title">Change Email:</li>
+            <li class="settings_title">Change Email:<span>(optional)</span></li>
             <li><label>Contact Email</label><span id="vemail"></span></li>
             <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email" maxlength="254"></li>
             <li>&nbsp;</li>
-            <li class="settings_title">Change Password:</li>
+            <?php
+			
+			if ($_SESSION['facebook']==1) echo '
+			<li class="settings_title">Change Password:<span>(optional)</span></li>
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
-            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>
-            <?php if ($_SESSION['facebook']==1) echo "I am a facebook user!";  ?>
+            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
+			
+            ?>
             </ul>
         </div>
         <div id="settings_column2">
         	<ul>
             <li class="settings_title" style="margin-bottom: 10px;">Notifications:</li>
-            <li><input type="checkbox" name="mail_interest" checked="checked" value="Y"/> Has similar interests as you</li>
+            <li><input id="interest_notify" type="checkbox" name="mail_interest" checked="checked" value="Y"/> Has similar interests as you</li>
             <li><input type="checkbox" name="mail_message" checked="checked" value="Y"/> Sends you a message</li>
             <li><input type="checkbox" name="mail_contact" checked="checked" value="Y"/> Adds you to a contact list</li>
             <li><input type="checkbox" name="mail_calls" checked="checked" value="Y"/> Calls you while you're away</li>

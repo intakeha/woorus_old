@@ -26,7 +26,7 @@
             <li>Homer</li>
             <li>pinata</li>
             <li>Conan</li>
-        </ul>
+        </ul><div id="clear"></div>
     </div>
     </div>
     </form>
