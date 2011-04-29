@@ -461,7 +461,7 @@ $(document).ready(function(){
 		submitHandler: function(form) {
 			$.post(
 				"actions/changeSettings.php",
-				$('#settings_form').serialize(),
+				$('#settings_form_c').serialize(),
 				function(data){
 					if (data){
 						$('#settings_error').text(data); 
