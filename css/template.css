@@ -427,19 +427,19 @@ li.settings_title span{
 	font-style: italic;
 }
 
-#settings_form li {
+#settings_form li, #settings_form_c li {
 	font-size: 18px;
 	color: #215086;	
 	line-height: 35px;
 }
 
-#settings_form label {
+#settings_form label, #settings_form_c label {
 	width: 200px;
 	display: inline-block;
 	margin-left: 20px;
 }
 
-#settings_form select {
+#settings_form select, #settings_form_c select {
 	width: 80px;
 	font-size: 18px;
 	color: #666;

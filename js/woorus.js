@@ -436,7 +436,146 @@ $(document).ready(function(){
 				rangelength: "Your old password must be between 6 and 20 characters long."
 			},
 			new_password: {
-				required: "Please enter your new password. foo",
+				required: "Please enter your new password.",
+				rangelength: "Your new password must be between 6 and 20 characters long."
+			},
+			confirm_password: {
+				required: "Please confirm your new password.",
+				equalTo: "Your new passwords do not match."
+			}
+		}
+	});	
+	
+	// Validate settings form in the _settings.php for those who have not created a password
+	$("#settings_form_c").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#settings_error").text(validator.errorList[0].message); 
+			}
+		},
+		submitHandler: function(form) {
+			$.post(
+				"actions/changeSettings.php",
+				$('#settings_form').serialize(),
+				function(data){
+					if (data){
+						$('#settings_error').text(data); 
+					}else{
+						window.location.href = "canvas.php?page=settings";			
+					}
+				}
+			);
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {
+			first_name: {
+				required: true,
+				validname: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 30
+			},
+			last_name: {
+				required: true,
+				validname: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 60	
+			},
+			gender: {
+				selectfield: true,
+				checkgender: true
+			},
+			birthday_month: {
+				selectfield: true,
+				range: [1, 12]
+			},
+			birthday_day: {
+				selectfield: true,
+				range: [1, 31]
+			},
+			birthday_year: {
+				selectfield: true,
+				range: [1905, 2011]
+			},
+			city: {
+				required: true,
+				validcity: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 255
+			},
+			new_email: {
+				email: true,
+				maxlength: 254
+			},
+			new_password: {
+				rangelength: [6,20]
+			},
+			confirm_password: {
+				required: function(element){
+					return $('#new_password').val() != ''
+				},
+				equalTo: "#new_password"
+			}
+		},
+		messages: {
+			first_name: {
+				required: "Please provide your first name.",
+				validname: "First name contains invalid characters.",
+				startsymbol: "First name should not start or end with a symbol.",
+				endsymbol: "First name should not start or end with a symbol.",
+				minlength: "Please provide your real first name.",
+				maxlength: "Please enter no more than 30 characters for your first name."
+			},
+			last_name: {
+				required: "Please provide in your last name.",
+				validname: "Last name contains invalid characters.",
+				startsymbol: "Last name should not start or end with a symbol.",
+				endsymbol: "Last name should not start or end with a symbol.",
+				minlength: "Please provide your real last name.",
+				maxlength: "Please enter no more than 60 characters for your last name."
+			},
+			gender: {
+				selectfield: "Please select your gender.",
+				checkgender: "Please select your gender."
+			},
+			birthday_month: {
+				selectfield: "Please select birthday month." ,
+				range: "Please select your birthday month."
+			},
+			birthday_day: {
+				selectfield: "Please select birthday date.",
+				range: "Please select your birthday date."
+			},
+			birthday_year: {
+				selectfield: "Please select birthday year.",
+				range: "Please select your birthday year."
+			},
+			city: {
+				required: "Please fill in your city.",
+				validcity: "City contains invalid characters.",
+				startsymbol: "City should not start or end with a symbol.",
+				endsymbol: "City should not start or end with a symbol.",
+				minlength: "Please provide your current city.",
+				maxlength: "Please enter no more than 255 characters for your city."
+			},
+			new_email: {
+				email: "Please enter a valid email address.",
+				maxlength: "Please enter no more than 254 characters for your email."
+			},
+			new_password: {
+				required: "Please enter your new password.",
 				rangelength: "Your new password must be between 6 and 20 characters long."
 			},
 			confirm_password: {
