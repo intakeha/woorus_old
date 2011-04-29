@@ -436,7 +436,7 @@ $(document).ready(function(){
 				rangelength: "Your old password must be between 6 and 20 characters long."
 			},
 			new_password: {
-				required: "Please enter your new password.",
+				required: "Please enter your new password. foo",
 				rangelength: "Your new password must be between 6 and 20 characters long."
 			},
 			confirm_password: {
