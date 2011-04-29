@@ -46,7 +46,7 @@ $f_mail_message = checkboxValidate($_POST['mail_message']);
 $f_mail_contact = checkboxValidate($_POST['mail_contact']);
 $f_mail_calls = checkboxValidate($_POST['mail_calls']);
 
-echo $f_mail_interest.$f_mail_message.$f_mail_contact.$f_mail_calls;
+//echo $f_mail_interest.$f_mail_message.$f_mail_contact.$f_mail_calls;
 
 //if passes all checks for user entered data
 
@@ -94,6 +94,7 @@ $result = mysql_query($query_users, $connection) or die ("Error 2");
 $query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_mail_interest)."', message_notify =  '".mysql_real_escape_string($f_mail_message)."', contact_notify =  '".mysql_real_escape_string($f_mail_contact)."', missed_call_notify =  '".mysql_real_escape_string($f_mail_calls)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
+echo $query_settings;
 // header( 'Location: ../canvas.php?page=settings') ;
 
 
