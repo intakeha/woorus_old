@@ -34,7 +34,7 @@ $(document).ready(function(){
 
 
 <div id="change_settings">
-    <form id="settings_form" action="../actions/changeSettings.php" method="POST">
+    <form id="settings_form<?php if ($_SESSION['password_created']==0) echo "_c";?>" action="../actions/changeSettings.php" method="POST">
 	    <div id="settings_column1">
             <ul>
             <li class="settings_title">About Me:</li>
