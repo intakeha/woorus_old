@@ -8,25 +8,25 @@ $(document).ready(function(){
 		$('#birthday_day').val(data.birthday_day);
 		$('#birthday_year').val(data.birthday_year);
 		$('#vemail').text(data.email);
-		if (data.interest_notify == 1) {
-			$('#interest_notify').attr('checked', true);
+		if (data.mail_interest == 1) {
+			$('#mail_interest').attr('checked', true);
 		} else {
-			$('#interest_notify').attr('checked', false);
+			$('#mail_interest').attr('checked', false);
 		}
-		if (data.message_notify == 1) {
-			$('#message_notify').attr('checked', true);
+		if (data.mail_message == 1) {
+			$('#mail_message').attr('checked', true);
 		} else {
-			$('#message_notify').attr('checked', false);
+			$('#mail_message').attr('checked', false);
 		}
-		if (data.contact_notify == 1) {
-			$('#contact_notify').attr('checked', true);
+		if (data.mail_contact == 1) {
+			$('#mail_contact').attr('checked', true);
 		} else {
-			$('#contact_notify').attr('checked', false);
+			$('#mail_contact').attr('checked', false);
 		}
-		if (data.missed_call_notify == 1) {
-			$('#missed_call_notify').attr('checked', true);
+		if (data.mail_calls == 1) {
+			$('#mail_calls').attr('checked', true);
 		} else {
-			$('#missed_call_notify').attr('checked', false);
+			$('#mail_calls').attr('checked', false);
 		}
 	});
 });
@@ -225,10 +225,10 @@ $(document).ready(function(){
         <div id="settings_column2">
         	<ul>
             <li class="settings_title" style="margin-bottom: 10px;">Notifications:</li>
-            <li><input id="interest_notify" type="checkbox" name="mail_interest" value="Y"/> Has similar interests as you</li>
-            <li><input id="message_notify" type="checkbox" name="mail_message" value="Y"/> Sends you a message</li>
-            <li><input id="contact_notify" type="checkbox" name="mail_contact" value="Y"/> Adds you to a contact list</li>
-            <li><input id="missed_call_notify" type="checkbox" name="mail_calls" value="Y"/> Calls you while you're away</li>
+            <li><input id="mail_interest" type="checkbox" name="mail_interest" value="Y"/> Has similar interests as you</li>
+            <li><input id="mail_message" type="checkbox" name="mail_message" value="Y"/> Sends you a message</li>
+            <li><input id="mail_contact" type="checkbox" name="mail_contact" value="Y"/> Adds you to a contact list</li>
+            <li><input id="mail_calls" type="checkbox" name="mail_calls" value="Y"/> Calls you while you're away</li>
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
             <div id="settings_error" class="error_text"></div>
