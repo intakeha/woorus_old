@@ -33,12 +33,11 @@ if (mysql_num_rows($result) == 1)
 	$day = trim($birthday_arr[2], "0");
 	
 	//set the notification flags to all true, in case we don't find the entry or data is bad.
-	$mail_interest = 1;
-	$mail_message = 1;
-	$mail_contact = 1;
-	$mail_calls = 1;
+	$interest_notify = 1;
+	$message_notify = 1;
+	$contact_notify = 1;
+	$missed_call_notify = 1;
 	
-	/*
 	//then  lookup the notification flag.
 	$notification_query = "SELECT interest_notify, message_notify, contact_notify, missed_call_notify FROM `settings` WHERE user_id =  '".$_SESSION['id']."' ";
 	$result = mysql_query($notification_query, $connection) or die ("Error");
@@ -47,12 +46,11 @@ if (mysql_num_rows($result) == 1)
 	{
 		$row = mysql_fetch_assoc($result);
 		//fetch data
-		$mail_interest = convertNotifications($row['interest_notify']);
-		$mail_message = convertNotifications($row['message_notify']);
-		$mail_contact = convertNotifications($row['contact_notify']);
-		$mail_calls = convertNotifications($row['missed_call_notify']);
+		$interest_notify = convertNotifications($row['interest_notify']);
+		$message_notify = convertNotifications($row['message_notify']);
+		$contact_notify = convertNotifications($row['contact_notify']);
+		$missed_call_notify = convertNotifications($row['missed_call_notify']);
 	}
-*/
 	
 	//set user data array & print to JavaSrcipt
 	$user_data = array('first_name'=>$first_name, 'last_name'=>$last_name, 'gender'=>$gender, 'birthday_month'=>$month, 'birthday_day'=>$day, 'birthday_year'=>$year, 'user_city_id'=>$user_city_id, 'email'=>$email, 'interest_notify'=>$interest_notify, 'message_notify'=>$message_notify, 'contact_notify'=>$contact_notify, 'missed_call_notify'=>$missed_call_notify);

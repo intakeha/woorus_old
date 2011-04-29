@@ -91,6 +91,8 @@ if (!$resp->is_valid) {
 	$result = mysql_query($query_settings, $connection) or die ("Error 2");
 	
 	
+
+	
 	/*
 	//send activation email (turn into a function)
 	$to = $f_email_address;

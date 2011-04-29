@@ -43,12 +43,10 @@ $f_user_country_id = ("1"); //need to do based on lookup
 $f_user_state_id = ("1"); //need to do based on lookup
 $f_user_city_id = ("1"); //need to do based on lookup
 
-$f_mail_interest  = checkboxValidate($_POST['mail_interest']);
-$f_mail_message = checkboxValidate($_POST['mail_message']);
-$f_mail_contact = checkboxValidate($_POST['mail_contact']);
-$f_mail_calls = checkboxValidate($_POST['mail_calls']);
-
-//echo $f_mail_interest.$f_mail_message.$f_mail_contact.$f_mail_calls;
+$f_interest_notify  = checkboxValidate($_POST['interest_notify']);
+$f_message_notify= checkboxValidate($_POST['message_notify']);
+$f_contact_notify = checkboxValidate($_POST['contact_notify']);
+$f_missed_call_notify = checkboxValidate($_POST['missed_call_notify']);
 
 //if passes all checks for user entered data
 
@@ -93,11 +91,10 @@ else //dont change password
 $result = mysql_query($query_users, $connection) or die ("Error 2");
 
 //for both options, update settings table & redirect
-$query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_mail_interest)."', message_notify =  '".mysql_real_escape_string($f_mail_message)."', contact_notify =  '".mysql_real_escape_string($f_mail_contact)."', missed_call_notify =  '".mysql_real_escape_string($f_mail_calls)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
+$query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_interest_notify)."', message_notify =  '".mysql_real_escape_string($f_message_notify)."', contact_notify =  '".mysql_real_escape_string($f_contact_notify)."', missed_call_notify =  '".mysql_real_escape_string($f_missed_call_notify)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 // header( 'Location: ../canvas.php?page=settings') ;
-
 
 function authenticatePassword($id, $password)
 {
