@@ -18,10 +18,16 @@ $(document).ready(function(){
 		} else {
 			$('#message_notify').attr('checked', false);
 		}
-		
-		$('#message_notify').attr('checked', text(data.message_notify)); 
-		$('#contact_notify').attr('checked', text(data.contact_notify)); 
-		$('#missed_call_notify').attr('checked', text(data.missed_call_notify)); 
+		if (data.contact_notify == 1) {
+			$('#contact_notify').attr('checked', true);
+		} else {
+			$('#contact_notify').attr('checked', false);
+		}
+		if (data.missed_call_notify == 1) {
+			$('#missed_call_notify').attr('checked', true);
+		} else {
+			$('#missed_call_notify').attr('checked', false);
+		}
 	});
 });
 </script>
