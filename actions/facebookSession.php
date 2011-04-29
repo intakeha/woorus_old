@@ -54,6 +54,7 @@ if ($session)
 		$namecheck_query = "SELECT email_address, id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
+		
 		if ($namecheck_count != 0)
 		{
 			//if user has already logged in via facebook, get ID & start session
@@ -67,6 +68,7 @@ if ($session)
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
 			$_SESSION['facebook'] = 1;
+			$_SESSION['password_created'] = 0; //need to set this!!!!
 			header( 'Location: ../canvas.php' );
 		}
 		else{
@@ -157,6 +159,8 @@ if ($session)
 			session_start();
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
+			$_SESSION['facebook'] = 1;
+			$_SESSION['password_created'] = 0;
 			
 			header( 'Location: ../canvas.php?page=settings') ;
 

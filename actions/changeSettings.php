@@ -5,16 +5,6 @@ require('connect.php');
 require('validations.php');
 require('facebook.php');
 
-$facebook = new Facebook(array(
-  'appId'  => '113603915367848',
-  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
-  'cookie' => true,
-));
-
-//get ID from session variable
-$id = $_SESSION['id'];
-$session = $facebook->getSession(); //if the user is a facebook user, then different rules for if they change their password
-
 //set variables--will use POST to get from html
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);
@@ -25,9 +15,19 @@ $f_password_old = $_POST['old_password']; // need to check that this is valid
 $f_password_new = $_POST['new_password'];
 $f_password_confirm = $_POST['confirm_password']; // need to check that this matches
 
-//either user has nothing entered in password fields or something in every field, validate that its a valid password in each field
-$f_password_new = validateOldAndNewPassword($f_password_old, $f_password_new, $f_password_confirm);
-	
+//check if user has a password or not, based on session info
+if ($_SESSION['password_created'])
+{
+	//will determine if either user has nothing entered in password fields or something in every field, & validate that its a valid password in each field if changing password
+	$f_password_new = validateOldAndNewPassword($f_password_old, $f_password_new, $f_password_confirm);
+}
+else 
+{
+	//will determine if user has entered either nothing in password fields or valid new & confirm password
+	$f_password_new = validateNewPasswordOnly($password_new, $password_confirm);
+}
+
+
 $f_gender = validateGender($_POST['gender']);
 
 $f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
