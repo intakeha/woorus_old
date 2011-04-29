@@ -22,6 +22,7 @@ if ($returned_id != NULL)
 	session_start();
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
+	$_SESSION['facebook'] = 0;
 	updateLoginTime($returned_id);
 	//header('Location: ../canvas.php');
 	

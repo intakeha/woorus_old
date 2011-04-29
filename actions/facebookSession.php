@@ -66,6 +66,7 @@ if ($session)
 			session_start();
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
+			$_SESSION['facebook'] = 1;
 			header( 'Location: ../canvas.php' );
 		}
 		else{
