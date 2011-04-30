@@ -18,6 +18,7 @@ $f_password_new = $_POST['new_password'];
 $f_password_confirm = $_POST['confirm_password']; // need to check that this matches
 
 //check if user has a password or not, based on  info
+die("session is ".$_SESSION['password_created']);
 if ($_SESSION['password_created'])
 {
 	//will determine if either user has nothing entered in password fields or something in every field, & validate that its a valid password in each field if changing password
@@ -54,7 +55,6 @@ $f_missed_call_notify = checkboxValidate($_POST['missed_call_notify']);
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");
 mysql_select_db($db_name, $connection);
 
-die("new password: ".$f_password_new); 
 if ($f_password_new != NULL) //change password
 {
 	if ($_SESSION['password_created'])
