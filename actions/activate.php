@@ -27,23 +27,35 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
-			die("Account is Activated"); //shoul redirect to canvas page
+			$success_message = "Account is Activated";
+			$message = array('sucess'=> 1, 'message'=>$success_message);
+			$output = json_encode($message);
+			print($output);
 		
 		}
 		else 
 		{
-			die("Account has already been activated"); //redirect to 
+			$error_message = "Account has already been activated";
+			$message = array('sucess'=> 0, 'message'=>$error_message);
+			$output = json_encode($message);
+			print($output);
 		}
 		
 	}
 	else
 	{
-		die("Incorrect token to activate account. \n");
+		$error_message = "Incorrect token to activate account.";
+		$message = array('sucess'=> 0, 'message'=>$error_message);
+		$output = json_encode($message);
+		print($output);
 	}
 }
 else
 {
-	die("Data is missing for activation");
+	$error_message = "Data is missing for activation";
+	$message = array('sucess'=> 0, 'message'=>$error_message);
+	$output = json_encode($message);
+	print($output);
 }
 ?>
 
