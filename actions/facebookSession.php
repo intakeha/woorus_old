@@ -102,7 +102,7 @@ if ($session)
 
 			$password_set = 1; //user has to set a password here, so we can call it 1
 			$user_info_set = 1; //user has to set info, so we can call it 1
-			$facebook_id = "NULL" //if theyre registering here, we dont get their facebook ID
+			$facebook_id = "NULL"; //if theyre registering here, we dont get their facebook ID
 
 			//connect
 			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
