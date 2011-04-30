@@ -23,7 +23,6 @@ if ($_SESSION['password_created'] == 1)
 {
 	//will determine if either user has nothing entered in password fields or something in every field, & validate that its a valid password in each field if changing password
 	$f_password_new = validateOldAndNewPassword($f_password_old, $f_password_new, $f_password_confirm);
-	die("new and old : " .$f_password_new);
 }
 else 
 {
