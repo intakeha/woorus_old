@@ -232,6 +232,12 @@ a#nav_trends_1 {
 	font-weight: bold;
 }
 
+.success_text {
+	font-size: 12px;
+	color: #0C0;
+	font-weight: bold;
+}
+
 .buttons {
 	font-size: 18px;
 	color: #FFF;
@@ -240,7 +246,6 @@ a#nav_trends_1 {
 	background: #215086;
 	border: 2px solid #4980B7;
 }
-
 
 /*	Pagination */
 

@@ -461,6 +461,14 @@ select#gender {
 	margin-top: -80px;
 }
 
+#settings_success{
+	text-align: left;
+	line-height: 20px;
+	border-left: 3px solid #0C0;
+	padding-left: 10px;
+	margin-top: -80px;
+}
+
 #save_settings{
 	width: 200px;
 	height: 30px;
@@ -573,4 +581,22 @@ li.forgot_title {
 	border: 1px solid #F00;
 	background-color:#E0E0E0; 
 	margin: 2px;
+}
+
+/* Message Page */
+
+#message_bg {
+	background: url(../images/global/message_banner.jpg) no-repeat;			
+	width: 1200px;
+	height: 600px;
+	text-align: left;
+	margin-top: -254px;
+}
+
+#user_messages {
+	position: relative;
+	left: 200px;
+	top: 350px;
+	font-size: 18px;
+	color: #666;
 }

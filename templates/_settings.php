@@ -232,6 +232,7 @@ $(document).ready(function(){
             </ul>
             <input id="save_settings" class="buttons" type="submit" name="update" value="Save"><br />
             <div id="settings_error" class="error_text"></div>
+            <div id="settings_success" class="error_text"></div>
         </div>
     </form>
 </div>        

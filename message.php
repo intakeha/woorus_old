@@ -17,22 +17,24 @@
 		$messageID = $_REQUEST['messageID'];
 		switch ($messageID) {
 			case 1:
-				$message = "Your account has been activated";
+				$message = "Your account has been activated.";
 				break;
 			case 2:
-				$message = "Account has already been activated";
+				$message = "Account has already been activated.";
 				break;
 			case 3:
-				$message = "Incorrect token to activate account";
+				$message = "Incorrect token to activate account.";
 				break;
 		}
 	?>
 
 </head>
 <body>
+    <div class="bg_canvas"></div>
 	<div class="globalContainer">
-        <div class="header"></div> 
-        <div style="height: 150px;"><?php echo $message ?></div>       
+        <div id="message_bg">
+        	<div id=user_messages><?php echo $message ?></div>
+        </div>  
         <?php include('templates/_footer.php');?>
     </div>
 </body>
