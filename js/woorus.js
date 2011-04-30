@@ -312,10 +312,13 @@ $(document).ready(function(){
 				$('#settings_form').serialize(),
 				function(data){
 					if (data.success == 0){
-						$('#settings_error').html(data.message); 
+						$('#settings_error').show();
+						$('#settings_success').hide();
+						$('#settings_error').text(data.message);
 					}else{
+						$('#settings_success').show();
 						$('#settings_error').hide();
-						$('#settings_success').html(data.message);
+						$('#settings_success').text(data.message);
 					}
 				},
 				"json"
@@ -468,11 +471,11 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#settings_error').show();
 						$('#settings_success').hide();
-						$('#settings_error').text(data.message); 
+						$('#settings_error').text(data.message);
 					}else{
 						$('#settings_success').show();
 						$('#settings_error').hide();
-						$('#settings_success').text(data.message);		
+						$('#settings_success').text(data.message);
 					}
 				},
 				"json"
