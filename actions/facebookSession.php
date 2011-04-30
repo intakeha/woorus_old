@@ -42,6 +42,9 @@ if ($session)
 		exit();
 		*/
 		
+		//get id
+		$id = $me['id']; //check
+		
 		$facebook_email_address_visual = $me["email"];
 		$facebook_email_address = get_standard_email($facebook_email_address_visual);
 
@@ -95,15 +98,19 @@ if ($session)
 			$f_user_city_id = ("1"); //need to do based on lookup
 
 			$social_status = "a"; //default value
-			$email_verified = "1"; //default value  (no need to verify, no need for token)
+			$email_verified = 1; //default value  (no need to verify, no need for token)
+
+			$password_set = 1; //user has to set a password here, so we can call it 1
+			$user_info_set = 1; //user has to set info, so we can call it 1
+			$facebook_id = "NULL" //if theyre registering here, we dont get their facebook ID
 
 			//connect
 			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
 			mysql_select_db($db_name);
 			
 			//enter user into system
-			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified) VALUES 
-			(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".mysql_real_escape_string($social_status)."', NOW(), NOW(), NULL , '".mysql_real_escape_string($email_verified)."')";
+			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id) VALUES 
+			(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."')";
 
 			$result = mysql_query($query_users, $connection) or die ("Error 1");
 
