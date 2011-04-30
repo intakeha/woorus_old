@@ -28,8 +28,7 @@ if ($_SESSION['password_created'] == 1)
 else 
 {
 	//will determine if user has entered either nothing in password fields or valid new & confirm password
-	$f_password_new = validateNewPasswordOnly($password_new, $password_confirm);
-	die("new only : " .$f_password_new);
+	$f_password_new = validateNewPasswordOnly($f_password_new, $f_password_confirm);
 }
 
 
