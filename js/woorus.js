@@ -316,7 +316,6 @@ $(document).ready(function(){
 					}else{
 						$('#settings_error').hide();
 						$('#settings_success').html(data.message);
-						window.location.href = "canvas.php?page=settings";			
 					}
 				}
 			);
@@ -466,11 +465,10 @@ $(document).ready(function(){
 				$('#settings_form_c').serialize(),
 				function(data){
 					if (data.success == 0){
-						$('#settings_error').html(data.message); 
+						$('#settings_error').text(data.message); 
 					}else{
 						$('#settings_error').hide();
-						$('#settings_success').html(data.message);
-						window.location.href = "canvas.php?page=settings";			
+						$('#settings_success').text(data.message);		
 					}
 				}
 			);
