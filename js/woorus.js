@@ -312,7 +312,7 @@ $(document).ready(function(){
 				$('#settings_form').serialize(),
 				function(data){
 					if (data){
-						$('#settings_error').text(data); 
+						$('#settings_error').html(data); 
 					}else{
 						window.location.href = "canvas.php?page=settings";			
 					}
@@ -464,7 +464,7 @@ $(document).ready(function(){
 				$('#settings_form_c').serialize(),
 				function(data){
 					if (data){
-						$('#settings_error').text(data); 
+						$('#settings_error').html(data); 
 					}else{
 						window.location.href = "canvas.php?page=settings";			
 					}
