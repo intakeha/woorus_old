@@ -122,17 +122,19 @@ if ($session)
 				$social_status = "a"; //default value
 				$email_verified = 1; //default value  (no need to verify, no need for token)
 
-				$password_set = 1; //user has to set a password here, so we can call it 1
-				$user_info_set = 1; //user has to set info, so we can call it 1
+				$password_set = 0; //user hasn't set a password
+				$user_info_set = 0; //user hasn't set info
 				//facebook_id is already set, above
+
+				$active_user = 1;
 
 				//connect
 				$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
 				mysql_select_db($db_name);
 				
 				//enter user into system
-				$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id) VALUES 
-				(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."')";
+				$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 
+				(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."', '".$active_user."')";
 
 				$result = mysql_query($query_users, $connection) or die ("Error 1");
 
@@ -189,8 +191,8 @@ if ($session)
 				$_SESSION['id'] = $user_id;
 				$_SESSION['email'] = $facebook_email_address_visual;
 				$_SESSION['facebook'] = 1;
-				$_SESSION['password_created'] = 0; //new user, so always 0
-				$_SESSION['user_info_set'] = 0;  // new user, so always 0
+				$_SESSION['password_created'] = $password_set;
+				$_SESSION['user_info_set'] = $user_info_set;
 				header( 'Location: ../canvas.php?page=settings') ;
 			}
 

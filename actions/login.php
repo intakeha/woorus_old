@@ -44,7 +44,7 @@ function authenticate($email, $pass)
 	$email = get_standard_email($email);
 
 	//check if user exists
-	$query = "SELECT id, email_verified from `users` WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
+	$query = "SELECT id, email_verified, active_user from `users` WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
 	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 
@@ -53,11 +53,16 @@ function authenticate($email, $pass)
 	{
 		//check if user has activated via email
 		$row = mysql_fetch_assoc($result);
-		$activated = $row['email_verified'];
-		if ($activated == '0')
+		$email_verified = $row['email_verified'];
+		$active_user = $row['active_user'];
+		if ($email_verified == 0)
 		{
 			 die ("Please check your email to activate your account.");
 			 //return NULL;
+		}
+		elseif ($active_user == 0)
+		{
+			//this is where we would need to say welcome back
 		}
 		
 		$id = $row['id'];
