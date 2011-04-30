@@ -311,13 +311,13 @@ $(document).ready(function(){
 				"actions/changeSettings.php",
 				$('#settings_form').serialize(),
 				function(data){
+					$('#settings_error').hide();
+					$('#settings_success').hide();
 					if (data.success == 0){
 						$('#settings_error').show();
-						$('#settings_success').hide();
 						$('#settings_error').text(data.message);
 					}else{
 						$('#settings_success').show();
-						$('#settings_error').hide();
 						$('#settings_success').text(data.message);
 					}
 				},
