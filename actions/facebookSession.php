@@ -59,7 +59,7 @@ if ($session)
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		
-		if ($namecheck_count != 0)
+		if ($namecheck_count != 0) //if 1, this means that email is in our database
 		{
 			//if user has already logged in via facebook, get ID & start session
 			$row = mysql_fetch_assoc($namecheck_result);
@@ -85,101 +85,114 @@ if ($session)
 			}
 		}
 		else{
-			//if first time--> input data, take to settings page
-			$activities = $facebook->api('/me/activities');
-			$books = $facebook->api('/me/books');
-			$interests = $facebook->api('/me/interests');
-			$likes = $facebook->api('/me/likes');
-			$links = $facebook->api('/me/links');
-			$movies = $facebook->api('/me/movies');
-			$music = $facebook->api('/me/music');
-			$television = $facebook->api('/me/television');		
-			$facebook_id = $me["id"]; //this is NOT woorus ID
-			$facebook_first_name =  $me["first_name"];
-			$facebook_last_name = $me["last_name"];
-			//$facebook_birthday =  $me["birthday_date"];
-			$facebook_city = $me["location"]["name"]; //not using yet
-			$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
-			$facebook_gender = convertGender($me["gender"]);
-
-			//need to do country lookup:
-			$f_user_country_id = ("1"); //need to do based on lookup
-			$f_user_state_id = ("1"); //need to do based on lookup
-			$f_user_city_id = ("1"); //need to do based on lookup
-
-			$social_status = "a"; //default value
-			$email_verified = 1; //default value  (no need to verify, no need for token)
-
-			$password_set = 1; //user has to set a password here, so we can call it 1
-			$user_info_set = 1; //user has to set info, so we can call it 1
-			//facebook_id is already set, above
-
-			//connect
-			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
-			mysql_select_db($db_name);
 			
-			//enter user into system
-			$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id) VALUES 
-			(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."')";
-
-			$result = mysql_query($query_users, $connection) or die ("Error 1");
-
-			//re-lookup ID based on email
-			$id_query = "SELECT id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
-			$id_result = mysql_query($id_query, $connection) or die ("Error 2");
-			$id_count = mysql_num_rows($id_result);
-			if ($id_count != 0)
+			//check if ID is already in system (this is in case the user has changed their facebook email)
+			$fb_id_query = "SELECT email_address, id, password_set, user_info_set from `users` WHERE facebook_id = '".mysql_real_escape_string($facebook_id)."'";
+			$fb_id_result = mysql_query($fb_id_query, $connection) or die ("Error 1");
+			$fb_id_count = mysql_num_rows($fb_id_result);
+			if ($fb_id_count != 0) //if 1, this means that facebook_ID is in our database
 			{
-				$row = mysql_fetch_assoc($id_result);
-				$user_id = $row['id']; 
-			}
+				//need process to deal with user changing their password
+				die("User changed email, its different from facebook.");
+				
+			}else
+			{
+				//user's true first time--> input data, take to settings page
+				$activities = $facebook->api('/me/activities');
+				$books = $facebook->api('/me/books');
+				$interests = $facebook->api('/me/interests');
+				$likes = $facebook->api('/me/likes');
+				$links = $facebook->api('/me/links');
+				$movies = $facebook->api('/me/movies');
+				$music = $facebook->api('/me/music');
+				$television = $facebook->api('/me/television');		
+				$facebook_id = $me["id"]; //this is NOT woorus ID
+				$facebook_first_name =  $me["first_name"];
+				$facebook_last_name = $me["last_name"];
+				//$facebook_birthday =  $me["birthday_date"];
+				$facebook_city = $me["location"]["name"]; //not using yet
+				$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
+				$facebook_gender = convertGender($me["gender"]);
 
-			//once we get the ID, set the settings for that user
-			$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".mysql_real_escape_string($user_id)."', 'Y', 'Y' , 'Y', 'Y')";
-			$result = mysql_query($query_settings, $connection) or die ("Error 3");
-	
-			updateLoginTime($user_id); //need to also update the login table
-			
-			//next step is to enter in all the interests we've taken from the facebook API
-			$tile_placement= 0;
-	
-			//employer
-			foreach ($me["work"] as $value){
-			
-				$facebook_interest = $value["employer"]["name"];
-				$facebook_interest_id = $value["employer"]["id"];
-				$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $tile_placement, $connection);
-				$tile_placement++;
-			}
+				//need to do country lookup:
+				$f_user_country_id = ("1"); //need to do based on lookup
+				$f_user_state_id = ("1"); //need to do based on lookup
+				$f_user_city_id = ("1"); //need to do based on lookup
+
+				$social_status = "a"; //default value
+				$email_verified = 1; //default value  (no need to verify, no need for token)
+
+				$password_set = 1; //user has to set a password here, so we can call it 1
+				$user_info_set = 1; //user has to set info, so we can call it 1
+				//facebook_id is already set, above
+
+				//connect
+				$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
+				mysql_select_db($db_name);
+				
+				//enter user into system
+				$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id) VALUES 
+				(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."')";
+
+				$result = mysql_query($query_users, $connection) or die ("Error 1");
+
+				//re-lookup ID based on email
+				$id_query = "SELECT id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
+				$id_result = mysql_query($id_query, $connection) or die ("Error 2");
+				$id_count = mysql_num_rows($id_result);
+				if ($id_count != 0)
+				{
+					$row = mysql_fetch_assoc($id_result);
+					$user_id = $row['id']; 
+				}
+
+				//once we get the ID, set the settings for that user
+				$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".mysql_real_escape_string($user_id)."', 'Y', 'Y' , 'Y', 'Y')";
+				$result = mysql_query($query_settings, $connection) or die ("Error 3");
 		
+				updateLoginTime($user_id); //need to also update the login table
+				
+				//next step is to enter in all the interests we've taken from the facebook API
+				$tile_placement= 0;
+		
+				//get all their intersts
+				foreach ($me["work"] as $value){
+				
+					$facebook_interest = $value["employer"]["name"];
+					$facebook_interest_id = $value["employer"]["id"];
+					$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $tile_placement, $connection);
+					$tile_placement++;
+				}
 			
-			foreach ($me["education"] as $value)
-			{
-				$facebook_interest = $value["school"]["name"];
-				$facebook_interest_id = $value["school"]["id"];
 				
-				$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $tile_placement, $connection);
-				$tile_placement++;
-			}
+				foreach ($me["education"] as $value)
+				{
+					$facebook_interest = $value["school"]["name"];
+					$facebook_interest_id = $value["school"]["id"];
+					
+					$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $tile_placement, $connection);
+					$tile_placement++;
+				}
 
-			foreach ($likes["data"] as $value){
-				$facebook_interest = $value["name"];
-				$category = $value["category"];
-				$facebook_interest_id = $value ["id"];
-				
-				$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection);
-				$tile_placement++;
-				
-			}
+				foreach ($likes["data"] as $value){
+					$facebook_interest = $value["name"];
+					$category = $value["category"];
+					$facebook_interest_id = $value ["id"];
+					
+					$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection);
+					$tile_placement++;
+					
+				}
 
-			//start the session
-			session_start();
-			$_SESSION['id'] = $user_id;
-			$_SESSION['email'] = $facebook_email_address_visual;
-			$_SESSION['facebook'] = 1;
-			$_SESSION['password_created'] = 0; //new user, so always 0
-			$_SESSION['user_info_set'] = 0;  // new user, so always 0
-			header( 'Location: ../canvas.php?page=settings') ;
+				//start the session
+				session_start();
+				$_SESSION['id'] = $user_id;
+				$_SESSION['email'] = $facebook_email_address_visual;
+				$_SESSION['facebook'] = 1;
+				$_SESSION['password_created'] = 0; //new user, so always 0
+				$_SESSION['user_info_set'] = 0;  // new user, so always 0
+				header( 'Location: ../canvas.php?page=settings') ;
+			}
 
 		}
     
