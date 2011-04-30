@@ -18,8 +18,8 @@ $f_password_new = $_POST['new_password'];
 $f_password_confirm = $_POST['confirm_password']; // need to check that this matches
 
 //check if user has a password or not, based on  info
-die("session is ".$_SESSION['password_created']);
-if ($_SESSION['password_created'])
+
+if ($_SESSION['password_created'] == 1)
 {
 	//will determine if either user has nothing entered in password fields or something in every field, & validate that its a valid password in each field if changing password
 	$f_password_new = validateOldAndNewPassword($f_password_old, $f_password_new, $f_password_confirm);
