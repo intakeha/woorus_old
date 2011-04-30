@@ -466,8 +466,11 @@ $(document).ready(function(){
 				$('#settings_form_c').serialize(),
 				function(data){
 					if (data.success == 0){
+						$('#settings_error').show();
+						$('#settings_success').hide();
 						$('#settings_error').text(data.message); 
 					}else{
+						$('#settings_success').show();
 						$('#settings_error').hide();
 						$('#settings_success').text(data.message);		
 					}
