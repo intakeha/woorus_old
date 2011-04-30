@@ -12,6 +12,10 @@
 	<script type="text/javascript" src="js/jquery.form.js "></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
+    <?php
+		session_start();
+		if ($_SESSION['id']) header('Location: canvas.php');
+	?>
     
 </head>
 <body>
