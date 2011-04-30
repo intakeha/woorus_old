@@ -42,9 +42,10 @@ if ($session)
 		exit();
 		*/
 		
-		//get id
-		$id = $me['id']; //check
+		//get facebook id
+		$facebook_id= $me['id'];
 		
+		//get email
 		$facebook_email_address_visual = $me["email"];
 		$facebook_email_address = get_standard_email($facebook_email_address_visual);
 
@@ -54,7 +55,7 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address, id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
+		$namecheck_query = "SELECT email_address, id, password_set, user_info_set from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		
@@ -63,7 +64,8 @@ if ($session)
 			//if user has already logged in via facebook, get ID & start session
 			$row = mysql_fetch_assoc($namecheck_result);
 			$user_id = $row['id']; 
-			
+			$password_set = $row['password_set']; 
+			$user_info_set = $row['user_info_set']; 
 			
 			updateLoginTime($user_id); //need to also update the login table
 			
@@ -71,8 +73,16 @@ if ($session)
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
 			$_SESSION['facebook'] = 1;
-			$_SESSION['password_created'] = 0; //need to set this!!!!
-			header( 'Location: ../canvas.php' );
+			$_SESSION['password_created'] = $password_set;
+			$_SESSION['user_info_set'] = $user_info_set;
+			
+			if ($user_info_set)
+			{
+				header( 'Location: ../canvas.php' );
+			}else
+			{
+				header( 'Location: ../canvas.php?page=settings' );
+			}
 		}
 		else{
 			//if first time--> input data, take to settings page
@@ -102,7 +112,7 @@ if ($session)
 
 			$password_set = 1; //user has to set a password here, so we can call it 1
 			$user_info_set = 1; //user has to set info, so we can call it 1
-			$facebook_id = "NULL"; //if theyre registering here, we dont get their facebook ID
+			//facebook_id is already set, above
 
 			//connect
 			$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
@@ -167,8 +177,8 @@ if ($session)
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
 			$_SESSION['facebook'] = 1;
-			$_SESSION['password_created'] = 0;
-			
+			$_SESSION['password_created'] = 0; //new user, so always 0
+			$_SESSION['user_info_set'] = 0;  // new user, so always 0
 			header( 'Location: ../canvas.php?page=settings') ;
 
 		}

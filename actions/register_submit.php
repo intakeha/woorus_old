@@ -34,7 +34,7 @@ $token = rand(23456789, 98765432); //randomly generated number
 $email_verified = 0; //default value
 $password_set = 1; //user has to set a password here, so we can call it 1
 $user_info_set = 1; //user has to set info, so we can call it 1
-$facebook_id = "NULL"; //if theyre registering here, we dont get their facebook ID
+$facebook_id = 0; //if theyre registering here, we dont get their facebook ID
 
 
 

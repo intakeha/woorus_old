@@ -72,6 +72,9 @@ if ($f_password_new != NULL) //change password
 	{
 		$query_users = "UPDATE `users` SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
+
+	$_SESSION['password_created'] = 1; //if theyre changing password, have definitely set one
+
 }
 else //dont change password
 {
@@ -84,11 +87,13 @@ else //dont change password
 	{
 		$query_users = "UPDATE `users` SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."'";
 	}
+	
 }
 
 
 //query_users is defned above.
 $result = mysql_query($query_users, $connection) or die ("Error 2");
+$_SESSION['user_info_set'] = 1; //if theyre saving, user info is set
 
 //for both options, update settings table & redirect
 $query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_interest_notify)."', message_notify =  '".mysql_real_escape_string($f_message_notify)."', contact_notify =  '".mysql_real_escape_string($f_contact_notify)."', missed_call_notify =  '".mysql_real_escape_string($f_missed_call_notify)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
