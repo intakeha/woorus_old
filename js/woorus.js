@@ -303,6 +303,8 @@ $(document).ready(function(){
 		invalidHandler: function(form, validator) {
 			var errors = validator.numberOfInvalids();
 			if (errors) {
+				$('#settings_success').hide();
+				$('#settings_error').show();
 				$("#settings_error").text(validator.errorList[0].message); 
 			}
 		},
