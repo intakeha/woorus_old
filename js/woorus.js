@@ -299,7 +299,7 @@ $(document).ready(function(){
 		onsubmit: true,
 		onfocusout: false,
 		onkeyup: false,
-		onclick: false,
+		onclick: true,
 		invalidHandler: function(form, validator) {
 			var errors = validator.numberOfInvalids();
 			if (errors) {
