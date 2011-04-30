@@ -54,7 +54,7 @@ $f_missed_call_notify = checkboxValidate($_POST['missed_call_notify']);
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");
 mysql_select_db($db_name, $connection);
 
-
+die("new password: ".$f_password_new); 
 if ($f_password_new != NULL) //change password
 {
 	if ($_SESSION['password_created'])
@@ -83,7 +83,7 @@ if ($f_password_new != NULL) //change password
 }
 else //dont change password
 {
-	if ($f_temp_email_address!= NULL) // change email  (add in token) & do not change password 
+	if ($f_temp_email_address != NULL) // change email  (add in token) & do not change password 
 	{
 		$email_token = rand(23456789, 98765432); //randomly generated number
 		$query_users = "UPDATE `users` SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), user_info_set = 1 WHERE id = '".mysql_real_escape_string($id)."'";
