@@ -317,7 +317,8 @@ $(document).ready(function(){
 						$('#settings_error').hide();
 						$('#settings_success').html(data.message);
 					}
-				}
+				},
+				"json"
 			);
 		},
 		errorPlacement: function(error, element) {
@@ -470,7 +471,8 @@ $(document).ready(function(){
 						$('#settings_error').hide();
 						$('#settings_success').text(data.message);		
 					}
-				}
+				},
+				"json"
 			);
 		},
 		errorPlacement: function(error, element) {
