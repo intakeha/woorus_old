@@ -57,9 +57,12 @@ mysql_select_db($db_name, $connection);
 
 if ($f_password_new != NULL) //change password
 {
+	if ($_SESSION['password_created'])
+	{
+		$f_password_old = md5($f_password_old); //encrypt old password
+		authenticatePassword($id, $f_password_old); //check old password match
+	}
 	
-	$f_password_old = md5($f_password_old); //encrypt old password
-	authenticatePassword($id, $f_password_old); //check old password match
 	$f_password_new = md5($f_password_new); //encrypt new password
 	
 	
