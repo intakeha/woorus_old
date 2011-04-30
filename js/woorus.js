@@ -311,9 +311,11 @@ $(document).ready(function(){
 				"actions/changeSettings.php",
 				$('#settings_form').serialize(),
 				function(data){
-					if (data){
-						$('#settings_error').html(data); 
+					if (data.success == 0){
+						$('#settings_error').html(data.message); 
 					}else{
+						$('#settings_error').hide();
+						$('#settings_success').html(data.message);
 						window.location.href = "canvas.php?page=settings";			
 					}
 				}
@@ -463,9 +465,11 @@ $(document).ready(function(){
 				"actions/changeSettings.php",
 				$('#settings_form_c').serialize(),
 				function(data){
-					if (data){
-						$('#settings_error').html(data); 
+					if (data.success == 0){
+						$('#settings_error').html(data.message); 
 					}else{
+						$('#settings_error').hide();
+						$('#settings_success').html(data.message);
 						window.location.href = "canvas.php?page=settings";			
 					}
 				}
