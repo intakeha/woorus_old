@@ -104,6 +104,7 @@ $query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 // header( 'Location: ../canvas.php?page=settings') ;
+die("Your information has been saved.");
 
 function authenticatePassword($id, $password)
 {
