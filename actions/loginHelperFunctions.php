@@ -34,7 +34,6 @@ $checkLogin_count = mysql_num_rows($checkLogin_result);
 function backendLogin($id)
 {
 	
-	die("in here");
 	//lookup email, password created, user_info set.
 	require('connect.php');
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
