@@ -544,13 +544,14 @@ function validateID($id)
 {
 	if ($id == NULL)
 	{
-		$error_message = "Please click on the link from your email to activate.";
-		sendToJS(0, $error_message);
+		header('Location: ../message.php?messageID=5');
+		die();
+		
 	}
 	elseif (!preg_match('/^[0-9 ]+$/', $id))
 	{
-		$error_message = "Please click on the link from your email to activate.";
-		sendToJS(0, $error_message);
+		header('Location: ../message.php?messageID=5');
+		die();
 	}
 	else
 	{
@@ -563,18 +564,18 @@ function validatetoken($token)
 {
 	if ($token == NULL)
 	{
-		$error_message = "Please click on the link from your email to activate.";
-		sendToJS(0, $error_message);
+		header('Location: ../message.php?messageID=5');
+		die();
 	}
 	elseif (!preg_match('/^[0-9 ]+$/', $token))
 	{
-		$error_message = "Please click on the link from your email to activate.";
-		sendToJS(0, $error_message);
+		header('Location: ../message.php?messageID=5');
+		die();
 	}
 	elseif ((int) $token< 23456789| (int)$token > 98765432)
 	{
-		$error_message = "Please click on the link from your email to activate.";
-		sendToJS(0, $error_message);
+		header('Location: ../message.php?messageID=5');
+		die();
 	}else
 	{
 		return strip_tags($token);
