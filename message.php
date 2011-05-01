@@ -25,6 +25,9 @@
 			case 3:
 				$message = "Your account has been deactivated and will be waiting for you whenever you want to come back.";
 				break;
+			case 4:
+				$message = "Incorrect token to recover password.";
+				break;			
 		}
 	?>
 
