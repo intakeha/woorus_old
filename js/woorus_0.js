@@ -174,7 +174,7 @@ $(document).ready(function(){
 				function(data){
 					if (data.success == 0){
 						if ($('#forgot_form_error').hasClass('success_text')){
-							$('##forgot_form_error').removeClass('success_text').addClass('error_text');
+							$('#forgot_form_error').removeClass('success_text').addClass('error_text');
 						}
 						$('#forgot_form_error').text(data.message); 
 					}else{
