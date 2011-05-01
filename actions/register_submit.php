@@ -91,13 +91,18 @@ if (!$resp->is_valid) {
 		//get id
 		$row = mysql_fetch_assoc($id_result);
 		$user_id = $row['id']; 
+		
+		//once we get the ID, set the settings for that user
+		$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
+		$result = mysql_query($query_settings, $connection) or die ("Error 2");
+		
+		sendToJS(1, ""); //send success flag to JS
+	}else
+	{
+		sendToJS(0, "User not entered correctly"); //send success flag to JS
 	}
 	
-	//once we get the ID, set the settings for that user
-	$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
-	$result = mysql_query($query_settings, $connection) or die ("Error 2");
 	
-	sendToJS(1, ""); //send success flag to JS
 
 	
 	/*
