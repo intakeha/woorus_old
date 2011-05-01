@@ -33,6 +33,7 @@ if ($id&&$token)
 		$activate_query = "UPDATE `users` SET temp_email_address = NULL, email_address = '".mysql_real_escape_string($new_email)."',  visual_email_address = '".mysql_real_escape_string($new_email_visual)."', email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";
 		$activate_result = mysql_query($activate_query, $connection) or die ("Error 2");
 		backendLogin($id);
+		header('Location: ../canvas.php');
 	}
 	else
 	{

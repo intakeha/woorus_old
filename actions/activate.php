@@ -29,6 +29,7 @@ if ($id&&$token)
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
 			backendLogin($id);
+			header('Location: ../canvas.php');
 			//use function where WE log them in (for acticate, save password, etc)
 		
 		}
