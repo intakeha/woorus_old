@@ -81,6 +81,7 @@ $(document).ready(function(){
 				}, "json"
 			);
 
+
 /*			jQuery(form).ajaxSubmit({
 				target: "#auth_error"
 			});
@@ -172,18 +173,17 @@ $(document).ready(function(){
 				"actions/savePassword.php",
 				$('#forgot_form').serialize(),
 				function(data){
+					$('#forgot_form_error').hide();
+					$('#forgot_form_success').hide();
 					if (data.success == 0){
-						if ($('#forgot_form_error').hasClass('success_text')){
-							$('#forgot_form_error').removeClass('success_text').addClass('error_text');
-						}
-						$('#forgot_form_error').text(data.message); 
+						$('#forgot_form_error').show();
+						$('#forgot_form_error').text(data.message);
 					}else{
-						if ($('#forgot_form_error').hasClass('error_text')){
-							$('#forgot_form_error').removeClass('error_text').addClass('success_text');
-						}
-						$('#forgot_form_error').text(data.message); 			
+						$('#forgot_form_success').show();
+						$('#forgot_form_success').text(data.message);
 					}
-				}, "json"
+				},
+				"json"
 			);
 
 /*			jQuery(form).ajaxSubmit({
