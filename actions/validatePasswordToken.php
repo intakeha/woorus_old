@@ -38,12 +38,14 @@ if ($id&&$token)
 	}
 	else
 	{
-		die("Incorrect token to recover password.");
+		header('Location: ../message.php?messageID=4');
+		die();
 	}
 }
 else
 {
-	die("Data is missing to recover password.");
+	header('Location: ../message.php?messageID=4');
+	die();
 }
 ?>
 

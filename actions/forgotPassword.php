@@ -25,7 +25,7 @@ if ($returned_id != NULL)
 
 	//send email to user with link containing id & token
 	
-	sendToJS(1, ""); //send success flag to JS
+	sendToJS(1, "check your email"); //send success flag to JS
 	exit();
 }
 else

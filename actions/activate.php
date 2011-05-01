@@ -27,35 +27,28 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
-			$success_message = "Account is Activated";
-			$message = array('success'=> 1, 'message'=>$success_message);
-			$output = json_encode($message);
-			die($output);
+			header('Location: ../message.php?messageID=1');
+			die();
+			//use function where WE log them in (for acticate, save password, etc)
 		
 		}
 		else 
 		{
-			$error_message = "Account has already been activated";
-			$message = array('success'=> 0, 'message'=>$error_message);
-			$output = json_encode($message);
-			die($output);
+			header('Location: ../message.php?messageID=1');
+			die();
 		}
 		
 	}
 	else
 	{
-		$error_message = "Incorrect token to activate account.";
-		$message = array('success'=> 0, 'message'=>$error_message);
-		$output = json_encode($message);
-		die($output);
+		header('Location: ../message.php?messageID=2');
+		die();
 	}
 }
 else
 {
-	$error_message = "Data is missing for activation";
-	$message = array('success'=> 0, 'message'=>$error_message);
-	$output = json_encode($message);
-	die($output);
+	header('Location: ../message.php?messageID=2');
+	die();
 }
 ?>
 

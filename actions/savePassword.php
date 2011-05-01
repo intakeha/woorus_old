@@ -28,6 +28,8 @@ $result = mysql_query($query_password, $connection) or die ("Password Update Err
 
 //update last user login, & take to main page.
 updateLoginTime($id);
+sendToJS(1, ""); //send success flag to JS
+
 header( 'Location: ../canvas.php' ) ;
 
 ?>
