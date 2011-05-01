@@ -58,7 +58,7 @@ if ($namecheck_count != 0)
 	$error_message = "This email address is already registered with Woorus.";	
 	sendToJS(0, $error_message);
 }
-
+sendToJS(1, "");
 
 // Check if you are human via captcha
 require_once('recaptchalib.php');
@@ -97,7 +97,7 @@ if (!$resp->is_valid) {
 	$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 	$result = mysql_query($query_settings, $connection) or die ("Error 2");
 	
-	
+	sendToJS(1, ""); //send success flag to JS
 
 	
 	/*
