@@ -106,9 +106,7 @@ $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 // header( 'Location: ../canvas.php?page=settings') ;
 $success_message = "Your information has been saved.";
-$message = array('success'=> 1, 'message'=>$success_message);
-$output = json_encode($message);
-print($output);
+sendToJS(1, $success_message);
 
 function authenticatePassword($id, $password)
 {

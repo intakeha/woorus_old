@@ -94,6 +94,7 @@ if ($session)
 			{
 				//need process to deal with user changing their password
 				die("User changed email, its different from facebook.");
+				//set email field to new facebook email & tell them
 				
 			}else
 			{

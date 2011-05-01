@@ -30,7 +30,7 @@ if ($id&&$token)
 			$success_message = "Account is Activated";
 			$message = array('success'=> 1, 'message'=>$success_message);
 			$output = json_encode($message);
-			print($output);
+			die($output);
 		
 		}
 		else 
@@ -38,7 +38,7 @@ if ($id&&$token)
 			$error_message = "Account has already been activated";
 			$message = array('success'=> 0, 'message'=>$error_message);
 			$output = json_encode($message);
-			print($output);
+			die($output);
 		}
 		
 	}
@@ -47,7 +47,7 @@ if ($id&&$token)
 		$error_message = "Incorrect token to activate account.";
 		$message = array('success'=> 0, 'message'=>$error_message);
 		$output = json_encode($message);
-		print($output);
+		die($output);
 	}
 }
 else
@@ -55,7 +55,7 @@ else
 	$error_message = "Data is missing for activation";
 	$message = array('success'=> 0, 'message'=>$error_message);
 	$output = json_encode($message);
-	print($output);
+	die($output);
 }
 ?>
 

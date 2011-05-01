@@ -36,6 +36,15 @@ echo "$f_user_city \n"; */
 
 //-------------------------Register / Settings validation functions-----------------------------------------//
 
+function sendToJS($successFlag, $message){
+
+	$messageToSend = array('success' => $successFlag, 'message'=>$message);
+	$output = json_encode($messageToSend);
+	die($output);
+}
+
+
+
 //helper function for validateName convert to camel case (also looks at apostrophe's & dashes)
 function ucname($string) 
 {
@@ -58,11 +67,12 @@ function validateFirstName($name)
 	
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in all fields. PHP1");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($name) < 2)
 	{
-		die("Please provide your real first name.");
+		$error_message = "Please provide your real first name.";
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
