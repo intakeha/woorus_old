@@ -59,9 +59,25 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
+
+			$.post(
+				"actions/forgotPassword.php",
+				$('#login_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						$('#auth_error').text(data.message); 
+					}else{
+						$("#auth_error").removeClass("error_text").addClass("success_text");
+						$('#auth_error').text(data.message); 			
+					}
+				}, "json"
+			);
+
+/*			jQuery(form).ajaxSubmit({
 				target: "#auth_error"
 			});
+*/
+
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
@@ -120,7 +136,7 @@ $(document).ready(function(){
 			$('#registration_form').serialize(),
 			function(data){
 				if (data.success == 0){
-					$('#reg_error_captcha').text(data.message); 
+					$('#reg_error_captcha').html(data.message); 
 				}else{
 					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
 					$('#captcha').hide();
