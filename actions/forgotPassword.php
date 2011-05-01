@@ -25,7 +25,7 @@ if ($returned_id != NULL)
 
 	//send email to user with link containing id & token
 	
-	sendToJS(1, "check your email"); //send success flag to JS
+	sendToJS(1, "Please check your email to reset your password."); //send success flag to JS
 	exit();
 }
 else
@@ -52,16 +52,17 @@ function checkUser($email)
 		$activated = $row['email_verified'];
 		if ($activated == '0')
 		{
-			die("Please check your email to activate your account.");
+			$error_message = "Please check your email to activate your account.";
+			sendToJS(0, $error_message);
 		}
 		
 		$id = $row['id'];
-		print "Please check your email to reset your password.";
 		return $id;
 	}
 	else
 	{
-		print "This email address is not registered.";
+		$error_message = "This email address is not registered.";
+		sendToJS(0, $error_message);
 		return NULL;
 	}
 }
