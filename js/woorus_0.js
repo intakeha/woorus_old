@@ -145,8 +145,10 @@ $(document).ready(function(){
 			$('#registration_form').serialize(),
 			function(data){
 				if (data.success == 0){
+					$('#reg_error_captcha').addClass('error_text');
 					$('#reg_error_captcha').html(data.message); 
 				}else{
+					if ($('#reg_error_captcha').hasClass('error_text')) {$('#reg_error_captcha').removeClass('error_text');}
 					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
 					$('#captcha').hide();
 				}
