@@ -599,6 +599,8 @@ li.forgot_title {
 	height: 600px;
 	text-align: left;
 	margin-top: -254px;
+	position: relative;
+	z-index: 1;
 }
 
 #user_messages {
