@@ -227,10 +227,10 @@ $(document).ready(function(){
 					$('#settings_success').hide();
 					if (data.success == 0){
 						$('#settings_error').show();
-						$('#settings_error').text(data.message);
+						$('#settings_error').html(data.message);
 					}else{
 						$('#settings_success').show();
-						$('#settings_success').text(data.message);
+						$('#settings_success').html(data.message);
 					}
 				},
 				"json"
@@ -266,10 +266,10 @@ $(document).ready(function(){
 					$('#settings_success').hide();
 					if (data.success == 0){
 						$('#settings_error').show();
-						$('#settings_error').text(data.message);
+						$('#settings_error').html(data.message);
 					}else{
 						$('#settings_success').show();
-						$('#settings_success').text(data.message);
+						$('#settings_success').html(data.message);
 					}
 				},
 				"json"
