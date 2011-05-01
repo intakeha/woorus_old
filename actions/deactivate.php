@@ -1,5 +1,6 @@
 <?php
 require('connect.php');
+require('facebook.php');
 
 //start session, get ID
 session_start();
