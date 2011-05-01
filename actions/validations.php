@@ -420,7 +420,7 @@ function validateEmail_emptyOK($email)
 		$error_message = "Please enter no more than 254 characters for your email.";
 		sendToJS(0, $error_message);
 	}
-	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
+	elseif (!preg_match ("/^[A-z][A-z0-9_\-]*([.][A-z0-9_\-]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
 		$error_message = "Please enter a valid email address.";
 		sendToJS(0, $error_message);
