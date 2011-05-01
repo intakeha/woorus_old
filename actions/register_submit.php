@@ -1,6 +1,7 @@
 <?php
 require('connect.php');
 require('validations.php');
+require('registerHelperFunctions.php');
 
 //need to check for under 13
 
@@ -49,7 +50,9 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to conn
 mysql_select_db($db_name);
 
 //check if email is already in system
-$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($f_email_address)."'";
+checkEmailInSystem($f_email_address);
+
+/*$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($f_email_address)."'";
 $namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 $namecheck_count = mysql_num_rows($namecheck_result);
 
@@ -58,6 +61,7 @@ if ($namecheck_count != 0)
 	$error_message = "This email address is already registered with Woorus.";	
 	sendToJS(0, $error_message);
 }
+*/
 
 // Check if you are human via captcha
 require_once('recaptchalib.php');
