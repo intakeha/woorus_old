@@ -106,7 +106,7 @@ $result = mysql_query($query_settings, $connection) or die ("Error 2");
 
 // header( 'Location: ../canvas.php?page=settings') ;
 $success_message = "Your information has been saved.";
-$message = array('sucess'=> 1, 'message'=>$success_message);
+$message = array('success'=> 1, 'message'=>$success_message);
 $output = json_encode($message);
 print($output);
 
@@ -129,7 +129,7 @@ function authenticatePassword($id, $password)
 	else
 	{
 		$error_message = "The old password you entered is incorrect. Please try again.";
-		$message = array('sucess'=> 0, 'message'=>$error_message);
+		$message = array('success' => 0, 'message'=>$error_message);
 		$output = json_encode($message);
 		die($output);
 	}

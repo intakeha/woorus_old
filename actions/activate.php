@@ -28,7 +28,7 @@ if ($id&&$token)
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
 			$success_message = "Account is Activated";
-			$message = array('sucess'=> 1, 'message'=>$success_message);
+			$message = array('success'=> 1, 'message'=>$success_message);
 			$output = json_encode($message);
 			print($output);
 		
@@ -36,7 +36,7 @@ if ($id&&$token)
 		else 
 		{
 			$error_message = "Account has already been activated";
-			$message = array('sucess'=> 0, 'message'=>$error_message);
+			$message = array('success'=> 0, 'message'=>$error_message);
 			$output = json_encode($message);
 			print($output);
 		}
@@ -45,7 +45,7 @@ if ($id&&$token)
 	else
 	{
 		$error_message = "Incorrect token to activate account.";
-		$message = array('sucess'=> 0, 'message'=>$error_message);
+		$message = array('success'=> 0, 'message'=>$error_message);
 		$output = json_encode($message);
 		print($output);
 	}
@@ -53,7 +53,7 @@ if ($id&&$token)
 else
 {
 	$error_message = "Data is missing for activation";
-	$message = array('sucess'=> 0, 'message'=>$error_message);
+	$message = array('success'=> 0, 'message'=>$error_message);
 	$output = json_encode($message);
 	print($output);
 }
