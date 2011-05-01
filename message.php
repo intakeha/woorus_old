@@ -29,7 +29,7 @@
 				$message = "Incorrect token to recover password.";
 				break;
 			case 5:
-				$message = "You have an incorrect ID-token combination.";
+				$message = "You have an incorrect ID-token combination. <br> Please recheck your email for the correct link.";
 				break;		
 		}
 	?>
