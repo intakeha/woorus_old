@@ -27,6 +27,7 @@ if ($returned_id != NULL)
 	updateLoginTime($returned_id);
 	//header('Location: ../canvas.php');
 	
+	sendToJS(1, "");
 	exit();
 }
 else
