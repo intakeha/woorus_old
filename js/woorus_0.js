@@ -28,6 +28,9 @@ $(document).ready(function(){
 				$('#login_form').serialize(),
 				function(data){
 					if (data.success == 0){
+						if ($('#auth_error').hasClass('success_text')){
+							$('#auth_error').removeClass('success_text').addClass('error_text');
+						}
 						$('#auth_error').text(data.message); 
 					}else{
 						window.location.href = "canvas.php";			
@@ -65,9 +68,14 @@ $(document).ready(function(){
 				$('#recover_form').serialize(),
 				function(data){
 					if (data.success == 0){
+						if ($('#auth_error').hasClass('success_text')){
+							$('#auth_error').removeClass('success_text').addClass('error_text');
+						}
 						$('#auth_error').text(data.message); 
 					}else{
-						$("#auth_error").removeClass("error_text").addClass("success_text");
+						if ($('#auth_error').hasClass('error_text')){
+							$('#auth_error').removeClass('error_text').addClass('success_text');
+						}
 						$('#auth_error').text(data.message); 			
 					}
 				}, "json"
