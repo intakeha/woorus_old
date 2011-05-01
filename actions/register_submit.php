@@ -58,7 +58,6 @@ if ($namecheck_count != 0)
 	$error_message = "This email address is already registered with Woorus.";	
 	sendToJS(0, $error_message);
 }
-//sendToJS(1, "");
 
 // Check if you are human via captcha
 require_once('recaptchalib.php');
@@ -86,7 +85,7 @@ if (!$resp->is_valid) {
 	
 	$id_result = mysql_query($id_query, $connection) or die ("Error 3");
 	$id_count = mysql_num_rows($id_result);
-	if ($id_count != 0)
+	if ($id_count == 0)
 	{
 		//get id
 		$row = mysql_fetch_assoc($id_result);
@@ -99,7 +98,7 @@ if (!$resp->is_valid) {
 		sendToJS(1, ""); //send success flag to JS
 	}else
 	{
-		sendToJS(0, "User not entered correctly"); //send success flag to JS
+		sendToJS(0, "Sorry we're experiencing techincal difficulties. Please come back soon!"); //send success flag to JS
 	}
 	
 	
