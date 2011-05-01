@@ -55,7 +55,7 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address, id, password_set, user_info_set from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
+		$namecheck_query = "SELECT email_address, id, password_set, user_info_set, active_user from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		
@@ -66,9 +66,20 @@ if ($session)
 			$user_id = $row['id']; 
 			$password_set = $row['password_set']; 
 			$user_info_set = $row['user_info_set']; 
+			$active_user = $row['active_user']; 
 			
 			updateLoginTime($user_id); //need to also update the login table
 			
+			//if user has deactivated & is returning
+			if ($active_user == 0)
+			{
+				//this is where we would need to say welcome back
+				//need to set active_user to 1
+				$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($user_id)."'";
+				$result = mysql_query($query_users, $connection) or die ("Error");
+			}
+			
+			//start session
 			session_start();
 			$_SESSION['id'] = $user_id;
 			$_SESSION['email'] = $facebook_email_address_visual;
@@ -95,6 +106,7 @@ if ($session)
 				//need process to deal with user changing their password
 				die("User changed email, its different from facebook.");
 				//set email field to new facebook email & tell them
+				//check for active user??
 				
 			}else
 			{
