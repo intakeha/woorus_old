@@ -54,6 +54,6 @@ if ($namecheck_count != 0)
 }
 
 //no errors, send success flag
-ssendToJS(1, "");
+sendToJS(1, "");
 
 ?>
