@@ -204,7 +204,7 @@ $(document).ready(function(){
             <li>&nbsp;</li>
             <li class="settings_title">Change Email: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;</span></li>
             <li><label>Contact Email</label><span id="vemail"></span></li>
-            <li><label>New Contact Email</label><input class="text_form" type="text" name="new_email" maxlength="254"></li>
+            <li><label>New Contact Email</label><input class="text_form" id="new_email" type="text" name="new_email" maxlength="254"></li>
             <li>&nbsp;</li>
             <?php
 			
@@ -212,12 +212,12 @@ $(document).ready(function(){
 			<li class="settings_title">Change Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;</span></li>
             <li><label>Old Password</label><input class="text_form" id="old_password" type="password" name="old_password" maxlength="20"></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
-            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
+            <li><label>Confirm Password</label><input class="text_form" id="confirm_password" type="password" name="confirm_password" maxlength="20"></li>';
 			
 			if ($_SESSION['password_created']==0) echo '
 			<li class="settings_title">Create Password: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span>&mdash;&mdash;&mdash;&mdash;&mdash; optional &mdash;&mdash;&mdash;&mdash;&mdash;</span><div></div></li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>
-            <li><label>Confirm Password</label><input class="text_form" type="password" name="confirm_password" maxlength="20"></li>';
+            <li><label>Confirm Password</label><input class="text_form" id="confirm_password" type="password" name="confirm_password" maxlength="20"></li>';
 			
             ?>
             </ul>
