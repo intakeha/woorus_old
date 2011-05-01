@@ -49,7 +49,8 @@ $namecheck_count = mysql_num_rows($namecheck_result);
 
 if ($namecheck_count != 0)
 {
-	die("This email address is already registered.");	
+	$error_message = "This email address is already registered with Woorus.");	
+	sendToJS(0, $error_message);
 }
 
 ?>

@@ -73,22 +73,27 @@ function validateFirstName($name)
 	elseif(strlen($name) < 2)
 	{
 		$error_message = "Please provide your real first name.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
-		die("First name should not start or end with a symbol.");
+		$error_message = "First name should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name)) 
 	{
-		die("First name should not start or end with a symbol.");
+		$error_message = "First name should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($name) > 30)
 	{
-		die("Please enter no more than 30 characters for your first name.");
+		$error_message = "Please enter no more than 30 characters for your first name.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $name))
 	{
-		die ("First name contains invalid characters.");
+		$error_message = "First name contains invalid characters.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -105,27 +110,33 @@ function validateLastName($name)
 	
 	if($name == NULL | strlen($name) == 0)
 	{
-		die("Please fill in all fields. PHP2");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($name) < 2)
 	{
-		die("Please provide your real last name.");
+		$error_message ="Please provide your real last name.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $name)) 
 	{
-		die("Last name should not start or end with a symbol.");
+		$error_message = "Last name should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $name))
 	{
-		die("Last name should not start or end with a symbol.");
+		$error_message = "Last name should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($name) > 60)
 	{
-		die("Please enter no more than 60 characters for your last name.");
+		$error_message = "Please enter no more than 60 characters for your last name.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\- ]+$/', $name))
 	{
-		die ("Last name contains invalid characters.");
+		$error_message = "Last name contains invalid characters.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -140,15 +151,18 @@ function validateEmail($email)
 {	
 	if($email == NULL | strlen($email) == 0)
 	{
-		die("Please fill in all fields. PHP3");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($email) > 254)
 	{
-		die("Please enter no more than 254 characters for your email.");
+		$error_message = "Please enter no more than 254 characters for your email.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match ("/^[A-z][A-z0-9_\-]*([.][A-z0-9_\-]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
-		die ("Please enter a valid email address.");
+		$error_message = "Please enter a valid email address.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -177,15 +191,18 @@ function checkEmail($email, $confirm_email)
 {
 	if (strlen($confirm_email) == 0)
 	{
-		die("Please fill in all fields PHP4.");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($email) > 254)
 	{
-		die("Please enter no more than 254 characters for your email confirmation.");
+		$error_message = "Please enter no more than 254 characters for your email confirmation.";
+		sendToJS(0, $error_message);
 	}
 	elseif ($email != $confirm_email)
 	{
-		die("Please provide matching emails.");
+		$error_message = "Please provide matching emails.";
+		sendToJS(0, $error_message);
 	}
 	else 
 	{
@@ -199,11 +216,13 @@ function validatePassword($password)
 {
 	if (strlen($password) == 0)
 	{
-		die("Please fill in all fields. PHP5");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif (strlen($password) <6 | strlen($password) > 20)
 	{
-		die("Your password must be between 6 and 20 characters long.");
+		$error_message = "Your password must be between 6 and 20 characters long.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -217,11 +236,13 @@ function validateGender($gender)
 {
 	if ($gender == -1)
 	{
-		die("Please select your gender.");
+		$error_message = "Please select your gender.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!($gender == "F" | $gender == "M"))
 	{
-		die("Please select your gender.");
+		$error_message = "Please select your gender.";
+		sendToJS(0, $error_message);
 	}
 	
 	else
@@ -235,11 +256,13 @@ function validateBirthdayMonth($month)
 {
 	if ($month == -1)
 	{
-		die("Please select your birthday month.");
+		$error_message = "Please select your birthday month.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[0-9 ]+$/', $month))
 	{
-		die ("Please select your birthday month.");
+		$error_message = "Please select your birthday month.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -252,11 +275,13 @@ function validateBirthdayDay($day)
 {
 	if ($day == -1)
 	{
-		die("Please select your birthday date.");
+		$error_message = "Please select your birthday date.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[0-9 ]+$/', $day))
 	{
-		die ("Please select your birthday date.");
+		$error_message = "Please select your birthday date.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -272,15 +297,18 @@ function validateBirthdayYear($year)
 	
 	if ($year == -1)
 	{
-		die("Please select your birthday year.");
+		$error_message = "Please select your birthday year.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[0-9 ]+$/', $year))
 	{
-		die ("Please select your birthday year.");
+		$error_message = "Please select your birthday year.";
+		sendToJS(0, $error_message);
 	}
 	elseif((int)$year < 1905 | (int)$year > $cur_year)
 	{
-		die ("Please select your birthday year.");
+		$error_message = "Please select your birthday year.";
+		sendToJS(0, $error_message);
 	}else
 	{
 		return strip_tags($year);
@@ -292,7 +320,8 @@ function ValidateDate($birthday_month, $birthday_day, $birthday_year)
 {
 	if (!checkdate($birthday_month, $birthday_day, $birthday_year))
 	{
-		die("Please select a valid date.");
+		$error_message = "Please select a valid date.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -312,7 +341,8 @@ function checkOver13($birthday)
 	}
 	else
 	{
-		die("Sorry, kiddo. Please come back on your 13th Birthday!");	
+		$error_message = "Sorry, kiddo. Please come back on your 13th Birthday!";
+		sendToJS(0, $error_message);
 	}
 }
 
@@ -323,27 +353,33 @@ function validateCity($city)
 	
 	if ($city == NULL | strlen($city) == 0)
 	{
-		die("Please fill in all fields. PHP6");
+		$error_message = "Please fill in all fields.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $city))
 	{
-		die("City should not start or end with a symbol.");
+		$error_message = "City should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $city))
 	{
-		die("City should not start or end with a symbol.");
+		$error_message = "City should not start or end with a symbol.";
+		sendToJS(0, $error_message);
 	}
 	elseif(strlen($city) < 2)
 	{
-		die("Please provide your current city.");
+		$error_message = "Please provide your current city.";
+		sendToJS(0, $error_message);
 	}
 	elseif (strlen($city) > 255)
 	{
-		die("Please enter no more than 255 characters for your city.");
+		$error_message = "Please enter no more than 255 characters for your city.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-\,]+$/', $city))
 	{
-		die ("City contains invalid characters.");
+		$error_message = "City contains invalid characters.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -359,7 +395,8 @@ function validatePasswordLogin($password)
 {
 	if (strlen($password) == 0)
 	{
-		die("Please fill in your password.");
+		$error_message = "Please fill in your password.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -380,11 +417,13 @@ function validateEmail_emptyOK($email)
 	}
 	elseif(strlen($email) > 254)
 	{
-		die("Please enter no more than 254 characters for your email.");
+		$error_message = "Please enter no more than 254 characters for your email.";
+		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match ("/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/", $email))
 	{
-		die ("Please enter a valid email address.");
+		$error_message = "Please enter a valid email address.";
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -403,23 +442,28 @@ function validateOldAndNewPassword($password_old, $password_new, $password_confi
 		
 		if (strlen($password_confirm != NULL)) //check that they have nothing in confirm password
 		{
-			die("Your new passwords do not match. PHP");
+			$error_message = "Your new passwords do not match.";
+			sendToJS(0, $error_message);
 		}
 		return NULL;
 	}
 	elseif (($password_old != NULL) & ($password_new == NULL))
 	{
-		die("Please enter your new password. PHP");
+		$error_message = "Please enter your new password.";
+		sendToJS(0, $error_message);
 	}
 	elseif (($password_old == NULL) & ($password_new != NULL))
 	{
-		die("Please enter your old password. PHP");
+		$error_message = "Please enter your old password.";
+		sendToJS(0, $error_message);
+		
 	}
 	else //since neither password_old nor password_new is NULL, use wants to change their passwod
 	{
 		if (strlen($password_confirm == NULL)) //no confirm password
 		{
-			die("Please confirm your password. PHP");
+			$error_message = "Please confirm your password.";
+			sendToJS(0, $error_message);
 		}
 		else
 		{
@@ -445,12 +489,14 @@ function validateNewPasswordOnly($password_new, $password_confirm)
 	elseif (($password_new != NULL) & ($password_confirm == NULL))
 	{
 		//user entered in password but did not confirm it
-		die("Please confirm your password. PHP");
+		$error_message = "Please confirm your password.";
+		sendToJS(0, $error_message);
 	}
 	elseif (($password_new== NULL) & ($password_confirm!= NULL))
 	{
 		//user confirmed password but did not enter new password.
-		die("Please enter both your new password & confirm password. PHP");
+		$error_message = "Please enter both your new password & confirm password.";
+		sendToJS(0, $error_message);
 	}
 	else 
 	{
@@ -468,7 +514,8 @@ function checkPassword($password, $password_confirm)
 {
 	if ($password != $password_confirm)
 	{
-		die("Your new passwords do not match.");
+		$error_message = "Your new passwords do not match.";
+		sendToJS(0, $error_message);
 	}
 	else 
 	{

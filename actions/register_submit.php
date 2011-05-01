@@ -55,7 +55,8 @@ $namecheck_count = mysql_num_rows($namecheck_result);
 
 if ($namecheck_count != 0)
 {
-	die("This email address is already registered.");	
+	$error_message = "This email address is already registered with Woorus.");	
+	sendToJS(0, $error_message);
 }
 
 
@@ -69,7 +70,8 @@ $resp = recaptcha_check_answer ($privatekey,
 
 if (!$resp->is_valid) {
 	// What happens when the CAPTCHA was entered incorrectly
-	die ("The reCAPTCHA wasn't entered correctly. Please try again.");
+	$error_message = "The reCAPTCHA wasn't entered correctly. Please try again.";
+	sendToJS(0, $error_message);
 } else {
 	// Your code here to handle a successful verification
 

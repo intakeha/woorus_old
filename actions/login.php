@@ -57,7 +57,8 @@ function authenticate($email, $pass)
 		$active_user = $row['active_user'];
 		if ($email_verified == 0)
 		{
-			 die ("Please check your email to activate your account.");
+			 $error_message = "Please check your email to activate your account.";
+			 sendToJS(0, $error_message);
 			 //return NULL;
 		}
 		elseif ($active_user == 0)
@@ -78,12 +79,15 @@ function authenticate($email, $pass)
 
 		if ($namecheck_count != 0) //user is registered but has the wrong password
 		{
-			die ("You have entered the wrong password.");
+			
+			$error_message = "You have entered the wrong password.";
+			sendToJS(0, $error_message);
 			return NULL;
 		}
 		else //user isnt even registered
 		{
-			die ("This email address is not registered.");
+			$error_message = "This email address is not registered.";
+			sendToJS(0, $error_message);
 			return NULL;
 		}
 	}
