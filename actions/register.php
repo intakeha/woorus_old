@@ -53,4 +53,7 @@ if ($namecheck_count != 0)
 	sendToJS(0, $error_message);
 }
 
+//no errors, send success flag
+ssendToJS(1, "");
+
 ?>
