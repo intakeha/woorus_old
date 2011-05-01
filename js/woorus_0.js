@@ -62,7 +62,7 @@ $(document).ready(function(){
 
 			$.post(
 				"actions/forgotPassword.php",
-				$('#login_form').serialize(),
+				$('#recover_form').serialize(),
 				function(data){
 					if (data.success == 0){
 						$('#auth_error').text(data.message); 

@@ -23,7 +23,7 @@
 				$message = "Incorrect token to activate account.";
 				break;
 			case 3:
-				$message = "";
+				$message = "Your account has been deactivated and will be waiting for you whenever you want to come back.";
 				break;
 		}
 	?>
