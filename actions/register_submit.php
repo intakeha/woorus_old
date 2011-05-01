@@ -58,7 +58,7 @@ if ($namecheck_count != 0)
 	$error_message = "This email address is already registered with Woorus.";	
 	sendToJS(0, $error_message);
 }
-sendToJS(1, "");
+//sendToJS(1, "");
 
 // Check if you are human via captcha
 require_once('recaptchalib.php');
