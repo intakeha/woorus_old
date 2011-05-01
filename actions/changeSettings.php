@@ -127,9 +127,8 @@ function authenticatePassword($id, $password)
 	else
 	{
 		$error_message = "The old password you entered is incorrect. Please try again.";
-		$message = array('success' => 0, 'message'=>$error_message);
-		$output = json_encode($message);
-		die($output);
+		sendToJS(0, $error_message);
+
 	}
 }
 
