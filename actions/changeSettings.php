@@ -17,6 +17,8 @@ $f_password_old = $_POST['old_password']; // need to check that this is valid
 $f_password_new = $_POST['new_password'];
 $f_password_confirm = $_POST['confirm_password']; // need to check that this matches
 
+
+
 //check if user has a password or not, based on  info
 
 if ($_SESSION['password_created'] == 1)
@@ -126,7 +128,10 @@ function authenticatePassword($id, $password)
 	}
 	else
 	{
-		die("Invalid old password for your Woorus account.");
+		$error_message = "The old password you entered is incorrect. Please try again.";
+		$message = array('sucess'=> 0, 'message'=>$error_message);
+		$output = json_encode($message);
+		die($output);
 	}
 }
 
