@@ -26,18 +26,18 @@
 			<div id="panel">
 				<div class="login_panel">
 					<form id="login_form" action="actions/login.php" method="POST">
-						Email <input class="login_text" type="text" name="email"> &nbsp; 
+						Email <input class="login_text" id="login_email" type="text" name="email"> &nbsp; 
 						Password <input class="login_text" type="password" name="password"> &nbsp; 
 						<input id="login_button" class="buttons" type="submit" name="login" value="Login">
 					</form>
-					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty();">Forgot your password?</a>
+					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#recover_email')=$('#login_email').val();">Forgot your password?</a>
 				</div>
 				<div class="login_panel" style="display: none;">
 					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
-						Email <input class="text_form" type="text" name="email"> &nbsp; 
+						Email <input class="text_form" id="recover_email" type="text" name="email"> &nbsp; 
 						<input id="recover_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
-					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty();">Log in</a>
+					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#login_email')=$('#recover_email').val();">Log in</a>
 				</div>
 				<div id="auth_error" class="error_text"></div>
 			</div>

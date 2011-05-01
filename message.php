@@ -27,7 +27,10 @@
 				break;
 			case 4:
 				$message = "Incorrect token to recover password.";
-				break;			
+				break;
+			case 5:
+				$message = "You have an incorrect ID-token combination.";
+				break;		
 		}
 	?>
 
