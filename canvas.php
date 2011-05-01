@@ -11,7 +11,7 @@
 	<script type="text/javascript" src="js/jquery.validate.js"></script> 
 	<script type="text/javascript" src="js/jquery.form.js "></script>
 	<script type="text/javascript" src="js/slides.min.jquery.js "></script> 
-  	<script type="text/javascript" src="js/woorus.js"></script>
+  	<script type="text/javascript" src="js/woorus_0.js"></script>
 
 	<?php 
 		$page = $_REQUEST['page'];

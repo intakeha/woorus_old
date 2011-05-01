@@ -17,13 +17,13 @@
 		$messageID = $_REQUEST['messageID'];
 		switch ($messageID) {
 			case 1:
-				$message = "Your account has been activated.";
-				break;
-			case 2:
 				$message = "Account has already been activated.";
 				break;
-			case 3:
+			case 2:
 				$message = "Incorrect token to activate account.";
+				break;
+			case 3:
+				$message = "";
 				break;
 		}
 	?>

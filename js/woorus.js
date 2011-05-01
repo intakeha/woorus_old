@@ -27,12 +27,12 @@ $(document).ready(function(){
 				"actions/login.php",
 				$('#login_form').serialize(),
 				function(data){
-					if (data){
-						$('#auth_error').text(data); 
+					if (data.success == 0){
+						$('#auth_error').text(data.message); 
 					}else{
 						window.location.href = "canvas.php";			
 					}
-				}
+				}, "json"
 			);
 		},
 		errorPlacement: function(error, element) {
@@ -105,8 +105,8 @@ $(document).ready(function(){
 				"actions/register.php",
 				$('#registration_form').serialize(),
 				function(data){
-					if (data){
-						$('#registration_error').text(data); 
+					if (data.success == 0){
+						$('#registration_error').text(data.message); 
 					}else{
 						$('#facebook_login').hide();
 						$('#userInfo').hide();
@@ -114,7 +114,7 @@ $(document).ready(function(){
 						$('#captcha').show();
 						$('#reg_error_captcha').show();				
 					}
-				}
+				}, "json"
 			);
 		},
 		errorPlacement: function(error, element) {
@@ -240,13 +240,13 @@ $(document).ready(function(){
 			"actions/register_submit.php",
 			$('#registration_form').serialize(),
 			function(data){
-				if (data){
-					$('#reg_error_captcha').text(data); 
+				if (data.success == 0){
+					$('#reg_error_captcha').text(data.message); 
 				}else{
 					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
 					$('#captcha').hide();
 				}
-			}
+			}, "json"
 		);
 		return false;
 	});
