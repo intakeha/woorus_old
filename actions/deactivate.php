@@ -1,4 +1,5 @@
 <?php
+require('connect.php');
 
 //start session, get ID
 session_start();
