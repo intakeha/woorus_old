@@ -48,7 +48,7 @@ function backendLogin($id)
 		$row = mysql_fetch_assoc($result);
 		$email_address = $row['visual_email_address'];
 		$email_verified = $row['email_verified'];
-		$password_set = $row['password_set '];
+		$password_set = $row['password_set'];
 		$user_info_set = $row['user_info_set'];
 		$active_user = $row['active_user'];
 
