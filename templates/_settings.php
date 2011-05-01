@@ -236,6 +236,6 @@ $(document).ready(function(){
         </div>
     </form>
 </div>        
-<div style="text-align:right;"><a id="deactivate" href="#">| deactivate account |</a></div>
+<div style="text-align:right;"><a id="deactivate" href="../actions/deactivate.php">| deactivate account |</a></div>
 
 
