@@ -168,9 +168,29 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
+			$.post(
+				"actions/savePassword.php",
+				$('#forgot_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						if ($('#forgot_form_error').hasClass('success_text')){
+							$('##forgot_form_error').removeClass('success_text').addClass('error_text');
+						}
+						$('#forgot_form_error').text(data.message); 
+					}else{
+						if ($('#forgot_form_error').hasClass('error_text')){
+							$('#forgot_form_error').removeClass('error_text').addClass('success_text');
+						}
+						$('#forgot_form_error').text(data.message); 			
+					}
+				}, "json"
+			);
+
+/*			jQuery(form).ajaxSubmit({
 				target: "#forgot_form_error"
 			});
+			
+*/
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
