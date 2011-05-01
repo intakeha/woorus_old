@@ -27,7 +27,7 @@ $query_password = "UPDATE `users` SET password = '".mysql_real_escape_string($f_
 $result = mysql_query($query_password, $connection) or die ("Password Update Error");
 
 //update last user login, & take to main page.
-updateLoginTime($id);
+backendLogin($id);
 sendToJS(1, "Your password has been reset."); //send success flag to JS
 
 header( 'Location: ../canvas.php' ) ;

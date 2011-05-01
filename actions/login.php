@@ -22,8 +22,9 @@ if ($returned_id != NULL)
 	session_start();
 	$_SESSION['id'] = $returned_id;
 	$_SESSION['email'] = $f_email_address;
-	$_SESSION['facebook'] = 0;
-	$_SESSION['password_created'] = 1;
+	$_SESSION['facebook'] = 0; //know they are logging in via homepage
+	$_SESSION['password_created'] = 1; //therefore password is created
+	$_SESSION['user_info_set'] = 1; //to create password, must have set all user info
 	updateLoginTime($returned_id);
 	//header('Location: ../canvas.php');
 	

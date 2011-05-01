@@ -1,6 +1,7 @@
 <?php
 require('connect.php');
 require('validations.php');
+require('loginHelperFunctions.php');
 
 $id = validateID($_GET['id']);
 $token = validateToken($_GET['token']);
@@ -27,7 +28,7 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
-			die("This is where we would log the user in");
+			backendLogin($id);
 			//use function where WE log them in (for acticate, save password, etc)
 		
 		}
