@@ -85,7 +85,7 @@ if (!$resp->is_valid) {
 	
 	$id_result = mysql_query($id_query, $connection) or die ("Error 3");
 	$id_count = mysql_num_rows($id_result);
-	if ($id_count == 0)
+	if ($id_count != 0)
 	{
 		//get id
 		$row = mysql_fetch_assoc($id_result);
