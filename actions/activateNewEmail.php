@@ -31,16 +31,18 @@ if ($id&&$token)
 		$new_email = get_standard_email($new_email_visual);
 		$activate_query = "UPDATE `users` SET temp_email_address = NULL, email_address = '".mysql_real_escape_string($new_email)."',  visual_email_address = '".mysql_real_escape_string($new_email_visual)."', email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";
 		$activate_result = mysql_query($activate_query, $connection) or die ("Error 2");
-		die("Account is Activated");
+		die("This is where we would log the user in");
 	}
 	else
 	{
-		die("Incorrect token to activate account. \n");
+		header('Location: ../message.php?messageID=2');
+		die();
 	}
 }
 else
 {
-	die("Data is missing for activation");
+	header('Location: ../message.php?messageID=2');
+	die();
 }
 ?>
 

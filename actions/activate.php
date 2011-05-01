@@ -27,12 +27,11 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
-			header('Location: ../message.php?messageID=1');
-			die();
+			die("This is where we would log the user in");
 			//use function where WE log them in (for acticate, save password, etc)
 		
 		}
-		else 
+		else //user has already verified
 		{
 			header('Location: ../message.php?messageID=1');
 			die();
