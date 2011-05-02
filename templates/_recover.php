@@ -1,5 +1,5 @@
+<form id="forgot_form" action="../actions/savePassword.php" method="POST">
 <div id="forgot_password">
-    <form id="forgot_form" action="../actions/savePassword.php" method="POST">
 	    <div>
             <ul>
             <li class="forgot_title">Please enter a new password:</li>
@@ -8,7 +8,7 @@
             </ul>
             <input id="save_password" class="buttons" type="submit" value="Save"><input class="buttons" id="cancel_button" type="button" value="Cancel" onclick="location.href='index.php'" /><br />
         </div>
-    </form>
         <div id="forgot_form_error" class="error_text"></div>
         <div id="forgot_form_success" class="success_text"></div>
 </div>
+</form>
