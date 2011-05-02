@@ -1,6 +1,6 @@
 <form id="forgot_form" action="../actions/savePassword.php" method="POST">
 <div id="forgot_password">
-	    <div id="forgot_form_container">
+	    <div>
             <ul>
             <li class="forgot_title">Please enter a new password:</li>
             <li><label>New Password</label><input class="text_form" id="new_password" type="password" name="new_password" maxlength="20"></li>

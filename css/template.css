@@ -489,10 +489,6 @@ select#gender {
 	line-height: 30px;
 }
 
-#forgot_form_container {
-	height: 300px;
-}
-
 li.forgot_title {
 	font-weight: bold;
 	margin: 20px;
@@ -532,6 +528,7 @@ li.forgot_title {
 }
 
 #forgot_form_error{
+	height: 30px;
 	text-align: left;
 	line-height: 20px;
 	border-left: 3px solid #C00;
@@ -540,6 +537,7 @@ li.forgot_title {
 }
 
 #forgot_form_success{
+	height: 30px;
 	text-align: left;
 	line-height: 20px;
 	border-left: 3px solid #0C0;
