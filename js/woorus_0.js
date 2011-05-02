@@ -183,7 +183,7 @@ $(document).ready(function(){
 					}else{
 						$('#forgot_form_success').show();
 						$('#forgot_form_success').text(data.message);
-						setTimeout('window.location.href="canvas.php"', 100);
+						setTimeout('window.location.href="canvas.php"', 500);
 					}
 				},
 				"json"
