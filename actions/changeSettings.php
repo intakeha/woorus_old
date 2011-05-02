@@ -132,7 +132,7 @@ function authenticatePassword($id, $password)
 	}
 	else
 	{
-		$error_message = "The old password you entered is incorrect. Please try again.";
+		$error_message = "The old password you entered is incorrect. <br>Please try again.";
 		sendToJS(0, $error_message);
 
 	}
