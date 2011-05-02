@@ -14,8 +14,6 @@ $email_count = mysql_num_rows($email_result);
 		$error_message = "This email address is already registered with Woorus.";	
 		sendToJS(0, $error_message);
 	}
-
-
 }
 
 
