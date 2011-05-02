@@ -4,6 +4,7 @@ session_start();
 require('connect.php');
 require('validations.php');
 require('facebook.php');
+require('registerHelperFunctions.php');
 
 $id = $_SESSION['id'];
 
