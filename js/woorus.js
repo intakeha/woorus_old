@@ -28,6 +28,9 @@ $(document).ready(function(){
 				$('#login_form').serialize(),
 				function(data){
 					if (data.success == 0){
+						if ($('#auth_error').hasClass('success_text')){
+							$('#auth_error').removeClass('success_text').addClass('error_text');
+						}
 						$('#auth_error').text(data.message); 
 					}else{
 						window.location.href = "canvas.php";			
@@ -67,9 +70,23 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
-				target: "#auth_error"
-			});
+			$.post(
+				"actions/forgotPassword.php",
+				$('#recover_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						if ($('#auth_error').hasClass('success_text')){
+							$('#auth_error').removeClass('success_text').addClass('error_text');
+						}
+						$('#auth_error').text(data.message); 
+					}else{
+						if ($('#auth_error').hasClass('error_text')){
+							$('#auth_error').removeClass('error_text').addClass('success_text');
+						}
+						$('#auth_error').text(data.message); 			
+					}
+				}, "json"
+			);
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
@@ -93,7 +110,7 @@ $(document).ready(function(){
 		onsubmit: true,
 		onfocusout: false,
 		onkeyup: false,
-		onclick: false,
+		onclick: true,
 		invalidHandler: function(form, validator) {
 			var errors = validator.numberOfInvalids();
 			if (errors) {
@@ -241,8 +258,10 @@ $(document).ready(function(){
 			$('#registration_form').serialize(),
 			function(data){
 				if (data.success == 0){
-					$('#reg_error_captcha').text(data.message); 
+					$('#reg_error_captcha').addClass('error_text');
+					$('#reg_error_captcha').html(data.message); 
 				}else{
+					if ($('#reg_error_captcha').hasClass('error_text')) {$('#reg_error_captcha').removeClass('error_text');}
 					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
 					$('#captcha').hide();
 				}
@@ -265,9 +284,23 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			jQuery(form).ajaxSubmit({
-				target: "#forgot_form_error"
-			});
+			$.post(
+				"actions/savePassword.php",
+				$('#forgot_form').serialize(),
+				function(data){
+					$('#forgot_form_error').hide();
+					$('#forgot_form_success').hide();
+					if (data.success == 0){
+						$('#forgot_form_error').show();
+						$('#forgot_form_error').text(data.message);
+					}else{
+						$('#forgot_form_success').show();
+						$('#forgot_form_success').text(data.message);
+						setTimeout('window.location.href="canvas.php"', 500);
+					}
+				},
+				"json"
+			);
 		},
 		errorPlacement: function(error, element) {
 			// Override error placement to not show error messages beside elements //
@@ -317,10 +350,14 @@ $(document).ready(function(){
 					$('#settings_success').hide();
 					if (data.success == 0){
 						$('#settings_error').show();
-						$('#settings_error').text(data.message);
+						$('#settings_error').html(data.message);
 					}else{
 						$('#settings_success').show();
-						$('#settings_success').text(data.message);
+						$('#settings_success').html(data.message);
+						$('#new_email').val('');
+						$('#old_password').val('');
+						$('#new_password').val('');
+						$('#confirm_password').val('');
 					}
 				},
 				"json"
@@ -474,10 +511,13 @@ $(document).ready(function(){
 					$('#settings_success').hide();
 					if (data.success == 0){
 						$('#settings_error').show();
-						$('#settings_error').text(data.message);
+						$('#settings_error').html(data.message);
 					}else{
 						$('#settings_success').show();
-						$('#settings_success').text(data.message);
+						$('#settings_success').html(data.message);
+						$('#new_email').val('');
+						$('#new_password').val('');
+						$('#confirm_password').val('');
 					}
 				},
 				"json"
