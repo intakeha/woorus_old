@@ -489,6 +489,10 @@ select#gender {
 	line-height: 30px;
 }
 
+#forgot_password div {
+	height: 300px;
+}
+
 li.forgot_title {
 	font-weight: bold;
 	margin: 20px;
