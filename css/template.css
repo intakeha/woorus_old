@@ -533,6 +533,8 @@ li.forgot_title {
 	border-left: 3px solid #C00;
 	padding-left: 10px;
 	margin: -10px 0px 0px 20px;
+	position: relative;
+	z-index: 1000;
 }
 
 #forgot_form_success{
@@ -541,6 +543,8 @@ li.forgot_title {
 	border-left: 3px solid #0C0;
 	padding-left: 10px;
 	margin: -10px 0px 0px 20px;
+	position: relative;
+	z-index: 1000;
 }
 
 /* Mosaic Page */
