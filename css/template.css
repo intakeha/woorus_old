@@ -566,7 +566,30 @@ li.forgot_title {
 	width: 420px;
 	height: 300px;
 	border: solid 1px #9F9;
+	text-align: left;
 	float: left;
+}
+
+#tile_search_field {
+	color: #666;
+    font-size: 18px;
+    width: 325px;
+}
+
+#tile_legend {
+	margin: 10px 0px 10px 0px;
+}
+
+#tile_legend a{
+	margin-rigth: 20px;
+}
+
+.legend_squares {
+	width: 15px;
+	height: 15px;
+	display: inline-block;
+	background-color: #F00;
+	vertical-align: middle;
 }
 
 #tiles_bank {
@@ -592,6 +615,7 @@ li.forgot_title {
 	height:75px;
 	border: 1px solid #F00;
 	background-color:#E0E0E0; 
+	text-align: center;
 	margin: 2px;
 }
 
@@ -613,4 +637,5 @@ li.forgot_title {
 	top: 350px;
 	font-size: 18px;
 	color: #666;
+	width: 600px;
 }
