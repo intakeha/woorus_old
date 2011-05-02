@@ -231,10 +231,10 @@ $(document).ready(function(){
 					}else{
 						$('#settings_success').show();
 						$('#settings_success').html(data.message);
-						$('#new_email').val("");
-						$('#old_password').val("");
-						$('#new_password').val("");
-						$('#confirm_password').val("");
+						$('#new_email').val('');
+						$('#old_password').val('');
+						$('#new_password').val('');
+						$('#confirm_password').val('');
 					}
 				},
 				"json"
@@ -274,8 +274,9 @@ $(document).ready(function(){
 					}else{
 						$('#settings_success').show();
 						$('#settings_success').html(data.message);
-						$('#new_password').val("");
-						$('#confirm_password').val("");
+						$('#new_email').val('');
+						$('#new_password').val('');
+						$('#confirm_password').val('');
 					}
 				},
 				"json"
