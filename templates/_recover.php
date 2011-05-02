@@ -8,7 +8,7 @@
             </ul>
             <input id="save_password" class="buttons" type="submit" value="Save"><input class="buttons" id="cancel_button" type="button" value="Cancel" onclick="location.href='index.php'" /><br />
         </div>
+    </form>
         <div id="forgot_form_error" class="error_text"></div>
         <div id="forgot_form_success" class="success_text"></div>
-    </form>
 </div>
