@@ -1,61 +1,87 @@
 <div id="mosaic">
-    <div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
-    <form id="tsearch_form" action="../actions/tileSearch.php" method="POST">
-    <div id="tiles">
-    <input type="text" id="tile_search_field" name="tile_name" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">
-    <input class="buttons" id="tile_search" type="submit" name="tile_search" value="Search">
-    <div id="tile_legend"><a href="#"><span class="legend_squares"></span>my tiles</a> <a href="#"><span class="legend_squares"></span>sponsored tiles</a> <a href="#"><span class="legend_squares"></span>community tiles</a></div>
-    <div id="tiles_bank">
-    	<ul id="tile_display">
-        	<li>BEP</li>
-            <li>Santorini</li>
-            <li>hats</li>
-            <li>fashion</li>
-            <li>vespa</li>
-            <li>Greece</li>
-            <li>San Francisco</li>
-            <li>Converse</li>
-            <li>Natalie Portman</li>
-            <li>Van Gogh</li>
-            <li>Love Actually</li>
-            <li>Coffee</li>
-            <li>Sydney</li>
-            <li>Beatles</li>
-            <li>Vespa</li>
-            <li>Las Vegas</li>
-            <li>Justin Timberlake</li>
-            <li>Homer</li>
-            <li>pinata</li>
-            <li>Conan</li>
-        </ul><div id="clear"></div>
+	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
+	<div id="tiles">
+	    <form id="tsearch_form" action="../actions/tileSearch.php" method="POST">
+            <input type="text" id="tile_search_field" name="tile_name" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">
+            <input class="buttons" id="tile_search" type="submit" name="tile_search" value="Search">
+        </form>
+		<div id="tiles_legend">
+            <a href="#" id="sponsoredTiles"><div><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div></a>
+            <a href="#" id="myTiles"><div><span class="legend_squares" id="blueSquare"></span>Uploaded Tiles</div></a>
+            <a href="#" id="communityTiles"><div><span class="legend_squares" id="graySquare"></span>Community Tiles</div></a>
+        </div>
+        <div id="tiles_bank">
+            <ul id="tile_display">
+            <li class="sponsored" style="background-image: url(images/interests/bep.png);">BEP</li>
+            <li class="sponsored" style="background-image: url(images/interests/santorini.png);">Santorini</li>
+            <li class="sponsored" style="background-image: url(images/interests/hats.png);">hats</li>
+            <li class="sponsored" style="background-image: url(images/interests/ferrari.png);">ferrari</li>
+            <li class="sponsored" style="background-image: url(images/interests/vespa.png);">vespa</li>
+            <li class="sponsored" style="background-image: url(images/interests/santorini2.png);">Greece</li>
+            <li class="sponsored" style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
+            <li class="uploaded" style="background-image: url(images/interests/converse.png);">Converse</li>
+            <li class="uploaded" style="background-image: url(images/interests/natalie.png);">Natalie Portman</li>
+            <li class="uploaded" style="background-image: url(images/interests/vangogh.png);">Van Gogh</li>
+            <li class="uploaded" style="background-image: url(images/interests/loveactually.png);">Love Actually</li>
+            <li class="uploaded" style="background-image: url(images/interests/coffee.png);">Coffee</li>
+            <li class="uploaded" style="background-image: url(images/interests/sydney.png);">Sydney</li>
+            <li class="uploaded" style="background-image: url(images/interests/paul.png);">Beatles</li>
+            <li class="community" style="background-image: url(images/interests/vespa2.png);">Vespa</li>
+            <li class="community" style="background-image: url(images/interests/vegas.png);">Las Vegas</li>
+            <li class="community" style="background-image: url(images/interests/timberlake.png);">Justin Timberlake</li>
+            <li class="community" style="background-image: url(images/interests/homer.png);">Homer</li>
+            <li class="community" style="background-image: url(images/interests/pinata.png);">pinata</li>
+            <li class="community" style="background-image: url(images/interests/conan.png);">Conan</li>
+            </ul><div id="clear"></div>
+        </div>
+        <div id="customized_tile">
+        	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
+            <form id="tile_upload_form" action="../actions/tileUpload.php" method="POST">
+            	Create your own customized tile: <input class="buttons" id="tile_upload" type="submit" name="filename" value="Upload">
+            </form>
+        </div>
     </div>
-    </div>
-    </form>
-    <div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
+	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
     <div id="mosaic_wall">
-    Personalize your mosaic wall by searching or creating tiles on the left panel
+        <span>&laquo; Personalize your mosaic wall &raquo;</span>
         <div id="wall">
             <ul id="wall_display">
-                <li>BEP</li>
-                <li>Santorini</li>
-                <li>hats</li>
-                <li>fashion</li>
-                <li>vespa</li>
-                <li>Greece</li>
-                <li>San Francisco</li>
-                <li>Converse</li>
-                <li>Natalie Portman</li>
-                <li>Van Gogh</li>
-                <li>Love Actually</li>
-                <li>Coffee</li>
-                <li>Sydney</li>
-                <li>Beatles</li>
-                <li>Vespa</li>
-                <li>Las Vegas</li>
-                <li>Justin Timberlake</li>
-                <li>Homer</li>
-                <li>pinata</li>
-                <li>Conan</li>
+                <li style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
+                <li style="background-image: url(images/interests/boudin.png);">Boudin</li>
+                <li style="background-image: url(images/interests/taylor.png);">Taylor</li>
+                <li style="background-image: url(images/interests/fergie.png);">Fergie</li>
+                <li style="background-image: url(images/interests/john.png);">John</li>
+                <li style="background-image: url(images/interests/paul.png);">Paul</li>
+                <li style="background-image: url(images/interests/santorini.png);">Greece</li>
+                <li style="background-image: url(images/interests/conan.png);">Conan</li>
+                <li style="background-image: url(images/interests/vespa.png);">Vespa</li>
+                <li style="background-image: url(images/interests/tivo.png);">Tivo</li>
+                <li style="background-image: url(images/interests/george.png);">George</li>
+                <li style="background-image: url(images/interests/ringo.png);">Ringo</li>
+                <li style="background-image: url(images/interests/ferrari.png);">Ferrari</li>
+                <li style="background-image: url(images/interests/converse.png);">Converse</li>
+                <li style="background-image: url(images/interests/homer.png);">Homer</li>
+                <li style="background-image: url(images/interests/icehotel.png);">Ice Hotel</li>
+                <li style="background-image: url(images/interests/pinata.png);">pinata</li>
+                <li style="background-image: url(images/interests/loveactually.png);">Love Actually</li>
+                <li style="background-image: url(images/interests/bep2.png);">BEP</li>
+                <li style="background-image: url(images/interests/vegas.png);">Las Vegas</li>
+                <li style="background-image: url(images/interests/breastcancer.png);">Breast Cancer</li>
+                <li style="background-image: url(images/interests/training.png);">Training</li>
+                <li style="background-image: url(images/interests/newyorker.png);">New Yorker</li>
+                <li style="background-image: url(images/interests/007.png);">Bond</li>
+                <li style="background-image: url(images/interests/natalie.png);">Natalie Portman</li>
+                <li style="background-image: url(images/interests/yoga.png);">Yoga</li>
+                <li style="background-image: url(images/interests/wholefoods.png);">Whole Foods</li>
+                <li style="background-image: url(images/interests/patron.png);">Patron</li>
+                <li style="background-image: url(images/interests/timberlake.png);">Justin Timberlake</li>
+                <li style="background-image: url(images/interests/giants2.png);">Giants</li>
+                <li style="background-image: url(images/interests/sailing.png);">Sailing</li>
+                <li style="background-image: url(images/interests/vangogh.png);">Van Gogh</li>
+                <li style="background-image: url(images/interests/sydney.png);">Sydney</li>
+                <li style="background-image: url(images/interests/yogurt.png);">Yogurt</li>
+                <li style="background-image: url(images/interests/coffee.png);">Coffee</li>
+                <li style="background-image: url(images/interests/hefeweizen.png);">Beer</li>
             </ul>
         </div>
     </div>
