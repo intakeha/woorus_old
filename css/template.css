@@ -581,15 +581,24 @@ li.forgot_title {
 }
 
 #tile_legend a{
-	margin-rigth: 20px;
+	margin-right: 20px;
+}
+
+#tile_legend div{
+	width: 130px;
+	height: 20px;
+	cursor: pointer; 
+	cursor: hand; 
+	border: 1px solid #ccc;
 }
 
 .legend_squares {
-	width: 15px;
-	height: 15px;
+	width: 18px;
+	height: 18px;
 	display: inline-block;
 	background-color: #F00;
 	vertical-align: middle;
+	margin-right: 5px;
 }
 
 #tiles_bank {
