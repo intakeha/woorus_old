@@ -573,10 +573,7 @@ li.forgot_title {
     font-size: 18px;
     width: 300px;
 	margin: 0px 3px 0px 3px;
-}
-
-#tile_search {
-
+    -webkit-appearance: none;
 }
 
 #tiles_legend {
