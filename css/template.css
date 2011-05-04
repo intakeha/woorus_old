@@ -35,13 +35,14 @@
 }
 
 .login_text{
-	width: 156px;
+	width: 140px;
 	font-size: 18px;
 	color: #666;
 }
 
 #login_button {
 	border: 2px solid #FFF;
+	width: 80px;
 }
 
 .switch_link {
@@ -143,7 +144,7 @@ div#slide_show div{
 }
 
 #registration_form select {
-	width: 80px;
+	width: 82px;
 	font-size: 18px;
 	color: #666;
 }
@@ -157,7 +158,7 @@ div#slide_show div{
 #validate_registration {
 	width: 100px;
 	margin-top: 10px;
-	margin-left: 300px;
+	margin-left: 307px;
 }
 
 #join_button {
@@ -563,9 +564,9 @@ li.forgot_title {
 #tiles {
 	width: 435px;
 	height: 500px;
-	text-align: left;
 	float: left;
 	padding-top: 28px;
+	text-align: left;
 }
 
 #tile_search_field {
@@ -573,8 +574,12 @@ li.forgot_title {
     font-size: 18px;
     width: 300px;
 	margin: 0px 3px 0px 3px;
-    -webkit-appearance: none;
 }
+
+#tile_search {
+	width: 100px;
+}
+
 
 #tiles_legend {
 	margin: 15px 0px 10px 3px;
@@ -651,7 +656,8 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 }
 
 #tile_upload {
-	margin-left: 82px;
+	margin-left: 40px;
+	width: 100px;
 }
 
 #mosaic_wall {

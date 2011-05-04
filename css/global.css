@@ -246,9 +246,10 @@ a#nav_trends_1 {
 	cursor: hand; 
 	background: #215086;
 	border: 2px solid #4980B7;
-	border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
+	height: 30px;
+	border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
     -webkit-appearance: none;
 }
 
