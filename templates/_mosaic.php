@@ -1,3 +1,44 @@
+
+<SCRIPT LANGUAGE="JavaScript">
+$(document).ready(function(){
+	$('#tile_upload').click( function(){
+		$('.pagination_mosaic').hide();
+		$('#tiles').hide();
+		$('#tile_crop').show();
+	});
+	
+	$('#tile_pic').imgAreaSelect({
+        handles: true,
+		aspectRatio: "1:1",
+		onSelectChange: previewTile
+    });
+	
+	
+	
+	function previewTile(img, selection) {
+		if (!selection.width || !selection.height)
+		return;
+		
+		var scaleX = 75 / selection.width;
+		var scaleY = 75 / selection.height;
+		
+		$('#preview img').css({
+		width: Math.round(scaleX*img.width),
+		height: Math.round(scaleY*img.height),
+		marginLeft: -Math.round(scaleX * selection.x1),
+		marginTop: -Math.round(scaleY * selection.y1), 
+		});
+		
+		$('#x1').val(selection.x1);
+		$('#y1').val(selection.y1);
+		$('#x2').val(selection.x2);
+		$('#y2').val(selection.y2);
+		$('#w').val(selection.width);
+		$('#h').val(selection.height);
+	} 
+});
+</SCRIPT>
+
 <div id="mosaic">
 	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
 	<div id="tiles">
@@ -36,12 +77,28 @@
         </div>
         <div id="customized_tile">
         	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
-            <form id="tile_upload_form" action="../actions/tileUpload.php" method="POST">
-            	Create your own customized tile: <input class="buttons" id="tile_upload" type="submit" name="filename" value="Upload">
-            </form>
+            	Create your own customized tile: <input class="buttons" id="tile_upload" type="button" name="filename" value="Upload">
         </div>
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
+    <div id="tile_crop" style="display: none;">
+    	Click and drag on the image to customize your tile.
+        <div id="preview_area">
+            <div id="preview" style="border: 1px solid #F30;">
+                <img id="tile_pic" src="sydney2.jpg"/>
+            </div>
+        </div>
+        <div id="original_photo">
+            <img id="tile_pic" src="sydney2.jpg" />
+        </div>
+        <div id="tile_tags">
+        	Tag your tile with your interest
+            <form id="tile_upload_form" action="" method="POST">
+            	<input type="text" id="assign_tags" name="assign_tags" value="Tile name..." onfocus="if($(this).val()=='Tile name...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Tile name...')};" maxlength="60">
+            </form>
+        </div>
+        
+    </div>
     <div id="mosaic_wall">
         <span>&laquo; Personalize your mosaic wall &raquo;</span>
         <div id="wall">

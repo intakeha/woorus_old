@@ -9,7 +9,8 @@
 	<link href="css/woorus.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.validate.js"></script> 
-	<script type="text/javascript" src="js/slides.min.jquery.js "></script> 
+	<script type="text/javascript" src="js/slides.min.jquery.js"></script> 
+	<script type="text/javascript" src="js/jquery.crop.js"></script> 
   	<script type="text/javascript" src="js/woorus.js"></script>
 
 	<?php 

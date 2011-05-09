@@ -558,7 +558,7 @@ li.forgot_title {
 	width: 70px;
 	height: 280px;
 	float: left;
-	padding-top: 215px;
+	padding-top: 240px;
 }
 
 #tiles {
@@ -648,7 +648,6 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 
 #customized_tile span {
 	font-size: 18px;
-	
 }
 
 #tile_upload_form {
@@ -658,6 +657,32 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 #tile_upload {
 	margin-left: 40px;
 	width: 100px;
+}
+
+#tile_crop {
+	width: 575px;
+	height: 520px;
+	float: left;
+	background:#0F3;
+}
+
+#original_photo{
+	border: 1px solid #099;
+	width: 400px;
+	background: #FC3;
+}
+
+#preview_area{
+    width: 120px;
+	border: 1px solid #F0F;
+	float: right;
+	padding-left: 50px;
+}
+
+#preview{
+    width: 75px;
+	height: 75px;
+    overflow: hidden;
 }
 
 #mosaic_wall {
