@@ -235,8 +235,8 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 		$interest_id = $row['id']; 
 		
 		//update other tables basd on ID
-		updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
-		$tile_id = lookupTileID($fb_interest_id, $connection);
+		$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
+		updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 		updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 		
 	}
@@ -258,9 +258,9 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			$interest_id = $row['id']; 
 			
 			//update other tables based on ID
-			updateUserInterestTable($user_id, $interest_id, $connection); //add this as an interest of the user, its *new* for them
-			updateTileTable($user_id, $interest_id, $fb_interest_id, $connection);  //need to deal with the facebook IMAGE
-			$tile_id = lookupTileID($fb_interest_id, $connection);
+			updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $connection);  //need to deal with the facebook IMAGE
+			$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
+			updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 				
 		} 
@@ -270,13 +270,13 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 }
 
 
-function updateUserInterestTable($user_id, $interest_id, $connection)
+function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 {
-	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, update_time) VALUES	(NULL, '". mysql_real_escape_string($user_id)."' ,  '".mysql_real_escape_string($interest_id)."', NOW() )";
+	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, tile_id, update_time) VALUES (NULL, '". mysql_real_escape_string($user_id)."' , '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_id)."', NOW() )";
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
-function updateTileTable($user_id, $interest_id, $fb_interest_id, $connection)
+function updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $connection)
 {
 	
 	$tile_filename = "filename.jpg"; //need to know this before we make an entry
@@ -284,7 +284,7 @@ function updateTileTable($user_id, $interest_id, $fb_interest_id, $connection)
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
-function lookupTileID($fb_id, $connection)
+function lookupTileID_Facebook($fb_id, $connection)
 {
 	$tile_id_query = "SELECT id from `tiles` WHERE  facebook_id= '".mysql_real_escape_string($fb_id)."'";
 	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
@@ -294,16 +294,17 @@ function lookupTileID($fb_id, $connection)
 		//get id
 		$row = mysql_fetch_assoc($tile_id_result);
 		$retrieved_tile_id = $row['id']; 
+		return $retrieved_tile_id;
+	}else
+	{
+		die("facebook interest entered without tile");
 	}
 	
-	return $retrieved_tile_id;
-
 }
 
 function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection){
 
-	$mosaic_wall_query = "INSERT INTO `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time, interest_active) VALUES
-										(NULL, '".mysql_real_escape_string($user_id)."', '".mysql_real_escape_string($tile_placement)."', '".mysql_real_escape_string($tile_id)."', '".mysql_real_escape_string($interest_id)."', NOW(), 1 )";
+	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."', update_time = NOW() WHERE user_id = '".$user_id."' AND tile_placement = '".$tile_placement."' ";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 

@@ -42,12 +42,12 @@ function authenticate($email, $pass)
 	require('connect.php');
 	//connect
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+	mysql_select_db($db_name);
 	
 	$email = get_standard_email($email);
 
 	//check if user exists
 	$query = "SELECT id, email_verified, active_user from `users` WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
-	mysql_select_db($db_name);
 	$result = mysql_query($query, $connection) or die ("Error");
 
 	// if row exists -> user/pass combination is correct

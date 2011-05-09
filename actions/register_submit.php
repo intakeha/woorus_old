@@ -99,6 +99,12 @@ if (!$resp->is_valid) {
 		$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".$user_id."', 'Y', 'Y' , 'Y', 'Y')";
 		$result = mysql_query($query_settings, $connection) or die ("Error 2");
 		
+		for ($tile_placement = 1; $tile_placement <= 36; $itile_placement++){
+		
+			$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$user_id."', '".$tile_placement."', 0 , 0, NOW()) ";
+			$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
+		}
+		
 		sendToJS(1, ""); //send success flag to JS
 	}else
 	{
