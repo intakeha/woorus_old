@@ -82,19 +82,27 @@ $(document).ready(function(){
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
     <div id="tile_crop" style="display: none;">
-    	Click and drag on the image to customize your tile.
-        <div id="preview_area">
-            <div id="preview" style="border: 1px solid #F30;">
-                <img id="tile_pic" src="sydney2.jpg"/>
-            </div>
-        </div>
+    	<div id="crop_instruction">Click and drag on the image to customize your tile.</div>
         <div id="original_photo">
             <img id="tile_pic" src="sydney2.jpg" />
         </div>
-        <div id="tile_tags">
+        <div id="preview_area">
+        	Tile Preview
+            <div id="preview">
+                <img id="tile_pic" src="sydney2.jpg"/>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <div id="tag_tile">
         	Tag your tile with your interest
             <form id="tile_upload_form" action="" method="POST">
-            	<input type="text" id="assign_tags" name="assign_tags" value="Tile name..." onfocus="if($(this).val()=='Tile name...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Tile name...')};" maxlength="60">
+            	<input type="text" class="text_form" id="assign_tag" name="assign_tag" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">            
+                <input type="hidden" name="x1" value="" />
+                <input type="hidden" name="y1" value="" />
+                <input type="hidden" name="x2" value="" />
+                <input type="hidden" name="y2" value="" />
+                <br />
+                <input type="submit" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
             </form>
         </div>
         

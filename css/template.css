@@ -104,9 +104,6 @@
 	border: none;
 }
 
-div#slide_show div{
-}
-
 .slides_container {
 	width: 475px;	/* size of the slides */
 	height: 350px;
@@ -513,20 +510,6 @@ li.forgot_title {
 	margin: 10px 10px 0px 260px;
 }
 
-#cancel_button{
-	width: 100px;
-	height: 30px;
-	display: block;
-}
-
-#cancel_button {
-	color: #fff;
-	text-decoration: none;
-	text-align: center;
-	background-color: #ccc;
-	margin-top: 10px;
-}
-
 #forgot_form_error{
 	text-align: left;
 	line-height: 20px;
@@ -663,26 +646,38 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	width: 575px;
 	height: 520px;
 	float: left;
-	background:#0F3;
+	text-align: left;
+}
+
+#crop_instruction {
+	font-size: 16px;
+	margin: 2px 0px 10px 0px;
 }
 
 #original_photo{
-	border: 1px solid #099;
 	width: 400px;
-	background: #FC3;
+	float: left;
+	margin-right: 10px;
 }
 
-#preview_area{
-    width: 120px;
-	border: 1px solid #F0F;
-	float: right;
-	padding-left: 50px;
+#preview_area {
+	float: left;
+	padding: 5px;
+	border: 1px solid #ccc;
+	text-align: center;
+	font-size: 10px;
 }
 
-#preview{
+#preview {
     width: 75px;
 	height: 75px;
+	margin-top: 5px;
     overflow: hidden;
+}
+
+#tag_tile {
+	margin-top: 10px;
+	font-size: 16px;
 }
 
 #mosaic_wall {

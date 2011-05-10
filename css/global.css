@@ -253,6 +253,21 @@ a#nav_trends_1 {
     -webkit-appearance: none;
 }
 
+.save {
+	width: 100px;
+	margin-right: 10px;
+}
+
+.cancel {
+	width: 100px;
+	background-color: #ccc;
+	margin-top: 10px;
+}
+
+div.clear {
+	clear: both;
+}
+
 /*	Pagination */
 
 a.arrows {
