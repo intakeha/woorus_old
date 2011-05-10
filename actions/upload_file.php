@@ -1,0 +1,116 @@
+<?php
+require('imageFunctions.php');
+
+$max_dimension = "400";		// Max width allowed for the large image
+$min_dimension = "75";
+
+/*image type:
+1 = GIF, 2 = JPG, 3 = PNG, 4 = SWF, 5 = PSD, 6 = BMP, 7 = TIFF(orden de bytes intel), 8 = TIFF(orden de bytes motorola), 9 = JPC, 10 = JP2, 11 = JPX, 12 = JB2, 13 = SWC, 14 = IFF, 15 = WBMP, 16 = XBM.
+*/
+
+//acceptable image types
+$gif = 1;
+$jpg = 2;
+$png = 3;
+$bmp = 6;
+
+//check image type
+$validImageType = array($gif, $jpg, $png, $bmp);
+list($width, $height, $type, $attr) = getimagesize($_FILES["file"]["tmp_name"]); 
+
+//check extension
+$validExtensions = array("png", "gif", "jpeg", "jpg", "bmp");
+$ext = end(explode(".",$_FILES["file"]["name"]));
+$ext2= strtolower($ext);
+
+//check image type 2 ways, extensions & size
+if ((($_FILES["file"]["type"] == "image/gif")
+|| ($_FILES["file"]["type"] == "image/jpeg")
+|| ($_FILES["file"]["type"] == "image/pjpeg")
+|| ($_FILES["file"]["type"] == "image/bmp")
+|| ($_FILES["file"]["type"] == "image/png"))
+&& in_array($ext2,$validExtensions)
+&& in_array($type,$validImageType))
+{
+	//check image size
+	if($_FILES["file"]["size"] > 1000000){
+		die("Please select a smaller image.");
+	}
+	
+	//check for error code
+	if ($_FILES["file"]["error"] > 0)
+	{
+		die("Return Code: " . $_FILES["file"]["error"]);
+	}
+	else
+	{
+		//echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+		//echo "Type: " . $_FILES["file"]["type"] . "<br />";
+		//echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+		//echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
+
+		//image locations
+		$file_name = $_FILES["file"]["name"]; //here, we will rename it!
+		
+		$large_path = "../images/temporary";
+		$thumbnail_path = "../images/interests";
+		
+		$large_image_location = $large_path."/".$file_name;
+		$thumb_image_location = $thumbnail_path."/".$file_name;
+
+	//check if already exists
+	if (file_exists( $large_image_location))
+	{
+	      die($_FILES["file"]["name"]. " already exists.");
+	}
+	else
+	{
+		//save large image
+		move_uploaded_file($_FILES["file"]["tmp_name"],
+		$large_image_location);      
+		chmod($large_image_location, 0777);
+		
+		//get height, width & scale if too big
+		$width = getWidth($large_image_location);
+		$height = getHeight($large_image_location);			
+
+
+		//find out which dimension is larger (we need both min and max)
+		if ($width > $height){
+			$max_dimension_num = $width;
+			$min_dimension_num = $height;
+		}else
+		{
+			$max_dimension_num = $height;
+			$min_dimension_num = $width;
+		}
+		
+		//error if image is too small
+		if ($min_dimension_num < $min_dimension){
+			die("Please use a larger image.");
+		}
+		
+		//Scale the image if it is greater than the max dimension
+		if ($max_dimension_num > $max_dimension){
+			$scale = $max_dimension/$max_dimension_num;
+			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
+		}else{
+			$scale = 1;
+			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
+		} 
+	
+	
+	//set data array of picture location & print to JavaSrcipt
+	$picture_data = array('file_name'=>$file_name);
+	$output = json_encode($picture_data);
+	print($output);
+	
+      }
+    }
+  }
+else
+{
+	die("Please select a valid file type.");
+}
+
+?>
