@@ -1,6 +1,8 @@
 
 <SCRIPT LANGUAGE="JavaScript">
 $(document).ready(function(){
+
+/*
 	$('#tile_upload').click( function(){
 		$('.pagination_mosaic').hide();
 		$('#tiles').hide();
@@ -12,8 +14,7 @@ $(document).ready(function(){
 		aspectRatio: "1:1",
 		onSelectChange: previewTile
     });
-	
-	
+*/
 	
 	function previewTile(img, selection) {
 		if (!selection.width || !selection.height)
@@ -36,6 +37,39 @@ $(document).ready(function(){
 		$('#w').val(selection.width);
 		$('#h').val(selection.height);
 	} 
+	
+	// Submit file for tile crop
+	$('#tile_pic_upload').click(function(){
+		$.post(
+			"actions/upload_file.php",
+			$('#registration_form').serialize(),
+			function(data){
+				if (data){
+					$('#tile_upload_error').html(data.message);	
+				} else {
+					$('.pagination_mosaic').hide();
+					$('#tiles').hide();
+					$('#tile_crop').show();
+					$('#tile_pic').imgAreaSelect({
+						handles: true,
+						aspectRatio: "1:1",
+						onSelectChange: previewTile
+					});
+				}
+			}
+
+/*				if (data.success == 0){
+					$('#reg_error_captcha').addClass('error_text');
+					$('#reg_error_captcha').html(data.message); 
+				}else{
+					if ($('#reg_error_captcha').hasClass('error_text')) {$('#reg_error_captcha').removeClass('error_text');}
+					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
+					$('#captcha').hide();
+				}
+			}, "json" */
+		);
+		return false;
+	});
 });
 </SCRIPT>
 
@@ -68,16 +102,17 @@ $(document).ready(function(){
             <li class="uploaded" style="background-image: url(images/interests/sydney.png);">Sydney</li>
             <li class="uploaded" style="background-image: url(images/interests/paul.png);">Beatles</li>
             <li class="community" style="background-image: url(images/interests/vespa2.png);">Vespa</li>
-            <li class="community" style="background-image: url(images/interests/vegas.png);">Las Vegas</li>
-            <li class="community" style="background-image: url(images/interests/timberlake.png);">Justin Timberlake</li>
-            <li class="community" style="background-image: url(images/interests/homer.png);">Homer</li>
-            <li class="community" style="background-image: url(images/interests/pinata.png);">pinata</li>
-            <li class="community" style="background-image: url(images/interests/conan.png);">Conan</li>
             </ul><div id="clear"></div>
         </div>
         <div id="customized_tile">
         	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
-            	Create your own customized tile: <input class="buttons" id="tile_upload" type="button" name="filename" value="Upload">
+            	<p>Create your own customized tile: </p>     
+                <form id="tile_upload_form" action="upload_file.php" method="post" enctype="multipart/form-data">
+                    <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
+                    <br />
+                    <input class="buttons" id="tile_pic_upload" type="button" name="filename" value="Upload">
+                    <div class="error_text" id="tile_upload_error">You haven't chosen a file</div>
+                </form>
         </div>
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
@@ -95,7 +130,7 @@ $(document).ready(function(){
         <div class="clear"></div>
         <div id="tag_tile">
         	Tag your tile with your interest
-            <form id="tile_upload_form" action="" method="POST">
+            <form id="tile_crop_form" action="" method="POST">
             	<input type="text" class="text_form" id="assign_tag" name="assign_tag" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
                 <input type="hidden" name="y1" value="" />

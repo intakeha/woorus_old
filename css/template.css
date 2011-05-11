@@ -541,7 +541,7 @@ li.forgot_title {
 	width: 70px;
 	height: 280px;
 	float: left;
-	padding-top: 240px;
+	padding-top: 200px;
 }
 
 #tiles {
@@ -617,15 +617,14 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 }
 
 #tiles_bank {
-	height: 350px;
+	height: 280px;
 	margin-top: 40px;
 	overflow: hidden;
 }
 
 #customized_tile {
 	font-size: 18px;
-	text-align: center;
-	margin-top: 10px;
+	text-align: left;
 	color: #215086;
 }
 
@@ -633,13 +632,26 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	font-size: 18px;
 }
 
-#tile_upload_form {
+#customized_tile p {
+	margin: 10px 0px 10px 0px;
+}
+
+#tile_pic_upload {
+	width: 100px;
 	margin-top: 10px;
 }
 
-#tile_upload {
-	margin-left: 40px;
-	width: 100px;
+#tile_upload_error {
+	text-align: left;
+	line-height: 20px;
+	padding-left: 10px;
+	border-left: 3px solid #C00;
+	position: absolute;
+	margin: -25px 0px 0px 120px;
+}
+
+#tile_crop_form {
+	margin-top: 10px;
 }
 
 #tile_crop {
