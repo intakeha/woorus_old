@@ -110,7 +110,7 @@ $(document).ready(function(){
                 <form id="tile_upload_form" action="upload_file.php" method="post" enctype="multipart/form-data">
                     <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
                     <br />
-                    <input class="buttons" id="tile_pic_upload" type="button" name="filename" value="Upload">
+                    <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
                     <div class="error_text" id="tile_upload_error">You haven't chosen a file</div>
                 </form>
         </div>
