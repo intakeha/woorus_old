@@ -44,7 +44,7 @@ $(document).ready(function(){
 			"actions/upload_file.php",
 			$('#registration_form').serialize(),
 			function(data){
-				if (data){
+				if (data.success == 0){
 					$('#tile_upload_error').html(data.message);	
 				} else {
 					$('.pagination_mosaic').hide();
