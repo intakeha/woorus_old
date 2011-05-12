@@ -1,7 +1,7 @@
 <?php
 require('imageFunctions.php');
 require('connect.php');
-
+require('validations.php');
 
 $thumb_width = "75";			// Width of thumbnail image
 $thumb_height = "75";			// Height of thumbnail image
@@ -16,6 +16,8 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
+$incoming_file = $_POST["file"];
+$tile_name = $_POST["tag"];
 */
 
 //hardcode for testing
@@ -25,16 +27,16 @@ $x2 = 350;
 $y2 = 300;
 $w = 300;
 $h = 300;
-
 $incoming_file = "eric clapton.jpg";
+$tile_name = "cars";
 
+//set file path basd on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
 
 $large_image_location = $large_path."/".$incoming_file;
 $thumb_image_location = $thumbnail_path."/".$incoming_file;
 
-$tile_name = "cars";
 
 //Scale the image to the thumbnail size & save
 $scale = $thumb_width/$w;
@@ -120,7 +122,8 @@ function lookupTileID($thumb_image_location, $connection)
 		return $retrieved_tile_id;
 	}else
 	{
-		die("Error uploading tile.");
+		$error_message = "Error uploading tile.";
+		sendToJS(0, $error_message);
 	}
 }
 
@@ -134,13 +137,16 @@ function getTilePlacement($user_id, $connection){
 	
 	if ($tile_id == NULL)
 	{
-		echo "Your wall is full!";
+		$error_message = "Your wall is full. Please remove some tiles to add new tiles.";
+		sendToJS(0, $error_message);
 	}else
 	{
 		return $tile_id;
 	}
 }
 
+$success_message = "Your new tile has been added to your wall.";
+sendToJS(0, $success_message);
 
 exit();
 

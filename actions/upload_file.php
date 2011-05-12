@@ -1,5 +1,6 @@
 <?php
 require('imageFunctions.php');
+require('validations.php');
 
 $max_dimension = "400";		// Max width allowed for the large image
 $min_dimension = "75";
@@ -34,13 +35,15 @@ if ((($_FILES["file"]["type"] == "image/gif")
 {
 	//check image size
 	if($_FILES["file"]["size"] > 1000000){
-		die("Please select a smaller image.");
+		$error_message = "Please select a smaller image.";
+		sendToJS(0, $error_message);
 	}
 	
 	//check for error code
 	if ($_FILES["file"]["error"] > 0)
 	{
-		die("Return Code: " . $_FILES["file"]["error"]);
+		$error_message = "Return Code: " . $_FILES["file"]["error"];
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -48,7 +51,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		//echo "Type: " . $_FILES["file"]["type"] . "<br />";
 		//echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
 		//echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
-
+	
 		//image locations
 		$file_name = $_FILES["file"]["name"]; //here, we will rename it!
 		
@@ -61,7 +64,8 @@ if ((($_FILES["file"]["type"] == "image/gif")
 	//check if already exists
 	if (file_exists( $large_image_location))
 	{
-	      die($_FILES["file"]["name"]. " already exists.");
+		$error_message = $_FILES["file"]["name"]. " already exists."; //when would this happen??
+		sendToJS(0, $error_message);
 	}
 	else
 	{
@@ -87,7 +91,8 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		
 		//error if image is too small
 		if ($min_dimension_num < $min_dimension){
-			die("Please use a larger image.");
+			$error_message = "Please use a larger image.";
+			sendToJS(0, $error_message);
 		}
 		
 		//Scale the image if it is greater than the max dimension
@@ -101,16 +106,20 @@ if ((($_FILES["file"]["type"] == "image/gif")
 	
 	
 	//set data array of picture location & print to JavaSrcipt
-	$picture_data = array('file_name'=>$file_name);
+	
+	/*$picture_data = array('file_name'=>$file_name);
 	$output = json_encode($picture_data);
-	print($output);
+	print($output);*/
+	
+	sendToJS(1, $file_name);
 	
       }
     }
   }
 else
 {
-	die("Please select a valid file type.");
+	$error_message = "Please select a valid file type.";
+	sendToJS(0, $error_message);
 }
 
 ?>
