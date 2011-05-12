@@ -111,7 +111,7 @@ $(document).ready(function(){
                     <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
                     <br />
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
-                    <div class="error_text" id="tile_upload_error">You haven't chosen a file</div>
+                    <div class="error_text" id="tile_upload_error"></div>
                 </form>
         </div>
     </div>
