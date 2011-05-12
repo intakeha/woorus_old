@@ -47,6 +47,7 @@ $(document).ready(function(){
 				if (data.success == 0){
 					$('#tile_upload_error').html(data.message);	
 				} else {
+					$('#crop_error').html(data.message);
 					$('.pagination_mosaic').hide();
 					$('#tiles').hide();
 					$('#tile_crop').show();
@@ -140,7 +141,7 @@ $(document).ready(function(){
                 <input type="submit" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
             </form>
         </div>
-        
+        <div class="error_text" id="crop_error"></div>
     </div>
     <div id="mosaic_wall">
         <span>&laquo; Personalize your mosaic wall &raquo;</span>
