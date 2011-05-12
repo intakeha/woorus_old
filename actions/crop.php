@@ -146,7 +146,7 @@ function getTilePlacement($user_id, $connection){
 }
 
 $success_message = "Your new tile has been added to your wall.";
-sendToJS(0, $success_message);
+sendToJS(1, $success_message);
 
 exit();
 
