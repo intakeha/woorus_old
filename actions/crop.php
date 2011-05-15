@@ -16,27 +16,15 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$incoming_file = $_POST["cropFile"];
+$picture_name = $_POST["cropFile"];
 $tile_name = $_POST["assign_tag"];
 
-//die($x1.$x2.$y1.$y2.$w.$h.$incoming_file.$tile_name); 
-//hardcode for testing
-/*
-$x1 = 50;
-$y1 = 0;
-$x2 = 350;
-$y2 = 300;
-$w = 300;
-$h = 300;
-$incoming_file = "facebook_34951293052.jpg";
-$tile_name = "cars";
-*/
-//set file path basd on filename
+//set file path based on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
 
-$large_image_location = $large_path."/".$incoming_file;
-$thumb_image_location = $thumbnail_path."/".$incoming_file;
+$large_image_location = $large_path."/".$picture_name;
+$thumb_image_location = $thumbnail_path."/".$picture_name;
 
 
 //Scale the image to the thumbnail size & save
@@ -63,8 +51,8 @@ if ($interest_id == NULL)
 }
 
 //save the tile & get tile id
-updateTileTable($user_id, $interest_id, $incoming_file, $connection); 
-$tile_id = lookupTileID($thumb_image_location, $connection);
+updateTileTable($user_id, $interest_id, $picture_name, $connection); 
+$tile_id = lookupTileID($picture_name, $connection);
 
 //update user interests table (requires interest id & tile id)
 updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
@@ -97,9 +85,9 @@ function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
-function updateTileTable($user_id, $interest_id, $thumb_image_location, $connection)
+function updateTileTable($user_id, $interest_id, $picture_name, $connection)
 {
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($thumb_image_location)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."', 0)";
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($picture_name)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."', 0)";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
@@ -110,9 +98,9 @@ function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement
 }
 
 
-function lookupTileID($thumb_image_location, $connection)
+function lookupTileID($picture_name, $connection)
 {
-	$tile_id_query = "SELECT id from `tiles` WHERE  tile_filename = '".mysql_real_escape_string($thumb_image_location)."' ";
+	$tile_id_query = "SELECT id from `tiles` WHERE  tile_filename = '".mysql_real_escape_string($picture_name)."' ";
 	$tile_id_result = mysql_query($tile_id_query, $connection) or die ("Error 9");
 	$tile_id_count = mysql_num_rows($tile_id_result);
 	if ($tile_id_count != 0)
