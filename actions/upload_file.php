@@ -2,6 +2,9 @@
 require('imageFunctions.php');
 require('validations.php');
 
+session_start();
+$user_id = $_SESSION['id'];
+
 $max_dimension = "400";		// Max width allowed for the large image
 $min_dimension = "75";
 
@@ -52,8 +55,10 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		//echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
 		//echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
 	
-		//image locations
-		$file_name = $_FILES["file"]["name"]; //here, we will rename it!
+		//rename image & add back on extension
+		$file_name_orig = basename($_FILES['file']['name']);
+		$file_ext = strtolower(substr($file_name_orig, strrpos($file_name_orig, '.') + 1));
+		$file_name = $user_id."_temp".$file_ext;
 		
 		$large_path = "../images/temporary";
 		$thumbnail_path = "../images/interests";
@@ -62,48 +67,42 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$thumb_image_location = $thumbnail_path."/".$file_name;
 
 	//check if already exists
-	if (file_exists( $large_image_location))
+
+	
+	//save large image
+	move_uploaded_file($_FILES["file"]["tmp_name"],
+	$large_image_location);      
+	chmod($large_image_location, 0777);
+	
+	//get height, width & scale if too big
+	$width = getWidth($large_image_location);
+	$height = getHeight($large_image_location);			
+
+
+	//find out which dimension is larger (we need both min and max)
+	if ($width > $height){
+		$max_dimension_num = $width;
+		$min_dimension_num = $height;
+	}else
 	{
-		$error_message = $_FILES["file"]["name"]. " already exists."; //when would this happen??
+		$max_dimension_num = $height;
+		$min_dimension_num = $width;
+	}
+	
+	//error if image is too small
+	if ($min_dimension_num < $min_dimension){
+		$error_message = "Please use a larger image.";
 		sendToJS(0, $error_message);
 	}
-	else
-	{
-		//save large image
-		move_uploaded_file($_FILES["file"]["tmp_name"],
-		$large_image_location);      
-		chmod($large_image_location, 0777);
-		
-		//get height, width & scale if too big
-		$width = getWidth($large_image_location);
-		$height = getHeight($large_image_location);			
-
-
-		//find out which dimension is larger (we need both min and max)
-		if ($width > $height){
-			$max_dimension_num = $width;
-			$min_dimension_num = $height;
-		}else
-		{
-			$max_dimension_num = $height;
-			$min_dimension_num = $width;
-		}
-		
-		//error if image is too small
-		if ($min_dimension_num < $min_dimension){
-			$error_message = "Please use a larger image.";
-			sendToJS(0, $error_message);
-		}
-		
-		//Scale the image if it is greater than the max dimension
-		if ($max_dimension_num > $max_dimension){
-			$scale = $max_dimension/$max_dimension_num;
-			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-		}else{
-			$scale = 1;
-			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-		} 
 	
+	//Scale the image if it is greater than the max dimension
+	if ($max_dimension_num > $max_dimension){
+		$scale = $max_dimension/$max_dimension_num;
+		$uploaded = resizeImage($large_image_location,$width,$height,$scale);
+	}else{
+		$scale = 1;
+		$uploaded = resizeImage($large_image_location,$width,$height,$scale);
+	} 
 	
 	//set data array of picture location & print to JavaSrcipt
 	
@@ -113,7 +112,6 @@ if ((($_FILES["file"]["type"] == "image/gif")
 	
 	sendToJS(1, $file_name);
 	
-      }
     }
   }
 else
