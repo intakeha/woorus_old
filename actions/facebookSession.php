@@ -4,6 +4,11 @@ require('facebook.php');
 require('connect.php');
 require('validations.php');
 require('loginHelperFunctions.php');
+require('imageFunctions.php');
+
+//settings for image tiles
+$thumb_width = "75";		// Width of thumbnail image
+$thumb_height = "75";		// Height of thumbnail image
 
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
@@ -175,7 +180,7 @@ if ($session)
 				
 					$facebook_interest = $value["employer"]["name"];
 					$facebook_interest_id = $value["employer"]["id"];
-					$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $tile_placement, $connection);
+					$interest_id = enterNewInterest($facebook_interest , 'Employers', $facebook_interest_id, 'Employers', $user_id, $tile_placement, $connection, $thumb_width);
 					$tile_placement++;
 				}
 			
@@ -185,7 +190,7 @@ if ($session)
 					$facebook_interest = $value["school"]["name"];
 					$facebook_interest_id = $value["school"]["id"];
 					
-					$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $tile_placement, $connection);
+					$interest_id = enterNewInterest($facebook_interest , 'Education', $facebook_interest_id , 'Education', $user_id, $tile_placement, $connection, $thumb_width);
 					$tile_placement++;
 				}
 
@@ -194,7 +199,7 @@ if ($session)
 					$category = $value["category"];
 					$facebook_interest_id = $value ["id"];
 					
-					$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection);
+					$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection, $thumb_width);
 					$tile_placement++;
 					
 				}
@@ -217,7 +222,7 @@ if ($session)
 }
 
 
-function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $tile_placement, $connection)
+function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $tile_placement, $connection, $thumb_width)
 {
 
 	//check for interest
@@ -257,8 +262,11 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			$row = mysql_fetch_assoc($id_result);
 			$interest_id = $row['id']; 
 			
+			//store image & get tile filename;
+			$tile_filename = getFacebookImage($fb_interest_id, $user_id, $thumb_width);
+			
 			//update other tables based on ID
-			updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $connection);  //need to deal with the facebook IMAGE
+			updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection); 
 			$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
 			updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
@@ -276,10 +284,9 @@ function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
-function updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $connection)
+function updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection)
 {
-	
-	$tile_filename = "filename.jpg"; //need to know this before we make an entry
+	//enter in line to tile table
 	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_filename)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."','".mysql_real_escape_string($fb_interest_id)."')";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
@@ -306,6 +313,61 @@ function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement
 
 	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."', update_time = NOW() WHERE user_id = '".$user_id."' AND tile_placement = '".$tile_placement."' ";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
+}
+
+
+
+function getFacebookImage($fb_interest_id, $user_id, $thumb_width){
+
+//set file path basd on filename
+$large_path = "../images/temporary";
+$thumbnail_path = "../images/interests";
+
+$large_image_location = $large_path."/facebook_".$fb_interest_id.".jpg";
+$thumb_image_location = $thumbnail_path."/facebook_".$fb_interest_id.".jpg";
+
+//$large_image_location = $large_path."/".$incoming_file;
+$link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=large";
+
+file_put_contents($large_image_location, file_get_contents($link));
+chmod($large_image_location, 0777);
+
+//get height, width & scale if too big
+$width = getWidth($large_image_location);
+$height = getHeight($large_image_location);	
+
+//find out which dimension is smaller
+if ($width > $height){
+	$min_dimension_num = $height;
+}else
+{
+	$min_dimension_num = $width;
+}
+
+//Scale the image if it is greater than the thumbnail
+if ($min_dimension_num > $thumb_width){
+	$scale1 = $thumb_width/$min_dimension_num;
+	$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
+}else{
+	$scale1 = 1;
+	$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
+} 
+
+//then crop top left square
+
+$x1 = 0;
+$y1 = 0;
+$x2 = $thumb_width;
+$y2 = $thumb_width;
+$w = $thumb_width;
+$h = $thumb_width;
+
+//Scale the image to the thumbnail size & save
+$scale2 = $thumb_width/$w;
+$cropped = resizeThumbnailImage($thumb_image_location, $large_image_location, $w,$h,$x1,$y1,$scale2);
+
+return $thumb_image_location;
+
 }
 
 
