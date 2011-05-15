@@ -33,7 +33,7 @@ $(document).ready(function(){
 	// Submit file for tile crop
 	$('#tile_pic_upload').click(function(){
 		$.ajaxFileUpload({
-			url: 'upload_file.php',
+			url: 'actions/upload_file.php',
 			secureuri: false,
             fileElementId:'file',
             dataType: 'json',
