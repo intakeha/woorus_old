@@ -19,6 +19,8 @@ $h = $_POST["h"];
 $picture_name = $_POST["cropFile"];
 $tile_name = $_POST["assign_tag"];
 
+die($x1.$y1.$x2.$y2.$picture_name.$tile_name);
+
 //set file path based on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
