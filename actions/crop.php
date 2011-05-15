@@ -27,7 +27,7 @@ $x2 = 350;
 $y2 = 300;
 $w = 300;
 $h = 300;
-$incoming_file = "eric clapton.jpg";
+$incoming_file = "facebook_34951293052.jpg";
 $tile_name = "cars";
 
 //set file path basd on filename
