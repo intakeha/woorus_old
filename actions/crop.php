@@ -62,7 +62,7 @@ if ($interest_id == NULL)
 }
 
 //save the tile & get tile id
-updateTileTable($user_id, $interest_id, $thumb_image_location, $connection); 
+updateTileTable($user_id, $interest_id, $incoming_file, $connection); 
 $tile_id = lookupTileID($thumb_image_location, $connection);
 
 //update user interests table (requires interest id & tile id)
