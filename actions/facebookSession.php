@@ -172,6 +172,12 @@ if ($session)
 		
 				updateLoginTime($user_id); //need to also update the login table
 				
+				//create mosaic wall tables
+				for ($tile_place = 1; $tile_place <= 36; $tile_place++){
+					$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$id."', '".$tile_place."', 0 , 0, NOW()) ";
+					$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
+				}
+				
 				//next step is to enter in all the interests we've taken from the facebook API
 				$tile_placement= 0;
 		
