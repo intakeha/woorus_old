@@ -19,7 +19,7 @@ $h = $_POST["h"];
 $incoming_file = $_POST["cropFile"];
 $tile_name = $_POST["assign_tag"];
 
-die($x1.$x2.$y1.$y2.$w.$h.$incoming_file.$tile_name); 
+//die($x1.$x2.$y1.$y2.$w.$h.$incoming_file.$tile_name); 
 //hardcode for testing
 /*
 $x1 = 50;
