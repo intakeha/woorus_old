@@ -2,9 +2,9 @@
 require('connect.php');
 
 //session_start();
-//$user_id = $_SESSION['id'];
+$user_id = $_SESSION['id'];
 
-$user_id  = 118; //hardcode
+//$user_id  = 118; //hardcode
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");

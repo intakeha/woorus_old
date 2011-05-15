@@ -9,18 +9,19 @@ $thumb_height = "75";			// Height of thumbnail image
 session_start();
 $user_id = $_SESSION['id'];
 
-/*
+
 $x1 = $_POST["x1"];
 $y1 = $_POST["y1"];
 $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$incoming_file = $_POST["file"];
-$tile_name = $_POST["tag"];
-*/
+$incoming_file = $_POST["cropFile"];
+$tile_name = $_POST["assign_tag"];
 
+die($x1.$x2.$y1.$y2.$w.$h.$incoming_file.$tile_name); 
 //hardcode for testing
+/*
 $x1 = 50;
 $y1 = 0;
 $x2 = 350;
@@ -29,7 +30,7 @@ $w = 300;
 $h = 300;
 $incoming_file = "facebook_34951293052.jpg";
 $tile_name = "cars";
-
+*/
 //set file path basd on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
