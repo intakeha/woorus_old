@@ -58,7 +58,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		//rename image & add back on extension
 		$file_name_orig = basename($_FILES['file']['name']);
 		$file_ext = strtolower(substr($file_name_orig, strrpos($file_name_orig, '.') + 1));
-		$file_name = $user_id."_temp".$file_ext;
+		$file_name = $user_id."_temp.".$file_ext;
 		
 		$large_path = "../images/temporary";
 		$thumbnail_path = "../images/interests";
