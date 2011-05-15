@@ -2,19 +2,11 @@
 <SCRIPT LANGUAGE="JavaScript">
 $(document).ready(function(){
 
-/*
-	$('#tile_upload').click( function(){
-		$('.pagination_mosaic').hide();
-		$('#tiles').hide();
-		$('#tile_crop').show();
-	});
-	
 	$('#tile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "1:1",
 		onSelectChange: previewTile
     });
-*/
 	
 	function previewTile(img, selection) {
 		if (!selection.width || !selection.height)
@@ -40,40 +32,21 @@ $(document).ready(function(){
 	
 	// Submit file for tile crop
 	$('#tile_pic_upload').click(function(){
-		$.post(
-			"actions/upload_file.php",
-			$('#registration_form').serialize(),
-			function(data){
-				if (data.success == 0){
-					$('#tile_upload_error').html(data.message);	
-				} else {
-					$('#crop_error').html(data.message);
-					$('.pagination_mosaic').hide();
-					$('#tiles').hide();
-					$('#tile_crop').show();
-					$('#tile_pic').imgAreaSelect({
-						handles: true,
-						aspectRatio: "1:1",
-						onSelectChange: previewTile
-					});
-				}
+		$.ajaxFileUpload({
+			url: 'upload_file.php',
+			secureuri: false,
+            fileElementId:'file',
+            dataType: 'json',
+			success: function(data){
+				$('#tile_upload_error').html(data); 
 			}
-
-/*				if (data.success == 0){
-					$('#reg_error_captcha').addClass('error_text');
-					$('#reg_error_captcha').html(data.message); 
-				}else{
-					if ($('#reg_error_captcha').hasClass('error_text')) {$('#reg_error_captcha').removeClass('error_text');}
-					$('#reg_error_captcha').html("<span>Welcome to Woorus!</span><br>Please check your email to activate your account.");
-					$('#captcha').hide();
-				}
-			}, "json" */
-		);
+		})
+		
 		return false;
 	});
 });
 </SCRIPT>
-
+<script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <div id="mosaic">
 	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
 	<div id="tiles">
