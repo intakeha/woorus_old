@@ -19,8 +19,6 @@ $h = $_POST["h"];
 $picture_name_input = $_POST["cropFile"];
 $tile_name = $_POST["assign_tag"];
 
-//die($x1.$y1.$x2.$y2.$picture_name_input.$tile_name);
-
 //get ext & re-name
 $file_ext = strtolower(substr($picture_name_input, strrpos($picture_name_input, '.') + 1));  //one day, this will always be .jpg!
 $key = strtotime(date('Y-m-d H:i:s'));
@@ -66,10 +64,10 @@ $tile_id = lookupTileID($picture_name, $connection);
 updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 
 //lookup tile placment
-$tile_placement_id = getTilePlacement($user_id, $connection);
+$tile_placement = getTilePlacement($user_id, $connection);
 
 //add to user's mosaic wall
-updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement_id, $connection);
+updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
 
 function lookupInterestID($interest, $connection)
@@ -99,9 +97,9 @@ function updateTileTable($user_id, $interest_id, $picture_name, $connection)
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
-function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement_id, $connection)
+function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection)
 {
-	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."', update_time = NOW() WHERE user_id = '".$user_id."' AND id = '".$tile_placement_id."' ";
+	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."', update_time = NOW() WHERE user_id = '".$user_id."' AND tile_placement = '".$tile_placement."' ";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 
@@ -126,11 +124,11 @@ function lookupTileID($picture_name, $connection)
 
 function getTilePlacement($user_id, $connection){
 
-	$tile_placement_query =  "SELECT id, min(tile_placement) from `mosaic_wall` where tile_id = 0 AND interest_id = 0 AND user_id = '".$user_id."' ";
+	$tile_placement_query =  "SELECT min(tile_placement) from `mosaic_wall` where tile_id = 0 AND interest_id = 0 AND user_id = '".$user_id."' ";
 	$tile_placement_result = mysql_query($tile_placement_query, $connection) or die ("Error");
-	$tile_placement_count = mysql_num_rows($tile_placement_result);
+	$tile_placement_count = mysql_num_rows($tile_placement_result); //necessary?
 	$row = mysql_fetch_assoc($tile_placement_result); //min function means that a row will always be returned
-	$tile_id = $row['id']; 
+	$tile_id = $row['tile_placement']; 
 	
 	if ($tile_id == NULL)
 	{
