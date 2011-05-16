@@ -69,9 +69,11 @@ $tile_placement = getTilePlacement($user_id, $connection);
 //add to user's mosaic wall
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
+//delete the temp file
+unlink($large_image_location);
+
 $success_message = "Your new tile has been added to your wall.";
 sendToJS(1, $success_message);
-
 exit();
 
 

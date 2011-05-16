@@ -72,7 +72,6 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$width = getWidth($large_image_location);
 		$height = getHeight($large_image_location);			
 
-
 		//find out which dimension is larger (we need both min and max)
 		if ($width > $height){
 			$max_dimension_num = $width;
