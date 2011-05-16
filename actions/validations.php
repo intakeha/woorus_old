@@ -537,6 +537,57 @@ function checkboxValidate($checkbox)
 
 }
 
+//-------------------------Mosaic Wall validation functions-----------------------------------------//
+
+//removes tags, convert to camel case, checks if its alpha, hyphen, apostrophe, space & checks between 2 & 30 chars
+function validateInterestTag($tag)
+{
+	$tag = utf8_decode($tag);
+	
+	if($tag == NULL | strlen($tag) == 0)
+	{
+		$error_message = "Please tag your tile.";
+		sendToJS(0, $error_message);
+	}
+	elseif(strlen($tag) < 2)
+	{
+		$error_message = "Please use a longer name.";
+		sendToJS(0, $error_message);
+	}
+	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $tag)) 
+	{
+		$error_message = "Tile should not start or end with a symbol.";
+		sendToJS(0, $error_message);
+	}
+	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $tag)) 
+	{
+		$error_message = "Tile should not start or end with a symbol.";
+		sendToJS(0, $error_message);
+	}
+	elseif(strlen($tag) > 30)
+	{
+		$error_message = "Please enter no more than 30 characters for your tile.";
+		sendToJS(0, $error_message);
+	}
+	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $tag))
+	{
+		$error_message = "Tile contains invalid characters.";
+		sendToJS(0, $error_message);
+	}
+	else
+	{
+		if (strtoupper($tag) == $tag) //keep in all caps if all caps
+		{
+			return strip_tags($tag);
+		}else //else want Camel-Case
+		{
+			return ucname(strip_tags($tag)); 
+		}
+	}
+
+}
+
+
 
 //-------------------------Email activation validation functions-----------------------------------------//
 

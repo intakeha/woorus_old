@@ -3,8 +3,8 @@ require('imageFunctions.php');
 require('connect.php');
 require('validations.php');
 
-$thumb_width = "75";			// Width of thumbnail image
-$thumb_height = "75";			// Height of thumbnail image
+$thumb_width = "75";		// Width of thumbnail image
+$thumb_height = "75";		// Height of thumbnail image
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -16,7 +16,7 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$picture_name_input = $_POST["cropFile"]; //VALIDATE & CONVERT TO CAMEL CASE
+$picture_name_input = validateInterestTag($_POST["cropFile"]); 
 $tile_name = $_POST["assign_tag"];
 
 //get ext & re-name
