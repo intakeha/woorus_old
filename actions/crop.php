@@ -16,7 +16,7 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$picture_name_input = $_POST["cropFile"];
+$picture_name_input = $_POST["cropFile"]; //VALIDATE & CONVERT TO CAMEL CASE
 $tile_name = $_POST["assign_tag"];
 
 //get ext & re-name
@@ -68,6 +68,11 @@ $tile_placement = getTilePlacement($user_id, $connection);
 
 //add to user's mosaic wall
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+
+$success_message = "Your new tile has been added to your wall.";
+sendToJS(1, $success_message);
+
+exit();
 
 
 function lookupInterestID($interest, $connection)
@@ -139,10 +144,5 @@ function getTilePlacement($user_id, $connection){
 		return $tile_id;
 	}
 }
-
-$success_message = "Your new tile has been added to your wall.";
-sendToJS(1, $success_message);
-
-exit();
 
 ?>
