@@ -47,8 +47,9 @@ function resizeImage($image,$width,$height,$scale) {
 		case "image/png":
 		case "image/x-png":
 			imagepng($newImage,$image);  
-			break;*/
+			break;
     }
+	*/
 	
 	chmod($image, 0777);
 	return $image;
