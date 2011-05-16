@@ -31,7 +31,11 @@ function resizeImage($image,$width,$height,$scale) {
   	}
 	imagecopyresampled($newImage,$source,0,0,0,0,$newImageWidth,$newImageHeight,$width,$height);
 	
-	switch($imageType) {
+	//new code:
+	imagegif($newImage,$image); 
+	break;
+	
+	/*switch($imageType) {
 		case "image/gif":
 	  		imagegif($newImage,$image); 
 			break;
@@ -43,7 +47,7 @@ function resizeImage($image,$width,$height,$scale) {
 		case "image/png":
 		case "image/x-png":
 			imagepng($newImage,$image);  
-			break;
+			break;*/
     }
 	
 	chmod($image, 0777);

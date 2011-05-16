@@ -92,11 +92,9 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		if ($max_dimension_num > $max_dimension){
 			$scale = $max_dimension/$max_dimension_num;
 			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-			imagejpeg($large_image_location);
 		}else{
 			$scale = 1;
 			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-			imagejpeg($large_image_location);
 		} 
 		
 		//set data array of picture location & print to JavaSrcipt
