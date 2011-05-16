@@ -2,10 +2,22 @@
 <SCRIPT LANGUAGE="JavaScript">
 $(document).ready(function(){
 
-	$('#tile_pic').imgAreaSelect({
+	$('.tile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "1:1",
-		onSelectChange: previewTile
+		onSelectChange: previewTile,
+		onSelectEnd: function (img, selection) {
+			var fullPath = $('img.tile_pic').attr('src');
+			var filename = fullPath.replace(/^.*\//, '');
+			
+            $('input[name=x1]').val(selection.x1);
+            $('input[name=y1]').val(selection.y1);
+            $('input[name=x2]').val(selection.x2);
+            $('input[name=y2]').val(selection.y2); 
+	        $('input[name=w]').val(selection.width);
+            $('input[name=h]').val(selection.height);
+			$('input[name=cropFile]').val(filename);
+        }		
     });
 	
 	function previewTile(img, selection) {
@@ -21,13 +33,7 @@ $(document).ready(function(){
 		marginLeft: -Math.round(scaleX * selection.x1),
 		marginTop: -Math.round(scaleY * selection.y1), 
 		});
-		
-		$('#x1').val(selection.x1);
-		$('#y1').val(selection.y1);
-		$('#x2').val(selection.x2);
-		$('#y2').val(selection.y2);
-		$('#w').val(selection.width);
-		$('#h').val(selection.height);
+			
 	} 
 	
 	// Submit file for tile crop
@@ -38,7 +44,14 @@ $(document).ready(function(){
             fileElementId:'file',
             dataType: 'json',
 			success: function(data){
-				$('#tile_upload_error').html(data); 
+				if (data.success == 0){
+					$('#tile_upload_error').html(data.message); 
+				} else {
+					$('.pagination_mosaic').hide();
+					$('#tiles').hide();
+					$('#tile_crop').show();	
+					$('.tile_pic').attr('src','images/temporary/'+data.message);
+				}
 			}
 		})
 		
@@ -93,23 +106,26 @@ $(document).ready(function(){
     <div id="tile_crop" style="display: none;">
     	<div id="crop_instruction">Click and drag on the image to customize your tile.</div>
         <div id="original_photo">
-            <img id="tile_pic" src="sydney2.jpg" />
+            <img class="tile_pic" />
         </div>
         <div id="preview_area">
         	Tile Preview
             <div id="preview">
-                <img id="tile_pic" src="sydney2.jpg"/>
+                <img class="tile_pic" />
             </div>
         </div>
         <div class="clear"></div>
         <div id="tag_tile">
         	Tag your tile with your interest
-            <form id="tile_crop_form" action="" method="POST">
+            <form id="tile_crop_form" action="actions/crop.php" method="POST">
             	<input type="text" class="text_form" id="assign_tag" name="assign_tag" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
                 <input type="hidden" name="y1" value="" />
                 <input type="hidden" name="x2" value="" />
                 <input type="hidden" name="y2" value="" />
+				<input type="hidden" name="w" value="" />
+                <input type="hidden" name="h" value="" />
+                <input type="hidden" name="cropFile" value="" />
                 <br />
                 <input type="submit" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
             </form>
