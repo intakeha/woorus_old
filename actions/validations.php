@@ -554,12 +554,12 @@ function validateInterestTag($tag)
 		$error_message = "Please use a longer name.";
 		sendToJS(0, $error_message);
 	}
-	elseif(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $tag)) 
+	elseif(!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ]/', $tag)) 
 	{
 		$error_message = "Tile should not start or end with a symbol.";
 		sendToJS(0, $error_message);
 	}
-	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $tag)) 
+	elseif(!preg_match('/[0-9A-Za-zÀ-ÖØ-öø-ÿ]$/', $tag)) 
 	{
 		$error_message = "Tile should not start or end with a symbol.";
 		sendToJS(0, $error_message);

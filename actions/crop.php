@@ -16,8 +16,8 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$picture_name_input = validateInterestTag($_POST["cropFile"]); 
-$tile_name = $_POST["assign_tag"];
+$picture_name_input = $_POST["cropFile"]; 
+$tile_name = validateInterestTag($_POST["assign_tag"]);
 
 //get ext & re-name
 $file_ext = strtolower(substr($picture_name_input, strrpos($picture_name_input, '.') + 1));  //one day, this will always be .jpg!
