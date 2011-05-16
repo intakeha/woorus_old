@@ -663,6 +663,10 @@ jQuery.validator.addMethod("validcity", function(value, element) {
 	return this.optional(element) || /^[a-zÀ-ÖØ-öø-ÿ-',\s]+$/i.test(value);
 }, "The name contains invalid characters.");
 
+jQuery.validator.addMethod("validtag", function(value, element) {
+	return this.optional(element) || /^[a-zÀ-ÖØ-öø-ÿ0-9-'\s]+$/i.test(value);
+}, "The name contains invalid characters.");
+
 // Captcha Theme Settings //
 var RecaptchaOptions = { 
 	theme : 'clean'
