@@ -53,7 +53,9 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		//rename image & add back on extension
 		$file_name_orig = basename($_FILES['file']['name']);
 		$file_ext = strtolower(substr($file_name_orig, strrpos($file_name_orig, '.') + 1));
-		$file_name = $user_id."_temp.".$file_ext;
+		
+		$key = strtotime(date('Y-m-d H:i:s'));
+		$file_name = $user_id . "_temp_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_temp_#####.***
 		
 		$large_path = "../images/temporary";
 		$thumbnail_path = "../images/interests";
@@ -97,11 +99,6 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		} 
 		
 		//set data array of picture location & print to JavaSrcipt
-		
-		/*$picture_data = array('file_name'=>$file_name);
-		$output = json_encode($picture_data);
-		print($output);*/
-		
 		sendToJS(1, $file_name);
 		
 	}
