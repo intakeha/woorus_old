@@ -16,16 +16,22 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$picture_name = $_POST["cropFile"];
+$picture_name_input = $_POST["cropFile"];
 $tile_name = $_POST["assign_tag"];
 
-die($x1.$y1.$x2.$y2.$picture_name.$tile_name);
+//die($x1.$y1.$x2.$y2.$picture_name_input.$tile_name);
+
+//get ext & re-name
+$file_ext = strtolower(substr($picture_name_input, strrpos($picture_name_input, '.') + 1));  //one day, this will always be .jpg!
+$key = strtotime(date('Y-m-d H:i:s'));
+
+$picture_name = $user_id . "_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_#####.***
 
 //set file path based on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
 
-$large_image_location = $large_path."/".$picture_name;
+$large_image_location = $large_path."/".$picture_name_input;
 $thumb_image_location = $thumbnail_path."/".$picture_name;
 
 
