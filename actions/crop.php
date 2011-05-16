@@ -128,7 +128,7 @@ function getTilePlacement($user_id, $connection){
 	$tile_placement_result = mysql_query($tile_placement_query, $connection) or die ("Error");
 	$tile_placement_count = mysql_num_rows($tile_placement_result); //necessary?
 	$row = mysql_fetch_assoc($tile_placement_result); //min function means that a row will always be returned
-	$tile_id = $row['tile_placement']; 
+	$tile_id = $row['min(tile_placement)']; 
 	
 	if ($tile_id == NULL)
 	{
