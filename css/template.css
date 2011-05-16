@@ -692,6 +692,16 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	font-size: 16px;
 }
 
+#crop_error {
+	text-align: left;
+	line-height: 20px;
+	padding-left: 10px;
+	border-left: 3px solid #C00;
+	position: absolute;
+	margin-top: 20px;
+}
+
+
 #mosaic_wall {
 	width: 490px;
 	float: left;

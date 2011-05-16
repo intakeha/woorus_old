@@ -637,6 +637,120 @@ $(document).ready(function(){
 		}
 	});	
 	
+	// Upload picture file for tile crop
+	$('#tile_pic_upload').click(function(){
+		$.ajaxFileUpload({
+			url: 'actions/upload_file.php',
+			secureuri: false,
+            fileElementId:'file',
+            dataType: 'json',
+			success: function(data){
+				if (data.success == 0){
+					$('#tile_upload_error').html(data.message); 
+				} else {
+					$('.pagination_mosaic').hide();
+					$('#tiles').hide();
+					$('#tile_crop').show();	
+					$('.tile_pic').attr('src','images/temporary/'+data.message);
+				}
+			}
+		})
+		
+		return false;
+	});
+	
+	// Call imgAreaSelect to crop picture and associated coordinates
+	$('.tile_pic').imgAreaSelect({
+        handles: true,
+		aspectRatio: "1:1",
+		onSelectChange: previewTile,
+		onSelectEnd: function (img, selection) {
+			var fullPath = $('img.tile_pic').attr('src');
+			var filename = fullPath.replace(/^.*\//, '');
+			
+            $('input[name=x1]').val(selection.x1);
+            $('input[name=y1]').val(selection.y1);
+            $('input[name=x2]').val(selection.x2);
+            $('input[name=y2]').val(selection.y2); 
+	        $('input[name=w]').val(selection.width);
+            $('input[name=h]').val(selection.height);
+			$('input[name=cropFile]').val(filename);
+        }		
+    });
+
+	// Function used by imgAreaSelect to preview thumbnail	
+	function previewTile(img, selection) {
+		if (!selection.width || !selection.height)
+		return;
+		
+		var scaleX = 75 / selection.width;
+		var scaleY = 75 / selection.height;
+		
+		$('#preview img').css({
+		width: Math.round(scaleX*img.width),
+		height: Math.round(scaleY*img.height),
+		marginLeft: -Math.round(scaleX * selection.x1),
+		marginTop: -Math.round(scaleY * selection.y1), 
+		});
+			
+	} 
+	
+	// Validate Tile_Crop_Form and send data to backend
+	$("#tile_crop_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#crop_error").text(validator.errorList[0].message);
+			}
+		},
+		submitHandler: function(form) {
+			$.post(
+				"actions/crop.php",
+				$('#tile_crop_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						if ($('#crop_error').hasClass('success_text')){
+							$('#crop_error').removeClass('success_text').addClass('error_text');
+						}
+						$('#crop_error').html(data.message); 
+					}else{
+						if ($('#crop_error').hasClass('error_text')){
+							$('#crop_error').removeClass('error_text').addClass('success_text');
+						}
+						$('#crop_error').text(data.message); 
+					}
+				}, "json"
+			);
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {						// Adding validation rules for each input //
+			assign_tag: {
+				required: true,
+				validtag: true,
+				startsymbol: true,
+				endsymbol: true,
+				minlength: 2,
+				maxlength: 30			
+			}
+		},
+		messages: {						// Customized error messages for each error //
+			assign_tag: {			
+				required: "Please provide a tag for your tile.",
+				validtag: "Tag contains invalid characters.",
+				startsymbol: "Tag should not start or end with a symbol.",
+				endsymbol: "Tag should not start or end with a symbol.",
+				minlength: "Tag should be at least 2 characters.",
+				maxlength: "Please enter no more than 30 characters for your tag."
+			}
+		}
+	});	
+	
 });
 
 jQuery.validator.addMethod("validname", function(value, element) {
