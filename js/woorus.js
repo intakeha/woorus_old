@@ -716,7 +716,8 @@ $(document).ready(function(){
 						$('#crop_error').html(data.message); 
 					}else{
 						$('#tile_crop').hide();
-						$('#tile_saved_success').html(data.message).show();
+						$('#tile_saved').show();
+						$('#tile_saved_success').html(data.message);
 					}
 				}, "json"
 			);
