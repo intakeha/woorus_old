@@ -713,15 +713,10 @@ $(document).ready(function(){
 				$('#tile_crop_form').serialize(),
 				function(data){
 					if (data.success == 0){
-						if ($('#crop_error').hasClass('success_text')){
-							$('#crop_error').removeClass('success_text').addClass('error_text');
-						}
 						$('#crop_error').html(data.message); 
 					}else{
-						if ($('#crop_error').hasClass('error_text')){
-							$('#crop_error').removeClass('error_text').addClass('success_text');
-						}
-						$('#crop_error').text(data.message); 
+						$('#tile_crop').hide();
+						$('#tile_saved_success').html(data.message).show();
 					}
 				}, "json"
 			);

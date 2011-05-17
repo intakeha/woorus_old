@@ -57,7 +57,7 @@
         <div id="tag_tile">
         	Tag your tile with your interest
             <form id="tile_crop_form" action="actions/crop.php" method="POST">
-            	<input type="text" class="text_form" id="assign_tag" name="assign_tag" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">            
+            	<input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
                 <input type="hidden" name="y1" value="" />
                 <input type="hidden" name="x2" value="" />
@@ -68,8 +68,9 @@
                 <br />
                 <input type="submit" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
             </form>
+            <div class="error_text" id="crop_error"></div>
         </div>
-        <div class="error_text" id="crop_error"></div>
+        <div id="tile_saved"><div class="success_text" id="tile_saved_success" style="display: none;"></div><input class="buttons" type="button" name="OK" value="OK" onclick="location.href='canvas.php?page=mosaic'"/></div>
     </div>
     <div id="mosaic_wall">
         <span>&laquo; Personalize your mosaic wall &raquo;</span>
