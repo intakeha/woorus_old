@@ -10,6 +10,8 @@ function getWidth($image);
 
 function convertImage($image) {
 	$new_image_name  = substr($image, 0, strrpos($image, '.')).".jpg";
+	die("image is ".$image. "new image is ". $new_image_name);
+	
 	imagejpeg($image, $new_image_name, 90); 
 	return $new_image_name;
 }
