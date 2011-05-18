@@ -17,7 +17,7 @@ function convertImage($image) {
 		switch($imageType) 
 		{
 			case "image/gif":
-				$source=imagecreatefromgif($image); 
+				$source=imagecreatefromgif($image);
 				break;
 			case "image/pjpeg":
 				$source=imagecreatefromjpeg($image); 
@@ -42,6 +42,43 @@ function convertImage($image) {
 }
 
 
+function resizeImage($image,$width,$height,$scale) {
+	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
+	$imageType = image_type_to_mime_type($imageType);
+	$newImageWidth = ceil($width * $scale);
+	$newImageHeight = ceil($height * $scale);
+	$newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
+	switch($imageType) {
+		case "image/gif":
+			$source=imagecreatefromgif($image); 
+			break;
+		case "image/pjpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
+		case "image/jpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
+		case "image/jpg":
+			$source=imagecreatefromjpeg($image); 
+			break;
+		case "image/png":
+			$source=imagecreatefrompng($image); 
+			break;
+		case "image/x-png":
+			$source=imagecreatefrompng($image); 
+			break;
+  	}
+	imagecopyresampled($newImage,$source,0,0,0,0,$newImageWidth,$newImageHeight,$width,$height);
+	
+	$new_image_name  = substr($image, 0, strrpos($image, '.')).".jpg";
+	imagejpeg($newImage, $new_image_name,90); 
+		
+	chmod($new_image_name, 0777);
+	return $new_image_name;
+}
+
+
+/*
 function resizeImage($image,$width,$height,$scale) {
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
 	$imageType = image_type_to_mime_type($imageType);
@@ -95,6 +132,8 @@ function resizeImage($image,$width,$height,$scale) {
 	chmod($image, 0777);
 	return $image;
 }
+*/
+
 //You do not need to alter these functions
 function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start_width, $start_height, $scale){
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);

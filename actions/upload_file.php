@@ -89,11 +89,11 @@ if ((($_FILES["file"]["type"] == "image/gif")
 			$error_message = "Please use a larger image.";
 			sendToJS(0, $error_message);
 		}
-		
+	
+		/*
 		//test file conversion to .jpg
 		$large_image_location = convertImage($large_image_location);
-		chmod($large_image_location, 0777);
-		die($large_image_location);
+		chmod($large_image_location, 0777);*/
 		
 		//Scale the image if it is greater than the max dimension
 		if ($max_dimension_num > $max_dimension){
@@ -105,8 +105,11 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		} 
 		
 		//set data array of picture location & print to JavaSrcipt
-				
-		sendToJS(1, $file_name);
+		
+		$new_file_name  = substr($file_name, 0, strrpos($file_name, '.')).".jpg";
+		sendToJS(1, $new_file_name);
+
+		//sendToJS(1, $file_name);
 		
 	}
 }
