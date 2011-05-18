@@ -33,8 +33,8 @@ function resizeImage($image,$width,$height,$scale) {
 	
 	switch($imageType) {
 		case "image/gif":
-	  		//imagegif($newImage,$image);
-			imagejpeg($newImage,$image,90); 
+	  		imagegif($newImage,$image);
+			//imagejpeg($newImage,$image,90); 
 			break;
       	case "image/pjpeg":
 		case "image/jpeg":
@@ -43,8 +43,8 @@ function resizeImage($image,$width,$height,$scale) {
 			break;
 		case "image/png":
 		case "image/x-png":
-			//imagepng($newImage,$image);  
-			imagejpeg($newImage,$image,90); 
+			imagepng($newImage,$image);  
+			//imagejpeg($newImage,$image,90); 
 			break;
 	}
 	
