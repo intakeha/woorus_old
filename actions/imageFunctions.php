@@ -9,8 +9,35 @@ function getWidth($image);
 ------------------------------------------------------------*/
 
 function convertImage($image) {
+	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
+		$imageType = image_type_to_mime_type($imageType);
+		$newImageWidth = ceil($width * $scale);
+		$newImageHeight = ceil($height * $scale);
+		$newImage = imagecreatetruecolor($newImageWidth,$newImageHeight);
+		switch($imageType) 
+		{
+			case "image/gif":
+				$source=imagecreatefromgif($image); 
+				break;
+			case "image/pjpeg":
+				$source=imagecreatefromjpeg($image); 
+				break;
+			case "image/jpeg":
+				$source=imagecreatefromjpeg($image); 
+				break;
+			case "image/jpg":
+				$source=imagecreatefromjpeg($image); 
+				break;
+			case "image/png":
+				$source=imagecreatefrompng($image); 
+				break;
+			case "image/x-png":
+				$source=imagecreatefrompng($image); 
+				break;
+		}
+
 	$new_image_name  = substr($image, 0, strrpos($image, '.')).".jpg";
-	imagejpeg($image, $new_image_name, 90); 
+	imagejpeg($source, $new_image_name, 90); 
 	return $new_image_name;
 }
 
