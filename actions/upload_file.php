@@ -54,6 +54,8 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$file_name_orig = basename($_FILES['file']['name']);
 		$file_ext = strtolower(substr($file_name_orig, strrpos($file_name_orig, '.') + 1));
 		
+		die("file name is". $file_name_orig." extension is ".$file_ext);
+		
 		$key = strtotime(date('Y-m-d H:i:s'));
 		$file_name = $user_id . "_temp_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_temp_#####.***
 		
