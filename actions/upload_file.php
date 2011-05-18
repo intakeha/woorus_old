@@ -98,9 +98,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		} 
 		
 		//set data array of picture location & print to JavaSrcipt
-		
-		die("file name is ". $file_name);
-		
+				
 		sendToJS(1, $file_name);
 		
 	}

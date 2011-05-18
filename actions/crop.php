@@ -25,6 +25,9 @@ $key = strtotime(date('Y-m-d H:i:s'));
 
 $picture_name = $user_id . "_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_#####.***
 
+die("input picture name is: ".$picture_name_input. " file extention is: ".$file_ext." new picture name is: ".$picture_name); 
+
+
 //set file path based on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
