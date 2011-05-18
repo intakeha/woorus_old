@@ -16,7 +16,7 @@ $x2 = $_POST["x2"];
 $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
-$picture_name_input = $_POST["cropFile"]; 
+$picture_name_input= $_POST["cropFile"]; 
 $tile_name = validateInterestTag($_POST["assign_tag"]);
 
 //get ext & re-name

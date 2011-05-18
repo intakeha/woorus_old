@@ -19,8 +19,12 @@ function resizeImage($image,$width,$height,$scale) {
 		case "image/gif":
 			$source=imagecreatefromgif($image); 
 			break;
-	    case "image/pjpeg":
+		case "image/pjpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
 		case "image/jpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
 		case "image/jpg":
 			$source=imagecreatefromjpeg($image); 
 			break;
@@ -34,17 +38,21 @@ function resizeImage($image,$width,$height,$scale) {
 	switch($imageType) {
 		case "image/gif":
 	  		imagegif($newImage,$image);
-			//imagejpeg($newImage,$image,90); 
 			break;
-      	case "image/pjpeg":
+		case "image/pjpeg":
+			imagejpeg($newImage,$image,90); 
+			break;
 		case "image/jpeg":
+			imagejpeg($newImage,$image,90); 
+			break;
 		case "image/jpg":
 	  		imagejpeg($newImage,$image,90); 
 			break;
 		case "image/png":
+			imagepng($newImage,$image);  
+			break;
 		case "image/x-png":
 			imagepng($newImage,$image);  
-			//imagejpeg($newImage,$image,90); 
 			break;
 	}
 	
@@ -64,12 +72,18 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 		case "image/gif":
 			$source=imagecreatefromgif($image); 
 			break;
-	    case "image/pjpeg":
+		case "image/pjpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
 		case "image/jpeg":
+			$source=imagecreatefromjpeg($image); 
+			break;
 		case "image/jpg":
 			$source=imagecreatefromjpeg($image); 
 			break;
-	    case "image/png":
+		case "image/png":
+			$source=imagecreatefrompng($image); 
+			break;
 		case "image/x-png":
 			$source=imagecreatefrompng($image); 
 			break;
@@ -79,12 +93,18 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 		case "image/gif":
 	  		imagegif($newImage,$thumb_image_name); 
 			break;
-      	case "image/pjpeg":
+		case "image/pjpeg":
+			magejpeg($newImage,$thumb_image_name,90); 
+			break;
 		case "image/jpeg":
+			magejpeg($newImage,$thumb_image_name,90); 
+			break;
 		case "image/jpg":
 	  		imagejpeg($newImage,$thumb_image_name,90); 
 			break;
 		case "image/png":
+			imagepng($newImage,$thumb_image_name);  
+			break;
 		case "image/x-png":
 			imagepng($newImage,$thumb_image_name);  
 			break;
