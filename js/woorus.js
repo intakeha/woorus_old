@@ -663,21 +663,19 @@ $(document).ready(function(){
 	$('.tile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "1:1",
-		minWidth: 75, 
-		minHeight: 75,
-		onSelectChange: previewTile,
-		onSelectEnd: function (img, selection) {
+		onInit: function () {
 			var fullPath = $('img.tile_pic').attr('src');
 			var filename = fullPath.replace(/^.*\//, '');
-			
+			$('input[name=cropFile]').val(filename);
+		},
+		onSelectChange: previewTile,
+		onSelectEnd: function (img, selection) {		
             $('input[name=x1]').val(selection.x1);
             $('input[name=y1]').val(selection.y1);
             $('input[name=x2]').val(selection.x2);
             $('input[name=y2]').val(selection.y2); 
 	        $('input[name=w]').val(selection.width);
             $('input[name=h]').val(selection.height);
-			$('input[name=cropFile]').val(filename);
-			$('#test_file').text(filename);
         }		
     });
 
