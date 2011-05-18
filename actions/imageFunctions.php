@@ -28,7 +28,9 @@ function resizeImage($image,$width,$height,$scale) {
 		case "image/jpg":
 			$source=imagecreatefromjpeg($image); 
 			break;
-	    case "image/png":
+		case "image/png":
+			$source=imagecreatefrompng($image); 
+			break;
 		case "image/x-png":
 			$source=imagecreatefrompng($image); 
 			break;
