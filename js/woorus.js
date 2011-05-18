@@ -675,6 +675,7 @@ $(document).ready(function(){
 	        $('input[name=w]').val(selection.width);
             $('input[name=h]').val(selection.height);
 			$('input[name=cropFile]').val(filename);
+			$('#test_file').val(filename);
         }		
     });
 
