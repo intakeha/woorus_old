@@ -90,6 +90,10 @@ if ((($_FILES["file"]["type"] == "image/gif")
 			sendToJS(0, $error_message);
 		}
 		
+		//test file conversion to .jpg
+		$large_image_location = convertImage($image);
+		chmod($large_image_location, 0777);
+		
 		//Scale the image if it is greater than the max dimension
 		if ($max_dimension_num > $max_dimension){
 			$scale = $max_dimension/$max_dimension_num;

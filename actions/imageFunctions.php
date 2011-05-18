@@ -8,6 +8,12 @@ function getWidth($image);
 
 ------------------------------------------------------------*/
 
+function convertImage($image) {
+	$new_image_name  = substr($image, 0, strrpos($image, '.')).".jpg";
+	imagejpeg($image, $new_image_name, 90); 
+	return $new_image_name;
+}
+
 
 function resizeImage($image,$width,$height,$scale) {
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
