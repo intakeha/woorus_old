@@ -31,8 +31,10 @@ $ext2= strtolower($ext);
 if ((($_FILES["file"]["type"] == "image/gif")
 || ($_FILES["file"]["type"] == "image/jpeg")
 || ($_FILES["file"]["type"] == "image/pjpeg")
+|| ($_FILES["file"]["type"] == "image/jpg")
 || ($_FILES["file"]["type"] == "image/bmp")
-|| ($_FILES["file"]["type"] == "image/png"))
+|| ($_FILES["file"]["type"] == "image/png")
+|| ($_FILES["file"]["type"] == "image/x-png"))
 && in_array($ext2,$validExtensions)
 && in_array($type,$validImageType))
 {
