@@ -25,7 +25,7 @@ $key = strtotime(date('Y-m-d H:i:s'));
 
 $picture_name = $user_id . "_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_#####.***
 
-$message = "input picture name is: ".$picture_name_input. " file extention is: ".$file_ext." new picture name is: ".$picture_name); 
+$message = "input picture name is: ".$picture_name_input. " file extention is: ".$file_ext." new picture name is: ".$picture_name; 
 sendToJS(0, $message);
 
 //set file path based on filename
