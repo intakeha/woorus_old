@@ -80,7 +80,7 @@ unlink($large_image_location);
 
 //send jSON array with success flag, message, filename
 $success_message = "Your new tile has been added to your wall.";
-$messageToSend = array('success' => 1, 'message'=>$success_message, 'filename'=>$picture_name);
+$messageToSend = array('success' => 1, 'message'=>$success_message, 'filename'=>$picture_name, 'tile_id'=>$tile_id, 'tag'=>$tile_name);
 $output = json_encode($messageToSend);
 die($output);
 
