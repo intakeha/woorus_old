@@ -76,10 +76,7 @@ $tile_placement = getTilePlacement($user_id, $connection);
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
 //delete the temp file
-$message = "temp image location is: ".$large_image_location; 
-sendToJS(0, $message);
-
-//unlink($large_image_location);
+unlink($large_image_location);
 
 //send jSON array with success flag, message, filename
 $success_message = "Your new tile has been added to your wall.";
