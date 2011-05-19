@@ -70,10 +70,10 @@
             </form>
             <div class="error_text" id="crop_error"></div>
         </div>
-        <div id="tile_saved" style="display: none;">
+    </div>
+    <div id="tile_saved" style="display: none;">
         	<div class="success_text" id="tile_saved_success"></div>
             <input class="buttons" type="button" name="OK" value="OK" onclick="location.href='canvas.php?page=mosaic'"/>
-        </div>
     </div>
     <div id="mosaic_wall">
         &laquo; Personalize your mosaic wall &raquo;
