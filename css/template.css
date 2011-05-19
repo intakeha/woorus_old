@@ -664,7 +664,6 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 }
 
 #crop_instruction {
-	font-size: 16px;
 	margin: 2px 0px 10px 0px;
 }
 
@@ -679,7 +678,8 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	padding: 5px;
 	border: 1px solid #ccc;
 	text-align: center;
-	font-size: 10px;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 #preview {
@@ -691,7 +691,6 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 
 #tag_tile {
 	margin-top: 10px;
-	font-size: 16px;
 }
 
 #crop_error {
@@ -707,12 +706,9 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 #mosaic_wall {
 	width: 490px;
 	float: left;
-	margin-left: 30px;
-}
-
-#mosaic_wall span {
 	font-size: 18px;
 	color: #215086;
+	margin-left: 30px;
 }
 
 #wall {

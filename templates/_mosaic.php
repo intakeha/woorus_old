@@ -43,7 +43,7 @@
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
     <div id="tile_crop" style="display: none;">
-    	<div id="crop_instruction"><span>Click on the image to crop and customize your tile.</span></div>
+    	<div id="crop_instruction">Click on the image to crop and customize your tile.</div>
         <div id="original_photo">
             <img class="tile_pic" />
         </div>
@@ -55,7 +55,7 @@
         </div>
         <div class="clear"></div>
         <div id="tag_tile">
-        	<span>Tag your tile with your interest</span>
+        	Tag your tile with your interest
             <form id="tile_crop_form" action="actions/crop.php" method="POST">
             	<input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
@@ -76,7 +76,7 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        <span>&laquo; Personalize your mosaic wall &raquo;</span>
+        &laquo; Personalize your mosaic wall &raquo;
         <div id="wall">
             <ul id="wall_display">
                 <li style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
