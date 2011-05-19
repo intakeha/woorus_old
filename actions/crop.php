@@ -20,7 +20,7 @@ $picture_name_input= $_POST["cropFile"];
 $tile_name = validateInterestTag($_POST["assign_tag"]);
 
 //if coordinates are null, send error message to JS
-if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input= == NULL || $tile_name == NULL){
+if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input == NULL || $tile_name == NULL){
 
 	$message = "Please click on the image & crop to create your tile."; 
 	sendToJS(0, $message);
