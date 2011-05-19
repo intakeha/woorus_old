@@ -43,19 +43,19 @@
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
     <div id="tile_crop" style="display: none;">
-    	<div id="crop_instruction">Click on the image to crop and customize your tile.<span id="test_file"></span></div>
+    	<div id="crop_instruction"><span>Click on the image to crop and customize your tile.</span></div>
         <div id="original_photo">
             <img class="tile_pic" />
         </div>
         <div id="preview_area">
-        	Tile Preview
+        	<font>Tile Preview</font>
             <div id="preview">
                 <img class="tile_pic" />
             </div>
         </div>
         <div class="clear"></div>
         <div id="tag_tile">
-        	Tag your tile with your interest
+        	<span>Tag your tile with your interest</span>
             <form id="tile_crop_form" action="actions/crop.php" method="POST">
             	<input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
