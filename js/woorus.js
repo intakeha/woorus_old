@@ -712,15 +712,13 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#crop_error').html(data.message); 
 					}else{
-						$('#tile_crop').hide();
-					/*	$('.imgareaselect-selection').hide();
+						$('.imgareaselect-selection').hide();
 						$('.imgareaselect-border1').hide();
 						$('.imgareaselect-border2').hide();
 						$('.imgareaselect-border3').hide();
 						$('.imgareaselect-border4').hide();
 						$('.imgareaselect-handle').hide();
 						$('.imgareaselect-outer').hide();
-					*/
 						$('#tile_crop').hide();	
 						$('.pagination_mosaic').show();
 						$('#tiles').show();
