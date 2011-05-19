@@ -33,9 +33,6 @@ $key = strtotime(date('Y-m-d H:i:s'));
 
 $picture_name = $user_id . "_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_#####.***
 
-$message = "input picture name is: ".$picture_name_input. " file extention is: ".$file_ext." new picture name is: ".$picture_name; 
-sendToJS(0, $message);
-
 //set file path based on filename
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
@@ -81,6 +78,10 @@ $tile_placement = getTilePlacement($user_id, $connection);
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
 //delete the temp file
+$message = "temp image location is: ".$large_image_location; 
+sendToJS(0, $message);
+
+
 unlink($large_image_location);
 
 //send jSON array with success flag, message, filename
