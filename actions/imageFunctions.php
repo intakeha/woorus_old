@@ -148,18 +148,12 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 		case "image/gif":
 			$source=imagecreatefromgif($image); 
 			break;
-		case "image/pjpeg":
-			$source=imagecreatefromjpeg($image); 
-			break;
+	    case "image/pjpeg":
 		case "image/jpeg":
-			$source=imagecreatefromjpeg($image); 
-			break;
 		case "image/jpg":
 			$source=imagecreatefromjpeg($image); 
 			break;
-		case "image/png":
-			$source=imagecreatefrompng($image); 
-			break;
+	    case "image/png":
 		case "image/x-png":
 			$source=imagecreatefrompng($image); 
 			break;
@@ -169,18 +163,12 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 		case "image/gif":
 	  		imagegif($newImage,$thumb_image_name); 
 			break;
-		case "image/pjpeg":
-			magejpeg($newImage,$thumb_image_name,90); 
-			break;
+      	case "image/pjpeg":
 		case "image/jpeg":
-			magejpeg($newImage,$thumb_image_name,90); 
-			break;
 		case "image/jpg":
 	  		imagejpeg($newImage,$thumb_image_name,90); 
 			break;
 		case "image/png":
-			imagepng($newImage,$thumb_image_name);  
-			break;
 		case "image/x-png":
 			imagepng($newImage,$thumb_image_name);  
 			break;
@@ -188,6 +176,8 @@ function resizeThumbnailImage($thumb_image_name, $image, $width, $height, $start
 	chmod($thumb_image_name, 0777);
 	return $thumb_image_name;
 }
+
+
 //You do not need to alter these functions
 function getHeight($image) {
 	$size = getimagesize($image);
