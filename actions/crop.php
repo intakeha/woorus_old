@@ -9,7 +9,6 @@ $thumb_height = "75";		// Height of thumbnail image
 session_start();
 $user_id = $_SESSION['id'];
 
-
 $x1 = $_POST["x1"];
 $y1 = $_POST["y1"];
 $x2 = $_POST["x2"];
@@ -24,7 +23,6 @@ if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h
 
 	$message = "Please click on the image & crop to create your tile."; 
 	sendToJS(0, $message);
-
 }
 
 //get ext & re-name
@@ -40,6 +38,8 @@ $thumbnail_path = "../images/interests";
 $large_image_location = $large_path."/".$picture_name_input;
 $thumb_image_location = $thumbnail_path."/".$picture_name;
 
+$message = "large image location is: ".$large_image_location." thumb image location is: ".$thumb_image_location; 
+sendToJS(0, $message);
 
 //Scale the image to the thumbnail size & save
 $scale = $thumb_width/$w;
