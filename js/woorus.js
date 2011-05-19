@@ -652,6 +652,7 @@ $(document).ready(function(){
 					$('#tiles').hide();
 					$('#tile_crop').show();	
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
+					$('input[name=cropFile]').val(data.message);
 				}
 			}
 		})
@@ -663,13 +664,8 @@ $(document).ready(function(){
 	$('.tile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "1:1",
-		onInit: function () {
-			var fullPath = $('img.tile_pic').attr('src');
-			var filename = fullPath.replace(/^.*\//, '');
-			$('input[name=cropFile]').val(filename);
-		},
 		onSelectChange: previewTile,
-		onSelectEnd: function (img, selection) {		
+		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
             $('input[name=y1]').val(selection.y1);
             $('input[name=x2]').val(selection.x2);

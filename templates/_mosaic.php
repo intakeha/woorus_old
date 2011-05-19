@@ -43,7 +43,7 @@
     </div>
 	<div class="pagination_mosaic"><a class="arrows pagination_right" href="#"></a></div>
     <div id="tile_crop" style="display: none;">
-    	<div id="crop_instruction">Click and drag on the image to customize your tile.<span id="test_file"></span></div>
+    	<div id="crop_instruction">Click on the image to crop and customize your tile.<span id="test_file"></span></div>
         <div id="original_photo">
             <img class="tile_pic" />
         </div>
