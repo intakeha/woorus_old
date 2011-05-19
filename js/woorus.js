@@ -652,7 +652,7 @@ $(document).ready(function(){
 				} else {
 					$('.pagination_mosaic').hide();
 					$('#tiles').hide();
-					$('#tile_crop').show();	
+					$('#tile_crop').show();
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
 					$('input[name=cropFile]').val(data.message);
 				}
@@ -667,6 +667,15 @@ $(document).ready(function(){
         handles: true,
 		aspectRatio: "1:1",
 		onSelectChange: previewTile,
+		onInit: function (img, selection) {				
+			$('.imgareaselect-selection').show();
+			$('.imgareaselect-border1').show();
+			$('.imgareaselect-border2').show();
+			$('.imgareaselect-border3').show();
+			$('.imgareaselect-border4').show();
+			$('.imgareaselect-handle').show();
+			$('.imgareaselect-outer').show();
+        },
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
             $('input[name=y1]').val(selection.y1);
