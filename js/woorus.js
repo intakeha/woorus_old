@@ -653,6 +653,7 @@ $(document).ready(function(){
 					$('.pagination_mosaic').hide();
 					$('#tiles').hide();
 					$('#tile_crop').show();
+					$('input[name=assign_tag]').val('');
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
 					$('input[name=cropFile]').val(data.message);
 				}
@@ -667,15 +668,6 @@ $(document).ready(function(){
         handles: true,
 		aspectRatio: "1:1",
 		onSelectChange: previewTile,
-		onInit: function (img, selection) {				
-			$('.imgareaselect-selection').show();
-			$('.imgareaselect-border1').show();
-			$('.imgareaselect-border2').show();
-			$('.imgareaselect-border3').show();
-			$('.imgareaselect-border4').show();
-			$('.imgareaselect-handle').show();
-			$('.imgareaselect-outer').show();
-        },
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
             $('input[name=y1]').val(selection.y1);
@@ -723,17 +715,14 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#crop_error').html(data.message); 
 					}else{
-						$('.imgareaselect-selection').hide();
-						$('.imgareaselect-border1').hide();
-						$('.imgareaselect-border2').hide();
-						$('.imgareaselect-border3').hide();
-						$('.imgareaselect-border4').hide();
-						$('.imgareaselect-handle').hide();
-						$('.imgareaselect-outer').hide();
-						$('#tile_crop').hide();	
+						$('#crop_error').empty();
+						$('#tile_crop').hide();
 						$('.pagination_mosaic').show();
 						$('#tiles').show();
 						$('#tile_upload_error').hide();
+						$('.tile_pic').imgAreaSelect({
+							hide: true
+						});
 						$('#tile_upload_success').show().html(data.message);
 					}
 				}, "json"
