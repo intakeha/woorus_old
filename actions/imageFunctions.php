@@ -8,6 +8,8 @@ function getWidth($image);
 
 ------------------------------------------------------------*/
 
+//combined with the resize function
+/* 
 function convertImage($image) {
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);
 		$imageType = image_type_to_mime_type($imageType);
@@ -40,7 +42,7 @@ function convertImage($image) {
 	imagejpeg($source, $new_image_name, 90); 
 	return $new_image_name;
 }
-
+*/
 
 function resizeImage($image,$width,$height,$scale) {
 	list($imagewidth, $imageheight, $imageType) = getimagesize($image);

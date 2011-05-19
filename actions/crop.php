@@ -19,6 +19,14 @@ $h = $_POST["h"];
 $picture_name_input= $_POST["cropFile"]; 
 $tile_name = validateInterestTag($_POST["assign_tag"]);
 
+//if coordinates are null, send error message to JS
+if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input= == NULL || $tile_name == NULL){
+
+	$message = "Please click on the image & crop to create your tile."; 
+	sendToJS(0, $message);
+
+}
+
 //get ext & re-name
 $file_ext = strtolower(substr($picture_name_input, strrpos($picture_name_input, '.') + 1));  //one day, this will always be .jpg!
 $key = strtotime(date('Y-m-d H:i:s'));
@@ -75,9 +83,11 @@ updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connec
 //delete the temp file
 unlink($large_image_location);
 
+//send jSON array with success flag, message, filename
 $success_message = "Your new tile has been added to your wall.";
-sendToJS(1, $success_message);
-exit();
+$messageToSend = array('success' => 1, 'message'=>$success_message, 'filename'=>$picture_name);
+$output = json_encode($messageToSend);
+die($output);
 
 
 function lookupInterestID($interest, $connection)
