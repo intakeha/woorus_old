@@ -38,12 +38,14 @@ $thumbnail_path = "../images/interests";
 $large_image_location = $large_path."/".$picture_name_input;
 $thumb_image_location = $thumbnail_path."/".$picture_name;
 
-$message = "large image location is: ".$large_image_location." thumb image location is: ".$thumb_image_location; 
-sendToJS(0, $message);
+
 
 //Scale the image to the thumbnail size & save
 $scale = $thumb_width/$w;
 $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
+
+$message = "Image should be cropped"; 
+sendToJS(0, $message);
 
 //---------------Now, enter the image /tile / interests into the DB-------
 
