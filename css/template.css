@@ -702,16 +702,6 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	margin-top: 20px;
 }
 
-#tile_saved{
-	width: 575px;
-	height: 520px;
-	float: left;
-	font-size: 18px;
-	color: #215086;
-	text-align: left;
-}
-
-
 #mosaic_wall {
 	width: 490px;
 	float: left;

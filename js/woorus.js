@@ -713,15 +713,18 @@ $(document).ready(function(){
 						$('#crop_error').html(data.message); 
 					}else{
 						$('#tile_crop').hide();
-						$('.imgareaselect-selection').hide();
+					/*	$('.imgareaselect-selection').hide();
 						$('.imgareaselect-border1').hide();
 						$('.imgareaselect-border2').hide();
 						$('.imgareaselect-border3').hide();
 						$('.imgareaselect-border4').hide();
 						$('.imgareaselect-handle').hide();
 						$('.imgareaselect-outer').hide();
-						$('#tile_saved').show();
-						$('#tile_saved_success').html(data.message);
+					*/
+						$('#tile_crop').hide();	
+						$('.pagination_mosaic').show();
+						$('#tiles').show();
+						$('#tile_upload_error').html(data.message);
 					}
 				}, "json"
 			);
