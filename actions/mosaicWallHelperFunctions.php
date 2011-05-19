@@ -73,8 +73,8 @@ function getTilePlacement($user_id, $connection){
 	
 	if ($tile_id == NULL)
 	{
-		$error_message = "Your wall is full. Please remove some tiles to add new tiles.";
-		sendToJS(0, $error_message);
+		$error_message = "Your wall is full. Your tile is placed in the tile bank.";
+		sendToJS(1, $error_message);
 	}else
 	{
 		return $tile_id;
