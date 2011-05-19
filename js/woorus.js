@@ -646,6 +646,8 @@ $(document).ready(function(){
             dataType: 'json',
 			success: function(data){
 				if (data.success == 0){
+					$('#tile_upload_success').hide();
+					$('#tile_upload_error').show();
 					$('#tile_upload_error').html(data.message); 
 				} else {
 					$('.pagination_mosaic').hide();
@@ -722,7 +724,8 @@ $(document).ready(function(){
 						$('#tile_crop').hide();	
 						$('.pagination_mosaic').show();
 						$('#tiles').show();
-						$('#tile_upload_error').html(data.message);
+						$('#tile_upload_error').hide();
+						$('#tile_upload_success').show().html(data.message);
 					}
 				}, "json"
 			);

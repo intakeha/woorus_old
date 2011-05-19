@@ -38,6 +38,7 @@
                     <br />
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
                     <div class="error_text" id="tile_upload_error"></div>
+                    <div class="error_text" id="tile_upload_success" style="display: none;"></div>
                 </form>
         </div>
     </div>

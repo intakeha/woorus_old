@@ -650,6 +650,15 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	margin: -25px 0px 0px 120px;
 }
 
+#tile_upload_success {
+	text-align: left;
+	line-height: 20px;
+	padding-left: 10px;
+	border-left: 3px solid #0C0;
+	position: absolute;
+	margin: -25px 0px 0px 120px;
+}
+
 #tile_crop_form {
 	margin-top: 10px;
 }
