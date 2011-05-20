@@ -650,7 +650,6 @@ $(document).ready(function(){
 					$('#tile_upload_error').show();
 					$('#tile_upload_error').html(data.message); 
 				} else {
-					$('#tile_loading').show();
 					$('.pagination_mosaic').hide();
 					$('#tiles').hide();
 					$('#tile_crop').show();
@@ -721,6 +720,7 @@ $(document).ready(function(){
 						$('.pagination_mosaic').show();
 						$('#tiles').show();
 						$('#tile_upload_error').hide();
+						$('#tile_display').append('<li class="sponsored" style="background-image: url(images/interests/'+data.filename+');">'+data.tag+'</li>');
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
