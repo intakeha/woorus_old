@@ -5,6 +5,7 @@ require('connect.php');
 require('validations.php');
 require('loginHelperFunctions.php');
 require('imageFunctions.php');
+require('mosaicWallHelperFunctions.php');
 
 //settings for image tiles
 $thumb_width = "75";		// Width of thumbnail image
@@ -272,7 +273,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			$tile_filename = getFacebookImage($fb_interest_id, $user_id, $thumb_width);
 			
 			//update other tables based on ID
-			updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection); 
+			updateTileTable($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection); 
 			$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
 			updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
@@ -283,19 +284,6 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 	return $interest_id;
 }
 
-
-function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
-{
-	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, tile_id, update_time) VALUES (NULL, '". mysql_real_escape_string($user_id)."' , '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_id)."', NOW() )";
-	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
-}
-
-function updateTileTable_Facebook($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection)
-{
-	//enter in line to tile table
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id, sponsored) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_filename)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."','".mysql_real_escape_string($fb_interest_id)."', 0)";
-	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
-}
 
 function lookupTileID_Facebook($fb_id, $connection)
 {
@@ -310,17 +298,10 @@ function lookupTileID_Facebook($fb_id, $connection)
 		return $retrieved_tile_id;
 	}else
 	{
-		die("facebook interest entered without tile");
+		die("Facebook interest entered without tile.");
 	}
 	
 }
-
-function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection){
-
-	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."', update_time = NOW() WHERE user_id = '".$user_id."' AND tile_placement = '".$tile_placement."' ";
-	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
-}
-
 
 
 function getFacebookImage($fb_interest_id, $user_id, $thumb_width){

@@ -32,11 +32,13 @@ function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
-function updateTileTable($user_id, $interest_id, $picture_name, $connection)
+
+function updateTileTable($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection)
 {
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id, sponsored) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($picture_name)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."', 0, 0)";
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id, sponsored) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_filename)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."','".mysql_real_escape_string($fb_interest_id)."', 0)";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
+
 
 function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection)
 {

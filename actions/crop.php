@@ -67,7 +67,7 @@ if ($interest_id == NULL)
 }
 
 //save the tile & get tile id
-updateTileTable($user_id, $interest_id, $picture_name, $connection); 
+updateTileTable($user_id, $interest_id, 0, $picture_name, $connection); 
 $tile_id = lookupTileID($picture_name, $connection);
 
 //update user interests table (requires interest id & tile id)
