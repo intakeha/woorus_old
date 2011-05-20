@@ -34,7 +34,7 @@ function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 
 function updateTileTable($user_id, $interest_id, $picture_name, $connection)
 {
-	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($picture_name)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."', 0)";
+	$query_update_tile = "INSERT INTO `tiles` (id, interest_id, tile_filename, update_time, picture_flagged, user_id, facebook_id, sponsored) VALUES (NULL, '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($picture_name)."', NOW(), 0 ,'".mysql_real_escape_string($user_id)."', 0, 0)";
 	$result = mysql_query($query_update_tile, $connection) or die ("Error 8");		
 }
 
