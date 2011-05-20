@@ -81,7 +81,7 @@ updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connec
 
 
 //send jSON array with success flag, message, filename
-$success_message = "Your new tile has been added to your wall. picture name is: "$picture_name." tile id is :".$tile_id." tag is: ".$tile_name;
+$success_message = "Your new tile has been added to your wall. picture name is: ".$picture_name." tile id is :".$tile_id." tag is: ".$tile_name;
 $messageToSend = array('success' => 1, 'message'=>$success_message, 'filename'=>$picture_name, 'tile_id'=>$tile_id, 'tag'=>$tile_name);
 $output = json_encode($messageToSend);
 die($output);
