@@ -708,6 +708,7 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
+			var tile_type = 'community';
 			$.post(
 				"actions/crop.php",
 				$('#tile_crop_form').serialize(),
@@ -715,18 +716,27 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#crop_error').html(data.message); 
 					}else{
-						$('#crop_save').hide();
 						$('#crop_error').empty();
 						$('#tile_crop').hide();
 						$('.pagination_mosaic').show();
 						$('#tiles').show();
 						$('#tile_upload_error').hide();
-						$('#tile_display').append('<li class="sponsored" style="background-image: url(images/interests/'+data.filename+');">'+data.tag+'</li>');
+						switch (data.tile_type){
+							case "s":
+								tile_type = "sponsored"
+								break
+							case "u":
+								tile_type = "uploaded"
+								break
+							case "c":
+								tile_type = "community"
+								break
+						};
+						$('#tile_display').append('<li class="'+tile_type+'sponsored" style="background-image: url(images/interests/'+data.filename+');">'+data.tag+'</li>');
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
 						$('#tile_upload_success').show().html(data.message);
-						$('#crop_save').show();
 					}
 				}, "json"
 			);
