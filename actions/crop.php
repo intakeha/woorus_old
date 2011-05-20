@@ -76,12 +76,21 @@ updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add th
 //lookup tile placment
 $tile_placement = getTilePlacement($user_id, $connection);
 
-//add to user's mosaic wall
-updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+if ($tile_placement == NULL)
+{
+	//send jSON array with message that the wall is full
+	$success_message = "Your wall is full. Your tile has been placed in the tile bank.";
 
+}else
+{
+	//add to user's mosaic wall
+	updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
-//send jSON array with success flag, message, filename
-$success_message = "Your new tile has been added to your wall. picture name is: ".$picture_name." tile id is :".$tile_id." tag is: ".$tile_name;
+	//send jSON array with success flag, message, filename
+	$success_message = "Your new tile has been added to your wall.";
+
+}
+
 $messageToSend = array('success' => 1, 'message'=>$success_message, 'filename'=>$picture_name, 'tile_id'=>$tile_id, 'tag'=>$tile_name);
 $output = json_encode($messageToSend);
 die($output);
