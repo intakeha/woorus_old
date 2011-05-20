@@ -21,6 +21,8 @@ updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add th
 //lookup tile placment
 $tile_placement = getTilePlacement($user_id, $connection);
 
+die($user_id." ".$tile_id." ".$interest_id." ".$tile_placement);
+
 //add to user's mosaic wall
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
