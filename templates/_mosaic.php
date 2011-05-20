@@ -69,7 +69,7 @@
                 <input type="hidden" name="h" value="" />
                 <input type="hidden" name="cropFile" value="" />
                 <br />
-                <input type="submit" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
+                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
             </form>
             <div class="error_text" id="crop_error"></div>
         </div>

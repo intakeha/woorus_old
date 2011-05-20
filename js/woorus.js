@@ -715,6 +715,7 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#crop_error').html(data.message); 
 					}else{
+						$('#crop_save').hide();
 						$('#crop_error').empty();
 						$('#tile_crop').hide();
 						$('.pagination_mosaic').show();
@@ -725,6 +726,7 @@ $(document).ready(function(){
 							hide: true
 						});
 						$('#tile_upload_success').show().html(data.message);
+						$('#crop_save').show();
 					}
 				}, "json"
 			);
