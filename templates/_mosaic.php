@@ -1,4 +1,11 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(li).mouseover(function(){
+			$(li).append('working');
+		})
+	});
+</script>
 <div id="mosaic">
 	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
 	<div id="tiles">

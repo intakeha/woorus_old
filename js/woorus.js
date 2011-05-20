@@ -708,7 +708,7 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			var tile_type = 'community';
+			var tile_type = "community";
 			$.post(
 				"actions/crop.php",
 				$('#tile_crop_form').serialize(),
@@ -722,21 +722,22 @@ $(document).ready(function(){
 						$('#tiles').show();
 						$('#tile_upload_error').hide();
 						switch (data.tile_type){
-							case "s":
+							case "S":
 								tile_type = "sponsored"
 								break
-							case "u":
+							case "U":
 								tile_type = "uploaded"
 								break
-							case "c":
+							case "C":
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append('<li class="'+tile_type+'sponsored" style="background-image: url(images/interests/'+data.filename+');">'+data.tag+'</li>');
+						$('#tile_display').append(
+							'<li class="'+tile_type+'" style="background-image: url(images/interests/'+data.filename+');"><span>'+data.tag+'</span></li>');
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
-						$('#tile_upload_success').show().html(data.message);
+						$('#tile_upload_success').show().html(data.tile_type);
 					}
 				}, "json"
 			);
