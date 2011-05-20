@@ -43,6 +43,9 @@ $thumb_image_location = $thumbnail_path."/".$picture_name;
 $scale = $thumb_width/$w;
 $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location,$w,$h,$x1,$y1,$scale);
 
+//delete the temp file
+unlink($large_image_location);
+
 
 //---------------Now, enter the image /tile / interests into the DB-------
 
@@ -76,8 +79,6 @@ $tile_placement = getTilePlacement($user_id, $connection);
 //add to user's mosaic wall
 updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
-//delete the temp file
-unlink($large_image_location);
 
 //send jSON array with success flag, message, filename
 $success_message = "Your new tile has been added to your wall.";
