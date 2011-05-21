@@ -1,11 +1,5 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
-<script type="text/javascript">
-	$(document).ready(function(){
-		$(li).mouseover(function(){
-			$(li).append('working');
-		})
-	});
-</script>
+
 <div id="mosaic">
 	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
 	<div id="tiles">
@@ -20,8 +14,8 @@
         </div>
         <div id="tiles_bank">
             <ul id="tile_display">
-<!--            <li class="sponsored" style="background-image: url(images/interests/bep.png);">BEP</li>
-            <li class="sponsored" style="background-image: url(images/interests/santorini.png);">Santorini</li>
+           	<li class="uploaded" onmouseover="showInterest($(this), 'BEP')" onmouseout="hideInterest($(this))" style="background-image:url(images/interests/bep.png)"></li>
+<!--             <li class="sponsored" style="background-image: url(images/interests/santorini.png);">Santorini</li>
             <li class="sponsored" style="background-image: url(images/interests/hats.png);">hats</li>
             <li class="sponsored" style="background-image: url(images/interests/ferrari.png);">ferrari</li>
             <li class="sponsored" style="background-image: url(images/interests/vespa.png);">vespa</li>

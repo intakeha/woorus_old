@@ -733,11 +733,12 @@ $(document).ready(function(){
 								break
 						};
 						$('#tile_display').append(
-							'<li class="'+tile_type+'" style="background-image: url(images/interests/'+data.filename+');"><span>'+data.tag+'</span></li>');
+							'<li class="'+tile_type+'" onmouseover="showInterest($(this), "'+data.tag+'")" on mouseout="hideInterest($(this))" style="background-image: url(images/interests/'+data.filename+');"></li>');
+							
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
-						$('#tile_upload_success').show().html(data.tile_type);
+						$('#tile_upload_success').show().html(data.message);
 					}
 				}, "json"
 			);
@@ -800,4 +801,13 @@ jQuery.validator.addMethod("validtag", function(value, element) {
 // Captcha Theme Settings //
 var RecaptchaOptions = { 
 	theme : 'clean'
+};
+
+function showInterest(obj, tag){	
+	obj.addClass('tile_tag');
+	obj.html(tag);
+};
+
+function hideInterest(obj){
+	obj.removeClass('tile_tag');
 };
