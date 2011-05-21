@@ -733,7 +733,7 @@ $(document).ready(function(){
 								break
 						};
 						$('#tile_display').append(
-							'<li class="'+tile_type+'" onmouseover="showInterest($(this), "'+data.tag+'")" on mouseout="hideInterest($(this))" style="background-image: url(images/interests/'+data.filename+');"></li>');
+							'<li class="'+tile_type+'" onmouseover="showInterest($(this), "'+data.tag+'")" onmouseout="hideInterest($(this))" style="background-image: url(images/interests/'+data.filename+');"></li>');
 							
 						$('.tile_pic').imgAreaSelect({
 							hide: true
