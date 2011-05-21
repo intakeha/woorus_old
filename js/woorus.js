@@ -732,8 +732,7 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append(
-							'<li class="'+tile_type+'" onmouseover="showInterest($(this), "'+data.tag+'")" onmouseout="hideInterest($(this))" style="background-image: url(images/interests/'+data.filename+');"></li>');
+						$('#tile_display').append("<li class=\'"+tile_type+"\' style=\'background-image:url(images/interests/"+data.filename+");\' onmouseout=\'hideInterest($(this))\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\"></li> ");
 							
 						$('.tile_pic').imgAreaSelect({
 							hide: true
@@ -810,4 +809,5 @@ function showInterest(obj, tag){
 
 function hideInterest(obj){
 	obj.removeClass('tile_tag');
+	obj.html('');
 };
