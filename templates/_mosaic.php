@@ -15,8 +15,8 @@
         <div id="tiles_bank">
             <ul id="tile_display">
            	<li class="uploaded" onmouseover="showInterest($(this), 'BEP')" onmouseout="hideInterest($(this))" style="background-image:url(images/interests/bep.png)"></li>
-<!--             <li class="sponsored" style="background-image: url(images/interests/santorini.png);">Santorini</li>
-            <li class="sponsored" style="background-image: url(images/interests/hats.png);">hats</li>
+            <li class="uploaded" onmouseover="showInterest2($(this), 'Santorini')" onmouseout="hideInterest2($(this))"><img src="images/interests/santorini.png" /></li>
+<!--             <li class="sponsored" style="background-image: url(images/interests/hats.png);">hats</li>
             <li class="sponsored" style="background-image: url(images/interests/ferrari.png);">ferrari</li>
             <li class="sponsored" style="background-image: url(images/interests/vespa.png);">vespa</li>
             <li class="sponsored" style="background-image: url(images/interests/santorini2.png);">Greece</li>

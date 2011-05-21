@@ -811,3 +811,13 @@ function hideInterest(obj){
 	obj.removeClass('tile_tag');
 	obj.html('');
 };
+
+function showInterest2(obj, tag){	
+	obj.addClass('tile_tag2');
+	obj.html(tag);
+};
+
+function hideInterest2(obj){
+	obj.removeClass('tile_tag');
+	obj.html('<img src="images/interests/santorini.png" />');
+};
