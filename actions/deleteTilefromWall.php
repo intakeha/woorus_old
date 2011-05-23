@@ -20,4 +20,11 @@ mysql_select_db($db_name);
 //delete tile from user's wall
 updateMosaicWallTable($user_id, 0 , 0 , $tile_placement, $connection);
 
+
+$success_message = "The tile has been delete from your wall.";
+$messageToSend = array('success' => 1, 'message'=>$success_message);
+$output = json_encode($messageToSend);
+die($output);
+
+
 ?>

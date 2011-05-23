@@ -26,6 +26,7 @@ while ($row = mysql_fetch_assoc($result)){
 	$tile_id = $row['tile_id'];
 	if ($tile_id == 0 ){
 		$tile_location = NULL; //user does not have a tile in all spots, so if 0, means no tile.
+		break;
 	}else
 	{
 		//query based on tile id & retreive tile filename
@@ -46,7 +47,8 @@ while ($row = mysql_fetch_assoc($result)){
 	//step 2. get the interest name for the interest id
 	$interest_id = $row['interest_id'];
 	if ($interest_id == 0 ){
-		$interest_name = NULL; //user does not have a tile in all spots, so if 0, means no interest id.
+		$interest_name = NULL; //this would be strange since the tile ID and interest ID are really a pair
+		break;
 	}else
 	{
 		//query based on interest id & retreive interest name
