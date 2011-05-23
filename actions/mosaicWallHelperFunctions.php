@@ -83,7 +83,7 @@ function getTilePlacement($user_id, $connection){
 	}
 }
 
-function getInterestfromTile($tile_id, $connection){
+function getInterestFromTile($tile_id, $connection){
 
 	$interest_query = "SELECT interest_id from `tiles` WHERE id = '".$tile_id."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error");
@@ -98,6 +98,34 @@ function getInterestfromTile($tile_id, $connection){
 	}
 }
 
+function getFilenameFromTile($tile_id, $connection){
 
+	$filename_query = "SELECT tile_filename from `tiles` WHERE id = '".$tile_id."' ";
+	$filename_result = mysql_query($filename_query, $connection) or die ("Error");
+	if (mysql_num_rows($interest_result) > 0)
+	{
+		$row = mysql_fetch_assoc($filename_result);
+		$tile_filename = $row['tile_filename'];
+		return $tile_filename;
+	}else
+	{
+		return NULL;
+	}
+}
+
+function getInterestFromId($interest_id, $connection){
+
+	$interest_query = "SELECT interest_name from `interests` WHERE id = '".$interest_id."' ";
+	$interest_result = mysql_query($interest_query, $connection) or die ("Error");
+	if (mysql_num_rows($interest_result) > 0)
+	{
+		$row = mysql_fetch_assoc($interest_result);
+		$interest_name = $row['interest_name'];
+		return $interest_name;
+	}else
+	{
+		return NULL;
+	}
+}
 
 ?>
