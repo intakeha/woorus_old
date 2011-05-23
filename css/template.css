@@ -750,8 +750,9 @@ li.community {
 
 li.tile_tag {
 	color: #fff;
-	opacity:0.5;
-	filter:alpha(opacity=50);
+	opacity:.9;
+	filter:alpha(opacity=00);
+	background-color: #069 !important;
 	font-weight: bold;
 	cursor: pointer; 
 	cursor: hand; 
@@ -764,6 +765,7 @@ li.tile_tag2 {
 	cursor: pointer; 
 	cursor: hand; 
 }
+
 
 /* Message Page */
 

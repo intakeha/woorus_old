@@ -14,10 +14,10 @@
         </div>
         <div id="tiles_bank">
             <ul id="tile_display">
-           	<li class="uploaded" onmouseover="showInterest($(this), 'BEP')" onmouseout="hideInterest($(this))" style="background-image:url(images/interests/bep.png)"></li>
+           	<li class="uploaded" onmouseover="showInterest($(this), 'BEP')" onmouseout="hideInterest($(this))" style="background-image:url(images/interests/bep.png)" onclick="addToWall('257','298')"></li>
             <li class="uploaded" onmouseover="showInterest2($(this), 'Santorini')" onmouseout="hideInterest2($(this))"><img src="images/interests/santorini.png" /></li>
-<!--             <li class="sponsored" style="background-image: url(images/interests/hats.png);">hats</li>
-            <li class="sponsored" style="background-image: url(images/interests/ferrari.png);">ferrari</li>
+            <li class="uploaded" onmouseover="showInterest3($(this), 'Hats')" onmouseout="hideInterest3($(this),$(this).css('background-image'))" style="background-image: url(images/interests/hats.png);"></li>
+<!--            <li class="sponsored" style="background-image: url(images/interests/ferrari.png);">ferrari</li>
             <li class="sponsored" style="background-image: url(images/interests/vespa.png);">vespa</li>
             <li class="sponsored" style="background-image: url(images/interests/santorini2.png);">Greece</li>
             <li class="sponsored" style="background-image: url(images/interests/cablecar.png);">San Francisco</li>

@@ -732,7 +732,7 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append("<li class=\'"+tile_type+"\' style=\'background-image:url(images/interests/"+data.filename+");\' onmouseout=\'hideInterest($(this))\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\"></li> ");
+						$('#tile_display').append("<li class=\'"+tile_type+"\' style=\'background-image:url(images/interests/"+data.filename+");\' onmouseout=\'hideInterest($(this))\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\" onclick=\"addToWall('"+data.tile_id+"','"+data.interest_id+"')\"></li> ");
 							
 						$('.tile_pic').imgAreaSelect({
 							hide: true
@@ -820,4 +820,31 @@ function showInterest2(obj, tag){
 function hideInterest2(obj){
 	obj.removeClass('tile_tag2');
 	obj.html('<img src="images/interests/santorini.png" />');
+};
+
+
+function showInterest3(obj, tag){	
+	obj.addClass('tile_tag2');
+	obj.css('background-image', 'none');
+	obj.html(tag);
+};
+
+function hideInterest3(obj, filepath){
+	obj.removeClass('tile_tag2');
+	obj.empty();
+	obj.css('background-image', filepath);
+	$('#tile_upload_error').text(filepath);
+};
+
+function addToWall(tileID, interestID){
+	$.post(
+		"actions/addTileToWall.php",
+		{ tile_id: tileID, interest_id: interestID },
+		function(data){
+			if (data.success == 0){
+				$('#tile_upload_error').html(data.message); 
+			}
+		}, "json"
+	);
+	return false;
 };
