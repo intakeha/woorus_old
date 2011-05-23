@@ -5,13 +5,9 @@ require('validations.php');
 require('mosaicWallHelperFunctions.php');
 
 session_start();
-//$user_id = $_SESSION['id'];
-//$tile_id = $_POST["tile_id"]; //need to validate this?
-//$interest_id = $_POST["interest_id"]; //need to validate this?
-
-$user_id = 120;
-$tile_id = 272; 
-$interest_id = 308;
+$user_id = $_SESSION['id'];
+$tile_id = $_POST["tile_id"]; //need to validate this?
+$interest_id = $_POST["interest_id"]; //need to validate this?
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
