@@ -9,7 +9,7 @@ session_start();
 //$tile_id = $_POST["tile_id"]; //need to validate this?
 //$interest_id = $_POST["interest_id"]; //need to validate this?
 
-$user_id = 120
+$user_id = 120;
 $tile_id = 272; 
 $interest_id = 308;
 
