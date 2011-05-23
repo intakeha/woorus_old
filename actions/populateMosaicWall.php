@@ -68,6 +68,7 @@ while ($row = mysql_fetch_assoc($result)){
 	$tile_filename_array[$tile_iterator]['tile_filename'] = $tile_location;
 	$tile_filename_array[$tile_iterator]['interest_name'] = $interest_name;
 	$tile_filename_array[$tile_iterator]['tile_id'] = $tile_id;
+	$tile_filename_array[$tile_iterator]['interest_id'] = $interest_id;
 	
 	$tile_iterator++;
 
