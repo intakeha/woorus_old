@@ -102,7 +102,7 @@ function getFilenameFromTile($tile_id, $connection){
 
 	$filename_query = "SELECT tile_filename from `tiles` WHERE id = '".$tile_id."' ";
 	$filename_result = mysql_query($filename_query, $connection) or die ("Error");
-	if (mysql_num_rows($interest_result) > 0)
+	if (mysql_num_rows($filename_result) > 0)
 	{
 		$row = mysql_fetch_assoc($filename_result);
 		$tile_filename = $row['tile_filename'];
