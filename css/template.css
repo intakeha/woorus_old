@@ -738,19 +738,21 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 
 li.uploaded {
 	border: 3px solid #4980B7;
+	background-color: #4980B7;
 }
 
 li.sponsored {
 	border: 3px solid #C00;
+	background-color: #C00;
 }
 
 li.community {
 	border: 3px solid #666;
+	background-color: #666;
 }
 
 li.tile_tag {
 	color: #fff;
-	background-color: #4980B7;
 	font-weight: bold;
 	cursor: pointer; 
 	cursor: hand; 

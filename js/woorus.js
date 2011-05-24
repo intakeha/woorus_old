@@ -732,7 +732,7 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\" onmouseout=\'hideInterest($(this))\'  onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\')\" ><img src=\"images/interests/"+data.filename+"></li> ");
+						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\" onmouseout=\'hideInterest($(this))\'  onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\')\" ><img src=\'images/interests/"+data.filename+"\'></li>");
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
