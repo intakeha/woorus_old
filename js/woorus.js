@@ -732,8 +732,7 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append("<li class=\'"+tile_type+"\' style=\'background-image:url(images/interests/"+data.filename+");\' onmouseout=\'hideInterest($(this))\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\" onclick=\"addToWall('"+data.tile_id+"','"+data.interest_id+"')\"></li> ");
-							
+						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseout=\'hideInterest($(this))\' onmouseover=\"showInterest($(this), \'"+data.tag+"\')\" onclick=\"addToWall('"+data.tile_id+"','"+data.interest_id+"')\"><img src=\"images/interests/"+data.filename+" /></li> ");
 						$('.tile_pic').imgAreaSelect({
 							hide: true
 						});
@@ -802,38 +801,14 @@ var RecaptchaOptions = {
 	theme : 'clean'
 };
 
-function showInterest(obj, tag){	
-	obj.addClass('tile_tag');
-	obj.html(tag);
+function showInterest(obj, tag){
+	obj.find('img').addClass('transparent_tile');
+	obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
 };
 
 function hideInterest(obj){
-	obj.removeClass('tile_tag');
-	obj.html('');
-};
-
-function showInterest2(obj, tag){	
-	obj.addClass('tile_tag2');
-	obj.html(tag);
-};
-
-function hideInterest2(obj){
-	obj.removeClass('tile_tag2');
-	obj.html('<img src="images/interests/santorini.png" />');
-};
-
-
-function showInterest3(obj, tag){	
-	obj.addClass('tile_tag2');
-	obj.css('background-image', 'none');
-	obj.html(tag);
-};
-
-function hideInterest3(obj, filepath){
-	obj.removeClass('tile_tag2');
-	obj.empty();
-	obj.css('background-image', filepath);
-	$('#tile_upload_error').text(filepath);
+	obj.find('img').removeClass('transparent_tile');
+	obj.find('div').remove();
 };
 
 function addToWall(tileID, interestID){
