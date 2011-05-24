@@ -36,10 +36,11 @@ if ($tile_placement <= 36){
 
 unset($tile_placement);
 
+/*
 $success_message = "Your wall has been updated";
 $messageToSend = array('success' => 1, 'message'=>$success_message);
 $output = json_encode($messageToSend);
-die($output);
+die($output);*/
 
 
 ?>
