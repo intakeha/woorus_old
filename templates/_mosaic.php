@@ -44,7 +44,7 @@
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
                     <div class="error_text" id="tile_upload_error"></div>
                     <div class="success_text" id="tile_upload_success" style="display: none;"></div>
-                    <img style="display: none;" src="images/global/loading.gif" />
+                    <img id="loading_gif" style="display: none;" src="images/global/loading.gif" />
                 </form>
         </div>
     </div>
