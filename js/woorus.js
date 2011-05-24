@@ -639,6 +639,14 @@ $(document).ready(function(){
 	
 	// Upload picture file for tile crop
 	$('#tile_pic_upload').click(function(){
+		$("#loading_gif")
+		.ajaxStart(function(){
+			$(this).show();
+		})
+		.ajaxComplete(function(){
+			$(this).hide();
+		});
+		
 		$.ajaxFileUpload({
 			url: 'actions/upload_file.php',
 			secureuri: false,
@@ -817,7 +825,7 @@ function addToWall(tileID, interestID){
 		{ tile_id: tileID, interest_id: interestID },
 		function(data){
 			if (data.success == 0){
-				$('#tile_upload_error').html(data.message); 
+				$('#tile_upload_error').show().html(data.message); 
 			}
 		}, "json"
 	);
