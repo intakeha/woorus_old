@@ -117,17 +117,17 @@ if ($session)
 			}else
 			{
 				//user's true first time--> input data, take to settings page
-				$activities = $facebook->api('/me/activities');
-				$books = $facebook->api('/me/books');
-				$interests = $facebook->api('/me/interests');
+				//$activities = $facebook->api('/me/activities');
+				//$books = $facebook->api('/me/books');
+				//$interests = $facebook->api('/me/interests');
 				$likes = $facebook->api('/me/likes');
-				$links = $facebook->api('/me/links');
-				$movies = $facebook->api('/me/movies');
-				$music = $facebook->api('/me/music');
-				$television = $facebook->api('/me/television');		
-				$facebook_id = $me["id"]; //this is NOT woorus ID
-				$facebook_first_name =  $me["first_name"];
-				$facebook_last_name = $me["last_name"];
+				//$links = $facebook->api('/me/links');
+				//$movies = $facebook->api('/me/movies');
+				//$music = $facebook->api('/me/music');
+				//$television = $facebook->api('/me/television');		
+				//$facebook_id = $me["id"]; //this is NOT woorus ID
+				//$facebook_first_name =  $me["first_name"];
+				//$facebook_last_name = $me["last_name"];
 				//$facebook_birthday =  $me["birthday_date"];
 				$facebook_city = $me["location"]["name"]; //not using yet
 				$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
