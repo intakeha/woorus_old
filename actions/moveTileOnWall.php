@@ -26,7 +26,7 @@ foreach ($tile_array as $value){
 
 	echo "tile_id is: ".$tile_id ."interest_id is: ".$interest_id;
 	//updateMosaicWallTable($user_id, $interest_id , $tile_id , $tile_placement, $connection);
-	$tile_placement++
+	$tile_placement++;
 }
 
 //zero out the last one (if it was a delete)
