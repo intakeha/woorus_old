@@ -12,7 +12,7 @@ $user_id = $_SESSION['id'];
 
 //$tile_array = json_decode($_POST["tile_array"]); //need to validate this?
 
-$tile_array = json_decode({"1":{"tile_id":"252","interest_id":"293"},"2":{"tile_id":"253","interest_id":"294"},"3":{"tile_id":"254","interest_id":"295"},"4":{"tile_id":"255","interest_id":"296"}});
+$tile_array = json_decode("{'1':{'tile_id':'252','interest_id':'293'},'2':{'tile_id':'253','interest_id':'294'},'3':{'tile_id':'254','interest_id':'295'},'4':{'tile_id':'255','interest_id':'296'}}");
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
