@@ -659,6 +659,11 @@ a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#com
 	margin: -25px 0px 0px 120px;
 }
 
+#tile_loading {
+	width: 30px;
+	vertical-align: bottom;
+}
+
 #tile_crop_form {
 	margin-top: 10px;
 }

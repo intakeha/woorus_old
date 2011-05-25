@@ -15,24 +15,6 @@
         <div id="tiles_bank">
             <ul id="tile_display">
             <li class="uploaded tile_tag" onmouseover="showInterest($(this), 'Ferrari')" onmouseout="hideInterest($(this))"><img src="images/interests/ferrari.png" /></li>
-<!--        
-           	<li class="uploaded" onmouseover="showInterest($(this), 'BEP')" onmouseout="hideInterest($(this))" style="background-image:url(images/interests/bep.png)" onclick="addToWall('257','298')"></li>
-            <li class="uploaded" onmouseover="showInterest2($(this), 'Santorini')" onmouseout="hideInterest2($(this))"><img src="images/interests/santorini.png" /></li>
-            <li class="uploaded" onmouseover="showInterest3($(this), 'Hats')" onmouseout="hideInterest3($(this),$(this).css('background-image'))" style="background-image: url(images/interests/hats.png);"></li>
-
-			<li class="sponsored" style="background-image: url(images/interests/vespa.png);">vespa</li>
-            <li class="sponsored" style="background-image: url(images/interests/santorini2.png);">Greece</li>
-            <li class="sponsored" style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
-            <li class="uploaded" style="background-image: url(images/interests/converse.png);">Converse</li>
-            <li class="uploaded" style="background-image: url(images/interests/natalie.png);">Natalie Portman</li>
-            <li class="uploaded" style="background-image: url(images/interests/vangogh.png);">Van Gogh</li>
-            <li class="uploaded" style="background-image: url(images/interests/loveactually.png);">Love Actually</li>
-            <li class="uploaded" style="background-image: url(images/interests/coffee.png);">Coffee</li>
-            <li class="uploaded" style="background-image: url(images/interests/sydney.png);">Sydney</li>
-            <li class="uploaded" style="background-image: url(images/interests/paul.png);">Beatles</li>
-            <li class="community" style="background-image: url(images/interests/vespa2.png);">Vespa</li>
-            
--->
             </ul><div id="clear"></div>
         </div>
         <div id="customized_tile">
@@ -44,7 +26,7 @@
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
                     <div class="error_text" id="tile_upload_error"></div>
                     <div class="success_text" id="tile_upload_success" style="display: none;"></div>
-                    <img id="loading_gif" style="display: none;" src="images/global/loading.gif" />
+                    <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
                 </form>
         </div>
     </div>
