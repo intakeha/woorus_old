@@ -42,7 +42,7 @@ if ($tile_placement == NULL)
 	$success_flag = 1;
 }
 
-$messageToSend = array('success' =>$success_flag, 'message'=>$success_message, 'filename'=>$tile_filename, 'tile_id'=>$tile_id, 'tag'=>$tile_name, 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
+$messageToSend = array('success' =>$success_flag, 'message'=>$success_message, 'tile_filename'=>$tile_filename, 'tile_id'=>$tile_id, 'interest_name'=>$tile_name, 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
 $output = json_encode($messageToSend);
 die($output);
 

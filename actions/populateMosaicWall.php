@@ -29,14 +29,17 @@ while ($row = mysql_fetch_assoc($result)){
 		break;
 	}else
 	{
-		//query based on tile id & retreive tile filename
-		$query_tile = "SELECT tile_filename FROM `tiles` WHERE `id` =  '".$tile_id."' ";
+		//query based on tile id & retreive tile filename, user id & sponsored
+		$query_tile = "SELECT tile_filename, user_id, sponsored FROM `tiles` WHERE `id` =  '".$tile_id."' ";
 		$tile_result = mysql_query($query_tile, $connection) or die ("Error 2");
 		$tile_count = mysql_num_rows($tile_result);
 		if ($tile_count != 0)
 		{
 			$row_tile = mysql_fetch_assoc($tile_result);
 			$tile_location = $row_tile['tile_filename']; 
+			$tile_user_id = $row_tile['user_id'];
+			$sponsored = $row_tile['sponsored'];
+			
 		}else
 		{
 			$tile_location = NULL; //there is a tile, but we can't find the filename--(bad data)
@@ -67,10 +70,25 @@ while ($row = mysql_fetch_assoc($result)){
 	
 	}
 	
+	//determine tile type based on sponsored, or user id of tile creator
+	if ($sponsored == 1)
+	{	
+		$tile_type = 'S';	
+	}
+	elseif ($tile_user_id == $user_id)
+	{
+		$tile_type = 'U';
+	}
+	else
+	{
+		$tile_type = 'C';
+	}
+	
 	$tile_filename_array[$tile_iterator]['tile_filename'] = $tile_location;
 	$tile_filename_array[$tile_iterator]['interest_name'] = $interest_name;
 	$tile_filename_array[$tile_iterator]['tile_id'] = $tile_id;
 	$tile_filename_array[$tile_iterator]['interest_id'] = $interest_id;
+	$tile_filename_array[$tile_iterator]['tile_type'] = $tile_type;
 	
 	$tile_iterator++;
 
