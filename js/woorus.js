@@ -828,7 +828,13 @@ function addToWall(tileID, interestID){
 				$('#tile_upload_success').hide(); 
 				$('#tile_upload_error').html(data.message); 
 				$('#tile_upload_error').show();
-			}
+			}else{
+				$('#wall_display').empty();
+				$.getJSON("actions/populateMosaicWall.php",function(result){
+					$.each(result, function(i, field){
+					  $('#wall_display').append("<li class=\'community_wall tile_tag\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+					});
+				});
 		}, "json"
 	);
 	return false;
