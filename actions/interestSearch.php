@@ -25,8 +25,7 @@ $interest_result = mysql_query($interest_query, $connection) or die ("Error");
 if (mysql_num_rows($interest_result) > 0)
 {
 	$row = mysql_fetch_assoc($interest_result);
-	$interest_id = $row['interest_id'];
-	die ($interest_id);
+	$interest_id = $row['id'];
 	$interest_name = $row['interest_name'];
 }
 else
@@ -51,7 +50,6 @@ switch ($query_type){
 	
 	default:
 	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."'  ";
-	die($tile_query);
 }
 
 $tile_query_result = mysql_query($tile_query, $connection) or die ("Error 9");
