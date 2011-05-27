@@ -71,18 +71,7 @@ while ($row = mysql_fetch_assoc($result)){
 	}
 	
 	//determine tile type based on sponsored, or user id of tile creator
-	if ($sponsored == 1)
-	{	
-		$tile_type = 'S';	
-	}
-	elseif ($tile_user_id == $user_id)
-	{
-		$tile_type = 'U';
-	}
-	else
-	{
-		$tile_type = 'C';
-	}
+	$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 	
 	$tile_filename_array[$tile_iterator]['tile_filename'] = $tile_location;
 	$tile_filename_array[$tile_iterator]['interest_name'] = $interest_name;

@@ -128,4 +128,24 @@ function getInterestFromId($interest_id, $connection){
 	}
 }
 
+function getTileType($sponsored, $tile_user_id, $user_id){
+
+	if ($sponsored == 1)
+	{	
+		$tile_type = 'S';	
+	}
+	elseif ($tile_user_id == $user_id)
+	{
+		$tile_type = 'U';
+	}
+	else
+	{
+		$tile_type = 'C';
+	}
+	
+	return $tile_type;
+
+}
+
+
 ?>

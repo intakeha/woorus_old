@@ -91,7 +91,7 @@ if ($tile_placement == NULL)
 
 }
 
-$messageToSend = array('success' => 1, 'message'=>$success_message, 'tile_filename'=>$picture_name, 'tile_id'=>$tile_id, 'interest_name'=>$tile_name, 'tile_type'=>"U", 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
+$messageToSend = array('success' => 1, 'message'=>$success_message, 'tile_filename'=>$picture_name, 'tile_id'=>$tile_id, 'interest_name'=>$tile_name, 'tile_type'=>'U', 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
 $output = json_encode($messageToSend);
 die($output);
 
