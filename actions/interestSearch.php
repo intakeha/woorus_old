@@ -26,6 +26,7 @@ if (mysql_num_rows($interest_result) > 0)
 {
 	$row = mysql_fetch_assoc($interest_result);
 	$interest_id = $row['interest_id'];
+	die ($interest_id);
 	$interest_name = $row['interest_name'];
 }
 else
