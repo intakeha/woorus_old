@@ -11,7 +11,7 @@ $user_id = $_SESSION['id'];
 //$interest_search = $_POST["interest_search"]; //need to validate this!!! & convert it to camel case--like on interest load
 //$query_type = $_POST["query_type"]; //need to validate this!
 
-$interest_search = "Penguins"; //need to validate this!!!
+$interest_search = "penguins"; //need to validate this!!!
 $query_type = "U"; //need to validate this!
 
 //connect
