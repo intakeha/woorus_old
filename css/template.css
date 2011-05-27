@@ -756,6 +756,18 @@ li.community {
 	background-color: #666;
 }
 
+li.uploaded_wall {
+	background-color: #4980B7;
+}
+
+li.sponsored_wall {
+	background-color: #C00;
+}
+
+li.community_wall {
+	background-color: #666;
+}
+
 li.tile_tag {
 	color: #fff;
 	font-weight: bold;

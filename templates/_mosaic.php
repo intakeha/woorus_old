@@ -61,46 +61,24 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        &laquo; Personalize your mosaic wall &raquo;
+        &laquo; Personalize your mosaic wall &raquo;<div id="here">here</div>
         <div id="wall">
             <ul id="wall_display">
                 <li style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
-                <li style="background-image: url(images/interests/boudin.png);">Boudin</li>
-                <li style="background-image: url(images/interests/taylor.png);">Taylor</li>
-                <li style="background-image: url(images/interests/fergie.png);">Fergie</li>
-                <li style="background-image: url(images/interests/john.png);">John</li>
-                <li style="background-image: url(images/interests/paul.png);">Paul</li>
-                <li style="background-image: url(images/interests/santorini.png);">Greece</li>
-                <li style="background-image: url(images/interests/conan.png);">Conan</li>
-                <li style="background-image: url(images/interests/vespa.png);">Vespa</li>
-                <li style="background-image: url(images/interests/tivo.png);">Tivo</li>
-                <li style="background-image: url(images/interests/george.png);">George</li>
-                <li style="background-image: url(images/interests/ringo.png);">Ringo</li>
-                <li style="background-image: url(images/interests/ferrari.png);">Ferrari</li>
-                <li style="background-image: url(images/interests/converse.png);">Converse</li>
-                <li style="background-image: url(images/interests/homer.png);">Homer</li>
-                <li style="background-image: url(images/interests/icehotel.png);">Ice Hotel</li>
-                <li style="background-image: url(images/interests/pinata.png);">pinata</li>
-                <li style="background-image: url(images/interests/loveactually.png);">Love Actually</li>
-                <li style="background-image: url(images/interests/bep2.png);">BEP</li>
-                <li style="background-image: url(images/interests/vegas.png);">Las Vegas</li>
-                <li style="background-image: url(images/interests/breastcancer.png);">Breast Cancer</li>
-                <li style="background-image: url(images/interests/training.png);">Training</li>
-                <li style="background-image: url(images/interests/newyorker.png);">New Yorker</li>
-                <li style="background-image: url(images/interests/007.png);">Bond</li>
-                <li style="background-image: url(images/interests/natalie.png);">Natalie Portman</li>
-                <li style="background-image: url(images/interests/yoga.png);">Yoga</li>
-                <li style="background-image: url(images/interests/wholefoods.png);">Whole Foods</li>
-                <li style="background-image: url(images/interests/patron.png);">Patron</li>
-                <li style="background-image: url(images/interests/timberlake.png);">Justin Timberlake</li>
-                <li style="background-image: url(images/interests/giants2.png);">Giants</li>
-                <li style="background-image: url(images/interests/sailing.png);">Sailing</li>
-                <li style="background-image: url(images/interests/vangogh.png);">Van Gogh</li>
-                <li style="background-image: url(images/interests/sydney.png);">Sydney</li>
-                <li style="background-image: url(images/interests/yogurt.png);">Yogurt</li>
-                <li style="background-image: url(images/interests/coffee.png);">Coffee</li>
-                <li style="background-image: url(images/interests/hefeweizen.png);">Beer</li>
             </ul>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$("#here").click(function(){
+	  $.getJSON("actions/populateMosaicWall.php",function(result){
+		$.each(result, function(i, field){
+		  $('#wall_display').append("<li class=\'community_wall tile_tag\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+		});
+	  });
+	});
+	$('#wall_display').empty();
+	$('#wall_display').append("<li style=\"background-image: url(images/interests/boudin.png);\">Boudin</li>")
+	
+	
+</script>
