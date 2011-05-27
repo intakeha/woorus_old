@@ -12,7 +12,7 @@ $user_id = $_SESSION['id'];
 //$query_type = $_POST["query_type"]; //need to validate this!
 
 $interest_search = "penguins"; //need to validate this!!!
-$query_type = "U"; //need to validate this!
+$query_type = ""; //need to validate this!
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
