@@ -1,5 +1,6 @@
 <?php
 require('connect.php');
+require('mosaicWallHelperFunctions.php');
 
 session_start();
 $user_id = $_SESSION['id'];
