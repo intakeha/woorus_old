@@ -67,7 +67,7 @@ while ($row = mysql_fetch_assoc($tile_query_result)){
 	$tile_user_id = $row['user_id'];
 	$sponsored = $row['sponsored'];
 
-	$tyle_type = getTileType($sponsored, $tile_user_id, $user_id)
+	$tyle_type = getTileType($sponsored, $tile_user_id, $user_id);
 	
 	$tile_search_array[$tile_iterator]['tile_filename'] = $tile_filename;
 	$tile_search_array[$tile_iterator]['interest_name'] = $interest_name;
