@@ -64,7 +64,6 @@
         &laquo; Personalize your mosaic wall &raquo;
         <div id="wall">
             <ul id="wall_display">
-                <li style="background-image: url(images/interests/cablecar.png);">San Francisco</li>
             </ul>
         </div>
     </div>
