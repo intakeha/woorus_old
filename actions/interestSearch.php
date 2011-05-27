@@ -50,6 +50,7 @@ switch ($query_type){
 	
 	default:
 	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."'  ";
+	die($tile_query);
 }
 
 $tile_query_result = mysql_query($tile_query, $connection) or die ("Error 9");
