@@ -10,7 +10,7 @@ $user_id = $_SESSION['id'];
 
 //$user_search = $_POST["user_search"]; //need to validate this!!! & convert it to camel case--like on interest load
 
-$user_search = "Pumpkin Seeds"; //need to validate this!!!
+$user_search = "penguins"; //need to validate this!!!
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -28,7 +28,7 @@ if (mysql_num_rows($interest_result) > 0)
 }
 else
 {
-	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.";
+	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge. 1";
 	sendToJS(0, $error_message);
 }
 
@@ -38,7 +38,7 @@ $mosaic_query =  "SELECT user_id, interest_id, tile_id FROM `mosaic_wall` WHERE 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error");
 if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on anyones wall
 {
-	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.";
+	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge. 2";
 	sendToJS(0, $error_message);
 }else
 {
