@@ -33,7 +33,7 @@ else
 
 
 //Get users associated with the interest id retreived above (need to pull the interest ID and tile_id as well	
-$mosaic_query =  "SELECT user_id, interest_id, tile_id FROM `mosaic_wall` WHERE interest_id =  '".$interest_id."' AND interest_active = 1";
+$mosaic_query =  "SELECT user_id, interest_id, tile_id FROM `mosaic_wall` WHERE interest_id =  '".$interest_id."' ";
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on anyones wall
 {
