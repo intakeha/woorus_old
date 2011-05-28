@@ -77,4 +77,9 @@
 			});
 		});
 	});
+
+	$(function() {
+		$( "#wall_display" ).sortable();
+		$( "#wall_display" ).disableSelection();
+	});
 </script>
