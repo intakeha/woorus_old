@@ -65,15 +65,29 @@ if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on
 		{
 			break; //need to test this? What happens if the user ID is gone?
 		}
-	
+		
+		//get tile filename, user who created ID & sponsored flag from tile_id
+		$tile_query = "SELECT id, tile_filename, user_id sponsored FROM `tiles` WHERE id =  '".$tile_id."' ";
+		$tile_query_result = mysql_query($tile_query, $connection) or die ("Error 4");
+		if (mysql_num_rows($tile_query_result) > 0)
+		{
+			$row = mysql_fetch_assoc($tile_query_result);
+			$tile_filename = $row['tile_filename'];
+			$sponsored = $row['sponsored'];
+			$tile_user_id = $row['user_id'];
+		}
+		
+		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
+		
 		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
 		$user_search_array[$user_iterator]['first_name'] = $first_name;
 		$user_search_array[$user_iterator]['social_status'] = $social_status;
 		
 		$user_search_array[$user_iterator]['tile_id'] = $tile_id;
 		$user_search_array[$user_iterator]['interest_id'] = $interest_id;
-		$user_search_array[$user_iterator]['tile_filename'] = "";
+		$user_search_array[$user_iterator]['tile_filename'] = $tile_filename;
 		$user_search_array[$user_iterator]['interest_name'] = $interest_name;
+		$user_search_array[$user_iterator]['tile_type'] = $tile_type;
 		
 		$user_iterator++;
 	
