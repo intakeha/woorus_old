@@ -18,7 +18,7 @@ mysql_select_db($db_name);
 
 
 //look for interest based on ID
-$interest_query = "SELECT id, interest_name FROM `interests` WHERE interest_name =  '".$interest_search."'  ";
+$interest_query = "SELECT id, interest_name FROM `interests` WHERE interest_name =  '".$user_search."'  ";
 $interest_result = mysql_query($interest_query, $connection) or die ("Error");
 if (mysql_num_rows($interest_result) > 0)
 {
