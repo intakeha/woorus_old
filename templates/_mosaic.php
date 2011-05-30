@@ -73,13 +73,25 @@
 		$('#wall_display').empty();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
-			  $('#wall_display').append("<li class=\'community_wall tile_tag\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 			});
 		});
 	});
 
 	$(function() {
-		$( "#wall_display" ).sortable();
+		$( "#wall_display" ).sortable({
+		   update: function(event, ui) { 
+		  		var data = $(this).sortable('toArray').toString();
+				$.post('actions/moveTileOnWall.php', {tile_array: data});
+		   }
+		});
 		$( "#wall_display" ).disableSelection();
+		return false;
 	});
 </script>
+
+
+
+
+
+
