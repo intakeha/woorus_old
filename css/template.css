@@ -532,7 +532,7 @@ li.forgot_title {
 
 /* Mosaic Page */
 #mosaic {
-	width: 1120px;
+	width: 1150px;
 	height: 600px;
 	margin: 0px auto;
 }
@@ -790,10 +790,18 @@ div.transparent_tag {
 	width: 75px;
 }
 
+#wall_trash{
+	width: 50px;
+	padding-top: 470px;
+	margin-left: 5px;
+	float: left;
+}
+
 #remove_tile { 
-    height: 18px; 
-    overflow: hidden; 
-    background-color: #F00;
+	width: 50px;
+    height: 50px;
+    overflow: hidden;
+	background: url(../images/global/trash.png) no-repeat;
 }
 #remove_tile li { 
     height: 0; 

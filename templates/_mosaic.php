@@ -61,14 +61,13 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        &laquo; Personalize your mosaic wall &raquo;         <ul class="tile_sort" id="remove_tile"></ul>
+        &laquo; Personalize your mosaic wall &raquo;         
         <div id="wall">
             <ul id="wall_display" class="tile_sort">
             </ul>
         </div>
     </div>
-   
-    
+    <div id="wall_trash"><ul class="tile_sort" id="remove_tile"></ul></div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function () {
