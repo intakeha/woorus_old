@@ -19,38 +19,21 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 
-//look for interest based on ID
-
-$interest_query = "SELECT id, interest_name FROM `interests` WHERE interest_name =  '".$interest_search."'  ";
-$interest_result = mysql_query($interest_query, $connection) or die ("Error");
-if (mysql_num_rows($interest_result) > 0)
-{
-	$row = mysql_fetch_assoc($interest_result);
-	$interest_id = $row['id'];
-	$interest_name = $row['interest_name'];
-}
-else
-{
-	$error_message = "No tiles match your interest. You can create your own personalized tile instead.";
-	sendToJS(0, $error_message);
-}
-
-
-//based on search selection, get tiles associated with the interest id retreived above
+//based on search selection, get tiles associated with the interest id / interest name.
 switch ($query_type){
 	
 	
 	case "S": // Sponsored Tiles
-	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."' AND sponsored = 1";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$user_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 1";
 	
 	case "U": //Uploaded Tiles
-	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."' AND user_id = '".$user_id."'";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$user_search."' AND interests.id = tiles.interest_id AND tiles.user_id = '".$user_id."'";
 	
 	case "C": //Community Tiles
-	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."' AND sponsored = 0 AND user_id <> '".$user_id."' ";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$user_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' ";
 	
 	default:
-	$tile_query = "SELECT id, interest_id, tile_filename, user_id, sponsored FROM `tiles` WHERE interest_id =  '".$interest_id."'  ";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$user_search."' AND interests.id = tiles.interest_id  ";
 }
 
 $tile_query_result = mysql_query($tile_query, $connection) or die ("Error 9");
@@ -67,6 +50,7 @@ while ($row = mysql_fetch_assoc($tile_query_result)){
 	$tile_filename = $row['tile_filename'];
 	$tile_user_id = $row['user_id'];
 	$sponsored = $row['sponsored'];
+	$interest_name = $row['interest_name'];
 
 	$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 	

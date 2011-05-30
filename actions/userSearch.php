@@ -16,28 +16,15 @@ $user_search = "penguins"; //need to validate this!!!
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//look for interest based on ID
-$interest_query = "SELECT id, interest_name FROM `interests` WHERE interest_name =  '".$user_search."'  ";
-$interest_result = mysql_query($interest_query, $connection) or die ("Error 1");
-if (mysql_num_rows($interest_result) > 0)
-{
-	$row = mysql_fetch_assoc($interest_result);
-	$interest_id = $row['id'];
-	$interest_name = $row['interest_name'];
-}
-else
-{
-	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge. 1";
-	sendToJS(0, $error_message);
-}
 
+//TO DO: need to look at online status!!!!!!!!!!!
 
-//Get users associated with the interest id retreived above (need to pull the interest ID and tile_id as well	
-$mosaic_query =  "SELECT user_id, interest_id, tile_id FROM `mosaic_wall` WHERE interest_id =  '".$interest_id."' ";
+//look for interest based on ID & get users associated with the interest id retreived above
+$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, mosaic_wall.interest_id, mosaic_wall.tile_id FROM `interests`, `mosaic_wall` WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id LIMIT 0, 10";
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on anyones wall
 {
-	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge. 2";
+	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.";
 	sendToJS(0, $error_message);
 }else
 {
@@ -50,6 +37,7 @@ if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on
 		$user_search_id = $row['user_id'];
 		$interest_id = $row['interest_id'];
 		$tile_id = $row['tile_id'];
+		$interest_name = $row['interest_name'];
 		
 		//get user info based on user ID (need to change this to look at online status!!)
 		$user_query = "SELECT id, first_name, social_status FROM `users` WHERE id =  '".$user_search_id."' ";
