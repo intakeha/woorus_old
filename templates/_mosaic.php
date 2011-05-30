@@ -61,12 +61,14 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        &laquo; Personalize your mosaic wall &raquo;<ul id="remove_tile" style="width: 30px; height: 30px; background-color: #F00;"></ul>
+        &laquo; Personalize your mosaic wall &raquo;         <ul class="tile_sort" id="remove_tile"></ul>
         <div id="wall">
-            <ul id="wall_display">
+            <ul id="wall_display" class="tile_sort">
             </ul>
         </div>
     </div>
+   
+    
 </div>
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -79,10 +81,21 @@
 	});
 
 	$(function() {
-		$( "#wall_display" ).sortable({
+		$( "ul.tile_sort" ).sortable({
+			tolerance: 'pointer',
+			cursor: 'pointer',
+			dropOnEmpty: true,
+			connectWith: 'ul.tile_sort',
 			update: function(event, ui) { 
-				var data = $(this).sortable('toArray').toString();
-				$.post('actions/moveTileOnWall.php', {tile_array: data});
+				if(this.id == 'remove_tile') {
+					// Remove the element dropped on #sortable-delete
+					//jQuery('#'+ui.item.attr('id')).remove();
+					alert('In the trash');
+				} else {
+					// Update code for the actual sortable lists
+					var data = $(this).sortable('toArray').toString();
+					$.post('actions/moveTileOnWall.php', {tile_array: data});
+				}
 			}
 		});
 		$( "#wall_display" ).disableSelection();

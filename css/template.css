@@ -790,6 +790,17 @@ div.transparent_tag {
 	width: 75px;
 }
 
+#remove_tile { 
+    height: 18px; 
+    overflow: hidden; 
+    background-color: #F00;
+}
+#remove_tile li { 
+    height: 0; 
+    width: 0; 
+    overflow: hidden; 
+}
+
 /* Message Page */
 
 #message_bg {
