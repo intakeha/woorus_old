@@ -61,7 +61,7 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        &laquo; Personalize your mosaic wall &raquo;
+        &laquo; Personalize your mosaic wall &raquo;<ul id="remove_tile" style="width: 30px; height: 30px; background-color: #F00;"></ul>
         <div id="wall">
             <ul id="wall_display">
             </ul>
@@ -80,10 +80,10 @@
 
 	$(function() {
 		$( "#wall_display" ).sortable({
-		   update: function(event, ui) { 
-		  		var data = $(this).sortable('toArray').toString();
+			update: function(event, ui) { 
+				var data = $(this).sortable('toArray').toString();
 				$.post('actions/moveTileOnWall.php', {tile_array: data});
-		   }
+			}
 		});
 		$( "#wall_display" ).disableSelection();
 		return false;

@@ -836,7 +836,7 @@ function addToWall(tileID, interestID){
 				$('#tile_upload_error').html(data.message); 
 				$('#tile_upload_error').show();
 			} else {
-				$('#wall_display').append("<li class=\'community_wall tile_tag\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+				$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
 			}
 		}, "json"
 	);
