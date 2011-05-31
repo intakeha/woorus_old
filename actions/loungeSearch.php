@@ -75,7 +75,7 @@ else
 						FROM `mosaic_wall`
 						LEFT JOIN interests ON mosaic_wall.interest_id = interests.id
 						LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
-						WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.interest_id <> 0
+						WHERE mosaic_wall.user_id =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0
 						ORDER BY `tile_placement`";
 				
 		$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 3");
