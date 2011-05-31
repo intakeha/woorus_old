@@ -798,7 +798,7 @@ $(document).ready(function(){
 				"actions/tileSearch.php",
 				$('#tsearch_form').serialize(),
 				function(data){
-					alert('Hello')
+					alert('hi');
 				}, "json"
 			);
 		},
