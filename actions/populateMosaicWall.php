@@ -25,6 +25,7 @@ $tile_filename_array = array();
 //iterate through the mosaic wall rows
 while ($row = mysql_fetch_assoc($result)){
 
+	//retreive data
 	$tile_id = $row['tile_id'];
 	$interest_id = $row['interest_id'];
 	$tile_placement = $row['tile_placement'];
@@ -36,6 +37,7 @@ while ($row = mysql_fetch_assoc($result)){
 	//determine tile type based on sponsored, or user id of tile creator
 	$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 	
+	//set array with data
 	$tile_filename_array[$tile_placement]['tile_filename'] = $tile_filename;
 	$tile_filename_array[$tile_placement]['interest_name'] = $interest_name;
 	$tile_filename_array[$tile_placement]['tile_id'] = $tile_id;

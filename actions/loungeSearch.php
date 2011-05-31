@@ -47,6 +47,8 @@ else
 						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0 ";
 		
 		//get user info from user id-->name, location, social status
+		$user_info_query = 
+		
 	
 	}
 
