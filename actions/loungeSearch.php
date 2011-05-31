@@ -9,8 +9,7 @@ session_start();
 $user_id = $_SESSION['id'];
 
 //$offset = $_POST["offset"]; //need to validate this!
-$offset = 0
-
+$offset = 0;
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
