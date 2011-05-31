@@ -4,7 +4,7 @@
 	<div class="pagination_mosaic"><a class="arrows pagination_left" href="#"></a></div>
 	<div id="tiles">
 	    <form id="tsearch_form" action="../actions/tileSearch.php" method="POST">
-            <input type="text" id="tile_search_field" name="tile_name" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">
+            <input type="text" id="tile_search_field" name="tile_search" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">
             <input class="buttons" id="tile_search" type="submit" name="tile_search" value="Search">
         </form>
 		<div id="tiles_legend">
@@ -77,6 +77,7 @@
 			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 			});
 		});
+		
 	});
 
 	$(function() {
@@ -92,7 +93,7 @@
 					// jQuery('#'+ui.item.attr('id')).remove();
 					alert('In the trash');
 				} else {
-					// Update code for the actual sortable lists
+					// Update back-end to reflect mosaic wall
 					$.post('actions/moveTileOnWall.php', {tile_array: data}); 	
 					alert('Called moveTileOnWall');
 				}
