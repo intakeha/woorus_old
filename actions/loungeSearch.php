@@ -28,7 +28,6 @@ $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
 if (mysql_num_rows($lounge_result) == 0) //we found no common interests with anyone else (online)
 {
 	//just return some users
-	
 }
 else
 {
@@ -100,6 +99,10 @@ else
 			
 			$tile_iterator++;
 		}
+		
+		
+		$output = json_encode($tile_lounge_array);
+		die($output);
 		
 		//get user info from user id-->name, location, social status
 		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' ";
