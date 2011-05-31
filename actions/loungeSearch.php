@@ -42,11 +42,11 @@ else
 
 		
 		//need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
-		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as other_tile_id, others_tiles.tile_filename as other_tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
+		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as tile_id, tiles.tile_filename as tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
 						FROM mosaic_wall
 						LEFT JOIN interests on mosaic_wall.interest_id = interests.id
 						LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
-						LEFT JOIN tiles AS others_tiles ON others_mosaic_wall.tile_id = others_tiles.id
+						LEFT JOIN tiles ON others_mosaic_wall.tile_id = tiles.id
 						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0
 						LIMIT ".$offset.", 10";
 		$user_match_result = mysql_query($user_match_query, $connection) or die ("Error 1");
@@ -54,7 +54,7 @@ else
 
 			$tile_id = $row['tile_id'];
 			$interest_id = $row['interest_id'];
-			$tile_filename = $row['other_tile_filename'];
+			$tile_filename = $row['tile_filename'];
 			$tile_user_id = $row['tile_user_id'];
 			$sponsored = $row['sponsored'];
 			$interest_name = $row['interest_name'];
