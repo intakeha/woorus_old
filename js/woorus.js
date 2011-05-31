@@ -813,9 +813,7 @@ $(document).ready(function(){
 			tile_search: required
 		},
 		messages: {						// Customized error messages for each error //
-			tile_search: {
-				required: "Please enter a search term."
-			}	
+			tile_search: "Please enter a search term."
 		}
 	});	
 	
