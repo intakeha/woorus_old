@@ -5,7 +5,7 @@
 	<div id="tiles">
 	    <form id="tsearch_form" action="actions/tileSearch.php" method="POST">
             <input type="text" id="tile_search_field" name="tile_search" value="Type an interest..." onfocus="if($(this).val()=='Type an interest...'){$(this).val('')};" onblur="if($(this).val()==''){$(this).val('Type an interest...')};" maxlength="60">
-            <input class="buttons" id="tile_search" type="submit" name="tile_search" value="Search">
+            <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
         </form>
 		<div id="tiles_legend">
             <a href="#" id="sponsoredTiles"><div><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div></a>

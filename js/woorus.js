@@ -782,6 +782,36 @@ $(document).ready(function(){
 	});	
 	
 	// Validate Tile Search on Mosaic Wall page
+	$("#tsearch_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#tile_upload_error").text(validator.errorList[0].message);
+			}
+		},
+		submitHandler: function(form) {
+			$.post(
+				"actions/tileSearch.php",
+				$('#tsearch_form').serialize(),
+				function(data){
+					alert('Hello')
+				}, "json"
+			);
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {						// Adding validation rules for each input //
+			tile_search: required
+		},
+		messages: {						// Customized error messages for each error //
+			tile_search: "Please enter a search term."
+		}
+	});	
 	
 });
 
