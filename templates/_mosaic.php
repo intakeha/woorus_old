@@ -86,13 +86,15 @@
 			dropOnEmpty: true,
 			connectWith: 'ul.tile_sort',
 			update: function(event, ui) { 
+				var data = $('#wall_display').sortable('toArray').toString();
 				if(this.id == 'remove_tile') {
-					// Remove the element dropped on #sortable-delete
+					// Remove the element dropped on #remove_tile
 					// jQuery('#'+ui.item.attr('id')).remove();
+					alert('In the trash');
 				} else {
 					// Update code for the actual sortable lists
-					var data = $(this).sortable('toArray').toString();
-					$.post('actions/moveTileOnWall.php', {tile_array: data});
+					$.post('actions/moveTileOnWall.php', {tile_array: data}); 	
+					alert('Called moveTileOnWall');
 				}
 			}
 		});
