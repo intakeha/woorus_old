@@ -38,8 +38,6 @@ else
 	while ($row = mysql_fetch_assoc($lounge_result)){
 		$user_match_id = $row['other_user_id'];
 		
-		//declare empty array
-		
 		$tile_iterator = 1;
 		//look at all the tiles need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
 		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as tile_id, tiles.tile_filename as tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
@@ -69,7 +67,7 @@ else
 			
 			$tile_iterator++;
 		}
-				
+			
 		//get other tile info (filler tiles)
 		$mosaic_wall_query = "SELECT mosaic_wall.user_id, mosaic_wall.tile_id, mosaic_wall.interest_id, interests.interest_name, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored
 						FROM `mosaic_wall`
@@ -85,7 +83,7 @@ else
 
 			$tile_id = $row['tile_id'];
 			$interest_id = $row['interest_id'];
-			$tile_filename = $row['other_tile_filename'];
+			$tile_filename = $row['tile_filename'];
 			$tile_user_id = $row['tile_user_id'];
 			$sponsored = $row['sponsored'];
 			$interest_name = $row['interest_name'];
