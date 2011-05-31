@@ -8,13 +8,15 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
-//$tile_search = $_POST["tile_search"]; //need to validate this!!! & convert it to camel case--like on interest load
-//$query_type = $_POST["query_type"]; //need to validate this!
-//$offset = $_POST["offset"]; //need to validate this!
+$tile_search = $_POST["tile_search"]; //need to validate this!!! & convert it to camel case--like on interest load
+$query_type = $_POST["query_type"]; //need to validate this!
+$offset = $_POST["offset"]; //need to validate this!
 
-$tile_search = "Dock"; //need to validate this!!!
-$query_type = ""; //need to validate this!
-$offset = 0; 
+die("tile search is: ".$tile_search." query type is: ".$query_type." offset is: ".$offset);
+
+//$tile_search = "Dock"; //need to validate this!!!
+//$query_type = ""; //need to validate this!
+//$offset = 0; 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

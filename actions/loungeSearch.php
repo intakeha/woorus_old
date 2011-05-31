@@ -16,8 +16,7 @@ $offset = 0
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//get array of all interest IDs for person 1
-
+//get sorted list of best matches
 $lounge_query = "SELECT DISTINCT mosaic_wall.user_id, others_mosaic_wall.user_id as other_user_id
 FROM mosaic_wall 
 LEFT JOIN mosaic_wall AS others_mosaic_wall
@@ -38,19 +37,89 @@ else
 	while ($row = mysql_fetch_assoc($lounge_result)){
 		$user_match_id = $row['other_user_id'];
 		
-		//need to get matching interests. interest_id -> interest_name -> tile filename
-		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as other_tile_id, others_tiles.tile_filename as other_tile_filename
+		//declare empty array
+		$tile_lounge_array = array();
+		$tile_iterator = 1;
+
+		
+		//need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
+		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as other_tile_id, others_tiles.tile_filename as other_tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
 						FROM mosaic_wall
 						LEFT JOIN interests on mosaic_wall.interest_id = interests.id
 						LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 						LEFT JOIN tiles AS others_tiles ON others_mosaic_wall.tile_id = others_tiles.id
 						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0
 						LIMIT ".$offset.", 10";
+		$user_match_result = mysql_query($user_match_query, $connection) or die ("Error 1");
+		while ($row = mysql_fetch_assoc($user_match_result)){
+
+			$tile_id = $row['tile_id'];
+			$interest_id = $row['interest_id'];
+			$tile_filename = $row['other_tile_filename'];
+			$tile_user_id = $row['tile_user_id'];
+			$sponsored = $row['sponsored'];
+			$interest_name = $row['interest_name'];
+
+			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
+			
+			$tile_search_array[$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_search_array[$tile_iterator]['interest_name'] = $interest_name;
+			$tile_search_array[$tile_iterator]['tile_id'] = $tile_id;
+			$tile_search_array[$tile_iterator]['interest_id'] = $interest_id;
+			$tile_search_array[$tile_iterator]['tile_type'] = $tile_type;
+			
+			$tile_iterator++;
+		}
+				
+		
+		
+		
+		//get other tile info (filler tiles)
+		$mosaic_wall_query = "SELECT mosaic_wall.user_id, mosaic_wall.tile_id, mosaic_wall.interest_id, interests.interest_name, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored
+						FROM `mosaic_wall`
+						LEFT JOIN interests ON mosaic_wall.interest_id = interests.id
+						LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
+						WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.interest_id <> 0
+						ORDER BY `tile_placement`";
+				
+		$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 3");
+		
+		//get filler tiles
+		while ($row = mysql_fetch_assoc($user_match_result) && $tile_iterator <= 10 ){
+
+			$tile_id = $row['tile_id'];
+			$interest_id = $row['interest_id'];
+			$tile_filename = $row['other_tile_filename'];
+			$tile_user_id = $row['tile_user_id'];
+			$sponsored = $row['sponsored'];
+			$interest_name = $row['interest_name'];
+
+			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
+			
+			$tile_search_array[$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_search_array[$tile_iterator]['interest_name'] = $interest_name;
+			$tile_search_array[$tile_iterator]['tile_id'] = $tile_id;
+			$tile_search_array[$tile_iterator]['interest_id'] = $interest_id;
+			$tile_search_array[$tile_iterator]['tile_type'] = $tile_type;
+			
+			$tile_iterator++;
+		}
+		
 		
 		//get user info from user id-->name, location, social status
-		$user_info_query = 
+		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' "
+		$user_info_result = mysql_query($user_info_query, $connection) or die ("Error 2");
+		$user_info_count = mysql_num_rows($user_info_result);
+		if ($user_info_count != 0)
+		{
+			//get user info
+			$row = mysql_fetch_assoc($user_info_result);
 		
-	
+		}else
+		{
+			$error_message = "";
+			sendToJS(0, $error_message);
+		}
 	}
 
 
