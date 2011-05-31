@@ -18,6 +18,7 @@ $query_mosaic_wall = "SELECT mosaic_wall.user_id, mosaic_wall.tile_placement, mo
 				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.interest_id <> 0
 				ORDER BY `tile_placement`";
 				
+die($query_mosaic_wall);
 $result = mysql_query($query_mosaic_wall, $connection) or die ("Error 1");
 
 $tile_filename_array = array();
