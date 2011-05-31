@@ -12,7 +12,7 @@ $user_id = $_SESSION['id'];
 //$offset = $_POST["offset"]; //need to validate this!
 
 $user_search = "penguins";
-$offset = 0
+$offset = 0;
 
 mysql_select_db($db_name);
 
