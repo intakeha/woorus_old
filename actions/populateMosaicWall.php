@@ -15,7 +15,8 @@ $query_mosaic_wall = "SELECT mosaic_wall.user_id, mosaic_wall.tile_placement, mo
 				FROM `mosaic_wall`
 				LEFT JOIN interests ON mosaic_wall.interest_id = interests.id
 				LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
-				WHERE mosaic_wall.user_id =  '".$user_id."' order by `tile_placement`";
+				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.interest_id <> 0
+				ORDER BY `tile_placement`";
 				
 $result = mysql_query($query_mosaic_wall, $connection) or die ("Error 1");
 
@@ -24,15 +25,14 @@ $tile_filename_array = array();
 //iterate through the mosaic wall rows
 while ($row = mysql_fetch_assoc($result)){
 
-
+	$tile_id = $row['mosaic_wall.tile_id'];
+	$interest_id = $row['mosaic_wall.interest_id'];
+	$tile_placement = $row['mosaic_wall.tile_placement'];
 	$sponsored = $row['tiles.sponsored'];
 	$tile_user_id = $row['tiles.user_id'];
 	$tile_filename = $row['tiles.tile_filename'];
 	$interest_name = $row['interests.interest_name'];
-	$tile_id = $row['mosaic_wall.tile_id'];
-	$interest_id = $row['mosaic_wall.interest_id'];
-	$tile_placement = $row['mosaic_wall.tile_placement'];
-	
+
 	
 	//determine tile type based on sponsored, or user id of tile creator
 	$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
