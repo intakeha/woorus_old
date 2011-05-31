@@ -62,18 +62,15 @@ else
 
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
-			$tile_search_array[$tile_iterator]['tile_filename'] = $tile_filename;
-			$tile_search_array[$tile_iterator]['interest_name'] = $interest_name;
-			$tile_search_array[$tile_iterator]['tile_id'] = $tile_id;
-			$tile_search_array[$tile_iterator]['interest_id'] = $interest_id;
-			$tile_search_array[$tile_iterator]['tile_type'] = $tile_type;
+			$tile_lounge_array[$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_lounge_array[$tile_iterator]['interest_name'] = $interest_name;
+			$tile_lounge_array[$tile_iterator]['tile_id'] = $tile_id;
+			$tile_lounge_array[$tile_iterator]['interest_id'] = $interest_id;
+			$tile_lounge_array[$tile_iterator]['tile_type'] = $tile_type;
 			
 			$tile_iterator++;
 		}
 				
-		
-		
-		
 		//get other tile info (filler tiles)
 		$mosaic_wall_query = "SELECT mosaic_wall.user_id, mosaic_wall.tile_id, mosaic_wall.interest_id, interests.interest_name, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored
 						FROM `mosaic_wall`
@@ -85,7 +82,7 @@ else
 		$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 3");
 		
 		//get filler tiles
-		while ($row = mysql_fetch_assoc($user_match_result) && $tile_iterator <= 10 ){
+		while ($row = mysql_fetch_assoc($mosaic_wall_result) && $tile_iterator <= 10 ){
 
 			$tile_id = $row['tile_id'];
 			$interest_id = $row['interest_id'];
@@ -96,15 +93,14 @@ else
 
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
-			$tile_search_array[$tile_iterator]['tile_filename'] = $tile_filename;
-			$tile_search_array[$tile_iterator]['interest_name'] = $interest_name;
-			$tile_search_array[$tile_iterator]['tile_id'] = $tile_id;
-			$tile_search_array[$tile_iterator]['interest_id'] = $interest_id;
-			$tile_search_array[$tile_iterator]['tile_type'] = $tile_type;
+			$tile_lounge_array[$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_lounge_array[$tile_iterator]['interest_name'] = $interest_name;
+			$tile_lounge_array[$tile_iterator]['tile_id'] = $tile_id;
+			$tile_lounge_array[$tile_iterator]['interest_id'] = $interest_id;
+			$tile_lounge_array[$tile_iterator]['tile_type'] = $tile_type;
 			
 			$tile_iterator++;
 		}
-		
 		
 		//get user info from user id-->name, location, social status
 		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' "
@@ -114,7 +110,7 @@ else
 		{
 			//get user info
 			$row = mysql_fetch_assoc($user_info_result);
-		
+			
 		}else
 		{
 			$error_message = "";
@@ -122,7 +118,8 @@ else
 		}
 	}
 
-
+	$output = json_encode($tile_lounge_array);
+	die($output);
 }
 
 /* Testing
