@@ -27,6 +27,8 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id 
 			LIMIT '".$offset."', 10";
 
+die ($mosaic_query);
+
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 if (mysql_num_rows($mosaic_result) == 0) //no matches
 {
