@@ -15,6 +15,8 @@ $offset = 0;
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
+$tile_lounge_array = array(); //declare array
+
 //get sorted list of best matches
 $lounge_query = "SELECT DISTINCT mosaic_wall.user_id, others_mosaic_wall.user_id as other_user_id
 FROM mosaic_wall 
@@ -31,16 +33,15 @@ if (mysql_num_rows($lounge_result) == 0) //we found no common interests with any
 }
 else
 {
+	$user_iterator = 1;
 	//iterate through all users who have matching interests
 	while ($row = mysql_fetch_assoc($lounge_result)){
 		$user_match_id = $row['other_user_id'];
 		
 		//declare empty array
-		$tile_lounge_array = array();
-		$tile_iterator = 1;
-
 		
-		//need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
+		$tile_iterator = 1;
+		//look at all the tiles need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
 		$user_match_query = "SELECT DISTINCT mosaic_wall.interest_id, interests.interest_name, others_mosaic_wall.tile_id as tile_id, tiles.tile_filename as tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
 						FROM mosaic_wall
 						LEFT JOIN interests on mosaic_wall.interest_id = interests.id
@@ -60,11 +61,11 @@ else
 
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
-			$tile_lounge_array[$tile_iterator]['tile_filename'] = $tile_filename;
-			$tile_lounge_array[$tile_iterator]['interest_name'] = $interest_name;
-			$tile_lounge_array[$tile_iterator]['tile_id'] = $tile_id;
-			$tile_lounge_array[$tile_iterator]['interest_id'] = $interest_id;
-			$tile_lounge_array[$tile_iterator]['tile_type'] = $tile_type;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['interest_name'] = $interest_name;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_id'] = $tile_id;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['interest_id'] = $interest_id;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_type'] = $tile_type;
 			
 			$tile_iterator++;
 		}
@@ -91,19 +92,16 @@ else
 
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
-			$tile_lounge_array[$tile_iterator]['tile_filename'] = $tile_filename;
-			$tile_lounge_array[$tile_iterator]['interest_name'] = $interest_name;
-			$tile_lounge_array[$tile_iterator]['tile_id'] = $tile_id;
-			$tile_lounge_array[$tile_iterator]['interest_id'] = $interest_id;
-			$tile_lounge_array[$tile_iterator]['tile_type'] = $tile_type;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_filename'] = $tile_filename;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['interest_name'] = $interest_name;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_id'] = $tile_id;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['interest_id'] = $interest_id;
+			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_type'] = $tile_type;
 			
 			$tile_iterator++;
 		}
 		
-		
-		$output = json_encode($tile_lounge_array);
-		die($output);
-		
+		/*
 		//get user info from user id-->name, location, social status
 		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' ";
 		$user_info_result = mysql_query($user_info_query, $connection) or die ("Error 2");
@@ -118,6 +116,9 @@ else
 			$error_message = "";
 			sendToJS(0, $error_message);
 		}
+		*/
+	
+		$user_iterator++;
 	}
 
 	$output = json_encode($tile_lounge_array);
