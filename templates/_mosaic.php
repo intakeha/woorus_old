@@ -76,8 +76,7 @@
 			$.each(result, function(i, field){
 			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 			});
-		});	
-		
+		});		
 	});
 
 	$(function() {
