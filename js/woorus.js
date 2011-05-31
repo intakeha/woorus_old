@@ -798,8 +798,8 @@ $(document).ready(function(){
 				"actions/tileSearch.php",
 				$('#tsearch_form').serialize(),
 				function(data){
-					alert('hi');
-				}, "json"
+					alert(data);
+				}, "text"
 			);
 		},
 		errorPlacement: function(error, element) {
