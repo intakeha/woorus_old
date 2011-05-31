@@ -9,18 +9,18 @@ session_start();
 $user_id = $_SESSION['id'];
 
 //$user_search = $_POST["user_search"]; //need to validate this!!! & convert it to camel case--like on interest load
+//$offset = $_POST["offset"]; //need to validate this!
 
-$user_search = "penguins"; //need to validate this!!!
+$user_search = "penguins";
+$offset = 0
 
-//connect
-$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 
 //TO DO: need to look at online status!!!!!!!!!!!
 
 //look for interest based on ID & get users associated with the interest id retreived above
-$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, mosaic_wall.interest_id, mosaic_wall.tile_id FROM `interests`, `mosaic_wall` WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id LIMIT 0, 10";
+$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, mosaic_wall.interest_id, mosaic_wall.tile_id FROM `interests`, `mosaic_wall` WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id LIMIT '".$offset."', 10";
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 if (mysql_num_rows($mosaic_result) == 0) //we found the interest, but its not on anyones wall
 {
