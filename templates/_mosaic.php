@@ -88,8 +88,7 @@
 			update: function(event, ui) { 
 				if(this.id == 'remove_tile') {
 					// Remove the element dropped on #sortable-delete
-					//jQuery('#'+ui.item.attr('id')).remove();
-					alert('In the trash');
+					// jQuery('#'+ui.item.attr('id')).remove();
 				} else {
 					// Update code for the actual sortable lists
 					var data = $(this).sortable('toArray').toString();
