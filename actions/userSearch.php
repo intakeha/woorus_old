@@ -5,7 +5,6 @@ require('validations.php');
 require('mosaicWallHelperFunctions.php');
 
 session_start();
-
 $user_id = $_SESSION['id'];
 
 //$user_search = $_POST["user_search"]; //need to validate this!!! & convert it to camel case--like on interest load
@@ -27,7 +26,7 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			LEFT JOIN users on users.id = mosaic_wall.user_id
 			WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id 
 			LIMIT '".$offset."', 10";
-			
+
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 if (mysql_num_rows($mosaic_result) == 0) //no matches
 {
