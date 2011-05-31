@@ -14,6 +14,8 @@ $user_id = $_SESSION['id'];
 $user_search = "penguins";
 $offset = 0;
 
+//connect
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 //TO DO: need to look at online status!!!!!!!!!!!
