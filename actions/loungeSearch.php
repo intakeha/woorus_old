@@ -24,7 +24,7 @@ LEFT JOIN mosaic_wall AS others_mosaic_wall
 ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
 GROUP BY others_mosaic_wall.user_id
-ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT '".$offset."', 2";
+ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
  
 $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
 if (mysql_num_rows($lounge_result) == 0) //we found no common interests with anyone else (online)
@@ -44,7 +44,8 @@ else
 						LEFT JOIN interests on mosaic_wall.interest_id = interests.id
 						LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 						LEFT JOIN tiles AS others_tiles ON others_mosaic_wall.tile_id = others_tiles.id
-						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0 ";
+						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0
+						LIMIT ".$offset.", 10";
 		
 		//get user info from user id-->name, location, social status
 		$user_info_query = 

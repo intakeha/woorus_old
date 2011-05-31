@@ -26,16 +26,16 @@ switch ($query_type){
 	
 	
 	case "S": // Sponsored Tiles
-	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 1 LIMIT '".$offset."', 15";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 1 LIMIT ".$offset.", 15";
 	
 	case "U": //Uploaded Tiles
-	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.user_id = '".$user_id."' LIMIT '".$offset."', 15";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.user_id = '".$user_id."' LIMIT ".$offset.", 15";
 	
 	case "C": //Community Tiles
-	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' LIMIT '".$offset."', 15 ";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' LIMIT ".$offset.", 15 ";
 	
 	default:
-	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id  LIMIT '".$offset."', 15";
+	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id  LIMIT ".$offset.", 15";
 }
 
 $tile_query_result = mysql_query($tile_query, $connection) or die ("Error 9");
