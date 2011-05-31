@@ -102,7 +102,7 @@ else
 		}
 		
 		//get user info from user id-->name, location, social status
-		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' "
+		$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' ";
 		$user_info_result = mysql_query($user_info_query, $connection) or die ("Error 2");
 		$user_info_count = mysql_num_rows($user_info_result);
 		if ($user_info_count != 0)
