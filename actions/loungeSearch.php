@@ -82,7 +82,7 @@ else
 		while ($row_mosaic = mysql_fetch_assoc($mosaic_wall_result))
 		{
 			
-			$tile_id = $=$row_mosaic ['tile_id'];
+			$tile_id = $row_mosaic['tile_id'];
 			$interest_id = $row_mosaic['interest_id'];
 			$tile_filename = $row_mosaic['tile_filename'];
 			$tile_user_id = $row_mosaic['tile_user_id'];
