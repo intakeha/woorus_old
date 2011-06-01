@@ -117,18 +117,12 @@ if ($session)
 			}else
 			{
 				//user's true first time--> input data, take to settings page
-				//$activities = $facebook->api('/me/activities');
-				//$books = $facebook->api('/me/books');
-				//$interests = $facebook->api('/me/interests');
+				
 				$likes = $facebook->api('/me/likes');
-				//$links = $facebook->api('/me/links');
-				//$movies = $facebook->api('/me/movies');
-				//$music = $facebook->api('/me/music');
-				//$television = $facebook->api('/me/television');		
-				//$facebook_id = $me["id"]; //this is NOT woorus ID
-				//$facebook_first_name =  $me["first_name"];
-				//$facebook_last_name = $me["last_name"];
-				//$facebook_birthday =  $me["birthday_date"];
+				
+				$facebook_first_name =  $me["first_name"];
+				$facebook_last_name = $me["last_name"];
+				$facebook_birthday =  $me["birthday_date"];
 				$facebook_city = $me["location"]["name"]; //not using yet
 				$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
 				$facebook_gender = convertGender($me["gender"]);
@@ -232,25 +226,34 @@ if ($session)
 function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $tile_placement, $connection, $thumb_width)
 {
 
-	//check for interest
-	$interest_query = "SELECT id from `interests` WHERE facebook_id = '".mysql_real_escape_string($fb_interest_id)."' ";
-	$interest_result = mysql_query($interest_query, $connection) or die ("Error 4");
-	$interest_count = mysql_num_rows($interest_result);
+	//check for interest (against matching facebook ID or matching interest)
+	$facebook_interest_query = "SELECT id, facebook_id from `interests` WHERE facebook_id = '".mysql_real_escape_string($fb_interest_id)."' OR interest_name =  '".mysql_real_escape_string($fb_interest)."' ";
+	$facebook_interest_result = mysql_query($facebook_interest_query, $connection) or die ("Error 4");
+	$facebook_interest_count = mysql_num_rows($facebook_interest_result);
 	
 	// if row exists -> interest is already there from Facebook
-	if ($interest_count != 0)
+	if ($facebook_interest_count != 0)
 	{
 		// its already there, so do not add to the interest to the table (will add to other tabes later)
 	
 		//get id, by lookup on facebook ID
-		$row = mysql_fetch_assoc($interest_result);
-		$interest_id = $row['id']; 
+		$row = mysql_fetch_assoc($facebook_interest_result);
+		$interest_id = $row['id'];
+		$retreived_facebook_id = $row['facebook_id'];
+			
+		//update interest_ID if its null (means that interest was entered from Woorus but then entered in by facebook connect.
+		if ($retreived_facebook_id == NULL || $retreived_facebook_id == 0){
+			$interest_update_query = "UPDATE `interests` SET facebook_id =   '".mysql_real_escape_string($fb_interest_id)."'  WHERE id = '".$interest_id."' ";
+			$interest_update_result = mysql_query($interest_update_query, $connection) or die ("Error 4.5");
+		}
 		
 		//update other tables basd on ID
 		$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
 		updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 		updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
-		
+
+	}
+	
 	}
 	else
 	{
