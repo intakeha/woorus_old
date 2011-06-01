@@ -219,7 +219,7 @@ if ($session)
 				$_SESSION['facebook'] = 1;
 				$_SESSION['password_created'] = $password_set;
 				$_SESSION['user_info_set'] = $user_info_set;
-				header( 'Location: ../canvas.php?page=settings') ;
+				//header( 'Location: ../canvas.php?page=settings') ;
 			}
 
 		}
@@ -317,13 +317,14 @@ function getFacebookImage($fb_interest_id, $user_id, $thumb_width){
 $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
 
-$large_image_location = $large_path."/facebook_".$fb_interest_id.".jpg";
-
 $picture_name = "facebook_".$fb_interest_id.".jpg";
+
+$large_image_location = $large_path."/".$picture_name;
 $thumb_image_location = $thumbnail_path."/".$picture_name;
 
 //$large_image_location = $large_path."/".$incoming_file;
 $link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=large";
+print $link;
 
 file_put_contents($large_image_location, file_get_contents($link));
 chmod($large_image_location, 0777);
