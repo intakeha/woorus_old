@@ -318,7 +318,9 @@ $large_path = "../images/temporary";
 $thumbnail_path = "../images/interests";
 
 $large_image_location = $large_path."/facebook_".$fb_interest_id.".jpg";
-$thumb_image_location = $thumbnail_path."/facebook_".$fb_interest_id.".jpg";
+
+$picture_name = "facebook_".$fb_interest_id.".jpg";
+$thumb_image_location = $thumbnail_path."/".$picture_name;
 
 //$large_image_location = $large_path."/".$incoming_file;
 $link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=large";
@@ -360,7 +362,7 @@ $h = $thumb_width;
 $scale2 = $thumb_width/$w;
 $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location, $w,$h,$x1,$y1,$scale2);
 
-return $thumb_image_location;
+return $picture_name;
 
 }
 
