@@ -252,10 +252,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 		updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 		updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 
-	}
-	
-	}
-	else
+	}else
 	{
 		//add interest if its not there
 		$query_add_interest = "INSERT INTO `interests` (id, interest_name, category, facebook_id, facebook_category, update_time, user_id) VALUES
