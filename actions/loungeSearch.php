@@ -88,7 +88,7 @@ else
 			$sponsored = $row['sponsored'];
 			$interest_name = $row['interest_name'];
 
-			die($tile_id.interest_id.$tile_filename.$tile_user_id.$interest_name);
+			die($tile_id.$interest_id.$tile_filename.$tile_user_id.$interest_name);
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
 			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_filename'] = $tile_filename;
