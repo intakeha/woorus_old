@@ -13,8 +13,8 @@
             <a href="#" id="communityTiles"><div><span class="legend_squares" id="graySquare"></span>Community Tiles</div></a>
         </div>
         <div id="tiles_bank">
-            <ul id="tile_display">
-            <li class="uploaded tile_tag" onmouseover="showInterest($(this), 'Ferrari')" onmouseout="hideInterest($(this))"><img src="images/interests/ferrari.png" /></li>
+            <ul id="tile_display" class="tile_sort">
+            	<li class="uploaded tile_tag" onmouseover="showInterest($(this), 'Ferrari')" onmouseout="hideInterest($(this))"><img src="images/interests/ferrari.png" /></li>
             </ul><div id="clear"></div>
         </div>
         <div id="customized_tile">
@@ -79,12 +79,18 @@
 		});		
 
 		$("#wall_display").sortable({
+			connectWith: ".tile_sort",
 			tolerance: 'pointer',
 			cursor: 'pointer',
 			update: function(event, ui) {
 				var data = $('#wall_display').sortable('toArray').toString();
 				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
 				alert(data);
+			},
+			receive: function(event, ui) { 
+				var data2 = $('#wall_display').sortable('toArray').toString();
+				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
+				alert(data2);			
 			}
 		});
 		$("#wall_display").disableSelection(); 
