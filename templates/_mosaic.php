@@ -74,34 +74,42 @@
 		$('#wall_display').empty();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
-			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 			});
 		});		
+
+		$("#wall_display").sortable();
+		$("#wall_display").disableSelection(); 
+
 	});
 
+
 /*
-	$(function() {
-		$( "ul.tile_sort" ).sortable({
-			tolerance: 'pointer',
-			cursor: 'pointer',
-			dropOnEmpty: true,
-			connectWith: 'ul.tile_sort',
-			update: function(event, ui) { 
-				var data = $('#wall_display').sortable('toArray').toString();
-				if(this.id == 'remove_tile') {
-					// Remove the element dropped on #remove_tile
-					// jQuery('#'+ui.item.attr('id')).remove();
-				} else {
-					// Update back-end to reflect mosaic wall
-					$.post('actions/moveTileOnWall.php', {tile_array: data}); 	
+		$(function() {
+			$( "ul.tile_sort" ).sortable({
+				tolerance: 'pointer',
+				cursor: 'pointer',
+				dropOnEmpty: true,
+				connectWith: 'ul.tile_sort',
+				update: function(event, ui) { 
+					var data = $('#wall_display').sortable('toArray').toString();
+					if(this.id == 'remove_tile') {
+						// Remove the element dropped on #remove_tile
+						// jQuery('#'+ui.item.attr('id')).remove();
+					} else {
+						// Update back-end to reflect mosaic wall
+						$.post('actions/moveTileOnWall.php', {tile_array: data}); 	
+					}
 				}
-			}
+			});
+			$( "#wall_display" ).disableSelection();
+			return false;
 		});
-		$( "#wall_display" ).disableSelection();
-		return false;
-	});
 */
+
 </script>
+
+
 
 
 
