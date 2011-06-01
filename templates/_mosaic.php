@@ -90,11 +90,9 @@
 				if(this.id == 'remove_tile') {
 					// Remove the element dropped on #remove_tile
 					// jQuery('#'+ui.item.attr('id')).remove();
-					alert('In the trash');
 				} else {
 					// Update back-end to reflect mosaic wall
 					$.post('actions/moveTileOnWall.php', {tile_array: data}); 	
-					alert('Called moveTileOnWall');
 				}
 			}
 		});
