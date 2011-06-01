@@ -324,7 +324,7 @@ $thumb_image_location = $thumbnail_path."/".$picture_name;
 
 //$large_image_location = $large_path."/".$incoming_file;
 $link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=large";
-print $link;
+echo "link is ".$link." large image location is ".$large_image_location;
 
 file_put_contents($large_image_location, file_get_contents($link));
 chmod($large_image_location, 0777);
