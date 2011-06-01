@@ -840,14 +840,6 @@ function addToWall(tileID, interestID){
 				$('#tile_upload_error').show();
 			} else {
 				$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
-				$("#wall_display").sortable({
-					tolerance: 'pointer',
-					cursor: 'pointer',
-					create: function(event, ui) {
-						var data = $('#wall_display').sortable('toArray').toString();
-						$.post('actions/moveTileOnWall.php', {tile_array: data}); 
-					}
-				});
 			}
 		}, "json"
 	);
