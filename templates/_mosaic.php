@@ -79,6 +79,7 @@
 		});		
 	});
 
+/*
 	$(function() {
 		$( "ul.tile_sort" ).sortable({
 			tolerance: 'pointer',
@@ -99,6 +100,7 @@
 		$( "#wall_display" ).disableSelection();
 		return false;
 	});
+*/
 </script>
 
 
