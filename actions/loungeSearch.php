@@ -89,7 +89,6 @@ else
 			$sponsored = $row_mosaic['sponsored'];
 			$interest_name = $row_mosaic['interest_name'];
 
-			die($tile_id.$interest_id.$tile_filename.$tile_user_id.$interest_name);
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			
 			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_filename'] = $tile_filename;
@@ -97,6 +96,10 @@ else
 			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_id'] = $tile_id;
 			$tile_lounge_array[$user_iterator][$tile_iterator]['interest_id'] = $interest_id;
 			$tile_lounge_array[$user_iterator][$tile_iterator]['tile_type'] = $tile_type;
+			
+			if ($tile_iterator >= 10){
+				break;
+			}
 			
 			$tile_iterator++;
 		}
