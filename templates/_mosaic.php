@@ -79,18 +79,12 @@
 		});		
 
 		$("#wall_display").sortable({
-			connectWith: ".tile_sort",
 			tolerance: 'pointer',
 			cursor: 'pointer',
 			update: function(event, ui) {
 				var data = $('#wall_display').sortable('toArray').toString();
 				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
 				alert(data);
-			},
-			receive: function(event, ui) { 
-				var data2 = $('#wall_display').sortable('toArray').toString();
-				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
-				alert(data2);			
 			}
 		});
 		$("#wall_display").disableSelection(); 
