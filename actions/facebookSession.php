@@ -61,7 +61,7 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address, id, password_set, user_info_set, active_user from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
+		$namecheck_query = "SELECT email_address, id, password_set, user_info_set, active_user, facebook_id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		
@@ -73,6 +73,13 @@ if ($session)
 			$password_set = $row['password_set']; 
 			$user_info_set = $row['user_info_set']; 
 			$active_user = $row['active_user']; 
+			$retreived_facebook_id = $row['facebook_id'];
+			
+			//update faecbook_ID if its null (means that user signed up with woorus but then logged in with facebook connect--we can get their facebookk ID)
+			if ($retreived_facebook_id == NULL || $retreived_facebook_id == 0){
+				$interest_update_query = "UPDATE `users` SET facebook_id =   '".mysql_real_escape_string($retreived_facebook_id)."'  WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
+				$interest_update_result = mysql_query($interest_update_query, $connection) or die ("Error 4.5");
+			}
 			
 			updateLoginTime($user_id); //need to also update the login table
 			
