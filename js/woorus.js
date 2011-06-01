@@ -840,6 +840,8 @@ function addToWall(tileID, interestID){
 				$('#tile_upload_error').show();
 			} else {
 				$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+				var data2 = $('#wall_display').sortable('toArray').toString();
+				alert(data2);
 			}
 		}, "json"
 	);
