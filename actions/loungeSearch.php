@@ -78,15 +78,16 @@ else
 				
 		$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 3");
 		
-		//get filler tiles
-		while ($row = mysql_fetch_assoc($mosaic_wall_result) && $tile_iterator <= 10 ){
+		//get filler tiles  && $tile_iterator <= 10
+		while ($row_mosaic = mysql_fetch_assoc($mosaic_wall_result))
+		{
 			
-			$tile_id = $row['tile_id'];
-			$interest_id = $row['interest_id'];
-			$tile_filename = $row['tile_filename'];
-			$tile_user_id = $row['tile_user_id'];
-			$sponsored = $row['sponsored'];
-			$interest_name = $row['interest_name'];
+			$tile_id = $=$row_mosaic ['tile_id'];
+			$interest_id = $row_mosaic['interest_id'];
+			$tile_filename = $row_mosaic['tile_filename'];
+			$tile_user_id = $row_mosaic['tile_user_id'];
+			$sponsored = $row_mosaic['sponsored'];
+			$interest_name = $row_mosaic['interest_name'];
 
 			die($tile_id.$interest_id.$tile_filename.$tile_user_id.$interest_name);
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
