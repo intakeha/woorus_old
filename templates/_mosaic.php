@@ -78,19 +78,17 @@
 			});
 		});		
 
-		$("#mosaic").live("mouseover", function(event) {
-			$("#wall_display").sortable({
-				tolerance: 'pointer',
-				cursor: 'pointer',
-				update: function(event, ui) {
-					var data = $('#wall_display').sortable('toArray').toString();
-					$.post('actions/moveTileOnWall.php', {tile_array: data}); 
-					alert(data);
-				}
-			});
-			$("#wall_display").disableSelection(); 
+		$("#wall_display").sortable({
+			tolerance: 'pointer',
+			cursor: 'pointer',
+			containment: 'document',
+			update: function(event, ui) {
+				var data = $('#wall_display').sortable('toArray').toString();
+				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
+				alert(data);
+			}
 		});
-		
+		$("#wall_display").disableSelection(); 
 	});
 
 
