@@ -205,7 +205,7 @@ if ($session)
 				foreach ($likes["data"] as $value){
 					$facebook_interest = $value["name"];
 					$category = $value["category"];
-					$facebook_interest_id = $value ["id"];
+					$facebook_interest_id = $value["id"];
 					
 					$interest_id = enterNewInterest($facebook_interest , $category, $facebook_interest_id, $category, $user_id, $tile_placement, $connection, $thumb_width);
 					$tile_placement++;
@@ -323,7 +323,7 @@ $large_image_location = $large_path."/".$picture_name;
 $thumb_image_location = $thumbnail_path."/".$picture_name;
 
 //$large_image_location = $large_path."/".$incoming_file;
-$link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=large";
+$link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=normal";
 echo "link is ".$link." large image location is ".$large_image_location;
 
 file_put_contents($large_image_location, file_get_contents($link));
