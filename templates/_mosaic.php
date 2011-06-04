@@ -13,7 +13,7 @@
             <a href="#" id="communityTiles"><div><span class="legend_squares" id="graySquare"></span>Community Tiles</div></a>
         </div>
         <div id="tiles_bank">
-            <ul id="tile_display" class="tile_sort">
+            <ul id="tile_display">
             	<li class="uploaded tile_tag" onmouseover="showInterest($(this), 'Ferrari')" onmouseout="hideInterest($(this))"><img src="images/interests/ferrari.png" /></li>
             </ul>
         </div><div id="clear"></div>
@@ -90,7 +90,7 @@
 				alert(data);
 			}
 		});
-		$("#wall_display, #remove_tile, #tile_display").disableSelection(); 
+		$("#wall_display, #remove_tile").disableSelection(); 
 	});
 
 
