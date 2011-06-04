@@ -742,7 +742,7 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseout=\'hideInterest($(this))\' onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\')\" ><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\')\" ><img src=\'images/interests/"+data.tile_filename+"\'></li>");
 						$('.tile_sort').sortable( "refresh" );
 						if ($('#wall_display li').length < 36){
 							$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
