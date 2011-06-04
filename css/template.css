@@ -803,6 +803,7 @@ div.transparent_tag {
     overflow: hidden;
 	background: url(../images/global/trash.png) no-repeat;
 }
+
 #remove_tile li { 
     height: 0; 
     width: 0; 

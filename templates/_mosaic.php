@@ -15,8 +15,8 @@
         <div id="tiles_bank">
             <ul id="tile_display" class="tile_sort">
             	<li class="uploaded tile_tag" onmouseover="showInterest($(this), 'Ferrari')" onmouseout="hideInterest($(this))"><img src="images/interests/ferrari.png" /></li>
-            </ul><div id="clear"></div>
-        </div>
+            </ul>
+        </div><div id="clear"></div>
         <div id="customized_tile">
         	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
             	<p>Create your own customized tile: </p>     
@@ -78,17 +78,19 @@
 			});
 		});		
 
-		$("#wall_display").sortable({
-			tolerance: 'pointer',
-			cursor: 'pointer',
-			containment: 'document',
+		$(".tile_sort").sortable({
+			tolerance: "pointer",
+			cursor: "pointer",
+			containment: "document",
+			dropOnEmpty: true,
+			connectWith: "ul",
 			update: function(event, ui) {
 				var data = $('#wall_display').sortable('toArray').toString();
 				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
 				alert(data);
 			}
 		});
-		$("#wall_display").disableSelection(); 
+		$("#wall_display, #remove_tile").disableSelection(); 
 	});
 
 
