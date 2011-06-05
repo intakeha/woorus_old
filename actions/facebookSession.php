@@ -181,7 +181,7 @@ if ($session)
 				}
 				
 				//next step is to enter in all the interests we've taken from the facebook API
-				$tile_placement= 0;
+				$tile_placement= 1;
 		
 				//get all their intersts
 				foreach ($me["work"] as $value){
@@ -257,7 +257,9 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 		//update other tables basd on ID
 		$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
 		updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
-		updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+		if ($tile_placement <= 36){
+			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+		}
 
 	}else
 	{
@@ -283,7 +285,9 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			updateTileTable($user_id, $interest_id, $fb_interest_id, $tile_filename, $connection); 
 			$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
 			updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
-			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+			if ($tile_placement <= 36){
+				updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);
+			}
 				
 		} 
 	}
@@ -324,7 +328,6 @@ $thumb_image_location = $thumbnail_path."/".$picture_name;
 
 //$large_image_location = $large_path."/".$incoming_file;
 $link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=normal";
-echo "link is ".$link." large image location is ".$large_image_location;
 
 file_put_contents($large_image_location, file_get_contents($link));
 chmod($large_image_location, 0777);
