@@ -602,17 +602,17 @@ li.forgot_title {
 	background-color: #666;
 }
 
-a#myTiles:link, a#myTiles:active, a#myTiles:visited, a#myTiles:hover {
+div#myTiles {
 	color: #4980B7;
 	text-decoration: none;
 }
 
-a#sponsoredTiles:link, a#sponsoredTiles:active, a#sponsoredTiles:visited, a#sponsoredTiles:hover {
+div#sponsoredTiles {
 	color: #C00;
 	text-decoration: none;
 }
 
-a#communityTiles:link,  a#communityTiles:active, a#communityTiles:visited, a#communityTiles:hover {
+div#communityTiles {
 	color: #666;
 	text-decoration: none;
 }
@@ -782,13 +782,13 @@ img.transparent_tile {
 	opacity:0.1;
 	filter:alpha(opacity=10);
 	position: relative;
-	word-wrap: break-word;
 }
 
 div.transparent_tag {
 	position: absolute;
 	text-align: center;
 	width: 75px;
+	word-wrap: break-word;
 }
 
 #wall_trash{

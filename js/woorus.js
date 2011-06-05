@@ -767,7 +767,7 @@ $(document).ready(function(){
 				startsymbol: true,
 				endsymbol: true,
 				minlength: 2,
-				maxlength: 30			
+				maxlength: 60			
 			}
 		},
 		messages: {						// Customized error messages for each error //
@@ -777,7 +777,7 @@ $(document).ready(function(){
 				startsymbol: "Tag should not start or end with a symbol.",
 				endsymbol: "Tag should not start or end with a symbol.",
 				minlength: "Tag should be at least 2 characters.",
-				maxlength: "Please enter no more than 30 characters for your tag."
+				maxlength: "Please enter no more than 60 characters for your tag."
 			}
 		}
 	});	

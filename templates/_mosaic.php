@@ -5,12 +5,14 @@
 	<div id="tiles">
 	    <form id="tsearch_form" action="actions/tileSearch.php" method="POST">
             <input type="text" id="tile_search_field" name="tile_search" maxlength="60">
+            <input type="hidden" name="query_type" value="" />
+            <input type="hidden" name="offset" value="" />
             <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
         </form>
 		<div id="tiles_legend">
-            <a href="#" id="sponsoredTiles"><div><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div></a>
-            <a href="#" id="myTiles"><div><span class="legend_squares" id="blueSquare"></span>Uploaded Tiles</div></a>
-            <a href="#" id="communityTiles"><div><span class="legend_squares" id="graySquare"></span>Community Tiles</div></a>
+            <div id="sponsoredTiles"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
+            <div id="myTiles"><span class="legend_squares" id="blueSquare"></span>Uploaded Tiles</div>
+            <div id="communityTiles"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
         </div>
         <div id="tiles_bank">
             <ul id="tile_display">
@@ -100,10 +102,45 @@
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
-					$("#tile_upload_error").text(validator.errorList[0].message); 
+					$('#tile_upload_success').hide(); 
+					$("#tile_upload_error").show().text(validator.errorList[0].message); 
 				}
 			},
 			submitHandler: function(form) {
+				$.post(
+					"actions/tileSearch.php",
+					$('#tsearch_form').serialize(),
+					function(data){
+						alert(data)
+					}
+				);
+			},
+			errorPlacement: function(error, element) {
+				// Override error placement to not show error messages beside elements //
+			},
+			rules: {
+				tile_search: "required"
+			},
+			messages: {
+				tile_search: "Please enter an interest search term."
+			}
+		});
+		
+		$("#sponsoredTiles").validate({
+			onsubmit: false,
+			onfocusout: false,
+			onkeyup: false,
+			onclick: true,
+			invalidHandler: function(form, validator) {
+				var errors = validator.numberOfInvalids();
+				if (errors) {
+					$('#tile_upload_success').hide(); 
+					$("#tile_upload_error").show().text(validator.errorList[0].message); 
+				}
+			},
+			submitHandler: function(form) {
+				$('input[name=query_type]').val("S");
+				$('input[name=offset]').val("0");
 				$.post(
 					"actions/tileSearch.php",
 					$('#tsearch_form').serialize(),
