@@ -782,6 +782,7 @@ img.transparent_tile {
 	opacity:0.1;
 	filter:alpha(opacity=10);
 	position: relative;
+	word-wrap: break-word;
 }
 
 div.transparent_tag {
