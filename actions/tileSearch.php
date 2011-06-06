@@ -36,7 +36,6 @@ switch ($query_type){
 	
 	case "C": //Community Tiles
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' LIMIT ".$offset.", 15 ";
-	die ($tile_query);
 	
 	default:
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id  LIMIT ".$offset.", 15";
