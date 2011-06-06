@@ -726,6 +726,7 @@ $(document).ready(function(){
 					if (data.success == 0){
 						$('#crop_error').html(data.message); 
 					}else{
+						$('#tile_display').empty();
 						$('#crop_error').empty();
 						$('#tile_crop').hide();
 						$('.pagination_mosaic').show();

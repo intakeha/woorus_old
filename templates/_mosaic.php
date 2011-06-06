@@ -114,10 +114,22 @@
 					"actions/tileSearch.php",
 					$('#tsearch_form').serialize(),
 					function(data){
+						$('#tile_display').empty();
 						$.each(data, function(i, field){
-							$('#tile_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+							switch (field.tile_type){
+								case "S":
+									tile_type = "sponsored"
+									break
+								case "U":
+									tile_type = "uploaded"
+									break
+								case "C":
+									tile_type = "community"
+									break
+							};
+							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 						});
-					}
+					}, "json"
 				);
 			},
 			errorPlacement: function(error, element) {
