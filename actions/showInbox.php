@@ -20,7 +20,8 @@ $show_message_query = 	"SELECT user_mailer, message_text, sent_time, message_rea
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.user_mailee
 					WHERE user_mailee =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
-					
+
+die ($show_message_query);
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
 //declare empy message array & set iterator to 1
