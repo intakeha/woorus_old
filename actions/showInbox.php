@@ -16,7 +16,7 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT user_mailer, message_text, sent_time, message_read, first_name, social_status
+$show_message_query = 	"SELECT message_text, sent_time, message_read, first_name, social_status
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.user_mailee
 					WHERE user_mailee =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
@@ -30,17 +30,18 @@ $mail_iterator = 1;
 //iterate through the messages returned
 while ($row = mysql_fetch_assoc($show_message_result)){
 
-	$user_mailer = $row['user_mailer'];
+	$first_name =  $row['first_name'];
+	$social_status =  $row['social_status'];
 	$message_text = $row['message_text'];
 	$sent_time = $row['sent_time'];
 	$message_read = $row['message_read'];
-	$first_name =  $row['first_name'];
-	$social_status =  $row['social_status'];
-	
-	$mail_array[$mail_iterator]['user_mailer'] = $user_mailer;
-	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 120);
+
+	$mail_array[$mail_iterator]['first_name'] = $first_name;
+	$mail_array[$mail_iterator]['social_status'] = $social_status;
+	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 100);
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
+	
 	
 	$mail_iterator++;
 }
