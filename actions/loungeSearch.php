@@ -7,8 +7,9 @@ require('mosaicWallHelperFunctions.php');
 session_start();
 
 $user_id = $_SESSION['id'];
+//$offset = validateOffset($_POST["offset"]); 
 
-//$offset = $_POST["offset"]; //need to validate this!
+//---testing---//
 $offset = 0;
 
 //connect

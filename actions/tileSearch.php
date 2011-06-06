@@ -8,14 +8,15 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
-$tile_search = $_POST["tile_search"]; //need to validate this!!! & convert it to camel case--like on interest load
-$query_type = $_POST["query_type"]; //need to validate this!
-$offset = $_POST["offset"]; //need to validate this!
+$tile_search = validateInterestTag_Search($_POST["tile_search"]);
+$query_type = validateQueryType($_POST["query_type"]);
+$offset = validateOffset($_POST["offset"]); 
 
 die("tile search is: ".$tile_search." query type is: ".$query_type." offset is: ".$offset);
 
-//$tile_search = "Dock"; //need to validate this!!!
-//$query_type = ""; //need to validate this!
+//---for testing---//
+//$tile_search = "Dock"; 
+//$query_type = ""; 
 //$offset = 0; 
 
 //connect

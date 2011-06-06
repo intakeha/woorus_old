@@ -7,8 +7,8 @@ require('mosaicWallHelperFunctions.php');
 session_start();
 $user_id = $_SESSION['id'];
 
-//$user_search = $_POST["user_search"]; //need to validate this!!! & convert it to camel case--like on interest load
-//$offset = $_POST["offset"]; //need to validate this!
+//$user_search = validateInterestTag_Search($_POST["user_search"]);
+//$offset = validateOffset($_POST["offset"]); 
 
 $user_search = "penguins";
 $offset = 0;

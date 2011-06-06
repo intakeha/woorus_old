@@ -587,6 +587,43 @@ function validateInterestTag($tag)
 
 }
 
+function validateInterestTag_Search($tag)
+{
+	$tag = utf8_decode($tag);
+	
+	if($tag == NULL | strlen($tag) == 0)
+	{
+		$error_message = "Please enter an interest in the search field.";
+		sendToJS(0, $error_message);
+	}
+	elseif(strlen($tag) < 2)
+	{
+		$error_message = "Search term should be at least 2 characters.";
+		sendToJS(0, $error_message);
+	}
+	
+	elseif(strlen($tag) > 60)
+	{
+		$error_message = "Search term should be fewer than 60 characters.";
+		sendToJS(0, $error_message);
+	}
+	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $tag))
+	{
+		$error_message = "Search term contains invalid characters.";
+		sendToJS(0, $error_message);
+	}
+	else
+	{
+		if (strtoupper($tag) == $tag) //keep in all caps if all caps
+		{
+			return strip_tags($tag);
+		}else //else want Camel-Case
+		{
+			return ucname(strip_tags($tag)); 
+		}
+	}
+
+}
 
 function validateInterestTag_Facebook($tag)
 {
@@ -605,6 +642,31 @@ function validateInterestTag_Facebook($tag)
 		return ucname(strip_tags($tag)); 
 	}
 	
+
+}
+
+function validateQueryType($search_query){
+
+	if ($search_query == "C" || $search_query == "U" || $search_query == "S" || $search_query == "")
+	{
+		return $search_query;
+	}else
+	{
+		$error_message = "Invalid search query.";
+		sendToJS(0, $error_message);
+	}
+
+}
+
+function validateOffset($offset){
+
+	if (!preg_match('/^[0-9 ]+$/', $offset)){
+		$error_message = "Invalid offset.";
+		sendToJS(0, $error_message);
+	}else
+	{
+		return $offset;
+	}
 
 }
 
@@ -666,6 +728,9 @@ function convertGender($gender){
 		return "M";
 	}
 }
+
+
+
 
 
 ?>
