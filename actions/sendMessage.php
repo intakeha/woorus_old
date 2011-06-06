@@ -17,9 +17,7 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 $send_message_query = "INSERT INTO `mail` (id, user_mailer, user_mailee, message_text, sent_time, update_time, message_read, message_deleted) VALUES
-							(NULL, '".mysql_real_escape_string($user_id_mailer)."' , '".mysql_real_escape_string($user_id_mailee)."' , '".mysql_real_escape_string($mail_message)."' NOW(), NOW(), 0, 0) ";
-
-die ($send_message_query);
+							(NULL, '".mysql_real_escape_string($user_id_mailer)."' , '".mysql_real_escape_string($user_id_mailee)."' , '".mysql_real_escape_string($mail_message)."', NOW(), NOW(), 0, 0) ";
 
 $result = mysql_query($send_message_query, $connection) or die ("Error");
 
