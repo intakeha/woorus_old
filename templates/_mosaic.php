@@ -100,9 +100,7 @@
 		// Validate tile search form for tile bank
 		$("#tsearch_form").validate({
 			onsubmit: true,
-			onfocusout: false,
-			onkeyup: false,
-			onclick: false,
+			onclick: true,
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
@@ -111,11 +109,14 @@
 				}
 			},
 			submitHandler: function(form) {
+				$('#tile_upload_error').hide();
 				$.post(
 					"actions/tileSearch.php",
 					$('#tsearch_form').serialize(),
 					function(data){
-						alert(data)
+						$.each(data, function(i, field){
+							$('#tile_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+						});
 					}
 				);
 			},
