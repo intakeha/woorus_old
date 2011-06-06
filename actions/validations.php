@@ -564,9 +564,9 @@ function validateInterestTag($tag)
 		$error_message = "Tile should not start or end with a symbol.";
 		sendToJS(0, $error_message);
 	}
-	elseif(strlen($tag) > 30)
+	elseif(strlen($tag) > 60)
 	{
-		$error_message = "Please enter no more than 30 characters for your tile.";
+		$error_message = "Please enter no more than 60 characters for your tile.";
 		sendToJS(0, $error_message);
 	}
 	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $tag))
@@ -587,6 +587,26 @@ function validateInterestTag($tag)
 
 }
 
+
+function validateInterestTag_Facebook($tag)
+{
+	$tag = preg_replace('/[^0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]/', '', utf8_decode($tag));
+	
+	if (strlen($tag) > 60)
+	{
+		$tag = substr($tag, 0, 60);
+	}
+	
+	if (strtoupper($tag) == $tag) //keep in all caps if all caps
+	{
+		return strip_tags($tag);
+	}else //else want Camel-Case
+	{
+		return ucname(strip_tags($tag)); 
+	}
+	
+
+}
 
 
 //-------------------------Email activation validation functions-----------------------------------------//

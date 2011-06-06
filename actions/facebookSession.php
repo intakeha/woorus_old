@@ -203,7 +203,7 @@ if ($session)
 				}
 
 				foreach ($likes["data"] as $value){
-					$facebook_interest = $value["name"];
+					$facebook_interest = validateInterestTag_Facebook($value["name"]);
 					$category = $value["category"];
 					$facebook_interest_id = $value["id"];
 					
