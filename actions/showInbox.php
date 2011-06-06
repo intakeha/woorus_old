@@ -10,6 +10,18 @@ $user_id= $_SESSION['id'];
 //$offset = validateOffset($_POST["offset"]); 
 
 $offset  = 0;
+$inbox_or_sent = "inbox";
+
+if ($inbox_or_sent == "inbox"){
+	$me = 'user_mailee';
+	$others = 'user_mailer';
+	
+}else{
+
+	$me =  'user_mailer';
+	$others = 'user_mailee';
+}
+
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -17,10 +29,10 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT message_text, sent_time, message_read, first_name, social_status
+$show_message_query = 	"SELECT message_text, sent_time, message_read, first_name
 					FROM `mail` 
-					LEFT JOIN `users` on users.id = mail.user_mailee
-					WHERE user_mailee =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
+					LEFT JOIN `users` on users.id = mail.'".$others."'
+					WHERE mail.'".$me."'  =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
