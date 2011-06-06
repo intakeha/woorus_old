@@ -2,6 +2,7 @@
 
 require('connect.php');
 require('validations.php');
+require('mailHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -31,13 +32,11 @@ $mail_iterator = 1;
 while ($row = mysql_fetch_assoc($show_message_result)){
 
 	$first_name =  $row['first_name'];
-	$social_status =  $row['social_status'];
 	$message_text = $row['message_text'];
-	$sent_time = $row['sent_time'];
+	$sent_time = convertTime($row['sent_time']);
 	$message_read = $row['message_read'];
 
 	$mail_array[$mail_iterator]['first_name'] = $first_name;
-	$mail_array[$mail_iterator]['social_status'] = $social_status;
 	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 100);
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
