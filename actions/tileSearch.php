@@ -8,16 +8,16 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
-$tile_search = validateInterestTag_Search($_POST["tile_search"]);
-$query_type = validateQueryType($_POST["query_type"]);
-$offset = validateOffset($_POST["offset"]); 
+//$tile_search = validateInterestTag_Search($_POST["tile_search"]);
+//$query_type = validateQueryType($_POST["query_type"]);
+//$offset = validateOffset($_POST["offset"]); 
 
 //die("tile search is: ".$tile_search." query type is: ".$query_type." offset is: ".$offset);
 
 //---for testing---//
-//$tile_search = "Dock"; 
-//$query_type = ""; 
-//$offset = 0; 
+$tile_search = "Dock"; 
+$query_type = ""; 
+$offset = 0; 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
