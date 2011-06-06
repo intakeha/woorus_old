@@ -6,13 +6,13 @@
 	    <form id="tsearch_form" action="actions/tileSearch.php" method="POST">
             <input type="text" id="tile_search_field" name="tile_search" maxlength="60">
             <input type="hidden" name="query_type" value="" />
-            <input type="hidden" name="offset" value="" />
+            <input type="hidden" name="offset" value="0" />
             <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
         </form>
 		<div id="tiles_legend">
             <div id="sponsoredTiles"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
-            <div id="myTiles"><span class="legend_squares" id="blueSquare"></span>Uploaded Tiles</div>
             <div id="communityTiles"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
+            <div id="myTiles"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
         </div>
         <div id="tiles_bank">
             <ul id="tile_display">
@@ -73,6 +73,8 @@
 </div>
 <script type="text/javascript">
 	$(document).ready(function () {
+		
+		// Clear mosaic wall and populate wall from backend
 		$('#wall_display').empty();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
@@ -80,6 +82,7 @@
 			});
 		});	
 
+		// Activate sort on the mosaic wall and trash using "tile sort" class and connect via UL
 		$(".tile_sort").sortable({
 			tolerance: "pointer",
 			cursor: "pointer",
@@ -92,8 +95,9 @@
 				alert(data);
 			}
 		});
-		$("#wall_display, #remove_tile").disableSelection(); 
+		$("#wall_display, #remove_tile").disableSelection(); // Disable text selection when dragging tiles
 		
+		// Validate tile search form for tile bank
 		$("#tsearch_form").validate({
 			onsubmit: true,
 			onfocusout: false,
@@ -119,45 +123,38 @@
 				// Override error placement to not show error messages beside elements //
 			},
 			rules: {
-				tile_search: "required"
+				tile_search: {
+					required: true,
+					minlength: 2,
+					maxlength: 60	
+				}
 			},
 			messages: {
-				tile_search: "Please enter an interest search term."
+				tile_search: {			
+					required: "Please enter an interest in the search field.",
+					minlength: "Search term should be at least 2 characters.",
+					maxlength: "Search term should be fewer than 60 characters."
+				}
 			}
 		});
 		
-		$("#sponsoredTiles").validate({
-			onsubmit: false,
-			onfocusout: false,
-			onkeyup: false,
-			onclick: true,
-			invalidHandler: function(form, validator) {
-				var errors = validator.numberOfInvalids();
-				if (errors) {
-					$('#tile_upload_success').hide(); 
-					$("#tile_upload_error").show().text(validator.errorList[0].message); 
-				}
-			},
-			submitHandler: function(form) {
-				$('input[name=query_type]').val("S");
-				$('input[name=offset]').val("0");
-				$.post(
-					"actions/tileSearch.php",
-					$('#tsearch_form').serialize(),
-					function(data){
-						alert(data)
-					}
-				);
-			},
-			errorPlacement: function(error, element) {
-				// Override error placement to not show error messages beside elements //
-			},
-			rules: {
-				tile_search: "required"
-			},
-			messages: {
-				tile_search: "Please enter an interest search term."
-			}
+		// Creating variable to call tile search validation form via function
+		var tsearchValidator = $("#tsearch_form").validate();
+		
+		// Associate each click on the tile bank legend to update query type and call validator
+		$("#sponsoredTiles").click(function() {
+			$('input[name=query_type]').val('S');
+			tsearchValidator.form();
+		});
+		
+		$("#communityTiles").click(function() {
+			$('input[name=query_type]').val('C');
+			tsearchValidator.form();
+		});
+		
+		$("#myTiles").click(function() {
+			$('input[name=query_type]').val('U');
+			tsearchValidator.form();
 		});
 
 	});

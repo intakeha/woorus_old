@@ -605,16 +605,19 @@ li.forgot_title {
 div#myTiles {
 	color: #4980B7;
 	text-decoration: none;
+	float: left;
 }
 
 div#sponsoredTiles {
 	color: #C00;
 	text-decoration: none;
+	float: left;
 }
 
 div#communityTiles {
 	color: #666;
 	text-decoration: none;
+	float: left;
 }
 
 #tiles_bank {
