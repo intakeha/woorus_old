@@ -45,9 +45,10 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 
 	$first_name =  $row['first_name'];
 	$message_text = $row['message_text'];
-	echo $message_text ;
 	$sent_time = convertTime($row['sent_time']);
 	$message_read = $row['message_read'];
+
+	echo $sent_time;
 
 	$mail_array[$mail_iterator]['first_name'] = $first_name;
 	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 100);
