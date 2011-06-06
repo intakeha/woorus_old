@@ -5,8 +5,8 @@ require('validations.php');
 
 session_start();
 $user_id_contacter = $_SESSION['id'];
-//$user_id_contactee = $_POST["user_id_contactee"]; 
-$user_id_contactee = "132"; 
+$user_id_contactee = $_POST["user_id_contactee"]; 
+
 
 
 //connect
