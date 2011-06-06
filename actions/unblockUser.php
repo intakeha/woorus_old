@@ -11,7 +11,7 @@ $user_id_blockee = $_POST["user_id_blockee"];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-$query_block_user_search = "SELECT id FROM `blocks` WHERE user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_blocker = '".mysql_real_escape_string($user_id_blocker)."' "
+$query_block_user_search = "SELECT id FROM `blocks` WHERE user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_blocker = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($query_block_user_search, $connection) or die ("Error");
 
 if (mysql_num_rows($result) == 1)

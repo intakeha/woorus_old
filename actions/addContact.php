@@ -11,7 +11,7 @@ $user_id_contactee = $_POST["user_id_contactee"];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-$query_friend_user_search = "SELECT id FROM `contacts` WHERE user_contactee = '".mysql_real_escape_string($user_id_contactee)."' AND user_contacter = '".mysql_real_escape_string($user_id_contacter)."' "
+$query_friend_user_search = "SELECT id FROM `contacts` WHERE user_contactee = '".mysql_real_escape_string($user_id_contactee)."' AND user_contacter = '".mysql_real_escape_string($user_id_contacter)."' ";
 $result = mysql_query($query_friend_user_search, $connection) or die ("Error");
 
 if (mysql_num_rows($result) == 1)
