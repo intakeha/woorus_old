@@ -57,7 +57,7 @@ $tile_count_query_result = mysql_query($tile_count_query, $connection) or die ("
 $tile_search_array = array();
 $tile_iterator = 1;
 
-$row = mysql_fetch_assoc($tile_count_query_result)
+$row = mysql_fetch_assoc($tile_count_query_result);
 $tile_count = $row['COUNT(*)'];
 $tile_search_array[0]['tile_count'] = $tile_count;
 
