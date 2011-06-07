@@ -44,7 +44,7 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 
 	$first_name =  $row['first_name'];
 	$message_text = $row['message_text'];
-	$sent_time = $row['sent_time'];
+	$sent_time = convertTime($row['sent_time']);
 	$message_read = $row['message_read'];
 
 	$mail_array[$mail_iterator]['first_name'] = $first_name;

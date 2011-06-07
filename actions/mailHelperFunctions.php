@@ -2,6 +2,8 @@
 
 function convertTime($date_time){
 
+	die ($date_time);
+
 	$today = date("Y-m-d", time() );
 	$yesterday =  date("Y-m-d ", time()-86400) ;
 
