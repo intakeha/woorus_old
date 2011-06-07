@@ -28,12 +28,15 @@ GROUP BY others_mosaic_wall.user_id
 ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
  
 $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
-if (mysql_num_rows($lounge_result) == 0) //we found no common interests with anyone else (online)
+$lounge_count = mysql_num_rows($lounge_result); 
+
+if ($lounge_count == 0) //we found no common interests with anyone else (online)
 {
-	//just return some users
+	//just return some users--preferably the ones who just logged in?
 }
 else
 {
+	$tile_lounge_array[0]['lounge_count'] = $lounge_count;
 	$user_iterator = 1;
 	//iterate through all users who have matching interests
 	while ($row = mysql_fetch_assoc($lounge_result)){
@@ -49,6 +52,7 @@ else
 						WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".$user_match_id."' AND mosaic_wall.interest_id <> 0
 						LIMIT ".$offset.", 10";
 		$user_match_result = mysql_query($user_match_query, $connection) or die ("Error 1");
+		
 		while ($row = mysql_fetch_assoc($user_match_result)){
 
 			$tile_id = $row['tile_id'];

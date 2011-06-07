@@ -35,9 +35,14 @@ $show_message_query = 	"SELECT message_text, sent_time, message_read, first_name
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
+//get count
+$message_count = mysql_num_rows($show_message_result); 
+
 //declare empy message array & set iterator to 1
 $mail_array = array();
 $mail_iterator = 1;
+
+$mail_array [0]['message_count'] = $message_count;
 
 //iterate through the messages returned
 while ($row = mysql_fetch_assoc($show_message_result)){

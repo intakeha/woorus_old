@@ -20,6 +20,7 @@ mysql_select_db($db_name);
 //TO DO: need to look at online status!!!!!!!!!!!
 //NEED TO CHECK for user blocked
 //need to check for contact
+//get count
 
 //look for interest based on ID & get users associated with the interest id retreived above
 $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 

@@ -27,38 +27,32 @@ mysql_select_db($db_name);
 //based on search selection, get tiles associated with the interest id / interest name & also get count
 switch ($query_type){
 	
-	
 	case "S": // Sponsored Tiles
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 1 LIMIT ".$offset.", 15";
-	$tile_count_query = "SELECT COUNT(*) FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 1 ";
 	break;
 	
 	case "U": //Uploaded Tiles
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.user_id = '".$user_id."' LIMIT ".$offset.", 15";
-	$tile_count_query = "SELECT COUNT(*) FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.user_id = '".$user_id."' ";
 	break;
 	
 	case "C": //Community Tiles
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' LIMIT ".$offset.", 15 ";
-	$tile_count_query = "SELECT COUNT(*) FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id AND tiles.sponsored = 0 AND tiles.user_id <> '".$user_id."' ";
 	break;
 	
 	default:
 	$tile_query = "SELECT tiles.id, tiles.tile_filename, tiles.user_id, tiles.sponsored, tiles.interest_id, interests.interest_name FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id  LIMIT ".$offset.", 15";
-	$tile_count_query = "SELECT COUNT(*) FROM `interests`,`tiles` WHERE interests.interest_name =  '".$tile_search."' AND interests.id = tiles.interest_id";
 	break;
 }
 
 $tile_query_result = mysql_query($tile_query, $connection) or die ("Error 9");
-$tile_count_query_result = mysql_query($tile_count_query, $connection) or die ("Error 10");
 
 
 //declare empy array & set iterator to 1
 $tile_search_array = array();
 $tile_iterator = 1;
 
-$row = mysql_fetch_assoc($tile_count_query_result);
-$tile_count = $row['COUNT(*)'];
+//get count
+$tile_count = mysql_num_rows($tile_query_result); 
 $tile_search_array[0]['tile_count'] = $tile_count;
 
 //iterate through the mosaic wall rows

@@ -24,9 +24,14 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 					
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
 
+//get count
+$contact_count = mysql_num_rows($show_contact_result); 
+
 //declare empy message array & set iterator to 1
 $contact_array = array();
 $contact_iterator = 1;
+
+$contact_array[0]['contact_count'] = $contact_count;
 
 //iterate through the messages returned
 while ($row = mysql_fetch_assoc($show_contact_result)){
