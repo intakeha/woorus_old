@@ -31,7 +31,9 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			LIMIT ".$offset.", 10";
 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
-if (mysql_num_rows($mosaic_result) == 0) //no matches
+$user_count = mysql_num_rows($mosaic_result);
+
+if ( $user_count == 0) //no matches
 {
 	$error_message = "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.";
 	sendToJS(0, $error_message);
@@ -41,6 +43,7 @@ if (mysql_num_rows($mosaic_result) == 0) //no matches
 	$user_search_array = array();
 	$user_iterator = 1;
 	
+	$user_search_array[0]['user_count'] =  $user_count;
 	//iterate through all users who have this interest on their wall
 	while ($row = mysql_fetch_assoc($mosaic_result)){
 		
