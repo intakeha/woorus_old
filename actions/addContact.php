@@ -7,7 +7,7 @@ session_start();
 $user_id_contacter = $_SESSION['id'];
 $user_id_contactee = $_POST["user_id_contactee"]; 
 
-//NEED TO CHECK for user blocked
+//NEED TO CHECK for user blocked?
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
