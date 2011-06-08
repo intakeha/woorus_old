@@ -48,7 +48,7 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	$user_city_id = $row['user_city_id'];
 
 	$mail_array[$mail_iterator]['first_name'] = $first_name;
-	$mail_array[$mail_iterator]['message_text'] =$message_text
+	$mail_array[$mail_iterator]['message_text'] = $message_text;
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
 	$mail_array[$mail_iterator]['social_status'] = $social_status;
