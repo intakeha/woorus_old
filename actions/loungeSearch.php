@@ -39,7 +39,7 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count; //does it makes sense to send this?
 	
 	//get any user ADD MORE CRITERIA
-	$lounge_query = " SELECT DISTINCT id as other_user_id
+	$lounge_query = "SELECT DISTINCT id as other_user_id, users.first_name, users.social_status, users.user_city_id
 				FROM users
 				WHERE users.active_user = 1
 				LIMIT ".$offset.", 2";
@@ -49,21 +49,25 @@ else
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count;
 	
 	//get sorted list of best USER matches
-	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id
+	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.user_city_id
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall
 				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
+				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
 				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
 				GROUP BY others_mosaic_wall.user_id
 				ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
 }
 
 $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
-
 $user_iterator = 1;
 //iterate through all users who have matching interests
 while ($row = mysql_fetch_assoc($lounge_result)){
 	$user_match_id = $row['other_user_id'];
+	
+	$tile_lounge_array[$user_iterator][0]['first_name'] = $row['first_name'];
+	$tile_lounge_array[$user_iterator][0]['social_status'] = $row['social_status'];
+	$tile_lounge_array[$user_iterator][0]['user_city_id'] = $row['user_city_id'];
 	
 	$tile_iterator = 1;
 	//look at all the tiles need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
@@ -132,48 +136,11 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 		$tile_iterator++;
 	}
 	
-	/*
-	//get user info from user id-->name, location, social status
-	$user_info_query = "SELECT first_name, social_status from `users` WHERE id = '".$user_id."' ";
-	$user_info_result = mysql_query($user_info_query, $connection) or die ("Error 2");
-	$user_info_count = mysql_num_rows($user_info_result);
-	if ($user_info_count != 0)
-	{
-		//get user info
-		$row = mysql_fetch_assoc($user_info_result);
-		
-	}else
-	{
-		$error_message = "";
-		sendToJS(0, $error_message);
-	}
-	*/
-
 	$user_iterator++;
 }
 
 $output = json_encode($tile_lounge_array);
 die($output);
 
-/* Testing
-
-SELECT *
-FROM mosaic_wall a
-WHERE interest_id <> 0 AND EXISTS (SELECT count(*) from mosaic_wall b WHERE a.interest_id = b.interest_id HAVING count(*)>1 AND a.user_id = 121)
-ORDER BY a.interest_id
-
-
-SELECT *
-FROM mosaic_wall a
-WHERE EXISTS (SELECT count(*) from mosaic_wall b WHERE a.user_id = 121 AND a.interest_id <> 0 AND a.interest_id = b.interest_id HAVING count(*)>1)
-ORDER BY a.interest_id
-
-SELECT *
-FROM mosaic_wall a
-WHERE a.user_id = 119 AND a.interest_id <> 0 AND EXISTS (SELECT count(*) from mosaic_wall b WHERE a.interest_id = b.interest_id HAVING count(*)>1)
-ORDER BY a.interest_id
-
-
-*/
 
 ?>
