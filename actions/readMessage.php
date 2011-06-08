@@ -36,7 +36,9 @@ $show_message_query = 	"SELECT message_text, sent_time, message_read, users.firs
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
-$mail_iterator=1;
+//declare empy message array & set iterator to 1
+$mail_array = array();
+$mail_iterator = 1;
 
 while ($row = mysql_fetch_assoc($show_message_result))
 {
