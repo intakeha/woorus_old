@@ -40,8 +40,10 @@ $show_message_result = mysql_query($show_message_query, $connection) or die ("Er
 $mail_array = array();
 $mail_iterator = 1;
 
-while ($row = mysql_fetch_assoc($show_message_result))
-{
+if(mysql_num_rows($show_message_result) > 0){
+
+	//fetch data
+	$row = mysql_fetch_assoc($show_message_result)
 	$first_name =  $row['first_name'];
 	$message_text = $row['message_text'];
 	$sent_time = $row['sent_time'];
@@ -56,7 +58,10 @@ while ($row = mysql_fetch_assoc($show_message_result))
 	$mail_array[$mail_iterator]['social_status'] = $social_status;
 	$mail_array[$mail_iterator]['user_city_id'] = $user_city_id;
 	
-	$mail_iterator++;
+	//mark message as read
+	$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
+	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
+	
 }
 
 $output = json_encode($mail_array);

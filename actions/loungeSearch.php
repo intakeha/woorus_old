@@ -9,6 +9,8 @@ session_start();
 $user_id = $_SESSION['id'];
 //$offset = validateOffset($_POST["offset"]); 
 
+//max offset?
+
 //---testing---//
 $offset = 0;
 
@@ -17,17 +19,6 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 $tile_lounge_array = array(); //declare array
-
-//get sorted list of best matches
-$lounge_query = "SELECT DISTINCT mosaic_wall.user_id, others_mosaic_wall.user_id as other_user_id
-FROM mosaic_wall 
-LEFT JOIN mosaic_wall AS others_mosaic_wall
-ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
-WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
-GROUP BY others_mosaic_wall.user_id
-ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
- 
-$lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
 
 //get count
 $lounge_count_query = "SELECT COUNT(*) 
@@ -42,13 +33,33 @@ $lounge_count_query_result = mysql_query($lounge_count_query, $connection) or di
 $row = mysql_fetch_assoc($lounge_count_query_result);
 $lounge_count = $row['COUNT(*)'];
 
-if ($lounge_count == 0) //we found no common interests with anyone else (online)
+if ($lounge_count <= ($offset*2) //at this point, no matches (could be no matches or user has iterated through all of them)
 {
 	//just return some users--preferably the ones who just logged in?
+	$tile_lounge_array[0]['lounge_count'] = $lounge_count; //does it makes sense to send this?
+	
+	//get any user ADD MORE CRITERIA
+	$lounge_query = " SELECT DISTINCT id as other_user_id
+				FROM users
+				WHERE users.active_user = 1
+				LIMIT ".$offset.", 2";
 }
 else
 {
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count;
+	
+	//get sorted list of best USER matches
+	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id
+				FROM mosaic_wall 
+				LEFT JOIN mosaic_wall AS others_mosaic_wall
+				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
+				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
+				GROUP BY others_mosaic_wall.user_id
+				ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
+}
+
+	$lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
+	
 	$user_iterator = 1;
 	//iterate through all users who have matching interests
 	while ($row = mysql_fetch_assoc($lounge_result)){
