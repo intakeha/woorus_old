@@ -602,6 +602,14 @@ li.forgot_title {
 	background-color: #666;
 }
 
+div.selectedFilter{
+	font-weight: bold;	
+}
+
+div.hoverFilter{
+	text-decoration: underline;
+}
+
 div#myTiles {
 	color: #4980B7;
 	text-decoration: none;
