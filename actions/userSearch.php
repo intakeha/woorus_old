@@ -20,7 +20,7 @@ mysql_select_db($db_name);
 //TO DO: need to look at online status!!!!!!!!!!!
 //NEED TO CHECK for user blocked
 //need to check for contact
-//get count
+//check for distinct user id
 
 //look for interest based on ID & get users associated with the interest id retreived above
 $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
@@ -31,7 +31,18 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			LIMIT ".$offset.", 10";
 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
-$user_count = mysql_num_rows($mosaic_result);
+
+$user_count_query = "SELECT COUNT(*) 
+			FROM `interests`, `mosaic_wall`
+			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
+			LEFT JOIN users ON users.id = mosaic_wall.user_id
+			WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id AND mosaic_wall.user_id <> '".$user_id."' AND users.active_user = 1";
+
+//get count
+$user_count_query_result = mysql_query($user_count_query, $connection) or die ("Error 10");
+$row = mysql_fetch_assoc($user_count_query_result);
+$user_count = $row['COUNT(*)'];
+
 
 if ( $user_count == 0) //no matches
 {

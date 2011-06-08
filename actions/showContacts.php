@@ -25,7 +25,15 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
 
 //get count
-$contact_count = mysql_num_rows($show_contact_result); 
+$contact_count_query = "SELECT COUNT(*) 
+				FROM `contacts` 
+				LEFT JOIN `users` on users.id =contacts.user_contactee
+				WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1";
+
+$contact_count_query_result = mysql_query($contact_count_query, $connection) or die ("Error 10");
+$row = mysql_fetch_assoc($contact_count_query_result);
+$contact_count = $row['COUNT(*)'];
+
 
 //declare empy message array & set iterator to 1
 $contact_array = array();

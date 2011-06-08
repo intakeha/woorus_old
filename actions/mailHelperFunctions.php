@@ -36,4 +36,27 @@ function convertTime($date_time){
 
 }
 
+function convertTime_LargeMessage($date_time){
+
+		//show date
+		$date = date_parse($date_time);
+		$month =  $date['month'];
+		$day =  $date['day'];
+		$year =  $date['year'];
+		$hour = $date['hour'];
+		$minute = $date['minute'];
+		$second = $date['second'];
+		
+		$hour_modified = $hour % 12;
+		$am_or_pm = ($hour >= 12) ? "PM" : "AM";
+		
+		return $month."-".$day."-".$year. "  ".$hour_modified.":".$minute." ".$am_or_pm;
+		
+	}
+
+}
+
+
+
+
 ?>

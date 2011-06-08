@@ -28,7 +28,19 @@ GROUP BY others_mosaic_wall.user_id
 ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
  
 $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
-$lounge_count = mysql_num_rows($lounge_result); 
+
+//get count
+$lounge_count_query = "SELECT COUNT(*) 
+				FROM mosaic_wall 
+				LEFT JOIN mosaic_wall AS others_mosaic_wall
+				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
+				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
+				GROUP BY others_mosaic_wall.user_id
+				ORDER BY COUNT(others_mosaic_wall.user_id) DESC";
+
+$lounge_count_query_result = mysql_query($lounge_count_query, $connection) or die ("Error 10");
+$row = mysql_fetch_assoc($lounge_count_query_result);
+$lounge_count = $row['COUNT(*)'];
 
 if ($lounge_count == 0) //we found no common interests with anyone else (online)
 {
