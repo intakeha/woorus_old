@@ -21,7 +21,7 @@ mysql_select_db($db_name);
 $tile_lounge_array = array(); //declare array
 
 //get count
-$lounge_count_query = "SELECT COUNT(*) 
+$lounge_count_query = "SELECT DISTINCT others_mosaic_wall.user_id
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall
 				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
@@ -30,8 +30,7 @@ $lounge_count_query = "SELECT COUNT(*)
 				ORDER BY COUNT(others_mosaic_wall.user_id) DESC";
 
 $lounge_count_query_result = mysql_query($lounge_count_query, $connection) or die ("Error 10");
-$row = mysql_fetch_assoc($lounge_count_query_result);
-$lounge_count = $row['COUNT(*)'];
+$lounge_count = mysql_num_rows($lounge_count_query_result);
 
 if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no matches or user has iterated through all of them)
 {
