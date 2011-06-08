@@ -33,7 +33,7 @@ $lounge_count_query_result = mysql_query($lounge_count_query, $connection) or di
 $row = mysql_fetch_assoc($lounge_count_query_result);
 $lounge_count = $row['COUNT(*)'];
 
-if ($lounge_count <= ($offset*2) //at this point, no matches (could be no matches or user has iterated through all of them)
+if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no matches or user has iterated through all of them)
 {
 	//just return some users--preferably the ones who just logged in?
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count; //does it makes sense to send this?
