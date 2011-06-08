@@ -607,7 +607,7 @@ div.selectedFilter{
 }
 
 div.hoverFilter{
-	text-decoration: underline;
+	font-weight: bold;
 }
 
 div#myTiles {

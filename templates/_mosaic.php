@@ -11,8 +11,8 @@
         </form>
 		<div id="tiles_legend">
             <div id="sponsoredTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
-			<div id="communityTiles"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
-            <div id="myTiles"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
+			<div id="communityTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
+            <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
         </div><span id="tile_bank_offset" style="display: none;"></span>
         <div id="tiles_bank">
             <ul id="tile_display">
