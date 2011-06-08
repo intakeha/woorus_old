@@ -38,7 +38,8 @@ $show_message_result = mysql_query($show_message_query, $connection) or die ("Er
 
 $mail_iterator=1;
 
-while ($row = mysql_fetch_assoc($show_message_result)){
+while ($row = mysql_fetch_assoc($show_message_result))
+{
 
 	$first_name =  $row['first_name'];
 	$message_text = $row['message_text'];
@@ -59,7 +60,6 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 
 $output = json_encode($mail_array);
 die($output);
-
 
 
 ?>
