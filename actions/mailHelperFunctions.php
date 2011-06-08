@@ -50,7 +50,9 @@ function convertTime_LargeMessage($date_time){
 		$hour_modified = $hour % 12;
 		$am_or_pm = ($hour >= 12) ? "PM" : "AM";
 		
-		return $month."-".$day."-".$year. "  ".$hour_modified.":".$minute." ".$am_or_pm;
+		die ($month."-".$day."-".$year. " ".$hour_modified.":".$minute." ".$am_or_pm);
+		
+		return $month."-".$day."-".$year. " ".$hour_modified.":".$minute." ".$am_or_pm;
 
 }
 
