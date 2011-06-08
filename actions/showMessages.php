@@ -29,7 +29,7 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT id, message_text, sent_time, message_read, users.first_name
+$show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others."
 					WHERE mail.".$me."  =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
