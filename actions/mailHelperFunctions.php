@@ -5,7 +5,6 @@ function convertTime($date_time){
 	$today = date("Y-m-d", time() );
 	$yesterday =  date("Y-m-d ", time()-86400) ;
 
-
 	if ($date_time > $today)
 	{
 		//show as time
