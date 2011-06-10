@@ -40,7 +40,7 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 	//get any user ADD MORE CRITERIA
 	$lounge_query = "SELECT DISTINCT id as other_user_id, users.first_name, users.social_status, users.user_city_id
 				FROM users
-				WHERE users.active_user = 1
+				WHERE users.active_user = 1 AND users.id > 119
 				LIMIT ".$offset.", 2";
 }
 else
@@ -50,8 +50,7 @@ else
 	//get sorted list of best USER matches
 	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.user_city_id
 				FROM mosaic_wall 
-				LEFT JOIN mosaic_wall AS others_mosaic_wall
-				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
+				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
 				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
 				GROUP BY others_mosaic_wall.user_id
