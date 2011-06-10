@@ -3,6 +3,7 @@
 require('connect.php');
 require('validations.php');
 require('mailHelperFunctions.php');
+require('contactHelperFunctions.php'); 
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -14,13 +15,13 @@ $message_id = "3";
 $inbox_or_sent = "inbox";
 
 if ($inbox_or_sent == "inbox"){
-	$me = 'user_mailee';
-	$others = 'user_mailer';
+	$me_mail = 'user_mailee';
+	$others_mail = 'user_mailer';
 	
 }elseif ($inbox_or_sent == "sent")
 {
-	$me =  'user_mailer';
-	$others = 'user_mailee';
+	$me_mail =  'user_mailer';
+	$others_mail = 'user_mailee';
 }
 
 //connect
@@ -29,12 +30,15 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.user_city_id
+$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.user_city_id, users.id
 					FROM `mail` 
-					LEFT JOIN `users` on users.id = mail.".$others."
-					WHERE mail.".$me."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' ";
+					LEFT JOIN `users` on users.id = mail.".$others_mail."
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' ";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
+
+
+
 
 //declare empy message array & set iterator to 1
 $mail_array = array();
@@ -51,17 +55,23 @@ if(mysql_num_rows($show_message_result) > 0){
 	$social_status = $row['social_status'];
 	$user_city_id = $row['user_city_id'];
 
+	//mark message as read
+	$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
+	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
+	
+	//check if the sessiom user has added the person therye looking at as a contact
+	$contact = checkContact($user_id, $other_user_id);
+	
+
+	//add data to array to send to json
 	$mail_array[$mail_iterator]['first_name'] = $first_name;
 	$mail_array[$mail_iterator]['message_text'] = $message_text;
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
 	$mail_array[$mail_iterator]['social_status'] = $social_status;
 	$mail_array[$mail_iterator]['user_city_id'] = $user_city_id;
-	
-	//mark message as read
-	$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
-	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
-	
+	$mail_array[$mail_iterator]['contact'] = $contact;
+
 }
 
 $output = json_encode($mail_array);

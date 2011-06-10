@@ -37,7 +37,7 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 	//just return some users--preferably the ones who just logged in?
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count; //does it makes sense to send this?
 	
-	//get any user ADD MORE CRITERIA
+	//get any user ADD MORE CRITERIA--note users higher than 119 for testing purposes
 	$lounge_query = "SELECT DISTINCT id as other_user_id, users.first_name, users.social_status, users.user_city_id
 				FROM users
 				WHERE users.active_user = 1 AND users.id > 119

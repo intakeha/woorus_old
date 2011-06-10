@@ -2,7 +2,6 @@
 
 require('connect.php');
 require('validations.php');
-require('mailHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
