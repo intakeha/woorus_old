@@ -63,9 +63,13 @@ $user_iterator = 1;
 while ($row = mysql_fetch_assoc($lounge_result)){
 	$user_match_id = $row['other_user_id'];
 	
+	$contact = checkContact($user_id, $user_match_id, $connection)
+	
+	
 	$tile_lounge_array[$user_iterator][0]['first_name'] = $row['first_name'];
 	$tile_lounge_array[$user_iterator][0]['social_status'] = $row['social_status'];
 	$tile_lounge_array[$user_iterator][0]['user_city_id'] = $row['user_city_id'];
+	$tile_lounge_array[$user_iterator][0]['contact'] = $contact;
 	
 	$tile_iterator = 1;
 	//look at all the tiles need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
