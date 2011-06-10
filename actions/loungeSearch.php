@@ -53,7 +53,7 @@ else
 				LEFT JOIN mosaic_wall AS others_mosaic_wall
 				ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
-				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 
+				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
 				GROUP BY others_mosaic_wall.user_id
 				ORDER BY COUNT(others_mosaic_wall.user_id) DESC LIMIT ".$offset.", 2";
 }

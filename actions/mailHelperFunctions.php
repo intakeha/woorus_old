@@ -19,7 +19,7 @@ function convertTime($date_time_in){
 		
 	}else{
 	
-		$date = date_format($date_time, 'M-d');
+		$date = date_format($date_time, 'M j');
 		
 	}
 	
