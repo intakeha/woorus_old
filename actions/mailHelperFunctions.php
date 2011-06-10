@@ -40,7 +40,6 @@ function convertTime_LargeMessage($date_time){
 		
 		//show date
 		$date = date_parse($date_time);
-		print_r($date);
 
 		$month =  $date['month'];
 		$day =  $date['day'];
