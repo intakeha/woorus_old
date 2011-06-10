@@ -61,7 +61,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
 	
 	//check if the sessiom user has added the person therye looking at as a contact
-	$contact = checkContact($user_id, $other_user_id);
+	$contact = checkContact($user_id, $other_user_id, $connection);
 	
 
 	//add data to array to send to json

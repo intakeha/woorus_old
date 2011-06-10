@@ -1,6 +1,6 @@
 <?php
 
-function checkContact($user_id, $other_user_id){
+function checkContact($user_id, $other_user_id, $connection){
 
 	$check_contact_query = "SELECT id
 					FROM `contacts`
