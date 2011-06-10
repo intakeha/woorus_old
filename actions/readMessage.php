@@ -54,6 +54,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	$message_read = $row['message_read'];
 	$social_status = $row['social_status'];
 	$user_city_id = $row['user_city_id'];
+	$other_user_id = $row['id'];
 
 	//mark message as read
 	$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
