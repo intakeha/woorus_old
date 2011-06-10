@@ -63,7 +63,7 @@ $user_iterator = 1;
 while ($row = mysql_fetch_assoc($lounge_result)){
 	$user_match_id = $row['other_user_id'];
 	
-	$contact = checkContact($user_id, $user_match_id, $connection)
+	$contact = checkContact($user_id, $user_match_id, $connection);
 	
 	
 	$tile_lounge_array[$user_iterator][0]['first_name'] = $row['first_name'];
