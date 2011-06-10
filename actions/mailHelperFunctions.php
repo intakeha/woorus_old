@@ -37,8 +37,6 @@ function convertTime($date_time){
 }
 
 function convertTime_LargeMessage($date_time){
-
-		echo $date_time." 1";
 		
 		//show date
 		$date = date_parse($date_time);
