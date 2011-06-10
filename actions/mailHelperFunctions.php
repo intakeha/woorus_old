@@ -7,7 +7,7 @@ function convertTime($date_time_in){
 	$today = date("Y-m-d", time() );
 	$yesterday =  date("Y-m-d ", time()-86400) ;
 
-	if ($date_time > $today)
+	if ($date_time_in > $today)
 	{
 		
 		$date =  date_format($date_time, 'g:i A');
