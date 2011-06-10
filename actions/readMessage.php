@@ -43,7 +43,7 @@ $mail_iterator = 1;
 if(mysql_num_rows($show_message_result) > 0){
 
 	//fetch data
-	$row = mysql_fetch_assoc($show_message_result)
+	$row = mysql_fetch_assoc($show_message_result);
 	$first_name =  $row['first_name'];
 	$message_text = $row['message_text'];
 	$sent_time = convertTime_LargeMessage($row['sent_time']);
