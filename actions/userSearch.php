@@ -3,6 +3,7 @@
 require('connect.php');
 require('validations.php');
 require('mosaicWallHelperFunctions.php');
+require('contactHelperFunctions.php'); 
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -70,11 +71,14 @@ if ( $user_count == 0) //no matches
 		$social_status = $row['social_status'];
 		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 		
+		$contact = checkContact($user_id, $user_retreived_id, $connection);
+		
 		
 		//set data
 		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
 		$user_search_array[$user_iterator]['first_name'] = $first_name;
 		$user_search_array[$user_iterator]['social_status'] = $social_status;
+		$user_search_array[$user_iterator]['contact'] = $contact;
 		$user_search_array[$user_iterator]['tile_id'] = $tile_id;
 		$user_search_array[$user_iterator]['interest_id'] = $interest_id;
 		$user_search_array[$user_iterator]['tile_filename'] = $tile_filename;
