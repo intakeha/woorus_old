@@ -12,7 +12,7 @@ function convertTime($date_time_in){
 		
 		$date =  date_format($date_time, 'g:i A');
 		
-	}elseif ($date_time > $yesterday)
+	}elseif ($date_time_in > $yesterday)
 	{
 		//show as yesterday
 		$date = "Yesterday";
