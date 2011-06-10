@@ -3,6 +3,7 @@
 require('connect.php');
 require('validations.php');
 require('mosaicWallHelperFunctions.php');
+require('contactHelperFunctions.php'); 
 
 session_start();
 
