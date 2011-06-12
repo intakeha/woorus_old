@@ -27,9 +27,9 @@ if (mysql_num_rows($user_info_result) > 0){
 	$social_status = $row['social_status'];
 	$user_city_id = $row['user_city_id'];
 
-	$external_profile_array[0]['first_name'] = $first_name;
-	$external_profile_array[0]['social_status'] = $social_status;
-	$external_profile_array[0]['user_city_id'] = $user_city_id;
+	$external_profile_array['user info']['first_name'] = $first_name;
+	$external_profile_array['user info']['social_status'] = $social_status;
+	$external_profile_array['user info']['user_city_id'] = $user_city_id;
 }
 
 $output = json_encode($external_profile_array);
