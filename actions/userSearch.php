@@ -29,6 +29,7 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
 			WHERE interests.interest_name =  '".$user_search."' AND interests.id = mosaic_wall.interest_id AND mosaic_wall.user_id <> '".$user_id."' AND users.active_user = 1 
+			GROUP BY mosaic_wall.user_id
 			LIMIT ".$offset.", 10";
 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
