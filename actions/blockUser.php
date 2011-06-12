@@ -5,8 +5,9 @@ require('validations.php');
 
 session_start();
 $user_id_blocker = $_SESSION['id'];
-$user_id_blockee = $_POST["user_id_blockee"]; 
+//$user_id_blockee = $_POST["user_id_blockee"]; 
 
+$user_id_blockee = 133;
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -38,5 +39,52 @@ $update_contacts_query2 = "UPDATE `contacts` SET active = 0, update_time = NOW()
 $result = mysql_query($update_contacts_query2, $connection) or die ("Error");
 
 //send message to blockee for full transparency!!
+
+
+//recalculate blocks for the user being blocked
+calculateBlockStatus($user_id_blockee, $connection);
+
+//-----------------Functions-------------------//
+
+function getBlockStatus($block_count){
+
+	if  ($block_count < 5)
+	{
+		$block_status = "a";
+	}
+	elseif  ($block_count < 10)
+	{
+		$block_status = "b";
+	}
+	else{
+		$block_status = "c";
+	}
+	
+	return $block_status;
+}
+
+function calculateBlockStatus($user_id, $connection){
+
+	$block_status_query = "SELECT COUNT(*)
+					FROM `blocks`
+					WHERE blocks.user_blockee =  '".$user_id."' AND blocks.active = 1 AND  blocks.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
+
+	$block_status_result = mysql_query($block_status_query, $connection) or die ("Error 1");
+
+	$row = mysql_fetch_assoc($block_status_result);
+	$block_count = $row['COUNT(*)'];
+
+	//calcuate block rating from block_count
+	$block_rating = getBlockStatus($block_count);
+
+	//update users table for current block status
+	$users_query = 	"UPDATE `users` 
+				SET users.block_status = '".$block_rating."' 
+				WHERE users.id = '".$user_id."' ";
+
+	$users_result = mysql_query($users_query, $connection) or die ("Error 2");
+
+}
+
 
 ?>

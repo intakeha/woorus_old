@@ -24,7 +24,61 @@ $conversation_query = "INSERT INTO `conversations`
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
+calculateSocialStatus($user_id, $connection);
+calculateSocialStatus($other_user_id, $connection);
+
 //if the call is accepted--make the Call!
+
+
+//-----------------Functions-------------------//
+
+function getSocialStatus($social_count){
+
+	if  ($social_count < 5)
+	{
+		$social_status = "a";
+	}
+	elseif  ($social_count < 20)
+	{
+		$social_status = "b";
+	}
+	elseif  ($social_count < 50)
+	{
+		$social_status = "c";
+	}
+	elseif  ($social_count < 100)
+	{
+		$social_status = "d";
+	}
+	else{
+		$social_status = "e";
+	}
+	
+	return $social_status;
+}
+
+function calculateSocialStatus($user_id, $connection){
+
+	$social_status_query = "SELECT COUNT(*)
+					FROM `conversations`
+					WHERE (conversations.caller_id =  '".$user_id."' OR conversations.callee_id =  '".$user_id."' ) AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
+
+	$social_status_result = mysql_query($social_status_query, $connection) or die ("Error 1");
+
+	$row = mysql_fetch_assoc($social_status_result);
+	$social_count = $row['COUNT(*)'];
+
+	//calcuate block rating from block_count
+	$social_status = getSocialStatus($social_count);
+
+	//update users table for current block status
+	$users_query = 	"UPDATE `users` 
+				SET users.social_status = '".$social_status."' 
+				WHERE users.id = '".$user_id."' ";
+
+	$users_result = mysql_query($users_query, $connection) or die ("Error 2");
+
+}
 
 
 
