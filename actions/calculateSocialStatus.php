@@ -5,6 +5,10 @@ require('contactHelperFunctions.php');
 session_start();
 $user_id= $_SESSION['id'];
 
+//connect
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+mysql_select_db($db_name);
+
 $social_status_query = "SELECT COUNT(*)
 				FROM `conversations`
 				WHERE (conversations.caller_id =  '".$user_id."' OR conversations.callee_id =  '".$user_id."' ) AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
