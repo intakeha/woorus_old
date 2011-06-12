@@ -1,6 +1,7 @@
 <?php
 require('connect.php');
 require('mosaicWallHelperFunctions.php');
+require('contactHelperFunctions.php');
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -26,10 +27,16 @@ if (mysql_num_rows($user_info_result) > 0){
 	$first_name =  $row['first_name'];
 	$social_status = $row['social_status'];
 	$user_city_id = $row['user_city_id'];
-
+	
+	//check if the session user has added the person therye looking at as a contact
+	$contact = checkContact($user_id, $other_user_id, $connection);
+	
 	$external_profile_array['user info']['first_name'] = $first_name;
 	$external_profile_array['user info']['social_status'] = $social_status;
 	$external_profile_array['user info']['user_city_id'] = $user_city_id;
+	$external_profile_array['user info']['contact'] = $contact;
+
+	
 }
 
 $output = json_encode($external_profile_array);
