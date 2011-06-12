@@ -20,4 +20,49 @@ function checkContact($user_id, $other_user_id, $connection){
 }
 
 
+function getBlockStatus($block_count){
+
+	if  ($block_count < 5)
+	{
+		$block_status = "a";
+	}
+	elseif  ($block_count < 10)
+	{
+		$block_status = "b";
+	}
+	else{
+		$block_status = "c";
+	}
+	
+	return $block_status;
+}
+
+function getSocialStatus($social_count){
+
+	if  ($social_count < 5)
+	{
+		$social_status = "a";
+	}
+	elseif  ($social_count < 20)
+	{
+		$social_status = "b";
+	}
+	elseif  ($social_count < 50)
+	{
+		$social_status = "c";
+	}
+	elseif  ($social_count < 100)
+	{
+		$social_status = "d";
+	}
+	else{
+		$social_status = "e";
+	}
+	
+	return $social_status;
+}
+
+
+
+
 ?>
