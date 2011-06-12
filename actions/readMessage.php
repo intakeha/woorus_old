@@ -30,7 +30,7 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.user_city_id, users.id
+$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status users.user_city_id, users.id
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
 					WHERE mail.".$me_mail."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' ";
@@ -53,6 +53,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	$sent_time = convertTime_LargeMessage($row['sent_time']);
 	$message_read = $row['message_read'];
 	$social_status = $row['social_status'];
+	$block_status = $row['block_status'];
 	$user_city_id = $row['user_city_id'];
 	$other_user_id = $row['id'];
 
@@ -70,6 +71,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
 	$mail_array[$mail_iterator]['social_status'] = $social_status;
+	$mail_array[$mail_iterator]['block_status'] = $block_status;
 	$mail_array[$mail_iterator]['user_city_id'] = $user_city_id;
 	$mail_array[$mail_iterator]['contact'] = $contact;
 

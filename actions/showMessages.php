@@ -29,7 +29,7 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted
-$show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name
+$show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others."
 					WHERE mail.".$me."  =  '".$user_id."' AND message_deleted = 0 LIMIT ".$offset.", 5";
@@ -58,12 +58,16 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 
 	$message_id = $row['id'];
 	$first_name =  $row['first_name'];
+	$social_status =  $row['social_status'];
+	$block_status =  $row['block_status'];
 	$message_text = $row['message_text'];
 	$sent_time = convertTime($row['sent_time']);
 	$message_read = $row['message_read'];
 
 	$mail_array[$mail_iterator]['message_id'] = $message_id;
 	$mail_array[$mail_iterator]['first_name'] = $first_name;
+	$mail_array[$mail_iterator]['social_status'] = $social_status;
+	$mail_array[$mail_iterator]['block_status'] = $block_status;
 	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 100);
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $message_read;

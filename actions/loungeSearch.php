@@ -39,7 +39,7 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count; //does it makes sense to send this?
 	
 	//get any user ADD MORE CRITERIA--note users higher than 119 for testing purposes
-	$lounge_query = "SELECT DISTINCT id as other_user_id, users.first_name, users.social_status, users.user_city_id
+	$lounge_query = "SELECT DISTINCT id as other_user_id, users.first_name, users.social_status,  users.block_status, users.user_city_id
 				FROM users
 				WHERE users.active_user = 1 AND users.id > 119
 				LIMIT ".$offset.", 2";
@@ -49,7 +49,7 @@ else
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count;
 	
 	//get sorted list of best USER matches
-	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.user_city_id
+	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.block_status, users.user_city_id
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
@@ -69,6 +69,7 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 	
 	$tile_lounge_array[$user_iterator][0]['first_name'] = $row['first_name'];
 	$tile_lounge_array[$user_iterator][0]['social_status'] = $row['social_status'];
+	$tile_lounge_array[$user_iterator][0]['block_status'] = $row['block_status'];
 	$tile_lounge_array[$user_iterator][0]['user_city_id'] = $row['user_city_id'];
 	$tile_lounge_array[$user_iterator][0]['contact'] = $contact;
 	

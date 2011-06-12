@@ -24,7 +24,7 @@ mysql_select_db($db_name);
 //check for distinct user id
 
 //look for interest based on ID & get users associated with the interest id retreived above
-$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
+$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, users.block_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored 
 			FROM `interests`, `mosaic_wall`
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
@@ -70,6 +70,7 @@ if ( $user_count == 0) //no matches
 		$sponsored = $row['sponsored'];
 		$first_name = $row['first_name'];
 		$social_status = $row['social_status'];
+		$block_status = $row['block_status'];
 		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 		
 		$contact = checkContact($user_id, $user_retreived_id, $connection);
@@ -79,6 +80,7 @@ if ( $user_count == 0) //no matches
 		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
 		$user_search_array[$user_iterator]['first_name'] = $first_name;
 		$user_search_array[$user_iterator]['social_status'] = $social_status;
+		$user_search_array[$user_iterator]['block_status'] = $block_status;
 		$user_search_array[$user_iterator]['contact'] = $contact;
 		$user_search_array[$user_iterator]['tile_id'] = $tile_id;
 		$user_search_array[$user_iterator]['interest_id'] = $interest_id;

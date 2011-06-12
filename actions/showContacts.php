@@ -16,7 +16,7 @@ mysql_select_db($db_name);
 
 
 //show all contacts the user hasnt deleted / blocked ---where the contact is an active user
-$show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.social_status
+$show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.social_status, users.block_status
 					FROM `contacts` 
 					LEFT JOIN `users` on users.id =contacts.user_contactee
 					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 LIMIT ".$offset.", 10";
@@ -46,10 +46,12 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	$first_name =  $row['first_name'];
 	$user_city_id =  $row['user_city_id']; //need to do lookup
 	$social_status =  $row['social_status'];
+	$block_status =  $row['block_status'];
 	
 	$contact_array[$contact_iterator]['first_name'] = $first_name;
 	$contact_array[$contact_iterator]['user_city_id'] = $user_city_id;
 	$contact_array[$contact_iterator]['social_status'] = $social_status;
+	$contact_array[$contact_iterator]['block_status'] = $block_status;
 	
 	$contact_iterator++
 }
