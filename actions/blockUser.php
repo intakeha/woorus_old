@@ -7,7 +7,7 @@ session_start();
 $user_id_blocker = $_SESSION['id'];
 //$user_id_blockee = $_POST["user_id_blockee"]; 
 
-$user_id_blockee = 133;
+$user_id_blockee = 132;
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
