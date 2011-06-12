@@ -9,7 +9,7 @@ $block_status_query = "SELECT COUNT(*)
 				FROM `blocks`
 				WHERE blocks.user_blockee =  '".$user_id."' AND blocks.active = 1 AND  blocks.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
 
-$block_status_result = mysql_query($block_status_query, $connection) or die ("Error");
+$block_status_result = mysql_query($block_status_query, $connection) or die ("Error 1");
 
 $row = mysql_fetch_assoc($block_status_result);
 $block_count = $row['COUNT(*)'];
@@ -22,6 +22,6 @@ $users_query = 	"UPDATE `users`
 			SET users.block_status = '".$block_rating."' 
 			WHERE users.id = '".$user_id."' ";
 
-$users_result = mysql_query($users_query, $connection) or die ("Error");
+$users_result = mysql_query($users_query, $connection) or die ("Error 2");
 
 ?>

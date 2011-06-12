@@ -9,7 +9,7 @@ $social_status_query = "SELECT COUNT(*)
 				FROM `conversations`
 				WHERE (conversations.caller_id =  '".$user_id."' OR conversations.callee_id =  '".$user_id."' ) AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
 
-$social_status_result = mysql_query($social_status_query, $connection) or die ("Error");
+$social_status_result = mysql_query($social_status_query, $connection) or die ("Error 1");
 
 $row = mysql_fetch_assoc($social_status_result);
 $social_count = $row['COUNT(*)'];
@@ -22,7 +22,7 @@ $users_query = 	"UPDATE `users`
 			SET users.social_status = '".$social_status."' 
 			WHERE users.id = '".$user_id."' ";
 
-$users_result = mysql_query($users_query, $connection) or die ("Error");
+$users_result = mysql_query($users_query, $connection) or die ("Error 2");
 
 
 
