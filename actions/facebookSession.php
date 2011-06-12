@@ -140,7 +140,7 @@ if ($session)
 				$f_user_city_id = ("1"); //need to do based on lookup
 
 				$social_status = "a"; //default value
-				$block_status = "a" //default value
+				$block_status = "a"; //default value
 				$email_verified = 1; //default value  (no need to verify, no need for token)
 
 				$password_set = 0; //user hasn't set a password
