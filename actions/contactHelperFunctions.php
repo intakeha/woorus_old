@@ -19,5 +19,24 @@ function checkContact($user_id, $other_user_id, $connection){
 
 }
 
+function checkBlock($user_id, $other_user_id, $connection){
+
+	$check_block_query = "SELECT id
+					FROM `blocks`
+					WHERE blocks.user_blocker = '".$user_id."' AND blocks.user_blockee = '".$other_user_id."' AND blocks.active = 1";
+
+	$check_block_result =  mysql_query($check_block_query, $connection) or die ("Error 12");
+	
+	if (mysql_num_rows($check_block_result) > 0){
+	
+		return 1;
+	}else
+	{
+		return 0;
+	}
+
+
+}
+
 
 ?>
