@@ -6,8 +6,10 @@ require('validations.php');
 session_start();
 $user_id_blocker = $_SESSION['id'];
 //$user_id_blockee = $_POST["user_id_blockee"]; 
+//$block_reason = $_POST["block_reason"]; 
 
 $user_id_blockee = 132;
+$block_reason = "They were rude!";
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -21,13 +23,14 @@ if (mysql_num_rows($result) == 1)
 //the person has blocked the user before--and has unblocked (or just found again somehow...)
 	$row = mysql_fetch_assoc($result);
 	$block_id = $row['id']; 
-	$update_query = "UPDATE `blocks` SET active = 1, update_time = NOW() WHERE id =  '".$block_id."' ";
+	$update_query = "UPDATE `blocks` SET active = 1, update_time = NOW() , block_reason = '".mysql_real_escape_string($block_reason)."' 
+				WHERE id =  '".$block_id."' ";
 	$result = mysql_query($update_query, $connection) or die ("Error");
 }
 else{
 //first time user has blocked the other
-	$query_block_user = "INSERT INTO `blocks` (id, user_blockee, user_blocker, update_time, active) VALUES
-							(NULL, '".mysql_real_escape_string($user_id_blockee)."' , '".mysql_real_escape_string($user_id_blocker)."' ,NOW(), 1) ";
+	$query_block_user = "INSERT INTO `blocks` (id, user_blockee, user_blocker, update_time, block_reason, active) VALUES
+							(NULL, '".mysql_real_escape_string($user_id_blockee)."' , '".mysql_real_escape_string($user_id_blocker)."' ,NOW(), '".mysql_real_escape_string($block_reason)."' ,1) ";
 	$result = mysql_query($query_block_user, $connection) or die ("Error");
 }
 
