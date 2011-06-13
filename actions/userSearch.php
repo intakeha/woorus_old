@@ -34,7 +34,7 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 
-$user_count_query = "SELECT COUNT(*) 
+$user_count_query = "SELECT COUNT(DISTINCT mosaic_wall.user_id) 
 			FROM `interests`, `mosaic_wall`
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
