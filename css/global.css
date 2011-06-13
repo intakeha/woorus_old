@@ -283,6 +283,8 @@ a.arrows {
 .pagination_right {
 	background: url(../images/global/page_arrows.png) no-repeat;
 	background-position: 20px -60px;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 .pagination_div{
