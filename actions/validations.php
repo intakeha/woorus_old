@@ -695,7 +695,7 @@ function validateMessage($message_text)
 		sendToJS(0, $error_message);
 	}
 	
-	elseif(strlen($message_text) > 50	0)
+	elseif(strlen($message_text) > 50)
 	{
 		$error_message = "Your message is too long. Stop writing & start talking!";
 		sendToJS(0, $error_message);
