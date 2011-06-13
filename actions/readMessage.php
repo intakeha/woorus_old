@@ -18,10 +18,14 @@ if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
 	$others_mail = 'user_mailer';
 	
+	$me_delete = 'message_deleted_by_mailee';
+	
 }elseif ($inbox_or_sent == "sent")
 {
 	$me_mail =  'user_mailer';
 	$others_mail = 'user_mailee';
+	
+	$me_delete =  'message_deleted_by_mailer';
 }
 
 //connect
@@ -33,7 +37,7 @@ mysql_select_db($db_name);
 $show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status users.user_city_id, users.id
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
-					WHERE mail.".$me_mail."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1  ";
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND ".$me_delete." = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1  ";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 

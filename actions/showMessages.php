@@ -10,17 +10,23 @@ $user_id= $_SESSION['id'];
 //$offset = validateOffset($_POST["offset"]); 
 //$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
 
-$offset  = 0;
-$inbox_or_sent = "sent";
+$offset  = 0; //hardcode for testing
+$inbox_or_sent = "sent"; //hardcode for testing
 
 if ($inbox_or_sent == "inbox"){
 	$me = 'user_mailee';
 	$others = 'user_mailer';
 	
+	$me_delete = 'message_deleted_by_mailee';
+	
+	
 }elseif ($inbox_or_sent == "sent")
 {
-	$me =  'user_mailer';
-	$others = 'user_mailee';
+	$me_mail =  'user_mailer';
+	$others_mail = 'user_mailee';
+	
+	$me_delete =  'message_deleted_by_mailer';
+	
 }
 
 //connect
@@ -32,7 +38,7 @@ mysql_select_db($db_name);
 $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others."
-					WHERE mail.".$me."  =  '".$user_id."' AND message_deleted = 0 AND users.active_user = 1 
+					WHERE mail.".$me."  =  '".$user_id."' AND ".$me_delete." = 0 AND users.active_user = 1 
 					LIMIT ".$offset.", 5";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");

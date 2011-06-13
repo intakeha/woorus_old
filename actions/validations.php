@@ -587,6 +587,8 @@ function validateInterestTag($tag)
 
 }
 
+//-------------------------Search validation functions-----------------------------------------//
+
 function validateInterestTag_Search($tag)
 {
 	$tag = utf8_decode($tag);
@@ -645,6 +647,7 @@ function validateInterestTag_Facebook($tag)
 
 }
 
+
 function validateQueryType($search_query){
 
 	if ($search_query == "C" || $search_query == "U" || $search_query == "S" || $search_query == "")
@@ -669,6 +672,41 @@ function validateOffset($offset){
 	}
 
 }
+
+function validateUserId($user_id){
+
+	if (!preg_match('/^[0-9 ]+$/', $user_id)){
+		$error_message = "Invalid user id.";
+		sendToJS(0, $error_message);
+	}else
+	{
+		return $user_id;
+	}
+
+}
+
+
+function validateMessage($message_text)
+{
+	
+	if($message_text == NULL | strlen($message_text) == 0)
+	{
+		$error_message = "Please enter a message to send.";
+		sendToJS(0, $error_message);
+	}
+	
+	elseif(strlen($message_text) > 50	0)
+	{
+		$error_message = "Your message is too long. Stop writing & start talking!";
+		sendToJS(0, $error_message);
+	}
+	else
+	{
+		return $message_text; 
+	}
+
+}
+
 
 
 //-------------------------Email activation validation functions-----------------------------------------//

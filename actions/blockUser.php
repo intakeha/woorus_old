@@ -5,7 +5,7 @@ require('validations.php');
 
 session_start();
 $user_id_blocker = $_SESSION['id'];
-//$user_id_blockee = $_POST["user_id_blockee"]; 
+//$user_id_blockee = validateUserId($_POST["user_id_blockee"]); 
 //$block_reason = $_POST["block_reason"]; 
 
 $user_id_blockee = 132;
@@ -15,7 +15,7 @@ $block_reason = "They were rude!";
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-$query_block_user_search = "SELECT id FROM `blocks` WHERE user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_blocker = '".mysql_real_escape_string($user_id_blocker)."' ";
+$query_block_user_search = "SELECT id FROM `blocks` WHERE user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND user_blocker = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($query_block_user_search, $connection) or die ("Error");
 
 if (mysql_num_rows($result) == 1)
@@ -34,14 +34,14 @@ else{
 	$result = mysql_query($query_block_user, $connection) or die ("Error");
 }
 
-//then, make sure the blockee is not on the blocker's contacts & vice versa
+//then, make sure the blockee is not on the blocker's contacts
 $update_contacts_query = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contactee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contacter = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($update_contacts_query, $connection) or die ("Error");
 
+//Not sure we want to remove from the other's contacts?
+/*
 $update_contacts_query2 = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contacter = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contactee = '".mysql_real_escape_string($user_id_blocker)."' ";
-$result = mysql_query($update_contacts_query2, $connection) or die ("Error");
-
-//send message to blockee for full transparency!!
+$result = mysql_query($update_contacts_query2, $connection) or die ("Error");*/
 
 
 //recalculate blocks for the user being blocked

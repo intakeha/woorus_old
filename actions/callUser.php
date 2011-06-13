@@ -1,5 +1,6 @@
 <?php
 require('connect.php');
+require('validations.php');
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -9,7 +10,7 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 //$call_accepted = validateCallOutcome($_POST["call_accepted"]); 
-//$other_user_id= validateUserID($_POST["user_id_callee"]); 
+//$other_user_id= validateUserId($_POST["user_id_callee"]); 
 
 $call_accepted = "missed"; //testing
 $other_user_id= 119;
