@@ -47,6 +47,15 @@ $result = mysql_query($update_contacts_query2, $connection) or die ("Error");*/
 //recalculate blocks for the user being blocked
 calculateBlockStatus($user_id_blockee, $connection);
 
+//add to blockee's feed
+$feed_type = 'block';
+
+$feed_update_query = "INSERT INTO `feed`	(id, feed_type, user_id, user_actor, tile_id, update_time) VALUES
+								(NULL, '".$feed_type."' , '".mysql_real_escape_string($user_id_blockee)."' , '".mysql_real_escape_string($user_id_blocker)."' , NULL , NOW()) ";
+$feed_update_result = mysql_query($feed_update_query, $connection) or die ("Error");
+
+
+
 //-----------------Functions-------------------//
 
 function getBlockStatus($block_count){
