@@ -278,6 +278,8 @@ a.arrows {
 
 .pagination_left {
 	background: url(../images/global/page_arrows.png) no-repeat;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 .pagination_right {

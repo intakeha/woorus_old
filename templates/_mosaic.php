@@ -15,6 +15,7 @@
             <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
         </div>
         <div id="tiles_bank">
+        	<div id="tile_bank_message" style="display: none;"></div>
             <ul id="tile_display">
             </ul>
         </div><div id="clear"></div>
@@ -109,8 +110,9 @@
 			submitHandler: function(form) {
 				$('#sponsoredTiles').removeClass('selectedFilter');
 				$('#communityTiles').removeClass('selectedFilter');
-				$('#tile_bank_left').css('display','none');
-				$('#tile_bank_right').css('display','none');
+				$('#tile_bank_left').hide();
+				$('#tile_bank_right').hide();
+				$('#tile_bank_message').hide().empty();
 				$('#myTiles').removeClass('selectedFilter');
 				$('#tile_upload_error').hide();
 				$('input[name=query_type]').val('');
@@ -135,7 +137,10 @@
 							if (i == 0){
 								var tileBankPages = Math.ceil(field.tile_count/15);	
 								if (tileBankPages > 1){
-									$('#tile_bank_right').css('display','');
+									$('#tile_bank_right').show();
+								}
+								if (field.tile_count == 0){
+									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -170,8 +175,9 @@
 		$("#sponsoredTiles").click(function() {
 			$('#communityTiles').removeClass('selectedFilter');
 			$('#myTiles').removeClass('selectedFilter');
-			$('#tile_bank_left').css('display','none');
-			$('#tile_bank_right').css('display','none');
+			$('#tile_bank_left').hide();
+			$('#tile_bank_right').hide();
+			$('#tile_bank_message').hide();
 			$('input[name=query_type]').val('S');
 			$('input[name=offset]').val(0);
 			if($("#tsearch_form").valid()) { 
@@ -199,7 +205,10 @@
 							if (i == 0){
 								var tileBankPages = Math.ceil(field.tile_count/15);	
 								if (tileBankPages > 1){
-									$('#tile_bank_right').css('display','');
+									$('#tile_bank_right').show();
+								}
+								if (field.tile_count == 0){
+									$('#tile_bank_message').text('No sponsored tiles found for \"'+$('#tile_search_field').val()+'\".').show();
 								}
 							}else{
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -213,8 +222,9 @@
 		$("#communityTiles").click(function() {
 			$('#sponsoredTiles').removeClass('selectedFilter');
 			$('#myTiles').removeClass('selectedFilter');
-			$('#tile_bank_left').css('display','none');
-			$('#tile_bank_right').css('display','none');
+			$('#tile_bank_left').hide();
+			$('#tile_bank_right').hide();
+			$('#tile_bank_message').hide();
 			$('input[name=query_type]').val('C');
 			$('input[name=offset]').val(0);
 			if($("#tsearch_form").valid()) { 
@@ -242,7 +252,10 @@
 							if (i == 0){
 								var tileBankPages = Math.ceil(field.tile_count/15);	
 								if (tileBankPages > 1){
-									$('#tile_bank_right').css('display','');
+									$('#tile_bank_right').show();
+								}
+								if (field.tile_count == 0){
+									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -256,8 +269,9 @@
 		$("#myTiles").click(function() {
 			$('#sponsoredTiles').removeClass('selectedFilter');
 			$('#communityTiles').removeClass('selectedFilter');
-			$('#tile_bank_left').css('display','none');
-			$('#tile_bank_right').css('display','none');
+			$('#tile_bank_left').hide();
+			$('#tile_bank_right').hide();
+			$('#tile_bank_message').hide();
 			$('input[name=query_type]').val('U');
 			$('input[name=offset]').val(0);
 			if($("#tsearch_form").valid()) { 
@@ -285,7 +299,10 @@
 							if (i == 0){
 								var tileBankPages = Math.ceil(field.tile_count/15);	
 								if (tileBankPages > 1){
-									$('#tile_bank_right').css('display','');
+									$('#tile_bank_right').show();
+								}
+								if (field.tile_count == 0){
+									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Customize your own tile for this interest!').show();
 								}
 							}else{
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -322,10 +339,10 @@
 							var tileBankPages = Math.ceil(field.tile_count/15);
 							var offsetPage = ((nextOffset)/15)+1;
 							if (offsetPage == tileBankPages){
-								$('#tile_bank_right').css('display','none');
+								$('#tile_bank_right').hide();
 							}
 							if (nextOffset > 0){
-								$('#tile_bank_left').css('display','');
+								$('#tile_bank_left').show();
 							}
 						}else{
 							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -361,10 +378,10 @@
 							var tileBankPages = Math.ceil(field.tile_count/15);
 							var offsetPage = (prevOffset/15)+1;
 							if (offsetPage < tileBankPages){
-								$('#tile_bank_right').css('display','');
+								$('#tile_bank_right').show();
 							}
 							if (prevOffset == 0){
-								$('#tile_bank_left').css('display','none');
+								$('#tile_bank_left').hide();
 							}		
 						}else{
 							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -373,7 +390,6 @@
 				}, "json"
 			);
 		});
-
 	});
 
 </script>

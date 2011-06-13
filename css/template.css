@@ -628,6 +628,11 @@ div#communityTiles {
 	float: left;
 }
 
+div#tile_bank_message {
+	color: #4980B7;
+	font-weight: bold;
+}
+
 #tiles_bank {
 	height: 280px;
 	margin-top: 40px;
