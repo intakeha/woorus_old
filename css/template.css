@@ -563,9 +563,12 @@ li.forgot_title {
 	width: 100px;
 }
 
+#tsearch_form {
+	margin: 0px 0px 20px 0px;
+}
 
 #tiles_legend {
-	margin: 15px 0px 10px 3px;
+	margin: 0px 0px 10px 3px;
 }
 
 #tiles_legend a{
@@ -629,12 +632,11 @@ div#communityTiles {
 }
 
 div#tile_bank_message {
-	margin-top: 10px;
 	text-align: left;
 	line-height: 20px;
 	padding-left: 10px;
 	border-left: 3px solid #C00;
-	position: absolute;
+	margin: -5px 0px 5px 0px;
 }
 
 #tiles_bank {
@@ -654,7 +656,7 @@ div#tile_bank_message {
 }
 
 #customized_tile p {
-	margin: 10px 0px 10px 0px;
+	margin: 20px 0px 10px 0px;
 }
 
 #tile_pic_upload {

@@ -9,13 +9,13 @@
             <input type="hidden" name="offset" value="0" />
             <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
         </form>
+        <div id="tile_bank_message" class="error_text" style="display: none;"></div>
 		<div id="tiles_legend">
             <div id="sponsoredTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
 			<div id="communityTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
             <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
         </div>
         <div id="tiles_bank">
-        	<div id="tile_bank_message" class="error_text" style="display: none;"></div>
             <ul id="tile_display">
             </ul>
         </div><div id="clear"></div>
@@ -76,7 +76,8 @@
 		
 		// Clear mosaic wall and populate wall from backend
 		$('#wall_display').empty();
-		$('#tiles_bank').slideUp();
+		$('#tiles_bank').hide();
+		$('#tiles_legend').hide();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
 			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -104,6 +105,10 @@
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
+					$('#tiles_bank').slideUp('fast');
+					$('#tile_bank_left').hide();
+					$('#tile_bank_right').hide();
+					$('#tiles_legend').hide();
 					$("#tile_bank_message").show().text(validator.errorList[0].message); 
 				}
 			},
@@ -140,10 +145,15 @@
 									$('#tile_bank_right').show();
 								}
 								if (field.tile_count == 0){
+									$('#tiles_bank').slideUp('fast');
+									$('#tile_bank_left').hide();
+									$('#tile_bank_right').hide();
+									$('#tiles_legend').hide();
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
-								$('#tiles_bank').slideDown();
+								$('#tiles_legend').show();
+								$('#tiles_bank').slideDown('fast');								
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
@@ -209,6 +219,10 @@
 									$('#tile_bank_right').show();
 								}
 								if (field.tile_count == 0){
+									$('#tiles_bank').slideUp('fast');
+									$('#tile_bank_left').hide();
+									$('#tile_bank_right').hide();
+									$('#tiles_legend').hide();
 									$('#tile_bank_message').text('No sponsored tiles found for \"'+$('#tile_search_field').val()+'\".').show();
 								}
 							}else{
@@ -256,6 +270,10 @@
 									$('#tile_bank_right').show();
 								}
 								if (field.tile_count == 0){
+									$('#tiles_bank').slideUp('fast');
+									$('#tile_bank_left').hide();
+									$('#tile_bank_right').hide();
+									$('#tiles_legend').hide();
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
@@ -303,6 +321,10 @@
 									$('#tile_bank_right').show();
 								}
 								if (field.tile_count == 0){
+									$('#tiles_bank').slideUp('fast');
+									$('#tile_bank_left').hide();
+									$('#tile_bank_right').hide();
+									$('#tiles_legend').hide();
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Customize your own tile for this interest!').show();
 								}
 							}else{
