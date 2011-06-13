@@ -11,7 +11,7 @@ mysql_select_db($db_name);
 //$call_accepted = validateCallOutcome($_POST["call_accepted"]); 
 //$other_user_id= validateUserID($_POST["user_id_callee"]); 
 
-$call_accepted = "accepted"; //testing
+$call_accepted = "missed"; //testing
 $other_user_id= 119;
 
 $distance = 1000; //need to calculate distance off of user locations
