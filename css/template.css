@@ -629,8 +629,12 @@ div#communityTiles {
 }
 
 div#tile_bank_message {
-	color: #4980B7;
-	font-weight: bold;
+	margin-top: 10px;
+	text-align: left;
+	line-height: 20px;
+	padding-left: 10px;
+	border-left: 3px solid #C00;
+	position: absolute;
 }
 
 #tiles_bank {

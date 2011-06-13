@@ -15,7 +15,7 @@
             <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
         </div>
         <div id="tiles_bank">
-        	<div id="tile_bank_message" style="display: none;"></div>
+        	<div id="tile_bank_message" class="error_text" style="display: none;"></div>
             <ul id="tile_display">
             </ul>
         </div><div id="clear"></div>
@@ -76,6 +76,7 @@
 		
 		// Clear mosaic wall and populate wall from backend
 		$('#wall_display').empty();
+		$('#tiles_bank').slideUp();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
 			  $('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
@@ -103,8 +104,7 @@
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
-					$('#tile_upload_success').hide(); 
-					$("#tile_upload_error").show().text(validator.errorList[0].message); 
+					$("#tile_bank_message").show().text(validator.errorList[0].message); 
 				}
 			},
 			submitHandler: function(form) {
@@ -143,6 +143,7 @@
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
+								$('#tiles_bank').slideDown();
 								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
