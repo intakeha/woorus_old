@@ -43,7 +43,7 @@ $user_count_query = "SELECT COUNT(DISTINCT mosaic_wall.user_id)
 //get count
 $user_count_query_result = mysql_query($user_count_query, $connection) or die ("Error 10");
 $row = mysql_fetch_assoc($user_count_query_result);
-$user_count = $row['COUNT(*)'];
+$user_count = $row['COUNT(DISTINCT mosaic_wall.user_id)'];
 
 
 if ( $user_count == 0) //no matches
