@@ -16,7 +16,7 @@ $external_profile_array = getTilesOnWall($other_user_id, $connection);
 
 $user_info_query = "SELECT   users.first_name, users.social_status, users.block_status, users.user_city_id 
 					FROM `users` 
-					WHERE users.id = '".$other_user_id."' ";
+					WHERE users.id = '".$other_user_id."' AND users.active_user = 1 ";
 					
 $user_info_result = mysql_query($user_info_query, $connection) or die ("Error");
 

@@ -33,7 +33,7 @@ mysql_select_db($db_name);
 $show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status users.user_city_id, users.id
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
-					WHERE mail.".$me_mail."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' ";
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND message_deleted = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1  ";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
