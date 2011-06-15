@@ -30,17 +30,6 @@ calculateSocialStatus($other_user_id, $connection);
 
 //if the call is accepted--make the Call!
 
-//if call is missed, add to other user's feeds
-if ($call_accepted == 'missed'){
-
-	$feed_type = 'call';
-
-	//add to feeds table
-	$feed_update_query = "INSERT INTO `feed`	(id, feed_type, user_id, user_actor, tile_id, update_time) VALUES
-									(NULL, '".$feed_type."' , '".mysql_real_escape_string($other_user_id)."' , '".mysql_real_escape_string($user_id)."' , NULL , NOW()) ";
-	$feed_update_result = mysql_query($feed_update_query, $connection) or die ("Error");
-
-}
 
 //-----------------Functions-------------------//
 

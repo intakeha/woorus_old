@@ -33,12 +33,5 @@ else{
 	$result = mysql_query($query_friend_user, $connection) or die ("Error");
 }
 
-$feed_type = 'contact';
-
-//add to feeds table
-$feed_update_query = "INSERT INTO `feed`	(id, feed_type, user_id, user_actor, tile_id, update_time) VALUES
-								(NULL, '".$feed_type."' , '".mysql_real_escape_string($user_id_contactee)."' , '".mysql_real_escape_string($user_id_contacter)."' , NULL , NOW()) ";
-$feed_update_result = mysql_query($feed_update_query, $connection) or die ("Error");
-
 
 ?>

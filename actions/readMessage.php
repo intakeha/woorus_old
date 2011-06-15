@@ -2,7 +2,7 @@
 
 require('connect.php');
 require('validations.php');
-require('mailHelperFunctions.php');
+require('timeHelperFunctions.php');
 require('contactHelperFunctions.php'); 
 
 session_start();
