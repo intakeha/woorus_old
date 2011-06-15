@@ -853,3 +853,18 @@ div.transparent_tag {
 	color: #666;
 	width: 600px;
 }
+
+/* Search Page */
+
+#search {
+	height: 600px;
+	background: url(../images/ads/prius.jpg) no-repeat;
+}
+
+#search_slide {
+	height: 200px;
+}
+
+#user_search_field {
+	width: 400px;
+}

@@ -7,12 +7,13 @@
 	<meta name="keywords" content="video chats">
 	<meta name="description" content="Connecting people through interests">
 	<link href="css/woorus.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
 	<script type="text/javascript" src="js/jquery.validate.js"></script> 
 	<script type="text/javascript" src="js/slides.min.jquery.js"></script> 
 	<script type="text/javascript" src="js/jquery.crop.js"></script> 
-  	<script type="text/javascript" src="js/woorus.js"></script>
+	<script type="text/javascript" src="js/woorus.js"></script>
 
 	<?php 
 		$page = $_REQUEST['page'];
