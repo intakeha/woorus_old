@@ -22,7 +22,7 @@
         <div id="customized_tile">
         	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
             	<p>Create your own customized tile: </p>     
-                <form id="tile_upload_form" action="upload_file.php" method="post" enctype="multipart/form-data">
+                <form id="tile_upload_form" action="actions/upload_file.php" method="post" enctype="multipart/form-data">
                     <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
                     <br />
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
