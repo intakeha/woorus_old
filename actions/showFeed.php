@@ -72,34 +72,27 @@ while ($row = mysql_fetch_assoc($new_contacts_result)){
 
 
 //get newly added  interests from contacts
-$new_contacts_query = "SELECT mosaic_wall.update_time, mosaic_wall.interest_id, interests.interest_name, users.first_name, users.social_status, users.block_status, users.user_city_id
+$new_interests_query = "SELECT users.id as user_id,  interests.interest_name, tiles.tile_filename
 		FROM `mosaic_wall`
 		LEFT JOIN `contacts` on  mosaic_wall.user_id = contacts.user_contactee
 		LEFT JOIN `users` on users.id =contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
+		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
 		WHERE contacts.user_contacter =  '".$user_id ."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		GROUP BY users.id
 		LIMIT 0, 5";
 
-$new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error");
+$new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error");
 
-$contacts_iterator = 1;
+$interests_iterator = 1;
 while ($row = mysql_fetch_assoc($new_contacts_result)){
 
 	//retreive data
-	$call_time = convertTime($row['update_time']);
-	$first_name = $row['first_name'];
-	$social_status = $row['social_status'];	
-	$block_status = $row['block_status'];	
-	$user_city_id = $row['user_city_id'];	
-	
-	//set data to send
-	$feed_array['new_contacts'][$contacts_iterator]['update_time']= $call_time;
-	$feed_array['new_contacts'][$contacts_iterator]['first_name']= $first_name;
-	$feed_array['new_contacts'][$contacts_iterator]['social_status']= $social_status;
-	$feed_array['new_contacts'][$contacts_iterator]['block_status']= $block_status;
-	$feed_array['new_contacts'][$contacts_iterator]['user_city_id']= $user_city_id;
+	$feed_array['new_interests'][$interests_iterator]['user_id']= $row['user_id'];
+	$feed_array['new_interests'][$interests_iterator]['interest_name']= $row['interest_name'];
+	$feed_array['new_interests'][$interests_iterator]['tile_filename']= $row['tile_filename'];
 
-	$contacts_iterator++;
+	$interests_iterator++;
 }
 
 

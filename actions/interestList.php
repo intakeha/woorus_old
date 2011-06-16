@@ -10,7 +10,8 @@ mysql_select_db($db_name);
 
 
 $interest_query = "SELECT interests.id, interests.interest_name
-		FROM `interests";
+		FROM `interests`
+		ORDER by interests.interest_name ASC";
 
 $interest_result = mysql_query($interest_query, $connection) or die ("Error");
 
