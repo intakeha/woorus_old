@@ -95,6 +95,40 @@ while ($row = mysql_fetch_assoc($new_interests_result)){
 	$interests_iterator++;
 }
 
+//get users who have shared interests
+$get_common_interest = "SELECT mosaic_wall.interest_id
+					FROM `mosaic_wall`
+					WHERE mosaic_wall.tile_id <> 0 AND mosaic_wall.interest_id <> 0 AND mosaic_wall.user_id = '".$user_id."' 
+					ORDER BY RAND()
+					LIMIT 1";
+					
+$common_interest_id = mysql_query($get_common_interest, $connection) or die ("Error");
+
+if (mysql_num_rows($common_interest_id) > 0){
+	$interest_id = $row['interest_id'];
+}
+
+
+$common_interests_query = "SELECT users.id as user_id
+				FROM `mosaic_wall`
+				LEFT JOIN users ON users.id = mosaic_wall.user_id
+				WHERE mosaic_wall.interest_id = '".$interest_id ."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+				GROUP BY users.id
+				ORDER BY RAND()
+				LIMIT 0, 5";
+
+$common_interests_result = mysql_query($common_interests_query, $connection) or die ("Error");
+
+$common_interests_iterator = 1;
+while ($row = mysql_fetch_assoc($common_interests_result)){
+
+	//retreive data
+	$feed_array['common_interests'][$common_interests_iterator]['user_id']= $row['user_id'];
+
+	$common_interests_iterator++;
+}
+
+
 
 $output = json_encode($feed_array);
 die($output);
