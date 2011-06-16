@@ -2,6 +2,8 @@
 
 require('connect.php');
 
+$q =  strtolower($_GET["q"]); //need to validate!!
+
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
@@ -20,14 +22,27 @@ while ($row = mysql_fetch_assoc($interest_result)){
 	$interest_name = $row['interest_name'];	
 	
 	//set interest ID & name pairs
-	array_push($interest_array, array(
-		"id" => $interest_id,
-		"interest_name" => $interest_name
-	));
+	$interest_array[$interest_id] = $interest_name;
 }
 
 
-$output = json_encode($interest_array);
+$result = array();
+$search_iterator = 1;
+foreach ($interest_array as $key=>$value) {
+	if (strpos(strtolower($value), $q) === 0) {
+		array_push($result, array(
+			"id" => $key,
+			"interest_name" => $value
+		));
+		$search_iterator++;
+	}
+	if ($search_iterator > 5){
+		break;
+	}
+}
+
+
+$output = json_encode($result);
 die($output);
 
 

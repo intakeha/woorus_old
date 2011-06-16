@@ -89,6 +89,14 @@ function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement
 }
 
 
+//same as above, but dont update the TIME
+function updateMosaicWallTable_move($user_id, $interest_id, $tile_id, $tile_placement, $connection)
+{
+	$mosaic_wall_query = "UPDATE `mosaic_wall` SET tile_id = '".$tile_id."', interest_id = '".$interest_id."' WHERE user_id = '".$user_id."' AND tile_placement = '".$tile_placement."' ";
+	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
+}
+
+
 function lookupTileID($picture_name, $connection)
 {
 	$tile_id_query = "SELECT id from `tiles` WHERE  tile_filename = '".mysql_real_escape_string($picture_name)."' ";
