@@ -98,6 +98,62 @@
 		});
 		$("#wall_display, #remove_tile").disableSelection(); // Disable text selection when dragging tiles
 		
+		// Activate autocomplete to the tile search field
+		$("#tile_search_field").autocomplete("actions/interestList.php",{
+			dataType: 'json',
+			parse: function(data) {
+				return $.map(data, function(item) {
+					return {
+						data: item,
+						value: item.interest_name,
+						result: item.interest_name
+					}
+				}); 
+			}, 
+			formatItem: function(item) {
+				return item.interest_name;
+			},
+			formatMatch: function(item) {
+				return item.interest_name;
+			},
+			formatResult: function(item) {
+				return item.interest_name;
+			},
+			autoFill: true,
+			minChars: 1,
+			selectFirst: true,
+			max: 5,
+			delay: 1
+		}); 
+		
+		// Activate autocomplete to the tag tile field
+		$("#assign_tag").autocomplete("actions/interestList.php",{
+			dataType: 'json',
+			parse: function(data) {
+				return $.map(data, function(item) {
+					return {
+						data: item,
+						value: item.interest_name,
+						result: item.interest_name
+					}
+				}); 
+			}, 
+			formatItem: function(item) {
+				return item.interest_name;
+			},
+			formatMatch: function(item) {
+				return item.interest_name;
+			},
+			formatResult: function(item) {
+				return item.interest_name;
+			},
+			autoFill: true,
+			minChars: 1,
+			selectFirst: true,
+			max: 5,
+			delay: 1
+		}); 
+		
 		// Validate tile search form for tile bank
 		$("#tsearch_form").validate({
 			onsubmit: true,
