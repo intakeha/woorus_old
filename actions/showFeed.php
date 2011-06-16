@@ -85,7 +85,7 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 $new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error");
 
 $interests_iterator = 1;
-while ($row = mysql_fetch_assoc($new_contacts_result)){
+while ($row = mysql_fetch_assoc($new_interests_result)){
 
 	//retreive data
 	$feed_array['new_interests'][$interests_iterator]['user_id']= $row['user_id'];
