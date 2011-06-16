@@ -63,7 +63,7 @@
         </div>
     </div>
     <div id="mosaic_wall">
-        &laquo; Personalize your mosaic wall &raquo;         
+        &laquo; Personalize your mosaic interest wall &raquo;         
         <div id="wall">
             <ul id="wall_display" class="tile_sort">
             </ul>
@@ -157,7 +157,6 @@
 		// Validate tile search form for tile bank
 		$("#tsearch_form").validate({
 			onsubmit: true,
-			onclick: true,
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
@@ -234,9 +233,6 @@
 				}
 			}
 		});
-		
-		// Creating variable to call tile search validation form via function
-		//var tsearchValidator = $("#tsearch_form").validate();
 		
 		// Associate each click on the tile bank legend to update query type and call validator
 		$("#sponsoredTiles").click(function() {
