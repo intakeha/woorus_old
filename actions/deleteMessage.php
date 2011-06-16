@@ -17,17 +17,26 @@ if ($inbox_or_sent == "inbox"){
 	$me = 'user_mailee';
 	$others = 'user_mailer';
 	
+	$me_delete = 'message_deleted_by_mailee';
+	
+	
 }elseif ($inbox_or_sent == "sent")
 {
-	$me =  'user_mailer';
-	$others = 'user_mailee';
+	$me_mail =  'user_mailer';
+	$others_mail = 'user_mailee';
+	
+	$me_delete =  'message_deleted_by_mailer';
+	
 }
+
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
+$read_message_query = "UPDATE `mail` 
+				SET mail.".$me_delete." = 1 
+				WHERE mail.id =  '".$message_id."' AND mail.".$me."  =  '".$user_id."' ";
 $read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
 
 $success_message = "Message deleted";

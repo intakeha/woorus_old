@@ -33,11 +33,11 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 
-//get all messages where user hasnt deleted
+//get the message specified by the user, as long as the user hasnt deleted
 $show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status users.user_city_id, users.id
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
-					WHERE mail.".$me_mail."  =  '".$user_id."' AND ".$me_delete." = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1  ";
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1  ";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
