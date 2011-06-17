@@ -10,7 +10,7 @@ $user_id= $_SESSION['id'];
 //$message_id= validateMessageId($_POST["message_id"]); 
 //$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
 
-$message_id = "3";
+$message_id = "2";
 $inbox_or_sent = "sent";
 
 if ($inbox_or_sent == "inbox"){
@@ -34,13 +34,15 @@ if ($inbox_or_sent == "inbox"){
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-$read_message_query = "UPDATE `mail` 
+$delete_message_query = "UPDATE `mail` 
 				SET mail.".$me_delete." = 1 
 				WHERE mail.id =  '".$message_id."' AND mail.".$me_mail."  =  '".$user_id."' ";
-				
-$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
+
+die($delete_message_query);
+
+$delete_message_result = mysql_query($delete_message_query, $connection) or die ("Error");
 
 $success_message = "Message deleted";
-sendToJS(1, $error_message);
+sendToJS(1, $success_message);
 
 ?>

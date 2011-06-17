@@ -576,12 +576,14 @@ function validateInterestTag($tag)
 	}
 	else
 	{
-		if (strtoupper($tag) == $tag) //keep in all caps if all caps
+		if (strtoupper($tag) == $tag) //keep in all caps if all caps,
 		{
-			return strip_tags($tag);
+			return strip_tags(preg_replace('/\s+/', ' ', $tag)); //take out tags, multiple spaces
+			
+			
 		}else //else want Camel-Case
 		{
-			return ucname(strip_tags($tag)); 
+			return ucname(strip_tags(preg_replace('/\s+/', ' ', $tag))); //take out tags, multiple spaces, convert to camel
 		}
 	}
 
@@ -618,10 +620,10 @@ function validateInterestTag_Search($tag)
 	{
 		if (strtoupper($tag) == $tag) //keep in all caps if all caps
 		{
-			return strip_tags($tag);
+			return strip_tags(preg_replace('/\s+/', ' ', $tag));
 		}else //else want Camel-Case
 		{
-			return ucname(strip_tags($tag)); 
+			return ucname(strip_tags(preg_replace('/\s+/', ' ', $tag))); 
 		}
 	}
 
@@ -638,10 +640,10 @@ function validateInterestTag_Facebook($tag)
 	
 	if (strtoupper($tag) == $tag) //keep in all caps if all caps
 	{
-		return strip_tags($tag);
+		return strip_tags(preg_replace('/\s+/', ' ', $tag));
 	}else //else want Camel-Case
 	{
-		return ucname(strip_tags($tag)); 
+		return ucname(strip_tags(preg_replace('/\s+/', ' ', $tag))); 
 	}
 	
 

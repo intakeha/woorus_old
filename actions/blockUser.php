@@ -38,10 +38,9 @@ else{
 $update_contacts_query = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contactee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contacter = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($update_contacts_query, $connection) or die ("Error");
 
-//Not sure we want to remove from the other's contacts?
-/*
+//Remove from the other's contacts?
 $update_contacts_query2 = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contacter = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contactee = '".mysql_real_escape_string($user_id_blocker)."' ";
-$result = mysql_query($update_contacts_query2, $connection) or die ("Error");*/
+$result = mysql_query($update_contacts_query2, $connection) or die ("Error");
 
 
 //recalculate blocks for the user being blocked
