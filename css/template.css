@@ -842,10 +842,17 @@ div.transparent_tag {
 
 #search {
 	height: 600px;
+	margin:0px auto;
 }
 
 #search_slide {
 	height: 150px;
+}
+
+#search_results {
+	width: 1150px;
+	height: 500px;
+    margin: 10px 0px 0px 25px;
 }
 
 #user_search_field {
@@ -854,11 +861,59 @@ div.transparent_tag {
 
 #search_error {
 	width: 400px;
+	height: 12px;
 	margin: 10px 0px 0px 360px;
 	font-weight: bold;
-	display: none;
+}
+
+.result_column {
+	width: 375px;
+	height:80px;
+	float: left;
+}
+
+.center_column {
+	margin-right: 100px;
+}
+
+.result_entry {
+	width: 375px;
+	height: 90px;
+	text-align: left;
+	border-bottom: 1px solid #99B8D7;
+}
+
+.result_entry_last {
+	width: 375px;
+	height: 90px;
+	text-align: left;
 }
 
 .list_users {
-	width: 300px;
+	width: 375px;
+	height: 90px;
+	margin-top: 10px;
 }
+
+.user_info {
+	height: 32px;
+}
+
+.action_buttons {
+	height: 50px;
+}
+
+.pagination_search {
+	width: 70px;
+	height: 280px;
+	float: left;
+	padding-top: 220px;
+	margin: 0px 40px;
+}
+
+.online_status a {
+	margin: 5px 0px 0px 30px;
+	display: block;
+	font-weight: bold;
+}
+

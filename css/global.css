@@ -420,3 +420,7 @@ a.arrows {
 	background:url(../images/global/social_status_sm.png) no-repeat;
 	background-position: 0px 0px;
 }
+
+.float_right {
+	float: right;
+}

@@ -6,21 +6,113 @@
                 <input type="hidden" name="offset" value="0" />
                 <input class="buttons" id="user_search_submit" type="submit" name="user_search_submit" value="Search">
         </form>
-        <div id="search_error" style="width: 400px; margin-left: 360px;  font-weight: bold; display: none;">
+        <div id="search_error">
         </div>
     </div>
-    <div id="search_results">
-    	<div id="search_results_col1">
+    <div id="search_results" style="display: none;">
+    	<div class="pagination_search"><a id="search_left" class="arrows pagination_left"></a></div>
+    	<div class="result_column center_column">
         	<ul>
-				<li>
+				<li class="result_entry">
                 	<div class="list_users">
                     	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
                          <div>
-                         	<div>
-                            	<div class="online_status"></div> Melanie
-                                <div class="social_status"></div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
                             </div>
-                            <div>
+                            <div class="action_buttons">
+                            	<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
+                            	<a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                         </div>
+                    </div>
+                </li>     
+				<li class="result_entry">
+                	<div class="list_users">
+                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
+                         <div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
+                            </div>
+                            <div class="action_buttons">
+                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
+                            	<a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                         </div>
+                    </div>
+                </li>
+				<li class="result_entry">
+                	<div class="list_users">
+                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
+                         <div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
+                            </div>
+                            <div class="action_buttons">
+                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
+                            	<a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                         </div>
+                    </div>
+                </li>   
+				<li class="result_entry">
+                	<div class="list_users">
+                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
+                         <div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
+                            </div>
+                            <div class="action_buttons">
+                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
+                            	<a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                         </div>
+                    </div>
+                </li>   
+				<li class="result_entry_last">
+                	<div class="list_users">
+                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
+                         <div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
+                            </div>
+                            <div class="action_buttons">
+                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
+                            	<a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                         </div>
+                    </div>
+                </li>   
+
+            </ul>
+        </div>
+        <div class="result_column">
+        	<ul>
+				<li class="result_entry">
+                	<div class="list_users">
+                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
+                         <div>
+                         	<div class="user_info">
+                            	<div class="online_status"><a href="#">Melanie</a></div> 
+                                <div class="social_status float_right"></div>
+                            </div>
+                            <div class="action_buttons">
+                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
                             	<a class="add_button_sm" href="#"></a>
                                 <a class="write_button_sm" href="#"></a>
                                 <a class="talk_button_sm" href="#"></a>
@@ -29,34 +121,9 @@
                     </div>
 					
                 </li>
-            
-<!--            <li class="feed_entry">
-                    <div class="feed_content">
-                        <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                        <div class="feed_display">
-                            <div class="feed_update">
-                                <div class="feed_message">You've been added to James' contact list.<br /><font>February 15 at 7:32pm</font></div>
-                                <div class="feed_online_status"></div>
-                                <div class="feed_social_status"></div>
-                            </div>
-                            <div class="feed_links">
-                                <div class="feed_actions">
-                                    <a class="add_button_sm" href="#"></a>
-                                    <a class="write_button_sm" href="#"></a>
-                                    <a class="talk_button_sm" href="#"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
--->
-                
             </ul>
         </div>
-        <div id="search_results_col2">
-        	<ul>
-            </ul>
-        </div>
+        <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
     </div>
 </div>
 
@@ -97,12 +164,13 @@
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
-					$("#search_error").show().text(validator.errorList[0].message); 
+					$("#search_error").html(validator.errorList[0].message); 
 				}
 			},
 			submitHandler: function(form) {
-				$('#search_slide').slideUp('fast');
+				$('#search_slide').hide();
 				$('#search').css('background','none');
+				$('#search_results').show();
 				$.post(
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
@@ -143,7 +211,7 @@
 		});
 		
 		$("#user_search_field").blur(function() {
-			$("#search_error").hide()
+			$("#search_error").html('');
 		});
 		
 	});
