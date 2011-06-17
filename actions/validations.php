@@ -97,7 +97,8 @@ function validateFirstName($name)
 	}
 	else
 	{
-		return ucname(strip_tags($name));
+		return ucname(strip_tags(preg_replace('/\s+/', ' ', $name))); //remove tags, double spaces, etc
+		
 	}
 
 }
@@ -140,7 +141,7 @@ function validateLastName($name)
 	}
 	else
 	{
-		return ucname(strip_tags($name));
+		return ucname(strip_tags(preg_replace('/\s+/', ' ', $name))); //remove tags, double spaces, etc
 	}
 
 }
