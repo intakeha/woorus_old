@@ -402,3 +402,21 @@ a.arrows {
 	background-color: #0A246A;
 	color: white;
 }
+
+/* Online & Social Status */
+
+.online_status {
+	width: 28px;
+	height: 28px;
+	float: left;
+	background: url(../images/global/online.png) no-repeat;
+	background-position: 0px 0px;
+}
+
+.social_status {
+	width: 30px;
+	height: 28px;
+	float: left;
+	background:url(../images/global/social_status_sm.png) no-repeat;
+	background-position: 0px 0px;
+}

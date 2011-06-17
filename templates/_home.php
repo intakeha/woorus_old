@@ -9,7 +9,7 @@
 				or leverage tiles from others to get started quickly.</div>
 		</a>
     </div>
-    <div id="social_status">
+    <div id="profile_social_status">
 		<div id="butterfly"></div>
 		<div id="warning"></div>
     </div>

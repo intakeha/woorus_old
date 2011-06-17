@@ -234,7 +234,7 @@
 	text-align: center;
 }
 
-#social_status {
+#profile_social_status {
 	width: 80px;
 	height: 540px;
 	float: left;
@@ -318,22 +318,6 @@
 	font-size: 11px;
 	font-style: italic;
 	color: #CCC;
-}
-
-.feed_online_status {
-	width: 28px;
-	height: 28px;
-	float: left;
-	background: url(../images/global/online.png) no-repeat;
-	background-position: 0px 0px;
-}
-
-.feed_social_status {
-	width: 30px;
-	height: 28px;
-	float: left;
-	background:url(../images/global/social_status_sm.png) no-repeat;
-	background-position: 0px 0px;
 }
 
 .feed_links {
@@ -858,7 +842,6 @@ div.transparent_tag {
 
 #search {
 	height: 600px;
-	background: url(../images/ads/prius.jpg) no-repeat;
 }
 
 #search_slide {
@@ -867,4 +850,15 @@ div.transparent_tag {
 
 #user_search_field {
 	width: 400px;
+}
+
+#search_error {
+	width: 400px;
+	margin: 10px 0px 0px 360px;
+	font-weight: bold;
+	display: none;
+}
+
+.list_users {
+	width: 300px;
 }
