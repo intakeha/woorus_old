@@ -14,8 +14,8 @@ $offset  = 0; //hardcode for testing
 $inbox_or_sent = "sent"; //hardcode for testing
 
 if ($inbox_or_sent == "inbox"){
-	$me = 'user_mailee';
-	$others = 'user_mailer';
+	$me_mail = 'user_mailee';
+	$others_mail = 'user_mailer';
 	
 	$me_delete = 'message_deleted_by_mailee';
 	
@@ -37,8 +37,8 @@ mysql_select_db($db_name);
 //get all messages where user hasnt deleted (other user must be active)
 $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status
 					FROM `mail` 
-					LEFT JOIN `users` on users.id = mail.".$others."
-					WHERE mail.".$me."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND users.active_user = 1 
+					LEFT JOIN `users` on users.id = mail.".$others_mail."
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND users.active_user = 1 
 					LIMIT ".$offset.", 5";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");

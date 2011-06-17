@@ -11,11 +11,11 @@ $user_id= $_SESSION['id'];
 //$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
 
 $message_id = "3";
-$inbox_or_sent = "inbox";
+$inbox_or_sent = "sent";
 
 if ($inbox_or_sent == "inbox"){
-	$me = 'user_mailee';
-	$others = 'user_mailer';
+	$me_mail = 'user_mailee';
+	$others_mail = 'user_mailer';
 	
 	$me_delete = 'message_deleted_by_mailee';
 	
@@ -36,7 +36,8 @@ mysql_select_db($db_name);
 
 $read_message_query = "UPDATE `mail` 
 				SET mail.".$me_delete." = 1 
-				WHERE mail.id =  '".$message_id."' AND mail.".$me."  =  '".$user_id."' ";
+				WHERE mail.id =  '".$message_id."' AND mail.".$me_mail."  =  '".$user_id."' ";
+				
 $read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
 
 $success_message = "Message deleted";
