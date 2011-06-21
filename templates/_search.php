@@ -12,98 +12,12 @@
     <div id="search_results" style="display: none;">
     	<div class="pagination_search"><a id="search_left" class="arrows pagination_left"></a></div>
     	<div class="result_column center_column">
-        	<ul>
-				<li class="result_entry">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                            	<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-                </li>     
-				<li class="result_entry">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-                </li>
-				<li class="result_entry">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-                </li>   
-				<li class="result_entry">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-                </li>   
-				<li class="result_entry_last">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-                </li>   
-
+        	<ul id="result_entries_left">
             </ul>
         </div>
         <div class="result_column">
-        	<ul>
-				<li class="result_entry">
+        	<ul id="result_entries_right">
+<!--				<li class="result_entry">
                 	<div class="list_users">
                     	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
                          <div>
@@ -120,7 +34,7 @@
                          </div>
                     </div>
 					
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
@@ -168,26 +82,46 @@
 				}
 			},
 			submitHandler: function(form) {
-				$('#search_slide').hide();
-				$('#search').css('background','none');
-				$('#search_results').show();
 				$.post(
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
 					function(data){
-						$.each(data, function(i, field){
-							switch (field.tile_type){
-								case "S":
-									tile_type = "sponsored"
-									break
-								case "U":
-									tile_type = "uploaded"
-									break
-								case "C":
-									tile_type = "community"
-									break
-							};
-						});
+						$('#result_entries_left').empty();
+						if (data.success == 0){
+							$("#search_error").html(data.message);
+						} else {
+							$('#search_left').hide();
+							$('#search_right').hide();
+							$('#search_slide').hide();
+							$('#search').css('background','none');
+							$('#search_results').show();
+							$.each(data, function(i, field){
+								switch (field.tile_type){
+									case "S":
+										tile_type = "sponsored"
+										break
+									case "U":
+										tile_type = "uploaded"
+										break
+									case "C":
+										tile_type = "community"
+										break
+								};
+								if (i == 0){
+									alert (field.user_count);
+									var userSearchPages = Math.ceil(field.user_count/10);
+									if (userSearchPages > 1){
+										$('#search_right').show();
+									}
+								}else{
+									if (i < 6) {
+										$('#result_entries_left').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									}else{
+										$('#result_entries_right').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									}
+								}
+							});
+						}
 					}, "json"
 				);
 			},
@@ -203,9 +137,9 @@
 			},
 			messages: {
 				user_search: {			
-					required: "Your search did not return any results. Please try another interest.",
-					minlength: "Your search did not return any results. Please try another interest.",
-					maxlength: "Your search did not return any results. Please try another interest."
+					required: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.",
+					minlength: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.",
+					maxlength: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge."
 				}
 			}
 		});
