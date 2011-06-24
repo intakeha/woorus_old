@@ -124,6 +124,54 @@
 			selectFirst: true,
 			max: 5,
 			delay: 1
+		}).result( function (){
+			if($("#tsearch_form").valid()) { 
+				$('#sponsoredTiles').removeClass('selectedFilter');
+				$('#communityTiles').removeClass('selectedFilter');
+				$('#tile_bank_left').hide();
+				$('#tile_bank_right').hide();
+				$('#tile_bank_message').hide().empty();
+				$('#myTiles').removeClass('selectedFilter');
+				$('#tile_upload_error').hide();
+				$('input[name=query_type]').val('');
+				$('input[name=offset]').val(0);
+				$.post(
+					"actions/tileSearch.php",
+					$('#tsearch_form').serialize(),
+					function(data){
+						$('#tile_display').empty();
+						$.each(data, function(i, field){
+							switch (field.tile_type){
+								case "S":
+									tile_type = "sponsored"
+									break
+								case "U":
+									tile_type = "uploaded"
+									break
+								case "C":
+									tile_type = "community"
+									break
+							};
+							if (i == 0){
+								var tileBankPages = Math.ceil(field.tile_count/15);	
+								if (tileBankPages > 1){
+									$('#tile_bank_right').show();
+								}
+								if (field.tile_count == 0){
+									$('#tiles_bank').slideUp('fast');
+									$('#tile_bank_left').hide();
+									$('#tile_bank_right').hide();
+									$('#tiles_legend').hide();
+									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
+								}
+							}else{
+								$('#tiles_legend').show();
+								$('#tiles_bank').slideDown('fast');								
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+							}
+						});
+					}, "json"
+				);}
 		}); 
 		
 		// Activate autocomplete to the tag tile field

@@ -17,7 +17,7 @@
         </div>
         <div class="result_column">
         	<ul id="result_entries_right">
-<!--				<li class="result_entry">
+<!--		<li class="result_entry">
                 	<div class="list_users">
                     	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
                          <div>
@@ -70,7 +70,53 @@
 			selectFirst: true,
 			max: 5,
 			delay: 1
-		}); 
+		}).result( function (){
+			if($("#search_form").valid()) { 
+				$.post(
+					"actions/userSearch.php",
+					$('#search_form').serialize(),
+					function(data){
+						$('#result_entries_left').empty();
+						$('#result_entries_right').empty();
+						if (data.success == 0){
+							$("#search_error").html(data.message);
+						} else {
+							$('#search_left').hide();
+							$('#search_right').hide();
+							$('#search_slide').hide();
+							$("#search_error").html('');
+							$('#search').css('background','none');
+							$('#search_results').show();
+							$.each(data, function(i, field){
+								switch (field.tile_type){
+									case "S":
+										tile_type = "sponsored"
+										break
+									case "U":
+										tile_type = "uploaded"
+										break
+									case "C":
+										tile_type = "community"
+										break
+								};
+								if (i == 0){
+									var userSearchPages = Math.ceil(field.user_count/10);
+									if (userSearchPages > 1){
+										$('#search_right').show();
+									}
+								}else{
+									if (i < 6) {
+										$('#result_entries_left').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									}else{
+										$('#result_entries_right').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									}
+								}
+							});
+						}
+					}, "json"
+				);
+			}
+		});
 		
 		// Validate user search form
 		$("#search_form").validate({
@@ -87,12 +133,14 @@
 					$('#search_form').serialize(),
 					function(data){
 						$('#result_entries_left').empty();
+						$('#result_entries_right').empty();
 						if (data.success == 0){
 							$("#search_error").html(data.message);
 						} else {
 							$('#search_left').hide();
 							$('#search_right').hide();
 							$('#search_slide').hide();
+							$("#search_error").html('');
 							$('#search').css('background','none');
 							$('#search_results').show();
 							$.each(data, function(i, field){
@@ -108,7 +156,6 @@
 										break
 								};
 								if (i == 0){
-									alert (field.user_count);
 									var userSearchPages = Math.ceil(field.user_count/10);
 									if (userSearchPages > 1){
 										$('#search_right').show();
@@ -118,6 +165,9 @@
 										$('#result_entries_left').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
 										$('#result_entries_right').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									}
+									if (i == 5) {
+										
 									}
 								}
 							});
