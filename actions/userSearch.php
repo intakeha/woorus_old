@@ -99,7 +99,7 @@ if ( $user_count > 0) //we found matches
 		}else{
 			//update count bc we have eliminated 1 user
 			$user_count--;
-			$user_search_array[0]['user_count'] =  $user_count;
+			$user_search_array['user_count'] =  $user_count;
 		}
 	}
 }
