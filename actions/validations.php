@@ -630,6 +630,24 @@ function validateInterestTag_Search($tag)
 
 }
 
+function checkBannedWords($word, $connection){
+
+	$banned_word_query = "SELECT `id`
+					FROM `banned_words`
+					WHERE banned_words.word LIKE '%".$word."%' ";
+					
+	$result = mysql_query($banned_word_query, $connection) or die ("Error");
+	
+	if (mysql_num_rows($result) > 0) {
+		$error_message = "Unable to load tile.";
+		sendToJS(0, $error_message);
+	
+	}
+
+
+}
+
+
 function validateInterestTag_Facebook($tag)
 {
 	$tag = preg_replace('/[^0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]/', '', utf8_decode($tag));
