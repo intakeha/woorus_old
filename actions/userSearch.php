@@ -51,12 +51,13 @@ $user_count_query_result = mysql_query($user_count_query, $connection) or die ("
 $row = mysql_fetch_assoc($user_count_query_result);
 $user_count = $row['COUNT(DISTINCT mosaic_wall.user_id)'];
 
+//declare empty array of users
+$user_search_array = array();
 $user_search_array[0]['user_count'] = $user_count;
 
 if ( $user_count > 0) //we found matches
 {
-	//declare empty array of users
-	$user_search_array = array();
+	
 	$user_iterator = 1;
 
 	//iterate through all users who have this interest on their wall
@@ -99,7 +100,7 @@ if ( $user_count > 0) //we found matches
 		}else{
 			//update count bc we have eliminated 1 user
 			$user_count--;
-			//$user_search_array['0']['user_count'] =  $user_count; //??
+			$user_search_array[0]['user_count'] = $user_count;
 		}
 	}
 }
