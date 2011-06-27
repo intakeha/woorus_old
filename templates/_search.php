@@ -88,6 +88,22 @@
 							$('#search').css('background','none');
 							$('#search_results').show();
 							$.each(data, function(i, field){
+								var resultEntryCSS = "result_entry";
+								switch (i){
+									case "0":
+										var lastEntry = field.user_count;
+										var userSearchPages = Math.ceil(field.user_count/10);
+										if (userSearchPages > 1){
+											$('#search_right').show();
+										}
+										break
+									case "5":
+										resultEntryCSS = "result_entry_last"
+										break
+									case "10":
+										resultEntryCSS = "result_entry_last"
+										break
+								};
 								switch (field.tile_type){
 									case "S":
 										tile_type = "sponsored"
@@ -99,18 +115,13 @@
 										tile_type = "community"
 										break
 								};
-								if (i == 0){
-									var userSearchPages = Math.ceil(field.user_count/10);
-									if (userSearchPages > 1){
-										$('#search_right').show();
-									}
-								}else{
+								if (i > 0){
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
-								}
+								}									
 							});
 						}
 					}, "json"
@@ -144,6 +155,15 @@
 							$('#search').css('background','none');
 							$('#search_results').show();
 							$.each(data, function(i, field){
+								var resultEntryCSS = "result_entry";
+								switch (i){
+									case "5":
+										resultEntryCSS = "result_entry_last"
+										break
+									case "10":
+										resultEntryCSS = "result_entry_last"
+										break
+								};
 								switch (field.tile_type){
 									case "S":
 										tile_type = "sponsored"
@@ -162,12 +182,9 @@
 									}
 								}else{
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'result_entry\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}
-									if (i == 5) {
-										
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'feed_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'online_status\'><a href=\'#\'>"+field.first_name+"</a></div> <div class=\'social_status float_right\'></div></div><div class=\'action_buttons\'><a class=\'feed_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
 								}
 							});
@@ -194,9 +211,50 @@
 			}
 		});
 		
+		// Clear error messages upon blur on search field
 		$("#user_search_field").blur(function() {
 			$("#search_error").html('');
 		});
+		
+		$("#search_right").click(function() {
+			var searchTerm = $('#tile_search_field').val();
+			var currentOffset = $('input[name=offset]').val();
+			var nextOffset = parseInt(currentOffset)+15;
+			$('input[name=offset]').val(nextOffset);
+			$.post(
+				"actions/tileSearch.php",
+				$('#tsearch_form').serialize(),
+				function(data){
+					$('#tile_display').empty();
+					$.each(data, function(i, field){
+						switch (field.tile_type){
+							case "S":
+								tile_type = "sponsored"
+								break
+							case "U":
+								tile_type = "uploaded"
+								break
+							case "C":
+								tile_type = "community"
+								break
+						};
+						if (i == 0){
+							var tileBankPages = Math.ceil(field.tile_count/15);
+							var offsetPage = ((nextOffset)/15)+1;
+							if (offsetPage == tileBankPages){
+								$('#tile_bank_right').hide();
+							}
+							if (nextOffset > 0){
+								$('#tile_bank_left').show();
+							}
+						}else{
+							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+						}
+					});
+				}, "json"
+			);
+		});
+
 		
 	});
 </script>
