@@ -11,7 +11,7 @@ $user_id = $_SESSION['id'];
 $user_search = validateInterestTag_Search($_POST["user_search"]);
 $offset = validateOffset($_POST["offset"]); */
 
-$user_search = "Flowers";
+$user_search = "Dock";
 $offset = 0;
 
 /*
