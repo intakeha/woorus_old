@@ -51,7 +51,7 @@ $user_count_query_result = mysql_query($user_count_query, $connection) or die ("
 $row = mysql_fetch_assoc($user_count_query_result);
 $user_count = $row['COUNT(DISTINCT mosaic_wall.user_id)'];
 
-$user_search_array[0]['user_count'] =  $user_count; // set it now, but update it at the end
+$user_search_array['user_count'] =  $user_count; // set it now, but update it at the end
 
 if ( $user_count > 0) //we found matches
 {
