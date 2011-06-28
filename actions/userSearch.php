@@ -8,12 +8,12 @@ require('contactHelperFunctions.php');
 session_start();
 $user_id = $_SESSION['id'];
 
-$user_search = validateInterestTag_Search($_POST["user_search"]);
-$offset = validateOffset($_POST["offset"]); 
+/*$user_search = validateInterestTag_Search($_POST["user_search"]);
+$offset = validateOffset($_POST["offset"]); */
 
-/*
+
 $user_search = "Flowers";
-$offset = 0;*/
+$offset = 0;
 
 /*
 <<<<<<< .mine
@@ -54,13 +54,12 @@ $user_count = $row['COUNT(DISTINCT mosaic_wall.user_id)'];
 
 //declare empty array of users
 $user_search_array = array();
+$user_iterator = 1;
 $user_search_array[0]['user_count'] = $user_count;
 
 if ( $user_count > 0) //we found matches
 {
 	
-	$user_iterator = 1;
-
 	//iterate through all users who have this interest on their wall
 	while ($row = mysql_fetch_assoc($mosaic_result)){
 		
