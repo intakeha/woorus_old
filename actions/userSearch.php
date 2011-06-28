@@ -8,12 +8,12 @@ require('contactHelperFunctions.php');
 session_start();
 $user_id = $_SESSION['id'];
 
-/*$user_search = validateInterestTag_Search($_POST["user_search"]);
-$offset = validateOffset($_POST["offset"]); */
+$user_search = validateInterestTag_Search($_POST["user_search"]);
+$offset = validateOffset($_POST["offset"]); 
 
-
+/*
 $user_search = "Flowers";
-$offset = 0;
+$offset = 0;*/
 
 /*
 <<<<<<< .mine
