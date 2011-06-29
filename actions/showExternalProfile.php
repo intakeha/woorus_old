@@ -39,7 +39,6 @@ if ($user_blocked == 0){
 		$external_profile_array['user info']['block_status'] = $row['block_status'];
 		$external_profile_array['user info']['user_city_id'] = $row['user_city_id'];
 		$external_profile_array['user info']['contact'] =  checkContact_search($row['user_contactee']);
-
 		
 	}
 

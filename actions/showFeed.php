@@ -24,19 +24,12 @@ $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Er
 $call_iterator = 1;
 while ($row = mysql_fetch_assoc($missed_calls_result)){
 
-	//retreive data
-	$call_time = convertTime($row['update_time']);
-	$first_name = $row['first_name'];
-	$social_status = $row['social_status'];	
-	$block_status = $row['block_status'];	
-	$user_city_id = $row['user_city_id'];	
-	
 	//set data to send
-	$feed_array['missed_calls'][$call_iterator]['update_time']= $call_time;
-	$feed_array['missed_calls'][$call_iterator]['first_name']= $first_name;
-	$feed_array['missed_calls'][$call_iterator]['social_status']= $social_status;
-	$feed_array['missed_calls'][$call_iterator]['block_status']= $block_status;
-	$feed_array['missed_calls'][$call_iterator]['user_city_id']= $user_city_id;
+	$feed_array['missed_calls'][$call_iterator]['update_time']= convertTime($row['update_time']);
+	$feed_array['missed_calls'][$call_iterator]['first_name']= $row['first_name'];
+	$feed_array['missed_calls'][$call_iterator]['social_status']= $row['social_status'];
+	$feed_array['missed_calls'][$call_iterator]['block_status']= $row['block_status'];
+	$feed_array['missed_calls'][$call_iterator]['user_city_id']= $row['user_city_id'];
 
 	$call_iterator++;
 }
