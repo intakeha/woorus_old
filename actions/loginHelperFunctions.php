@@ -31,8 +31,7 @@ $checkLogin_count = mysql_num_rows($checkLogin_result);
 
 
 //login function we will use when the user activates email address or changes password (e.g. login not from index page or fb connect)
-function backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection)
-{
+function backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection){
 	
 	//lookup email, password created, user_info set.
 	require('connect.php');

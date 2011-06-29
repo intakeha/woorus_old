@@ -35,7 +35,7 @@ if ($id&&$token)
 			$active_user = $row['active_user'];
 			$id = $row['id'];
 			
-			backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection);
+			backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
 			
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
