@@ -53,7 +53,7 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	$contact_array[$contact_iterator]['social_status'] = $social_status;
 	$contact_array[$contact_iterator]['block_status'] = $block_status;
 	
-	$contact_iterator++
+	$contact_iterator++;
 }
 
 $output = json_encode($contact_array);
