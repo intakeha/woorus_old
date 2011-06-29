@@ -20,7 +20,8 @@ $update_query = "UPDATE `blocks` SET active = 1, update_time = NOW() , block_rea
 				WHERE id =  user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND user_blocker = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($update_query, $connection) or die ("Error");
 
-if (mysql_affected_rows($result)==0) {
+
+if (mysql_affected_rows() == 0) {
 
 	$query_block_user = "INSERT INTO `blocks` (id, user_blockee, user_blocker, update_time, block_reason, active) VALUES
 								(NULL, '".mysql_real_escape_string($user_id_blockee)."' , '".mysql_real_escape_string($user_id_blocker)."' ,NOW(), '".mysql_real_escape_string($block_reason)."' ,1) ";
