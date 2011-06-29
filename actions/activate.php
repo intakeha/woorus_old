@@ -14,7 +14,7 @@ if ($id&&$token)
 	mysql_select_db($db_name);
 
 	//check if id & token combination exists
-	$query = "SELECT id, email_verified from `users` WHERE id =  '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
+	$query = "SELECT id, visual_email_address, email_verified, password_set, user_info_set, active_user from `users` WHERE id =  '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
 	$result = mysql_query($query, $connection) or die ("Error");
 
 	// if row exists -> id/token combination is correct
@@ -28,12 +28,19 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";  
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
-			backendLogin($id);
+			
+			$email_address = $row['visual_email_address'];
+			$password_set = $row['password_set'];
+			$user_info_set = $row['user_info_set'];
+			$active_user = $row['active_user'];
+			$id = $row['id'];
+			
+			backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection);
 			
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
-			$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$id."', '".$tile_placement."', 0 , 0, NOW()) ";
-			$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
+				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$id."', '".$tile_placement."', 0 , 0, NOW()) ";
+				$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
 			}
 			
 			header('Location: ../canvas.php');
