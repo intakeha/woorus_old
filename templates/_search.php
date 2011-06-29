@@ -17,24 +17,6 @@
         </div>
         <div class="result_column">
         	<ul id="result_entries_right">
-<!--		<li class="result_entry">
-                	<div class="list_users">
-                    	 <a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-                         <div>
-                         	<div class="user_info">
-                            	<div class="online_status"><a href="#">Melanie</a></div> 
-                                <div class="social_status float_right"></div>
-                            </div>
-                            <div class="action_buttons">
-                           		<a class="feed_interest" href="#"><img src="images/interests/starwood.png" /></a>
-                            	<a class="add_button_sm" href="#"></a>
-                                <a class="write_button_sm" href="#"></a>
-                                <a class="talk_button_sm" href="#"></a>
-                            </div>
-                         </div>
-                    </div>
-					
-                </li> -->
             </ul>
         </div>
         <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
@@ -77,12 +59,11 @@
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
 					function(data){
-						$('#result_entries_left').empty();
-						$('#result_entries_right').empty();
+						searchReset();
 						if (data.success == 0){
 							$("#search_error").html(data.message);
 						} else {
-							searchReset();
+							showResults();
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
@@ -93,23 +74,12 @@
 											$('#search_right').show();
 										}
 										break
-									case 5:
-										resultEntryCSS = "result_entry_last"
+									case 1:
+										resultEntryCSS = "result_entry_first"
 										break
-									case 10:
-										resultEntryCSS = "result_entry_last"
-										break
-								};
-								switch (field.tile_type){
-									case "S":
-										tile_type = "sponsored"
-										break
-									case "U":
-										tile_type = "uploaded"
-										break
-									case "C":
-										tile_type = "community"
-										break
+									case 6:
+										resultEntryCSS = "result_entry_first"
+										break										
 								};
 								if (i > 0){
 									if (i < 6) {
@@ -131,6 +101,7 @@
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
+					searchReset();
 					$("#search_error").html(validator.errorList[0].message); 
 				}
 			},
@@ -140,12 +111,11 @@
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
 					function(data){
-						$('#result_entries_left').empty();
-						$('#result_entries_right').empty();
+						searchReset();
 						if (data.success == 0){
 							$("#search_error").html(data.message);
 						} else {
-							searchReset();
+							showResults();
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
@@ -156,22 +126,11 @@
 											$('#search_right').show();
 										}
 										break
-									case 5:
-										resultEntryCSS = "result_entry_last"
+									case 1:
+										resultEntryCSS = "result_entry_first"
 										break
-									case 10:
-										resultEntryCSS = "result_entry_last"
-										break
-								};
-								switch (field.tile_type){
-									case "S":
-										tile_type = "sponsored"
-										break
-									case "U":
-										tile_type = "uploaded"
-										break
-									case "C":
-										tile_type = "community"
+									case 6:
+										resultEntryCSS = "result_entry_first"
 										break
 								};
 								if (i > 0){
@@ -220,12 +179,11 @@
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
 					function(data){
-						$('#result_entries_left').empty();
-						$('#result_entries_right').empty();
+						searchReset();
 						if (data.success == 0){
 							$("#search_error").html(data.message);
 						} else {
-							searchReset();
+							showResults();
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
@@ -240,22 +198,11 @@
 											$('#search_left').show();
 										}
 										break
-									case 5:
-										resultEntryCSS = "result_entry_last"
+									case 1:
+										resultEntryCSS = "result_entry_first"
 										break
-									case 10:
-										resultEntryCSS = "result_entry_last"
-										break
-								};
-								switch (field.tile_type){
-									case "S":
-										tile_type = "sponsored"
-										break
-									case "U":
-										tile_type = "uploaded"
-										break
-									case "C":
-										tile_type = "community"
+									case 6:
+										resultEntryCSS = "result_entry_first"
 										break
 								};
 								if (i > 0){
@@ -282,12 +229,11 @@
 					"actions/userSearch.php",
 					$('#search_form').serialize(),
 					function(data){
-						$('#result_entries_left').empty();
-						$('#result_entries_right').empty();
+						searchReset();
 						if (data.success == 0){
 							$("#search_error").html(data.message);
 						} else {
-							searchReset();
+							showResults();
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
@@ -302,22 +248,11 @@
 											$('#search_left').hide();
 										}
 										break
-									case 5:
-										resultEntryCSS = "result_entry_last"
+									case 1:
+										resultEntryCSS = "result_entry_first"
 										break
-									case 10:
-										resultEntryCSS = "result_entry_last"
-										break
-								};
-								switch (field.tile_type){
-									case "S":
-										tile_type = "sponsored"
-										break
-									case "U":
-										tile_type = "uploaded"
-										break
-									case "C":
-										tile_type = "community"
+									case 6:
+										resultEntryCSS = "result_entry_first"
 										break
 								};
 								if (i > 0){
@@ -337,11 +272,16 @@
 		function searchReset(){
 			$('#search_left').hide();
 			$('#search_right').hide();
-			$('#search_slide').hide();
 			$("#search_error").html('');
+			$('#result_entries_left').empty();
+			$('#result_entries_right').empty();
+		}
+		
+		function showResults(){
+			$('#search_slide').hide();
 			$('#search').css('background','none');
 			$('#search_results').show();
 		}
-		
+			
 	});
 </script>

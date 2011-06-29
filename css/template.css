@@ -878,12 +878,12 @@ div.transparent_tag {
 
 .result_entry {
 	width: 375px;
-	height: 90px;
+	height: 100px;
 	text-align: left;
-	border-bottom: 1px solid #99B8D7;
+	border-top: 1px solid #99B8D7;
 }
 
-.result_entry_last {
+.result_entry_first {
 	width: 375px;
 	height: 90px;
 	text-align: left;
@@ -930,12 +930,18 @@ div.transparent_tag {
 	margin:0px auto;
 }
 
-#contact_mosaic li {
-	float: left;
-	margin-right: 10px;
+#contact_mosaic {
+    background-color: #992299;
+    float: left;
+    height: 550px;
+    margin-top: 20px;
+    overflow: hidden;
+    width: 560px;
 }
 
-.contact_polaroid {
+#contact_mosaic li {
+	float: left;
+	margin: 0px 5px 10px;
 	width: 100px; 
 	height: 125px; 
 	border: 1px solid #ccc;
@@ -945,4 +951,20 @@ div.transparent_tag {
 	margin: 10px;
 	width: 80px;
 	height: 80px;
+}
+
+.pagination_contacts {
+	width: 70px;
+	height: 280px;
+	float: left;
+	padding-top: 260px;
+	margin: 0px 40px;
+}
+
+#contact_results {
+    padding-left: 170px;
+}
+
+#contact_search_field {
+    width: 400px;
 }

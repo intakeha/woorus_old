@@ -5,16 +5,74 @@
 			<input type="hidden" name="offset" value="0" />
 			<input class="buttons" id="contact_search_submit" type="submit" name="contact_search_submit" value="Search">
 		</form>
+        
+       	
 		<div id="csearch_error">
 		</div>
 	</div>
-	<div>
+	<div id="contact_results">
+    	<div class="pagination_contacts"><a id="search_left" class="arrows pagination_left"></a></div>
 		<ul id="contact_mosaic">
-			<li class="contact_polaroid">
-					<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/><br /></div></a>
 			</li>
-			
-
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li><li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            <li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+			<li>
+				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+			</li>
+            
 <!--
 			<li class="contact_entry">
 				<div class="list_contacts">
@@ -50,6 +108,7 @@
 			</li>
 -->
 		</ul>
+        <div class="pagination_contacts"><a id="search_right" class="arrows pagination_right"></a></div>
 	</div>
 </div>
 
