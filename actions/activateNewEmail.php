@@ -18,7 +18,7 @@ if ($id&&$token)
 	mysql_select_db($db_name);
 
 	//check if id & token combination exists
-	$query = "SELECT id, temp_email_address from `users` WHERE id = '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
+	$query = "SELECT id, temp_email_address, email_verified, password_set, user_info_set, active_user from `users` WHERE id = '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
 	$result = mysql_query($query, $connection) or die ("Error 1");
 	
 	// if row exists -> id/token combination is correct
@@ -32,6 +32,17 @@ if ($id&&$token)
 		$new_email = get_standard_email($new_email_visual);
 		$activate_query = "UPDATE `users` SET temp_email_address = NULL, email_address = '".mysql_real_escape_string($new_email)."',  visual_email_address = '".mysql_real_escape_string($new_email_visual)."', email_token = NULL WHERE id = '".mysql_real_escape_string($id)."' ";
 		$activate_result = mysql_query($activate_query, $connection) or die ("Error 2");
+		
+		
+		$email_address = $row['temp_email_address'];
+		$password_set = $row['password_set'];
+		$user_info_set = $row['user_info_set'];
+		$active_user = $row['active_user'];
+		$id = $row['id'];
+		
+		backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
+	
+		
 		backendLogin($id);
 		header('Location: ../canvas.php');
 	}
