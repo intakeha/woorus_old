@@ -19,6 +19,17 @@ function checkContact($user_id, $other_user_id, $connection){
 
 }
 
+function checkContact_search($user_id){
+
+	if ($user_id == NULL) {
+		return 0;
+	}else{
+		return 1;
+	}
+
+}
+
+
 function checkBlock($user_id, $other_user_id, $connection){
 
 	$check_block_query = "SELECT id

@@ -31,12 +31,14 @@ mysql_select_db($db_name);
 //TO DO: need to look at online status!!!!!!!!!!!
 
 //look for interest based on ID & get users associated with the interest id retreived above
-$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, users.block_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored, BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee  
+$mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, users.block_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored, 
+			BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee 
 			FROM `interests`, `mosaic_wall`
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
 			LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' 
 			LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' 
+			LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."'
 			WHERE interests.interest_name =  '".mysql_real_escape_string($user_search)."' AND interests.id = mosaic_wall.interest_id AND mosaic_wall.user_id <> '".$user_id."' AND users.active_user = 1 
 			AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 			GROUP BY mosaic_wall.user_id
@@ -81,9 +83,11 @@ if ( $user_count > 0) //we found matches
 		$first_name = $row['first_name'];
 		$social_status = $row['social_status'];
 		$block_status = $row['block_status'];
+		$contact = checkContact_search($row['user_contactee']);
+		
 		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 		
-		$contact = checkContact($user_id, $user_retreived_id, $connection);
+		
 		
 		//set data
 		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
