@@ -11,7 +11,10 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 //lookup user data
-$lookup_query = "SELECT first_name, last_name, gender, birthday, user_city_id, visual_email_address  FROM `users` WHERE id =  '".$_SESSION['id']."' ";
+$lookup_query = "SELECT first_name, last_name, gender, birthday, user_city_id, visual_email_address, interest_notify, message_notify, contact_notify, missed_call_notify
+			FROM `users`
+			LEFT OUTER JOIN `settings` on settings.user_id  = users.id
+			WHERE users.id =  '".$_SESSION['id']."' ";
 $result = mysql_query($lookup_query, $connection) or die ("Error");
 
 //if we found a match
@@ -31,26 +34,10 @@ if (mysql_num_rows($result) == 1)
 	$year =  $birthday_arr[0];
 	$month = trim($birthday_arr[1], "0");
 	$day = trim($birthday_arr[2], "0");
-	
-	//set the notification flags to all true, in case we don't find the entry or data is bad.
-	$interest_notify = 1;
-	$message_notify = 1;
-	$contact_notify = 1;
-	$missed_call_notify = 1;
-	
-	//then  lookup the notification flag.
-	$notification_query = "SELECT interest_notify, message_notify, contact_notify, missed_call_notify FROM `settings` WHERE user_id =  '".$_SESSION['id']."' ";
-	$result = mysql_query($notification_query, $connection) or die ("Error");
-	//if we found a match
-	if (mysql_num_rows($result) == 1)
-	{
-		$row = mysql_fetch_assoc($result);
-		//fetch data
-		$interest_notify = convertNotifications($row['interest_notify']);
-		$message_notify = convertNotifications($row['message_notify']);
-		$contact_notify = convertNotifications($row['contact_notify']);
-		$missed_call_notify = convertNotifications($row['missed_call_notify']);
-	}
+	$interest_notify = convertNotifications($row['interest_notify']);
+	$message_notify = convertNotifications($row['message_notify']);
+	$contact_notify = convertNotifications($row['contact_notify']);
+	$missed_call_notify = convertNotifications($row['missed_call_notify']);
 	
 	//set user data array & print to JavaSrcipt
 	$user_data = array('first_name'=>$first_name, 'last_name'=>$last_name, 'gender'=>$gender, 'birthday_month'=>$month, 'birthday_day'=>$day, 'birthday_year'=>$year, 'user_city_id'=>$user_city_id, 'email'=>$email, 'interest_notify'=>$interest_notify, 'message_notify'=>$message_notify, 'contact_notify'=>$contact_notify, 'missed_call_notify'=>$missed_call_notify);
