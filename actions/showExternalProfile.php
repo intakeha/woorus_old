@@ -21,8 +21,9 @@ if ($user_blocked == 0){
 
 	$external_profile_array = getTilesOnWall($other_user_id, $connection);
 
-	$user_info_query = "SELECT   users.first_name, users.social_status, users.block_status, users.user_city_id 
+	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, users.user_city_id, contacts.user_contactee 
 						FROM `users` 
+						LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."'
 						WHERE users.id = '".$other_user_id."' AND users.active_user = 1 ";
 						
 	$user_info_result = mysql_query($user_info_query, $connection) or die ("Error");
@@ -31,19 +32,13 @@ if ($user_blocked == 0){
 
 		$row = mysql_fetch_assoc($user_info_result);
 		
-		$first_name =  $row['first_name'];
-		$social_status = $row['social_status'];
-		$block_status = $row['block_status'];
-		$user_city_id = $row['user_city_id'];
-		
 		//check if the session user has added the person therye looking at as a contact
-		$contact = checkContact($user_id, $other_user_id, $connection);
 		
-		$external_profile_array['user info']['first_name'] = $first_name;
-		$external_profile_array['user info']['social_status'] = $social_status;
-		$external_profile_array['user info']['block_status'] = $block_status;
-		$external_profile_array['user info']['user_city_id'] = $user_city_id;
-		$external_profile_array['user info']['contact'] = $contact;
+		$external_profile_array['user info']['first_name'] = $row['first_name'];
+		$external_profile_array['user info']['social_status'] = $row['social_status'];
+		$external_profile_array['user info']['block_status'] = $row['block_status'];
+		$external_profile_array['user info']['user_city_id'] = $row['user_city_id'];
+		$external_profile_array['user info']['contact'] =  checkContact_search($row['user_contactee']);
 
 		
 	}
