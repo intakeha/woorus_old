@@ -34,14 +34,11 @@ else{
 	$result = mysql_query($query_block_user, $connection) or die ("Error");
 }
 
-//then, make sure the blockee is not on the blocker's contacts
-$update_contacts_query = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contactee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contacter = '".mysql_real_escape_string($user_id_blocker)."' ";
+//then, make sure the blockee is not on the blocker's contacts & also remove the blocker from the blockee's contacts
+$update_contacts_query = "UPDATE `contacts` SET active = 0, update_time = NOW() 
+					WHERE  (user_contactee = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contacter = '".mysql_real_escape_string($user_id_blocker)."' ) 
+					OR  (user_contacter = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contactee = '".mysql_real_escape_string($user_id_blocker)."' ) ";
 $result = mysql_query($update_contacts_query, $connection) or die ("Error");
-
-//Remove from the other's contacts?
-$update_contacts_query2 = "UPDATE `contacts` SET active = 0, update_time = NOW() WHERE  user_contacter = '".mysql_real_escape_string($user_id_blockee)."' AND  user_contactee = '".mysql_real_escape_string($user_id_blocker)."' ";
-$result = mysql_query($update_contacts_query2, $connection) or die ("Error");
-
 
 //recalculate blocks for the user being blocked
 calculateBlockStatus($user_id_blockee, $connection);

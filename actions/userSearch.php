@@ -87,8 +87,6 @@ if ( $user_count > 0) //we found matches
 		
 		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 		
-		
-		
 		//set data
 		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
 		$user_search_array[$user_iterator]['first_name'] = $first_name;
