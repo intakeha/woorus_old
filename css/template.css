@@ -931,7 +931,7 @@ div.transparent_tag {
 }
 
 #contact_mosaic {
-    background-color: #992299;
+    background-color: #fff;
     float: left;
     height: 550px;
     margin-top: 20px;
@@ -944,7 +944,7 @@ div.transparent_tag {
 	margin: 0px 5px 10px;
 	width: 100px; 
 	height: 125px; 
-	border: 1px solid #ccc;
+	border: 1px solid #eee;
 }
 
 .contact_links {
@@ -967,4 +967,8 @@ div.transparent_tag {
 
 #contact_search_field {
     width: 400px;
+}
+
+.contact_first {
+	word-wrap: break-word;
 }

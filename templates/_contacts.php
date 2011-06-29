@@ -14,7 +14,10 @@
     	<div class="pagination_contacts"><a id="search_left" class="arrows pagination_left"></a></div>
 		<ul id="contact_mosaic">
 			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/><br /></div></a>
+				<a href="#">
+                <div class="contact_links">
+                	<img src="images/users/james.png"/><div class="contact_first">slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
 				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
