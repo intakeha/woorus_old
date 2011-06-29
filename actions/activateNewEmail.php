@@ -42,8 +42,6 @@ if ($id&&$token)
 		
 		backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
 	
-		
-		backendLogin($id);
 		header('Location: ../canvas.php');
 	}
 	else
