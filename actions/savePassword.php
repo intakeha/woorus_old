@@ -26,8 +26,23 @@ mysql_select_db($db_name, $connection);
 $query_password = "UPDATE `users` SET password = '".mysql_real_escape_string($f_password_new)."', update_time = NOW() WHERE id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_password, $connection) or die ("Password Update Error");
 
-//update last user login, & take to main page.
-backendLogin($id);
+//update last user login, & log them in / take to main page.
+$query = "SELECT id, visual_email_address, email_verified, password_set, user_info_set, active_user from `users` WHERE id = '".mysql_real_escape_string($id)."' ";
+$result = mysql_query($query, $connection) or die ("Error");
+
+$row = mysql_fetch_assoc($result);
+$verified = $row['email_verified'];
+$email_address = $row['visual_email_address'];
+$password_set = $row['password_set'];
+$user_info_set = $row['user_info_set'];
+$active_user = $row['active_user'];
+
+
+backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection);
+
+
+
+
 sendToJS(1, "Your new password has been saved. You'll be logged in momentarily."); //send success flag to JS
 
 
