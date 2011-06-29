@@ -42,16 +42,11 @@ $contact_array[0]['contact_count'] = $contact_count;
 
 //iterate through the messages returned
 while ($row = mysql_fetch_assoc($show_contact_result)){
-
-	$first_name =  $row['first_name'];
-	$user_city_id =  $row['user_city_id']; //need to do lookup
-	$social_status =  $row['social_status'];
-	$block_status =  $row['block_status'];
 	
-	$contact_array[$contact_iterator]['first_name'] = $first_name;
-	$contact_array[$contact_iterator]['user_city_id'] = $user_city_id;
-	$contact_array[$contact_iterator]['social_status'] = $social_status;
-	$contact_array[$contact_iterator]['block_status'] = $block_status;
+	$contact_array[$contact_iterator]['first_name'] = $row['first_name'];
+	$contact_array[$contact_iterator]['user_city_id'] = $row['user_city_id']; //need to do lookup
+	$contact_array[$contact_iterator]['social_status'] = $row['social_status'];
+	$contact_array[$contact_iterator]['block_status'] = $row['block_status'];
 	
 	$contact_iterator++;
 }

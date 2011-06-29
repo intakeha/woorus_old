@@ -5,28 +5,21 @@
 function updateLoginTime($id)
 {
 
-require('connect.php');
-$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
-mysql_select_db($db_name);
+	require('connect.php');
+	mysql_select_db($db_name);
 
-//check if user has logged in before
-$query_checkLogin = "SELECT id from `user_login` WHERE user_id = '".$id."'";
-$checkLogin_result = mysql_query($query_checkLogin, $connection) or die ("Error");
-$checkLogin_count = mysql_num_rows($checkLogin_result);
+	//check if user has logged in before
 
+	$query_login = "UPDATE `user_login` SET update_time = NOW() WHERE user_id = '".$id."'";
+	$result = mysql_query($query_login, $connection) or die ("Error 2");
 
-	if ($checkLogin_count == 0) // user does not exist, do an insert
-	{
+	if (mysql_affected_rows($result) == 0) {
 
 		$query_login = "INSERT INTO `user_login` (id, user_id, update_time) VALUES (NULL,  '".$id."', NOW())";
 		$result = mysql_query($query_login, $connection) or die ("Error 2");
 
 	}
-	else //user does exist, can do an update
-	{
-		$query_login = "UPDATE `user_login` SET update_time = NOW() WHERE user_id = '".$id."'";
-		$result = mysql_query($query_login, $connection) or die ("Error 2");
-	}
+
 }
 
 
@@ -57,7 +50,7 @@ function backendLogin($id, $email_address, $password_set, $user_info_set, $activ
 	$_SESSION['facebook'] = 0; //we know theyre not logging in via facebook
 	$_SESSION['password_created'] = $password_set;
 	$_SESSION['user_info_set'] = $user_info_set;
-	updateLoginTime($id);
+	updateLoginTime($id, $connection);
 }
 
 ?>
