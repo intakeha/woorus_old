@@ -923,3 +923,26 @@ div.transparent_tag {
 	height: 40px;
 }
 
+/* Contact Page */
+
+#contacts{
+	height: 600px;
+	margin:0px auto;
+}
+
+#contact_mosaic li {
+	float: left;
+	margin-right: 10px;
+}
+
+.contact_polaroid {
+	width: 100px; 
+	height: 125px; 
+	border: 1px solid #ccc;
+}
+
+.contact_links {
+	margin: 10px;
+	width: 80px;
+	height: 80px;
+}
