@@ -930,27 +930,34 @@ div.transparent_tag {
 	margin:0px auto;
 }
 
+#contact_search_field {
+    width: 400px;
+}
+
+#contact_results {
+    padding-left: 180px;
+}
+
 #contact_mosaic {
     background-color: #fff;
     float: left;
-    height: 550px;
-    margin-top: 20px;
+    height: 500px;
+    margin-top: 40px;
     overflow: hidden;
-    width: 560px;
+    width: 540px;
 }
 
 #contact_mosaic li {
 	float: left;
-	margin: 0px 5px 10px;
-	width: 100px; 
+	width: 90px; 
 	height: 125px; 
-	border: 1px solid #eee;
 }
 
-.contact_links {
-	margin: 10px;
+.contact_profile {
+	margin: 5px;
 	width: 80px;
 	height: 80px;
+	word-wrap: break-word;
 }
 
 .pagination_contacts {
@@ -959,16 +966,4 @@ div.transparent_tag {
 	float: left;
 	padding-top: 260px;
 	margin: 0px 40px;
-}
-
-#contact_results {
-    padding-left: 170px;
-}
-
-#contact_search_field {
-    width: 400px;
-}
-
-.contact_first {
-	word-wrap: break-word;
 }

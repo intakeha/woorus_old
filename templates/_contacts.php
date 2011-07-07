@@ -15,67 +15,154 @@
 		<ul id="contact_mosaic">
 			<li>
 				<a href="#">
-                <div class="contact_links">
-                	<img src="images/users/james.png"/><div class="contact_first">slslslslslslslslslslslslslslsl</div>
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
                 </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-            <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-            <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-            <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li><li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
-			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             <li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
-			<li>
-				<a href="#"><div class="contact_links"><img src="images/users/james.png"/></div></a>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li>
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
+			</li>
+            <li onmouseover="showStatus($(this), 'Online')" onmouseup="hideStatus($(this))" onmouseout="hideStatus($(this))">
+				<a href="#">
+                <div class="contact_profile">
+                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
+                </div></a>
 			</li>
             
+            
+            
+<!-- <li onclick="addToWall('179','254')" onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), 'Flowers')" id="179" class="community tile_tag"><img src="images/interests/115_1305512341.jpg"></li>
+-->
 <!--
 			<li class="contact_entry">
 				<div class="list_contacts">
@@ -114,6 +201,16 @@
         <div class="pagination_contacts"><a id="search_right" class="arrows pagination_right"></a></div>
 	</div>
 </div>
-
+<script type="text/javascript">
+	function showStatus(obj, tag){
+		obj.find('img').addClass('transparent_tile');
+		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
+	};
+	
+	function hideStatus(obj){
+		obj.find('img').removeClass('transparent_tile');
+		obj.find('div').remove();
+	};
+</script>
 
 

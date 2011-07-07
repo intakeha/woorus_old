@@ -504,7 +504,36 @@
 		}
 		
 	});
-
+	
+	function showInterest(obj, tag){
+		obj.find('img').addClass('transparent_tile');
+		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
+	};
+	
+	function hideInterest(obj){
+		obj.find('img').removeClass('transparent_tile');
+		obj.find('div').remove();
+	};
+	
+	function addToWall(tileID, interestID){
+		$.post(
+			"actions/addTileToWall.php",
+			{ tile_id: tileID, interest_id: interestID },
+			function(data){
+				if (data.success == 0){
+					$('#tile_upload_success').hide(); 
+					$('#tile_upload_error').html(data.message); 
+					$('#tile_upload_error').show();
+				} else {
+					$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+					$('.tile_sort').sortable( "refresh" );
+					$('#tile_upload_error').hide();
+				}
+			}, "json"
+		);
+		return false;
+	};
+	
 </script>
 
 
