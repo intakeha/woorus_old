@@ -421,6 +421,10 @@ a.arrows {
 	background-position: 0px 0px;
 }
 
+.warning_status {
+	background-position: 0px -25px;
+}
+
 .float_right {
 	float: right;
 }

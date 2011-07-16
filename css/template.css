@@ -216,7 +216,6 @@
 	width: 72px;
 	height: 28px;
 	background: url(../images/global/online.png) no-repeat;
-	float: right;
 }
 
 #announcement {
@@ -935,7 +934,7 @@ div.transparent_tag {
 }
 
 #contact_results {
-    padding-left: 180px;
+    padding-left: 210px;
 }
 
 #contact_mosaic {
@@ -944,20 +943,53 @@ div.transparent_tag {
     height: 500px;
     margin-top: 40px;
     overflow: hidden;
-    width: 540px;
+    width: 480px;
+}
+
+#contact_mosaic a:hover{
+	text-decoration: none;
 }
 
 #contact_mosaic li {
 	float: left;
-	width: 90px; 
-	height: 125px; 
+	width: 96px; 
+	height: 125px;
+	cursor: pointer;
+	cursor: hand;
 }
 
 .contact_profile {
 	margin: 5px;
 	width: 80px;
 	height: 80px;
-	word-wrap: break-word;
+	color: #FFF;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.contact_online {
+	background-color: #390;
+	border: 3px solid #390;
+}
+
+.contact_offline {
+	background-color: #666;
+	border: 3px solid #666;
+}
+
+.contact_busy {
+	background-color: #F00;
+	border: 3px solid #F00;
+}
+
+.contact_away {
+	background-color: #F90;
+	border: 3px solid #F90;
+}
+
+.contact_name {
+		margin: 5px;
+		word-wrap: break-word;
 }
 
 .pagination_contacts {
@@ -966,4 +998,144 @@ div.transparent_tag {
 	float: left;
 	padding-top: 260px;
 	margin: 0px 40px;
+}
+
+div.online {
+	color: #390;
+	text-decoration: none;
+	float: left;
+}
+
+div.away {
+	color: #F90;
+	text-decoration: none;
+	float: left;
+}
+
+div.busy {
+	color: #F00;
+	text-decoration: none;
+	float: left;
+}
+
+div.offline {
+	color: #666;
+	text-decoration: none;
+	float: left;
+}
+
+#contact_legend {
+	margin-top: 50px;
+	width: 200px;
+	float: left;
+	text-align: left;
+}
+
+#contact_legend div{
+	width: 150px;
+	margin-bottom: 5px;
+}
+
+#greenSquare {
+	background-color: #390;
+}
+
+#orangeSquare {
+	background-color: #F90;
+}
+
+/* Lounge Page */
+
+#lounge {
+	height: 500px;
+	margin:0px auto;
+}
+
+#lounge_area {
+	width: 980px;
+	height: 500px;
+	float: left;
+	color: #215086;
+}
+
+#lounge_area p{
+	margin-top: 20px;
+	line-height: 20px;
+	font-size: 14px;
+}
+
+#lounge_profiles {
+	margin-top: 50px;
+	height: 350px;
+}
+
+.lounge_match {
+	width: 450px;
+	height: 340px;
+	float: left;
+	margin: 0 19px;
+}
+
+.pagination_lounge {
+	width: 70px;
+	height: 215px;
+	float: left;
+	padding-top: 285px;
+	margin: 0px 20px;
+}
+
+.lounge_tiles {
+	display: block;
+	height: 150px;
+	margin: 190px 0px 0px 10px;
+	width: 440px;
+}
+
+.lounge_tiles li {
+	float: left;
+	margin: 0px 3px 1px 0px;
+}
+
+.lounge_interestTile {
+	width: 70px;
+	height: 70px;
+}
+
+.lounge_info {
+	float: left;
+	width: 450px;
+	height: 190px;
+
+}
+
+.lounge_photo {
+	float: left;
+	background-image: url(../images/global/contact_frame.png);
+	background-repeat: repeat-x;
+	width: 264px;
+	height: 190px;
+	padding-top: 22px;
+}
+
+.lounge_photo img{
+	width: 220px;
+}
+
+.lounge_userInfo {
+	height: 115px;
+	margin: 15px 0 0 265px;
+	text-align: left;
+}
+
+.lounge_userInfo span {
+	margin-left: 10px;
+}
+
+.lounge_userInfo a:hover {
+	text-decoration: none;
+}
+
+.lounge_icons {
+	width: 30px;
+	height: 100px;
 }

@@ -11,194 +11,177 @@
 		</div>
 	</div>
 	<div id="contact_results">
-    	<div class="pagination_contacts"><a id="search_left" class="arrows pagination_left"></a></div>
+		<div class="pagination_contacts"><a id="search_left" class="arrows pagination_left"></a></div>
 		<ul id="contact_mosaic">
-			<li>
+	
+			<li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
 				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li>
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            <li onmouseover="showStatus($(this), 'Online')" onmouseup="hideStatus($(this))" onmouseout="hideStatus($(this))">
-				<a href="#">
-                <div class="contact_profile">
-                	<img src="images/users/james.png"/><div>slslslslslslslslslslslslslslsl</div>
-                </div></a>
-			</li>
-            
-            
-            
-<!-- <li onclick="addToWall('179','254')" onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), 'Flowers')" id="179" class="community tile_tag"><img src="images/interests/115_1305512341.jpg"></li>
--->
-<!--
-			<li class="contact_entry">
-				<div class="list_contacts">
-					<a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-					<div>
-						<div class="user_info">
-							<div class="online_status"><a href="#">Melanie</a></div> 
-							<div class="social_status float_right"></div>
-						</div>
-						<div class="action_buttons">
-							<a class="add_button_sm" href="#"></a>
-							<a class="write_button_sm" href="#"></a>
-							<a class="talk_button_sm" href="#"></a>
-						</div>
-					</div>
+				<div class="contact_profile contact_online">
+						<img src="images/users/james.png"/>
 				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
 			</li>
-			<li class="contact_entry">
-				<div class="list_contacts">
-					<a class="feed_profile" href="#"><img src="images/users/james.png" /></a>
-					<div>
-						<div class="user_info">
-							<div class="online_status"><a href="#">Melanie</a></div> 
-							<div class="social_status float_right"></div>
-						</div>
-						<div class="action_buttons">
-							<a class="add_button_sm" href="#"></a>
-							<a class="write_button_sm" href="#"></a>
-							<a class="talk_button_sm" href="#"></a>
-						</div>
-					</div>
+			<li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_away">
+						<img src="images/users/james.png"/>
 				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
 			</li>
--->
+			<li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_busy">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_offline">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_online">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_away">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_busy">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_offline">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_online">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_away">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_busy">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_offline">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_online">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_away">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_busy">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_offline">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_online">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_away">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_busy">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
+			<li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
+				<a href="#">
+				<div class="contact_profile contact_offline">
+						<img src="images/users/james.png"/>
+				</div>
+				<div>James Andrew McAvoy</div>
+				</a>
+			</li>
 		</ul>
-        <div class="pagination_contacts"><a id="search_right" class="arrows pagination_right"></a></div>
+		<div class="pagination_contacts"><a id="search_right" class="arrows pagination_right"></a></div>
+		<div id="contact_legend">
+			<div class="online"><span class="legend_squares" id="greenSquare"></span>Online</div>
+			<div class="away"><span class="legend_squares" id="orangeSquare"></span>Away</div>
+			<div class="busy"><span class="legend_squares" id="redSquare"></span>Busy</div>
+			<div class="offline"><span class="legend_squares" id="graySquare"></span>Offline</div>
+		</div>
 	</div>
 </div>
 <script type="text/javascript">
@@ -209,7 +192,7 @@
 	
 	function hideStatus(obj){
 		obj.find('img').removeClass('transparent_tile');
-		obj.find('div').remove();
+		obj.find('img').prev('div').remove();
 	};
 </script>
 
