@@ -18,7 +18,7 @@
 							</div>						
 							<div class="lounge_userInfo">
 								<a href="#"><span>Melanie</span></a>
-								<div id="online_status"></div> 
+								<div id="online_status" class="lounge_online"></div> 
 							</div>
 						</div>
 						<div class="action_buttons">
@@ -57,7 +57,7 @@
 							</div>						
 							<div class="lounge_userInfo">
 								<a href="#"><span>Melanie</span></a>
-								<div id="online_status"></div> 
+								<div id="online_status" class="lounge_online"></div> 
 							</div>
 						</div>
 						<div class="action_buttons">
@@ -90,7 +90,7 @@
 <script type="text/javascript">
 	function showInterest(obj, tag){
 		obj.find('img').addClass('transparent_tile');
-		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
+		obj.find('img').before('<div class="lounge_transparent_tag">'+tag+'</div>');
 	};
 	
 	function hideInterest(obj){

@@ -1,6 +1,6 @@
 <div id="iprofile">
 	<div id="profile">
-        <div id="profile_pic"></div>
+        <div id="profile_pic"><img src="images/global/user_pic.png"></div>
 		<div id="profile_frame"><a href="#" title="Jessica"></a></div>
         <div id="profile_name"><div id="online_status"></div><span>Jessica</span><br />Palo Alto, CA | United States</div>
 		<a id="announcement" href="canvas.php?page=mosaic">
