@@ -4,16 +4,19 @@
 //updates the user_login table
 function updateLoginTime($id)
 {
-
+	
 	require('connect.php');
+	//connect
+	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 	mysql_select_db($db_name);
 
 	//check if user has logged in before
 
 	$query_login = "UPDATE `user_login` SET update_time = NOW() WHERE user_id = '".$id."'";
+	
 	$result = mysql_query($query_login, $connection) or die ("Error 2");
-
-	if (mysql_affected_rows($result) == 0) {
+	
+	if (mysql_affected_rows() == 0) {
 
 		$query_login = "INSERT INTO `user_login` (id, user_id, update_time) VALUES (NULL,  '".$id."', NOW())";
 		$result = mysql_query($query_login, $connection) or die ("Error 2");

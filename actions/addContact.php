@@ -19,7 +19,7 @@ mysql_select_db($db_name);
 $update_query = "UPDATE `contacts` SET active = 1, update_time = NOW() WHERE user_contactee = '".mysql_real_escape_string($user_id_contactee)."' AND user_contacter = '".mysql_real_escape_string($user_id_contacter)."' ";
 $result = mysql_query($update_query, $connection) or die ("Error");
 
-if (mysql_affected_rows($result) == 0) {
+if (mysql_affected_rows() == 0) {
 
 	$query_friend_user = "INSERT INTO `contacts` (id, user_contactee, user_contacter, update_time, active) VALUES
 							(NULL, '".mysql_real_escape_string($user_id_contactee)."' , '".mysql_real_escape_string($user_id_contacter)."' ,NOW(), 1) ";
