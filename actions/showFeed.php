@@ -105,7 +105,7 @@ if (mysql_num_rows($common_interest_id) > 0){
 $common_interests_query = "SELECT users.id as user_id
 				FROM `mosaic_wall`
 				LEFT JOIN users ON users.id = mosaic_wall.user_id
-				WHERE mosaic_wall.interest_id = '".$interest_id ."' AND mosaic_wall.user_id <> '".$user_id."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+				WHERE mosaic_wall.interest_id = '".$interest_id ."' AND mosaic_wall.user_id <> '".$user_id."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
 				GROUP BY users.id
 				ORDER BY RAND()
 				LIMIT 0, 5";
