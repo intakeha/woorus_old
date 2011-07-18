@@ -13,12 +13,11 @@
 		<div id="butterfly"></div>
 		<div id="warning"></div>
     </div>
-   	<div class="pagination_home"><a class="arrows pagination_left" href="#"></a></div>
+   	<div class="pagination_home"><a class="arrows pagination_left" style="display: none;" href="#"></a></div>
    	<div id="updates">
-    	<span>This week's summary for your Woorus activities:</span>
-		<div><span>12</span> missed calls<br />
+    	<span>Your Recent Woorus Activities:</span>
+		<div><a href="#"><span>5</span><br />Missed Calls</a>
         	<ul>
-            	<li><img src="images/users/james.png"/></li>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -26,9 +25,8 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div><span>15</span> people added you to their contact list<br />
+        <div><a href="#"><span>5</span><br />Added You to Contacts</a>
         	<ul>
-            	<li><img src="images/users/james.png"/></li>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -36,9 +34,17 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div>Here are some people who share your interest of <span>Tennis</span><br />
+        <div><a href="#"><p><span>5</span></p>New Interests of Contacts</a>
         	<ul>
-            	<li><img src="images/users/james.png"/></li>
+				<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+				<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+            </ul>
+        </div>
+        <div><a href="#"><p><span>5</span></p>Added "Tennis" to Mosaic Wall</a>
+        	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -46,16 +52,6 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
 		</div>
-        <div>Here are some new interests added by your contacts<br />
-        	<ul>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-				<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-				<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-            </ul>
-        </div>
     </div>
-   	<div class="pagination_home"><a class="arrows pagination_right" href="#"></a></div>
+   	<div class="pagination_home"><a class="arrows pagination_right" style="display: none;" href="#"></a></div>
 </div>

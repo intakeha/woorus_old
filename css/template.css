@@ -265,21 +265,33 @@
 }
 
 #updates {
-	width: 500px;
-	height: 500px;
-	float: left;
-	text-align: left;
+	color: #4980B7;
+    float: left;
+    font-size: 16px;
+    height: 500px;
+    text-align: left;
+    width: 500px;
 }
 
 #updates div {
 	height: 80px;
 	margin-top: 15px;
+	border-bottom: 1px solid #99B8D7;
 }
 
 #updates img {
     float: left;
     margin: 5px 5px 0 0;
     width: 60px;
+}
+
+#updates a {
+    float: left;
+    font-size: 14px;
+    height: 60px;
+    margin: 5px 40px 0 0;
+    text-align: center;
+    width: 120px;
 }
 
 /* Settings Page */
