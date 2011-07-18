@@ -12,13 +12,15 @@ function updateLoginTime($id)
 
 	//check if user has logged in before
 
-	$query_login = "UPDATE `user_login` SET last_login_time = NOW() WHERE user_id = '".$id."'";
+	$query_login = "UPDATE `user_login` 
+			SET last_login_time = NOW(),  last_active_time = NOW(), session_set = 1
+			WHERE user_id = '".$id."'";
 	
 	$result = mysql_query($query_login, $connection) or die ("Error 2");
 	
 	if (mysql_affected_rows() == 0) {
 
-		$query_login = "INSERT INTO `user_login` (id, user_id, last_login_time, last_active_time) VALUES (NULL,  '".$id."', NOW(), NOW())";
+		$query_login = "INSERT INTO `user_login` (id, user_id, last_login_time, last_active_time, session_set) VALUES (NULL,  '".$id."', NOW(), NOW(), 1)";
 		$result = mysql_query($query_login, $connection) or die ("Error 2");
 
 	}

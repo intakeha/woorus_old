@@ -4,8 +4,20 @@ require('connect.php');
 require('facebook.php');
 
 session_start();
-session_destroy();
+$user_id = $_SESSION['id'];
 
+//set the user as logged out
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+mysql_select_db($db_name);
+
+$query_logout = "UPDATE `user_login` 
+			SET session_set = 0
+			WHERE user_id = '".$user_id."' ";
+
+$result = mysql_query($query_logout, $connection) or die ("Error");
+
+//then can destroy the session
+session_destroy();
 
 // Need to logout if a facebook user
 
