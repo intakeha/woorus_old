@@ -15,8 +15,47 @@
     </div>
    	<div class="pagination_home"><a class="arrows pagination_left" href="#"></a></div>
    	<div id="updates">
-
-
+    	<span>This week's summary for your Woorus activities:</span>
+		<div><span>12</span> missed calls<br />
+        	<ul>
+            	<li><img src="images/users/james.png"/></li>
+               	<li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+            </ul>
+        </div>
+        <div><span>15</span> people added you to their contact list<br />
+        	<ul>
+            	<li><img src="images/users/james.png"/></li>
+               	<li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+            </ul>
+        </div>
+        <div>Here are some people who share your interest of <span>Tennis</span><br />
+        	<ul>
+            	<li><img src="images/users/james.png"/></li>
+               	<li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+                <li><img src="images/users/james.png"/></li>
+            </ul>
+		</div>
+        <div>Here are some new interests added by your contacts<br />
+        	<ul>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+				<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+				<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+            </ul>
+        </div>
     </div>
    	<div class="pagination_home"><a class="arrows pagination_right" href="#"></a></div>
 </div>

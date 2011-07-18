@@ -268,6 +268,18 @@
 	width: 500px;
 	height: 500px;
 	float: left;
+	text-align: left;
+}
+
+#updates div {
+	height: 80px;
+	margin-top: 15px;
+}
+
+#updates img {
+    float: left;
+    margin: 5px 5px 0 0;
+    width: 60px;
 }
 
 /* Settings Page */
