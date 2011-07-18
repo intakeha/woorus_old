@@ -235,19 +235,23 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 {
 
 	//check for interest (against matching facebook ID or matching interest)
-	$facebook_interest_query = "SELECT id, facebook_id from `interests` WHERE facebook_id = '".mysql_real_escape_string($fb_interest_id)."' OR interest_name =  '".mysql_real_escape_string($fb_interest)."' ";
+	$facebook_interest_query = "SELECT interests.id, interests.facebook_id, tiles.id AS tile_id 
+						FROM `interests` 
+						LEFT JOIN `tiles` on tiles.facebook_id = interests.facebook_id
+						WHERE interests.facebook_id = '".mysql_real_escape_string($fb_interest_id)."' OR interest_name =  '".mysql_real_escape_string($fb_interest)."' ";
 	$facebook_interest_result = mysql_query($facebook_interest_query, $connection) or die ("Error 4");
 	$facebook_interest_count = mysql_num_rows($facebook_interest_result);
 	
 	// if row exists -> interest is already there from Facebook
 	if ($facebook_interest_count != 0)
 	{
-		// its already there, so do not add to the interest to the table (will add to other tabes later)
+		// its already there, so do not add to the interest to the table (will add to other tables later)
 	
 		//get id, by lookup on facebook ID
 		$row = mysql_fetch_assoc($facebook_interest_result);
 		$interest_id = $row['id'];
 		$retreived_facebook_id = $row['facebook_id'];
+		$tile_id = $row['tile_id'];
 			
 		//update interest_ID if its null (means that interest was entered from Woorus but then entered in by facebook connect.
 		if ($retreived_facebook_id == NULL || $retreived_facebook_id == 0){
@@ -255,8 +259,7 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 			$interest_update_result = mysql_query($interest_update_query, $connection) or die ("Error 4.5");
 		}
 		
-		//update other tables basd on ID
-		$tile_id = lookupTileID_Facebook($fb_interest_id, $connection);
+		//update other tables based on ID
 		updateUserInterestTable($user_id, $interest_id, $tile_id, $connection); //add this as an interest of the user, its *new* for them
 		if ($tile_placement <= 36){
 			updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection);

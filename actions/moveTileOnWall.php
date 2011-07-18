@@ -23,7 +23,7 @@ foreach ($tile_array as $value){
 	$interest_id = getInterestFromTile($tile_id, $connection); 
 
 	//echo "tile_id is: ".$tile_id ." interest_id is: ".$interest_id." tile_placement is: ".$tile_placement;
-	updateMosaicWallTable_move($user_id, $interest_id , $tile_id , $tile_placement, $connection);
+	updateMosaicWallTable_move($user_id, $interest_id, $tile_id, $tile_placement, $connection);
 	$tile_placement++;
 }
 

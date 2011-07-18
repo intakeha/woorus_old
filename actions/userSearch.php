@@ -55,7 +55,7 @@ $user_count_query = "SELECT COUNT(DISTINCT mosaic_wall.user_id)
 			WHERE interests.interest_name =  '".mysql_real_escape_string($user_search)."' AND interests.id = mosaic_wall.interest_id AND mosaic_wall.user_id <> '".$user_id."' 
 			AND users.active_user = 1 AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL";
 
-//get count
+//get total count
 $user_count_query_result = mysql_query($user_count_query, $connection) or die ("Error 10");
 $row = mysql_fetch_assoc($user_count_query_result);
 $user_count = $row['COUNT(DISTINCT mosaic_wall.user_id)'];
@@ -71,32 +71,24 @@ if ( $user_count > 0) //we found matches
 	//iterate through all users who have this interest on their wall
 	while ($row = mysql_fetch_assoc($mosaic_result)){
 		
-		//get data
-		$user_retreived_id = $row['user_id'];
-		
-		$interest_id = $row['interest_id'];
-		$tile_id = $row['tile_id'];
-		$interest_name = $row['interest_name'];
+		//get /store data
+
 		$tile_user_id = $row['tile_user_id'];
-		$tile_filename = $row['tile_filename'];
 		$sponsored = $row['sponsored'];
-		$first_name = $row['first_name'];
-		$social_status = $row['social_status'];
-		$block_status = $row['block_status'];
+	
 		$contact = checkContact_search($row['user_contactee']);
-		
 		$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 		
 		//set data
-		$user_search_array[$user_iterator]['user_id'] = $user_retreived_id;
-		$user_search_array[$user_iterator]['first_name'] = $first_name;
-		$user_search_array[$user_iterator]['social_status'] = $social_status;
-		$user_search_array[$user_iterator]['block_status'] = $block_status;
+		$user_search_array[$user_iterator]['user_id'] = $row['user_id'];
+		$user_search_array[$user_iterator]['first_name'] = $row['first_name'];
+		$user_search_array[$user_iterator]['social_status'] = $row['social_status'];
+		$user_search_array[$user_iterator]['block_status'] = $row['block_status'];
 		$user_search_array[$user_iterator]['contact'] = $contact;
-		$user_search_array[$user_iterator]['tile_id'] = $tile_id;
-		$user_search_array[$user_iterator]['interest_id'] = $interest_id;
-		$user_search_array[$user_iterator]['tile_filename'] = $tile_filename;
-		$user_search_array[$user_iterator]['interest_name'] = $interest_name;
+		$user_search_array[$user_iterator]['tile_id'] = $row['tile_id'];
+		$user_search_array[$user_iterator]['interest_id'] = $row['interest_id'];
+		$user_search_array[$user_iterator]['tile_filename'] = $row['tile_filename'];
+		$user_search_array[$user_iterator]['interest_name'] = $row['interest_name'];
 		$user_search_array[$user_iterator]['tile_type'] = $tile_type;
 
 		$user_iterator++;
