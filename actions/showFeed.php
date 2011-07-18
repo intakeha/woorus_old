@@ -101,7 +101,6 @@ if (mysql_num_rows($common_interest_id) > 0){
 	$interest_id = $row['interest_id'];
 }
 
-
 $common_interests_query = "SELECT users.id as user_id
 				FROM `mosaic_wall`
 				LEFT JOIN users ON users.id = mosaic_wall.user_id

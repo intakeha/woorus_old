@@ -12,13 +12,13 @@ function updateLoginTime($id)
 
 	//check if user has logged in before
 
-	$query_login = "UPDATE `user_login` SET update_time = NOW() WHERE user_id = '".$id."'";
+	$query_login = "UPDATE `user_login` SET last_login_time = NOW() WHERE user_id = '".$id."'";
 	
 	$result = mysql_query($query_login, $connection) or die ("Error 2");
 	
 	if (mysql_affected_rows() == 0) {
 
-		$query_login = "INSERT INTO `user_login` (id, user_id, update_time) VALUES (NULL,  '".$id."', NOW())";
+		$query_login = "INSERT INTO `user_login` (id, user_id, last_login_time, last_active_time) VALUES (NULL,  '".$id."', NOW(), NOW())";
 		$result = mysql_query($query_login, $connection) or die ("Error 2");
 
 	}
@@ -53,7 +53,7 @@ function backendLogin($id, $email_address, $password_set, $user_info_set, $activ
 	$_SESSION['facebook'] = 0; //we know theyre not logging in via facebook
 	$_SESSION['password_created'] = $password_set;
 	$_SESSION['user_info_set'] = $user_info_set;
-	updateLoginTime($id, $connection);
+	updateLoginTime($id);
 }
 
 ?>
