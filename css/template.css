@@ -181,22 +181,22 @@
 
 #profile_frame {
 	position: relative;
-	margin: -250px 0px 0px 0px;
+	margin: -283px 0 0;
 }
 
 #profile_frame a {
 	width: 400px;
-	height: 300px;
+	height: 283px;
 	display: block;
 	background: url(../images/global/profile_frame.png) no-repeat;
 }
 
 #profile_frame a:hover{
 	width: 400px;
-	height: 300px;
+	height: 283px;
 	display: block;
 	background: url(../images/global/profile_frame.png) no-repeat;
-	background-position: 0px -300px;
+	background-position: 0px -283px;
 }
 
 #profile_pic {
@@ -264,122 +264,10 @@
 	padding-top: 225px;
 }
 
-#feeds {
+#updates {
 	width: 500px;
 	height: 500px;
 	float: left;
-}
-
-.feed_entry {
-	width: 500px;
-	height: 100px;
-	text-align: left;
-	border-top: 1px solid #99B8D7;
-}
-
-#feed_last_entry {
-	border-top: 1px solid #99B8D7;
-	border-bottom: 1px solid #99B8D7;
-}
-
-.feed_content {
-	width: 490px;
-	height: 90px;
-	margin-top: 10px;
-}
-
-.feed_profile {
-	width: 90px;
-	height: 80px;
-	float: left;
-}
-
-.feed_display {
-	width: 380px;
-	float: left;
-}
-
-.feed_update {
-	width: 358px;
-	height: 28px;
-}
-
-.feed_message {
-	width: 300px;
-	height: 28px;
-	line-height: 16px;
-	float: left;
-}
-
-.feed_message a {
-	font-weight: bold;
-}
-
-.feed_message font {
-	font-size: 11px;
-	font-style: italic;
-	color: #CCC;
-}
-
-.feed_links {
-	width: 358px;
-	height: 50px;
-}
-
-.feed_interest {
-	float: left;
-	margin-top: 8px;
-}
-
-.feed_actions {
-	width: 186px;
-	height: 50px;
-	float: right;
-}
-
-.talk_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
-	background-position: 0px 0px;
-	float: right;
-}
-
-.write_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
-	background-position: -62px 0px;
-	float: right;
-}
-
-.add_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
-	background-position: -124px 0px;
-	float: right;
-}
-
-.block_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
-	background-position: -186px 0px;
-	float: right;
-}
-
-.archive_button {
-	display: block;
-	width: 20px;
-	height: 20px;
-	margin-top: 30px;
-	float: right;
-	background:url(../images/global/archive.png) no-repeat;
 }
 
 /* Settings Page */
@@ -894,6 +782,17 @@ div.transparent_tag {
 	width: 375px;
 	height: 90px;
 	margin-top: 10px;
+}
+
+.search_profile {
+	width: 90px;
+	height: 80px;
+	float: left;
+}
+
+.search_interest {
+	float: left;
+	margin-top: 8px;
 }
 
 .user_info {

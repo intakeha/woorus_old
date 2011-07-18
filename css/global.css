@@ -428,3 +428,50 @@ a.arrows {
 .float_right {
 	float: right;
 }
+
+/* Action Buttons */
+
+.talk_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: 0px 0px;
+	float: right;
+}
+
+.write_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -62px 0px;
+	float: right;
+}
+
+.add_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -124px 0px;
+	float: right;
+}
+
+.block_button_sm {
+	display: block;
+	width: 62px;
+	height: 50px;
+	background:url(../images/global/action_buttons_sm.png) no-repeat;
+	background-position: -186px 0px;
+	float: right;
+}
+
+.archive_button {
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-top: 30px;
+	float: right;
+	background:url(../images/global/archive.png) no-repeat;
+}
