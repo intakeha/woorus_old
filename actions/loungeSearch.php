@@ -58,7 +58,7 @@ else
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
 				LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 				LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
-				LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' contacts.active = 1
+				LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
 				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				GROUP BY others_mosaic_wall.user_id
