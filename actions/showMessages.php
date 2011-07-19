@@ -41,7 +41,7 @@ $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, u
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
 					LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = users.id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = users.id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKER.active = 1
-					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."'
+					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' and contacts.active = 1
 					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND users.active_user = 1 
 					LIMIT ".$offset.", 5";
 					
