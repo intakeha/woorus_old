@@ -50,4 +50,15 @@ function checkBlock($user_id, $other_user_id, $connection){
 }
 
 
+function checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee){
+
+	if ($BLOCKER_user_blocker == NULL && $BLOCKER_user_blockee == NULL && $BLOCKEE_user_blocker == NULL && $BLOCKEE_user_blockee == NULL) {
+		return 0;
+	}else{
+		return 1;
+	}
+}
+
+
+
 ?>
