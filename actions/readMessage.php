@@ -34,14 +34,14 @@ mysql_select_db($db_name);
 
 
 //get the message specified by the user, as long as the user hasnt deleted
-$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status, users.user_city_id, users.id as user_id, 
+$show_message_query = 	"SELECT message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status, users.user_city_id, users.id as user_id, users.active_user, 
 					BLOCKER.user_blocker AS BLOCKER_user_blocker, BLOCKER.user_blockee AS BLOCKER_user_blockee, BLOCKEE.user_blocker AS BLOCKEE_user_blocker, BLOCKEE.user_blockee AS BLOCKEE_user_blockee, contacts.user_contactee 
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
 					LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = users.id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = users.id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' and contacts.active = 1
-					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND mail.id =  '".$message_id."' AND users.active_user = 1 ";
+					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0 AND mail.id =  '".$message_id."' ";
 
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
@@ -62,6 +62,8 @@ if(mysql_num_rows($show_message_result) > 0){
 	$block_status = $row['block_status'];
 	$user_city_id = $row['user_city_id'];
 	$other_user_id = $row['user_id'];
+	$active_user = $row['active_user'];
+	
 	$BLOCKER_user_blocker = $row['BLOCKER_user_blocker'];
 	$BLOCKER_user_blockee = $row['BLOCKER_user_blockee'];
 	$BLOCKEE_user_blocker = $row['BLOCKEE_user_blocker'];
@@ -84,6 +86,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	$mail_array[$mail_iterator]['message_read'] = $message_read;
 	$mail_array[$mail_iterator]['social_status'] = $social_status;
 	$mail_array[$mail_iterator]['block_status'] = $block_status;
+	$mail_array[$mail_iterator]['active_user'] = $active_user;	
 	$mail_array[$mail_iterator]['user_city_id'] = $user_city_id;
 	$mail_array[$mail_iterator]['contact'] = $contact;
 	$mail_array[$mail_iterator]['block'] = $block;
