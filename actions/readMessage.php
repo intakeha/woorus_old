@@ -7,7 +7,6 @@ require('contactHelperFunctions.php');
 
 session_start();
 //$user_id= $_SESSION['id'];
-
 //$message_id= validateMessageId($_POST["message_id"]); 
 //$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
 
@@ -47,8 +46,6 @@ $show_message_query = 	"SELECT message_text, sent_time, message_read, users.firs
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
 
-
-
 //declare empy message array & set iterator to 1
 $mail_array = array();
 $mail_iterator = 1;
@@ -75,8 +72,9 @@ if(mysql_num_rows($show_message_result) > 0){
 	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
 	
 	//check if contact field is NULL or not
-	$contact = checkContact_search($user_id);
+	$contact = checkContact_search($row['user_contactee']);
 	
+	//check if anyone has blocked...so make sure all are NULL, otherwise return block flag
 	$block = checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee);
 
 	//add data to array to send to json
