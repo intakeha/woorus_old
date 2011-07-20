@@ -823,10 +823,10 @@ $.idleTimer(3000);
 
 $(document).bind("idle.idleTimer", function(){
 	 // post when the user goes idle
-	 $.post("updateOnlineStatus.php", {onlineStatus: "0" } );
+	 $.post("actions/updateOnlineStatus.php", {onlineStatus: "0" } );
 });
 
 $(document).bind("active.idleTimer", function(){
 	 // post when the user becomes active again
-	 $.post("updateOnlineStatus.php", {onlineStatus: "1" } );
+	 $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
 });
