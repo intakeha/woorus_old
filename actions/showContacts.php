@@ -8,7 +8,6 @@ session_start();
 $user_id= $_SESSION['id'];
 
 //$offset = validateOffset($_POST["offset"]); 
-
 $offset  = 0;
 
 //connect

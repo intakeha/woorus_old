@@ -52,13 +52,15 @@ else
 	$tile_lounge_array[0]['lounge_count'] = $lounge_count;
 	
 	//get sorted list of best USER matches
-	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.block_status, users.user_city_id, BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee
+	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.block_status, users.user_city_id, 
+				BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
 				LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 				LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
 				LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
+				LEFT JOIN `user_login` on  user_login.user_id = others_mosaic_wall.user_id
 				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				GROUP BY others_mosaic_wall.user_id
@@ -77,8 +79,16 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 	$tile_lounge_array[$user_iterator][0]['block_status'] = $row['block_status'];
 	$tile_lounge_array[$user_iterator][0]['user_city_id'] = $row['user_city_id'];
 	
+	//calculate  online status
+	$session_set = $row['session_set'];
+	$on_call = $row['on_call'];
+	$user_active = $row['user_active'];
+	
+	$onlineStatus = calculateOnlineStatus($session_set, $on_call, $user_active);
+	
 	$contact = checkContact_search($row['user_contactee']);
 	$tile_lounge_array[$user_iterator][0]['contact'] = $contact;
+	$tile_lounge_array[$user_iterator][0]['online_status'] = $onlineStatus;
 	
 	$tile_iterator = 1;
 	//look at all the tiles need to get matching interests. interest_id -> interest_name -> tile filename. This is a subset of the next search
