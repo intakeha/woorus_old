@@ -789,6 +789,20 @@ function convertGender($gender){
 }
 
 
+//-------------------------Status functions-----------------------------------------//
+
+
+function validateOnlineStatus($status){
+	if ($status == 0 or $status == 1)
+	{
+		return $status;
+	}else
+	{
+		$error_message = "Invalid Online Status.";
+		sendToJS(0, $error_message);	
+	}
+
+}
 
 
 
