@@ -782,6 +782,22 @@ $(document).ready(function(){
 			}
 		}
 	});	
+	
+	// Idle timeout is in milliseconds (defaults to 30000)
+	$.idleTimer(3000);
+	
+	$(document).bind("idle.idleTimer", function(){
+		 // post when the user goes idle
+		 $.post("actions/updateOnlineStatus.php", {onlineStatus: "0" } );
+		 $('#profile_online_status').addClass('away_status');
+	});
+	
+	$(document).bind("active.idleTimer", function(){
+		 // post when the user becomes active again
+		 $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
+		 $('#profile_online_status').removeClass('away_status');
+	});
+
 
 });
 
@@ -818,15 +834,3 @@ var RecaptchaOptions = {
 	theme : 'clean'
 };
 
-// Idle timeout is in milliseconds (defaults to 30000)
-$.idleTimer(3000);
-
-$(document).bind("idle.idleTimer", function(){
-	 // post when the user goes idle
-	 $.post("actions/updateOnlineStatus.php", {onlineStatus: "0" } );
-});
-
-$(document).bind("active.idleTimer", function(){
-	 // post when the user becomes active again
-	 $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
-});

@@ -214,12 +214,6 @@
 	margin: 15px;
 }
 
-#online_status {
-	width: 72px;
-	height: 28px;
-	background: url(../images/global/online.png) no-repeat;
-}
-
 #announcement {
 	display : block;
 	width: 370px;
@@ -271,11 +265,12 @@
     height: 500px;
     text-align: left;
     width: 500px;
+	margin: 10px 0 0 100px;
 }
 
 #updates div {
 	height: 80px;
-	margin-top: 15px;
+	margin-top: 10px;
 	border-bottom: 1px solid #99B8D7;
 }
 
@@ -289,14 +284,18 @@
     float: left;
     font-size: 14px;
     height: 60px;
-    margin: 5px 40px 0 0;
+    margin: 12px 40px 0 0;
     text-align: center;
     width: 120px;
-	vertical-align: middle;
 }
 
 #updates p {
 	margin-bottom: 5px;
+}
+
+#first_update {
+	border-top: 1px solid #99B8D7;
+	padding-top: 10px;
 }
 
 /* Settings Page */

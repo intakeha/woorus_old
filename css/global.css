@@ -406,11 +406,21 @@ a.arrows {
 /* Online & Social Status */
 
 .online_status {
-	width: 28px;
-	height: 28px;
-	float: left;
+	width: 66px;
+	height: 20px;
 	background: url(../images/global/online.png) no-repeat;
-	background-position: 0px 0px;
+}
+
+.offline_status {
+	background-position: 0 -20px;
+}
+
+.away_status {
+	background-position: 0 -40px;
+}
+
+.busy_status {
+	background-position: 0 -60px;
 }
 
 .social_status {
