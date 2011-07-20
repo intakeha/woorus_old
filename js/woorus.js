@@ -782,10 +782,7 @@ $(document).ready(function(){
 			}
 		}
 	});	
-	
-	// Validate Tile Search on Mosaic Wall page
 
-	
 });
 
 jQuery.validator.addMethod("validname", function(value, element) {
@@ -820,3 +817,16 @@ jQuery.validator.addMethod("validtag", function(value, element) {
 var RecaptchaOptions = { 
 	theme : 'clean'
 };
+
+// Idle timeout is in milliseconds (defaults to 30000)
+$.idleTimer(3000);
+
+$(document).bind("idle.idleTimer", function(){
+	 // post when the user goes idle
+	 $.post("updateOnlineStatus.php", {onlineStatus: "0" } );
+});
+
+$(document).bind("active.idleTimer", function(){
+	 // post when the user becomes active again
+	 $.post("updateOnlineStatus.php", {onlineStatus: "1" } );
+});

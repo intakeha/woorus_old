@@ -16,7 +16,7 @@
    	<div class="pagination_home"><a class="arrows pagination_left" style="display: none;" href="#"></a></div>
    	<div id="updates">
     	<span>Your Recent Woorus Activities:</span>
-		<div><a href="#"><span>5</span><br />Missed Calls</a>
+		<div><a href="#"><p><span>5</span></p>Missed Calls</a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -25,7 +25,7 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div><a href="#"><span>5</span><br />Added You to Contacts</a>
+        <div><a href="#"><p><span>5</span></p>Added You to Contacts</a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>

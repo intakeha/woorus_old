@@ -12,6 +12,7 @@
 	<script type="text/javascript" src="js/jquery.autocomplete.js"></script>
 	<script type="text/javascript" src="js/jquery.validate.js"></script> 
 	<script type="text/javascript" src="js/slides.min.jquery.js"></script> 
+   	<script type="text/javascript" src="js/jquery.idle-timer.js"></script> 
 	<script type="text/javascript" src="js/jquery.crop.js"></script> 
 	<script type="text/javascript" src="js/woorus.js"></script>
 

@@ -292,6 +292,11 @@
     margin: 5px 40px 0 0;
     text-align: center;
     width: 120px;
+	vertical-align: middle;
+}
+
+#updates p {
+	margin-bottom: 5px;
 }
 
 /* Settings Page */
