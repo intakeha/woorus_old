@@ -30,6 +30,13 @@ calculateSocialStatus($other_user_id, $connection);
 
 //if the call is accepted--make the Call!
 
+//set user on the call
+$call_log_query =  "UPDATE `user_login` 
+			SET on_call = 1
+			WHERE user_id = '".$user_id."'";
+$result = mysql_query($call_log_query, $connection) or die ("Error 2");
+
+
 
 //-----------------Functions-------------------//
 

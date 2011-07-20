@@ -60,5 +60,20 @@ function checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKE
 }
 
 
+function calculateOnlineStatus($session_set, $on_call, $user_active){
+
+	if ($session_set == 0){
+		return "offline";
+	}elseif($on_call == 1){
+		return "on call";
+	}elseif($user_active == 1){
+		return "available";
+	}else{
+		return "idle";
+	}
+}
+
+
+
 
 ?>
