@@ -36,7 +36,7 @@ $call_log_query =  "UPDATE `user_login`
 			WHERE user_id = '".$user_id."'";
 $result = mysql_query($call_log_query, $connection) or die ("Error 2");
 
-
+//REMEMBER TO END THE CALL
 
 //-----------------Functions-------------------//
 

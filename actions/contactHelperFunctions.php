@@ -65,11 +65,11 @@ function calculateOnlineStatus($session_set, $on_call, $user_active){
 	if ($session_set == 0){
 		return "offline";
 	}elseif($on_call == 1){
-		return "on call";
+		return "busy";
 	}elseif($user_active == 1){
-		return "available";
+		return "online";
 	}else{
-		return "idle";
+		return "away";
 	}
 }
 
