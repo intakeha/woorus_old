@@ -60,11 +60,9 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$file_name = $user_id . "_temp_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_temp_#####.***
 		
 		$large_path = "../images/temporary";
-		$thumbnail_path = "../images/interests";
 		
 		$large_image_location = $large_path."/".$file_name;
-		$thumb_image_location = $thumbnail_path."/".$file_name;
-
+		
 		//save large image
 		move_uploaded_file($_FILES["file"]["tmp_name"],
 		$large_image_location);      
