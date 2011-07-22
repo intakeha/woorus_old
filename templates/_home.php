@@ -15,8 +15,18 @@
     </div>
    	<div class="pagination_home" style="display: none;"><a class="arrows pagination_left" href="#"></a></div>
    	<div id="updates">
-    	<span>Your Recent Woorus Activities:</span>
-		<div id="first_update"><a href="#"><p><span>5</span></p>Missed Calls</a>
+    	<p>Your Recent Woorus Activities:</p>
+	
+	<div id="first_update"><a href="#"><p>5</p>Missed Calls</a>
+		<ul>
+			  <li><img src="images/users/james.png"/></li>
+			<li><img src="images/users/james.png"/></li>
+			<li><img src="images/users/james.png"/></li>
+			<li><img src="images/users/james.png"/></li>
+			<li><img src="images/users/james.png"/></li>
+		</ul>
+        </div>
+        <div><a href="#"><p>5</p>Added You to Contacts</a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -25,16 +35,7 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div><a href="#"><p><span>5</span></p>Added You to Contacts</a>
-        	<ul>
-               	<li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-            </ul>
-        </div>
-        <div><a href="#"><p><span>5</span></p>New Interests of Contacts</a>
+        <div><a href="#"><p>5</p>New Interests of Contacts</a>
         	<ul>
 				<li><img src="images/interests/41_1306185339.jpg"/></li>
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
@@ -43,7 +44,7 @@
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
             </ul>
         </div>
-        <div><a href="#">People interested in "Tennis"</a>
+        <div><a href="#">People interested in <p>"Tennis"</p></a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>

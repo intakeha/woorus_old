@@ -179,6 +179,11 @@
 	text-align: left;
 }
 
+#profile a:hover {
+	text-decoration: none;
+	color: #215086;
+}
+
 #profile_frame {
 	position: relative;
 	margin: -283px 0 0;
@@ -268,34 +273,46 @@
 	margin: 10px 0 0 100px;
 }
 
-#updates div {
-	height: 80px;
-	margin-top: 10px;
-	border-bottom: 1px solid #99B8D7;
-}
-
-#updates img {
-    float: left;
-    margin: 5px 5px 0 0;
-    width: 60px;
+#updates p {
+	font-size: 16px;
+    font-weight: bold;
+	margin-bottom: 5px;
 }
 
 #updates a {
     float: left;
     font-size: 14px;
     height: 60px;
-    margin: 12px 40px 0 0;
+	padding-top: 10px;
+    margin: 0px 40px 0px 10px;
     text-align: center;
     width: 120px;
+	word-wrap: break-word;
 }
 
-#updates p {
-	margin-bottom: 5px;
+#updates a:hover {
+	text-decoration: none;
+	color: #215086;
+}
+
+#updates li {
+	float: left;
+}
+
+#updates div {
+	height: 80px;
+	border-bottom: 1px solid #99B8D7;
+	padding-top: 10px;
+}
+
+#updates img {
+    margin: 5px 5px 0 0;
+    width: 60px;
 }
 
 #first_update {
 	border-top: 1px solid #99B8D7;
-	padding-top: 10px;
+	margin-top: 30px;
 }
 
 /* Settings Page */
