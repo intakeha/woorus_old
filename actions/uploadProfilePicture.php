@@ -1,12 +1,17 @@
 <?php
+
 require('imageFunctions.php');
 require('validations.php');
 
 session_start();
 $user_id = $_SESSION['id'];
 
-$max_dimension = "400";		// Max width allowed for the large image
-$min_dimension = "75";
+// Min & Max width allowed for the large image
+$min_width = "300";
+$min_height = "200";
+
+$max_width = "600";
+$max_height = "400";
 
 /*image type:
 1 = GIF, 2 = JPG, 3 = PNG, 4 = SWF, 5 = PSD, 6 = BMP, 7 = TIFF(orden de bytes intel), 8 = TIFF(orden de bytes motorola), 9 = JPC, 10 = JP2, 11 = JPX, 12 = JB2, 13 = SWC, 14 = IFF, 15 = WBMP, 16 = XBM.
@@ -57,7 +62,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$file_ext = strtolower(substr($file_name_orig, strrpos($file_name_orig, '.') + 1));
 		
 		$key = strtotime(date('Y-m-d H:i:s'));
-		$file_name = $user_id . "_temp_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_temp_#####.***
+		$file_name = $user_id . "_temp_profile_" . $key . "." . $file_ext;// name the image w/ random number; should be of form: UID_temp_#####.***
 		
 		$large_path = "../images/temporary";
 		$thumbnail_path = "../images/interests";
@@ -74,44 +79,25 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$width = getWidth($large_image_location);
 		$height = getHeight($large_image_location);			
 
-		//find out which dimension is larger (we need both min and max)
-		//this only works because the picture is a square
-		if ($width > $height){
-			$max_dimension_num = $width;
-			$min_dimension_num = $height;
-		}else
-		{
-			$max_dimension_num = $height;
-			$min_dimension_num = $width;
-		}
-		
 		//error if image is too small
-		if ($min_dimension_num < $min_dimension){
+		if ($width < $min_width || $height < $min_height){
 			$error_message = "Please use a larger image.";
 			sendToJS(0, $error_message);
 		}
 	
-		/*
-		//test file conversion to .jpg
-		$large_image_location = convertImage($large_image_location);
-		chmod($large_image_location, 0777);*/
+		//determine what to scale by--calculate the width & height scale
+		$scale_width = $max_width / $width;
+		$scale_height = $max_height / $height;
+	
+		//pick the bigger scale to use, want the largest of scale_width, scale_height, 1
+		$scale_larger = ($scale_width > $scale_height) ? $scale_width : $scale_height;
+		$scale = ($scale_larger > 1) ? $scale_larger : 1;
 		
-		//Scale the image if it is greater than the max dimension
-		if ($max_dimension_num > $max_dimension){
-			$scale = $max_dimension/$max_dimension_num;
-			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-		}else{
-			$scale = 1;
-			$uploaded = resizeImage($large_image_location,$width,$height,$scale);
-		} 
+		$uploaded = resizeImage($large_image_location,$width,$height,$scale);
 		
 		//set data array of picture location & print to JavaSrcipt
-		
 		$new_file_name  = substr($file_name, 0, strrpos($file_name, '.')).".jpg";
 		sendToJS(1, $new_file_name);
-
-		//sendToJS(1, $file_name);
-		
 	}
 }
 else
@@ -119,5 +105,7 @@ else
 	$error_message = "Please select a valid file type.";
 	sendToJS(0, $error_message);
 }
+
+
 
 ?>
