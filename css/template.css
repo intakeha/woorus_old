@@ -185,28 +185,19 @@
 }
 
 #profile_frame {
+	width: 400px;
+	height: 283px;
+	display: block;
+	background: url(../images/global/profile_frame.png) no-repeat;
 	position: relative;
-	margin: -283px 0 0;
-}
-
-#profile_frame a {
-	width: 400px;
-	height: 283px;
-	display: block;
-	background: url(../images/global/profile_frame.png) no-repeat;
-}
-
-#profile_frame a:hover{
-	width: 400px;
-	height: 283px;
-	display: block;
-	background: url(../images/global/profile_frame.png) no-repeat;
-	background-position: 0px -283px;
+	z-index: 100;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 #profile_pic {
-	width: 350px;
-	margin: 25px;
+    margin: -259px 25px 30px;
+    width: 350px;
 }
 
 #profile_pic img {
@@ -499,8 +490,6 @@ li.forgot_title {
 	width: 120px;
 	height: 20px;
 	margin-right: 14px;
-	cursor: pointer; 
-	cursor: hand; 
 }
 
 .legend_squares {
