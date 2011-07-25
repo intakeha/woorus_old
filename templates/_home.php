@@ -64,7 +64,18 @@
             <div class="success_text" id="profile_upload_success" style="display: none;"></div>
             <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
 		</form>
-        <div id="profile_frame"></div><div id="profile_pic"><img src="images/global/user_pic.png"></div>
+    </div>
+    <div id="crop_profile_pic" style="display: none;">
+    	<div id="crop_instruction">Click on the image to crop and customize your tile.</div>
+        <div id="original_photo">
+            <img class="tile_pic" />
+        </div>
+        <div id="preview_area">
+        	<font>Tile Preview</font>
+            <div id="preview">
+                <img class="tile_pic" />
+            </div>
+        </div>
     </div>
 </div>
 
@@ -89,11 +100,11 @@
 	}
 	
 	// Upload picture file for tile crop
-	$('#tile_pic_upload').click(function(){
+	$('#profile_pic_upload').click(function(){
 		$("#tile_loading")
 		.ajaxStart(function(){
-			$('#tile_upload_error').hide();
-			$('#tile_upload_success').hide();
+			$('#profile_upload_error').hide();
+			$('#profile_upload_success').hide();
 			$(this).show();
 		})
 		.ajaxComplete(function(){
@@ -101,22 +112,18 @@
 		});
 		
 		$.ajaxFileUpload({
-			url: 'actions/upload_file.php',
+			url: 'actions/uploadProfilePicture.php',
 			secureuri: false,
             fileElementId:'file',
             dataType: 'json',
 			success: function(data){
 				if (data.success == 0){
-					$('#tile_upload_success').hide();
-					$('#tile_upload_error').show();
-					$('#tile_upload_error').html(data.message); 
+					$('#profile_upload_success').hide();
+					$('#profile_upload_error').show();
+					$('#profile_upload_error').html(data.message); 
 				} else {
-					$('.pagination_mosaic').hide();
-					$('#tiles').hide();
-					$('#tile_crop').show();
-					$('input[name=assign_tag]').val('');
+					$('#crop_profile_pic').show();
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
-					$('input[name=cropFile]').val(data.message);
 				}
 			}
 		})
