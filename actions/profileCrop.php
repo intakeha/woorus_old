@@ -10,7 +10,6 @@ $profile_height = "200";		// Height of profile picture
 session_start();
 $user_id = $_SESSION['id'];
 
-/*
 $x1 = $_POST["x1"];
 $y1 = $_POST["y1"];
 $x2 = $_POST["x2"];
@@ -18,8 +17,9 @@ $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
 $picture_name_input= $_POST["cropFile"];  //this may change?
-*/
 
+
+/*
 $x1  = 100;
 $y1 = 100;
 $x2 = 400;
@@ -27,7 +27,7 @@ $y2 = 300;
 $w = 300;
 $h = 200;
 
-$picture_name_input= "142_temp_profile_1311308063.jpg";
+$picture_name_input= "142_temp_profile_1311309740.jpg";*/
 
 //if coordinates are null, send error message to JS
 if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input == NULL ){
