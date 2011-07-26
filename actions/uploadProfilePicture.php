@@ -87,9 +87,9 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$scale_width = $max_width / $width;
 		$scale_height = $max_height / $height;
 	
-		//pick the bigger scale to use, want the largest of scale_width, scale_height, 1
-		$scale_larger = ($scale_width > $scale_height) ? $scale_width : $scale_height;
-		$scale = ($scale_larger > 1) ? $scale_larger : 1;
+		//pick the smallest scale to use, want the smallest of scale_width, scale_height, 1
+		$scale_smaller = ($scale_width < $scale_height) ? $scale_width : $scale_height;
+		$scale = ($scale_smaller < 1) ? $scale_smaller : 1;
 		
 		$uploaded = resizeImage($large_image_location,$width,$height,$scale);
 		

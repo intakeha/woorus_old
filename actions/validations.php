@@ -630,7 +630,10 @@ function validateInterestTag_Search($tag)
 
 }
 
-function checkBannedWords($word, $connection){
+function checkBannedWords($string, $connection){
+
+	$words = explode($string, 
+
 
 	$banned_word_query = "SELECT `id`
 					FROM `banned_words`
@@ -641,10 +644,7 @@ function checkBannedWords($word, $connection){
 	if (mysql_num_rows($result) > 0) {
 		$error_message = "Unable to load tile.";
 		sendToJS(0, $error_message);
-	
 	}
-
-
 }
 
 
