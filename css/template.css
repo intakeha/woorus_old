@@ -240,22 +240,29 @@
 	margin: -25px 0px 0px 120px;
 }
 
+#profile_crop_instruction {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 2px 0 20px;
+    text-align: left;
+}
+
 #profile_original_photo{
 	width: 600px;
 	float: left;
-	margin-right: 10px;
+	margin-right: 50px;
 }
 
 #profile_preview {
     width: 300px;
 	height: 200px;
-	margin-top: 5px;
+	margin-top: 20px;
     overflow: hidden;
 }
 
 #profile_preview_area {
 	float: left;
-	padding: 5px;
+	padding: 10px;
 	border: 1px solid #ccc;
 	text-align: center;
 	font-size: 12px;
@@ -665,8 +672,8 @@ div#tile_bank_message {
 	text-align: left;
 }
 
-#crop_instruction {
-	margin: 2px 0px 10px 0px;
+#tile_crop_instruction {
+	margin: 2px 0px 20px;
 }
 
 #tile_original_photo{

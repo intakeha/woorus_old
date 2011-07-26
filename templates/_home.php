@@ -66,14 +66,27 @@
 		</form>
     </div>
     <div id="crop_profile_pic" style="display: none;">
-    	<div id="crop_instruction">Click on the image to crop and customize your tile.</div>
-        <div id="original_photo">
+    	<div id="profile_crop_instruction">Click on the image to crop and customize your tile.</div>
+        <div id="profile_original_photo">
             <img class="profile_pic" />
         </div>
-        <div id="preview_area">
-        	<font>Tile Preview</font>
+        <div id="profile_preview_area">
+        	<font>Profile Photo Preview</font>
             <div id="profile_preview">
                 <img class="profile_pic" />
+            </div>
+            <div>
+                <form id="profile_crop_form" action="actions/profileCrop.php" method="POST">       
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="x2" value="" />
+                    <input type="hidden" name="y2" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
+                    <input type="hidden" name="cropFile" value="" />
+                    <br />
+                    <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+                </form>
             </div>
         </div>
     </div>
@@ -90,7 +103,7 @@
 	
 	$('#profile_frame').click(function(){
 		$('#updates').hide();
-		$('#upload_profile_pic').show();
+		$('#upload_profile_area').show();
 	});
 	
 	function hideProfile(){
@@ -123,9 +136,10 @@
 					$('#profile_upload_error').html(data.message); 
 				} else {
 					hideProfile();
-					$('#upload_profile_pic').hide();
+					$('#upload_profile_area').hide();
 					$('#crop_profile_pic').show();
 					$('.profile_pic').attr('src','images/temporary/'+data.message);
+					$('input[name=cropFile]').val(data.message);
 				}
 			}
 		})
@@ -137,7 +151,7 @@
 	$('.profile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "3:2",
-		onSelectChange: previewTile,
+		onSelectChange: previewProfile,
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
             $('input[name=y1]').val(selection.y1);
@@ -149,14 +163,14 @@
     });
 
 	// Function used by imgAreaSelect to preview thumbnail	
-	function previewTile(img, selection) {
+	function previewProfile(img, selection) {
 		if (!selection.width || !selection.height)
 		return;
 		
 		var scaleX = 300 / selection.width;
 		var scaleY = 200 / selection.height;
 		
-		$('#preview img').css({
+		$('#profile_preview img').css({
 		width: Math.round(scaleX*img.width),
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),

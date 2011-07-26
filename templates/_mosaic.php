@@ -34,7 +34,7 @@
     </div>
 	<div class="pagination_mosaic"><a id="tile_bank_right" class="arrows pagination_right" style="display: none;"></a></div>
     <div id="tile_crop" style="display: none;">
-    	<div id="crop_instruction">Click on the image to crop and customize your tile.</div>
+    	<div id="tile_crop_instruction">Click on the image to crop and customize your tile.</div>
         <div id="tile_original_photo">
             <img class="tile_pic" />
         </div>

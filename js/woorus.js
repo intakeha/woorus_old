@@ -696,7 +696,7 @@ $(document).ready(function(){
 		var scaleX = 75 / selection.width;
 		var scaleY = 75 / selection.height;
 		
-		$('#preview img').css({
+		$('#tile_preview img').css({
 		width: Math.round(scaleX*img.width),
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),
