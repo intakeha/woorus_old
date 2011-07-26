@@ -55,7 +55,7 @@
 		</div>
     </div>
    	<div id="updates_right" class="pagination_home" style="display: none;"><a class="arrows pagination_right" href="#"></a></div>
-    <div id="upload_profile_pic" style="display: none;">
+    <div id="upload_profile_area" style="display: none;">
     	<p>Select a photo for your profile picture:</p>
 		<form id="profile_upload_form" action="actions/uploadProfilePicture.php" method="post" enctype="multipart/form-data">
             <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /><br />
@@ -68,12 +68,12 @@
     <div id="crop_profile_pic" style="display: none;">
     	<div id="crop_instruction">Click on the image to crop and customize your tile.</div>
         <div id="original_photo">
-            <img class="tile_pic" />
+            <img class="profile_pic" />
         </div>
         <div id="preview_area">
         	<font>Tile Preview</font>
-            <div id="preview">
-                <img class="tile_pic" />
+            <div id="profile_preview">
+                <img class="profile_pic" />
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
 	});
 	
 	$('#profile_frame').click(function(){
-		hideProfile();
+		$('#updates').hide();
 		$('#upload_profile_pic').show();
 	});
 	
@@ -122,12 +122,46 @@
 					$('#profile_upload_error').show();
 					$('#profile_upload_error').html(data.message); 
 				} else {
+					hideProfile();
+					$('#upload_profile_pic').hide();
 					$('#crop_profile_pic').show();
-					$('.tile_pic').attr('src','images/temporary/'+data.message);
+					$('.profile_pic').attr('src','images/temporary/'+data.message);
 				}
 			}
 		})
 		
 		return false;
 	});
+	
+	// Call imgAreaSelect to crop picture and associated coordinates
+	$('.profile_pic').imgAreaSelect({
+        handles: true,
+		aspectRatio: "3:2",
+		onSelectChange: previewTile,
+		onSelectEnd: function (img, selection) {				
+            $('input[name=x1]').val(selection.x1);
+            $('input[name=y1]').val(selection.y1);
+            $('input[name=x2]').val(selection.x2);
+            $('input[name=y2]').val(selection.y2); 
+	        $('input[name=w]').val(selection.width);
+            $('input[name=h]').val(selection.height);
+        }		
+    });
+
+	// Function used by imgAreaSelect to preview thumbnail	
+	function previewTile(img, selection) {
+		if (!selection.width || !selection.height)
+		return;
+		
+		var scaleX = 300 / selection.width;
+		var scaleY = 200 / selection.height;
+		
+		$('#preview img').css({
+		width: Math.round(scaleX*img.width),
+		height: Math.round(scaleY*img.height),
+		marginLeft: -Math.round(scaleX * selection.x1),
+		marginTop: -Math.round(scaleY * selection.y1), 
+		});
+			
+	} 
 </script>

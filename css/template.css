@@ -204,13 +204,15 @@
 	width: 350px;
 }
 
-#upload_profile_pic {
+#upload_profile_area {
 	text-align: left;
+	float: left;
     width: 400px;
     height: 500px;
+	margin: 10px 0 0 100px;
 }
 
-#upload_profile_pic p {
+#upload_profile_area p {
 	font-size: 16px;
     font-weight: bold;
 	margin-bottom: 15px;
@@ -236,6 +238,28 @@
 	border-left: 3px solid #0C0;
 	position: absolute;
 	margin: -25px 0px 0px 120px;
+}
+
+#profile_original_photo{
+	width: 600px;
+	float: left;
+	margin-right: 10px;
+}
+
+#profile_preview {
+    width: 300px;
+	height: 200px;
+	margin-top: 5px;
+    overflow: hidden;
+}
+
+#profile_preview_area {
+	float: left;
+	padding: 5px;
+	border: 1px solid #ccc;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
 }
 
 #profile_name {
@@ -645,13 +669,13 @@ div#tile_bank_message {
 	margin: 2px 0px 10px 0px;
 }
 
-#original_photo{
+#tile_original_photo{
 	width: 400px;
 	float: left;
 	margin-right: 10px;
 }
 
-#preview_area {
+#tile_preview_area {
 	float: left;
 	padding: 5px;
 	border: 1px solid #ccc;
@@ -660,7 +684,7 @@ div#tile_bank_message {
 	font-weight: bold;
 }
 
-#preview {
+#tile_preview {
     width: 75px;
 	height: 75px;
 	margin-top: 5px;
