@@ -277,7 +277,11 @@
 #profile_save {
     float: left;
     margin-left: 20px;
-    width: 300px;
+    width: 280px;
+}
+
+#profile_crop_error {
+	margin-top: 20px;
 }
 
 #profile_name {

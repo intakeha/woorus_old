@@ -92,6 +92,32 @@
             <div class="error_text" id="profile_crop_error"></div>
         </div>
     </div>
+    <div id="crop_profile_thumbnail" style="display: none;">
+    	<div id="profile_crop_instruction">Now create your thumbnail picture.</div>
+        <div id="profile_post_crop">
+            <img class="post_crop_pic" />
+        </div>
+        <div id="profile_preview_area">
+        	<font>Profile Thumbnail Preview</font>
+            <div id="profile_thumbnail_preview">
+                <img />
+            </div>
+        </div>
+        <div id="profile_save">
+            <form id="profile_thumbnail_form" action="actions/profileCropThumbnail.php" method="POST">       
+                <input type="hidden" name="x1" value="" />
+                <input type="hidden" name="y1" value="" />
+                <input type="hidden" name="x2" value="" />
+                <input type="hidden" name="y2" value="" />
+                <input type="hidden" name="w" value="" />
+                <input type="hidden" name="h" value="" />
+                <input type="hidden" name="cropFile" value="" />
+                <br />
+                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+            </form>
+            <div class="error_text" id="profile_crop_error"></div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
@@ -138,8 +164,8 @@
 					$('#profile_upload_error').html(data.message); 
 				} else {
 					hideProfile();
-					$('#profile_crop_error').hide();
-					$('#upload_profile_area').html(''); 
+					$('#profile_crop_error').html('');
+					$('#upload_profile_area').hide(); 
 					$('#crop_profile_pic').show();
 					$('.profile_pic').attr('src','images/temporary/'+data.message);
 					$('#profile_preview img').attr('src','images/temporary/'+data.message);
@@ -195,7 +221,10 @@
 					if (data.success == 0){
 						$('#profile_crop_error').html(data.message); 
 					}else{
-						alert("Crop Successful!");
+						$('.post_crop_pic').attr('src','images/temporary/'+data.message);
+						$('#profile_thumbnail_preview img').attr('src','images/temporary/'+data.message);
+						$('#crop_profile_pic').hide();
+						$('#crop_profile_thumbnail').show();
 					}
 				}, "json"
 			);
