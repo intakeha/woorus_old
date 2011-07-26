@@ -66,28 +66,30 @@
 		</form>
     </div>
     <div id="crop_profile_pic" style="display: none;">
-    	<div id="profile_crop_instruction">Click on the image to crop and customize your tile.</div>
+    	<div id="profile_crop_instruction">Click and drag on the image below to create your profile picture.</div>
         <div id="profile_original_photo">
             <img class="profile_pic" />
         </div>
         <div id="profile_preview_area">
         	<font>Profile Photo Preview</font>
             <div id="profile_preview">
-                <img class="profile_pic" />
+                <img />
             </div>
-            <div>
-                <form id="profile_crop_form" action="actions/profileCrop.php" method="POST">       
-                    <input type="hidden" name="x1" value="" />
-                    <input type="hidden" name="y1" value="" />
-                    <input type="hidden" name="x2" value="" />
-                    <input type="hidden" name="y2" value="" />
-                    <input type="hidden" name="w" value="" />
-                    <input type="hidden" name="h" value="" />
-                    <input type="hidden" name="cropFile" value="" />
-                    <br />
-                    <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
-                </form>
-            </div>
+        
+        </div>
+        <div id="profile_save">
+            <form id="profile_crop_form" action="actions/profileCrop.php" method="POST">       
+                <input type="hidden" name="x1" value="" />
+                <input type="hidden" name="y1" value="" />
+                <input type="hidden" name="x2" value="" />
+                <input type="hidden" name="y2" value="" />
+                <input type="hidden" name="w" value="" />
+                <input type="hidden" name="h" value="" />
+                <input type="hidden" name="cropFile" value="" />
+                <br />
+                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+            </form>
+            <div class="error_text" id="profile_crop_error"></div>
         </div>
     </div>
 </div>
@@ -112,7 +114,7 @@
 		$('#updates').hide();
 	}
 	
-	// Upload picture file for tile crop
+	// Upload picture file for profile crop
 	$('#profile_pic_upload').click(function(){
 		$("#tile_loading")
 		.ajaxStart(function(){
@@ -136,9 +138,11 @@
 					$('#profile_upload_error').html(data.message); 
 				} else {
 					hideProfile();
-					$('#upload_profile_area').hide();
+					$('#profile_crop_error').hide();
+					$('#upload_profile_area').html(''); 
 					$('#crop_profile_pic').show();
 					$('.profile_pic').attr('src','images/temporary/'+data.message);
+					$('#profile_preview img').attr('src','images/temporary/'+data.message);
 					$('input[name=cropFile]').val(data.message);
 				}
 			}
@@ -151,6 +155,8 @@
 	$('.profile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "3:2",
+		minWidth: 300,
+		minHeight: 200,
 		onSelectChange: previewProfile,
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
@@ -178,4 +184,21 @@
 		});
 			
 	} 
+	
+	$("#profile_crop_form").submit(function(event) {
+		event.preventDefault(); 
+		
+		$.post(
+				"actions/profileCrop.php",
+				$('#profile_crop_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						$('#profile_crop_error').html(data.message); 
+					}else{
+						alert("Crop Successful!");
+					}
+				}, "json"
+			);
+	});
+	
 </script>

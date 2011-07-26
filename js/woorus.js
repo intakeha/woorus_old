@@ -665,6 +665,7 @@ $(document).ready(function(){
 					$('#tile_crop').show();
 					$('input[name=assign_tag]').val('');
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
+					$('#tile_preview img').attr('src','images/temporary/'+data.message);
 					$('input[name=cropFile]').val(data.message);
 				}
 			}
@@ -677,6 +678,8 @@ $(document).ready(function(){
 	$('.tile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "1:1",
+		minWidth: 75,
+		minHeight: 75,
 		onSelectChange: previewTile,
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
