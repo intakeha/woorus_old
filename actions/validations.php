@@ -630,23 +630,6 @@ function validateInterestTag_Search($tag)
 
 }
 
-function checkBannedWords($string, $connection){
-
-	$words = explode($string, 
-
-
-	$banned_word_query = "SELECT `id`
-					FROM `banned_words`
-					WHERE banned_words.word LIKE '%".$word."%' ";
-					
-	$result = mysql_query($banned_word_query, $connection) or die ("Error");
-	
-	if (mysql_num_rows($result) > 0) {
-		$error_message = "Unable to load tile.";
-		sendToJS(0, $error_message);
-	}
-}
-
 
 function validateInterestTag_Facebook($tag)
 {
