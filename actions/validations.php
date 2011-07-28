@@ -392,6 +392,7 @@ function validateCity($city)
 //-------------------------Login validation functions-----------------------------------------//
 
 
+//password validation, only used at login page
 function validatePasswordLogin($password)
 {
 	if (strlen($password) == 0)
@@ -409,6 +410,8 @@ function validatePasswordLogin($password)
 
 //-------------------------Settings validation functions-----------------------------------------//
 
+
+//settings page validate email---because email can be empty--means theyre not changing it.
 function validateEmail_emptyOK($email)
 {	
 	if($email == NULL | strlen($email) == 0)
@@ -433,7 +436,7 @@ function validateEmail_emptyOK($email)
 
 }
 
-//logic to check passwords
+//logic to check passwords, for case when a user has already set a password and is changing it
 function validateOldAndNewPassword($password_old, $password_new, $password_confirm)
 {
 	
@@ -479,6 +482,7 @@ function validateOldAndNewPassword($password_old, $password_new, $password_confi
 
 }
 
+//validate new password, for case when user is setting a password for the first time (facebook user)
 function validateNewPasswordOnly($password_new, $password_confirm)
 {
 	
@@ -510,7 +514,7 @@ function validateNewPasswordOnly($password_new, $password_confirm)
 }
 
 
-
+//check if password and password confirm match
 function checkPassword($password, $password_confirm)
 {
 	if ($password != $password_confirm)
@@ -524,7 +528,7 @@ function checkPassword($password, $password_confirm)
 	}
 }
 
-
+//translate checkbox values to enum fields
 function checkboxValidate($checkbox)
 {
 	if ($checkbox == NULL | strlen($checkbox) == 0)
@@ -783,6 +787,22 @@ function validateOnlineStatus($status){
 	{
 		$error_message = "Invalid Online Status.";
 		sendToJS(0, $error_message);	
+	}
+
+}
+
+
+//----------------------------------Call Validation Functions-------------------------//
+
+
+function validateConversationID($id){
+
+	if (!preg_match('/^[0-9 ]+$/', $id)){
+		$error_message = "Error";
+		sendToJS(0, $error_message);
+	}else
+	{
+		return $id;
 	}
 
 }

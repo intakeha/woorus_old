@@ -1,8 +1,8 @@
 <?php
-require('imageFunctions.php');
-require('connect.php');
-require('validations.php');
-require('mosaicWallHelperFunctions.php');
+require_once('imageFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('mosaicWallHelperFunctions.php');
 
 $profile_width = "80";		// Width of profile picture
 $profile_height = "80";		// Height of profile picture

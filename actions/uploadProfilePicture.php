@@ -1,7 +1,7 @@
 <?php
 
-require('imageFunctions.php');
-require('validations.php');
+require_once('imageFunctions.php');
+require_once('validations.php');
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -87,7 +87,7 @@ if ((($_FILES["file"]["type"] == "image/gif")
 		$scale_width = $max_width / $width;
 		$scale_height = $max_height / $height;
 	
-		//pick the smallest scale to use, want the smallest of scale_width, scale_height, 1
+		//pick the smallest scale to use, want the largest of scale_width, scale_height, 1
 		$scale_smaller = ($scale_width < $scale_height) ? $scale_width : $scale_height;
 		$scale = ($scale_smaller < 1) ? $scale_smaller : 1;
 		

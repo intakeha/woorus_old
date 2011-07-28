@@ -1,11 +1,11 @@
 <?php
 
+require_once('connect.php');
 
 //updates the user_login table
 function updateLoginTime($id)
 {
 	
-	require('connect.php');
 	//connect
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 	mysql_select_db($db_name);
@@ -32,7 +32,7 @@ function updateLoginTime($id)
 function backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection){
 	
 	//lookup email, password created, user_info set.
-	require('connect.php');
+	
 	mysql_select_db($db_name);
 
 	if ($verified == 0) //check email verified

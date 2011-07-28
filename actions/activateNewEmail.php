@@ -2,9 +2,9 @@
 
 //takes in "visual" email, stores it in the "visual" email field & then stores the lowercase, gmail-safe email in 
 
-require('connect.php');
-require('validations.php');
-require('loginHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('loginHelperFunctions.php');
 
 $id = validateID($_GET['id']);
 $token = validateToken($_GET['token']);
@@ -38,9 +38,9 @@ if ($id&&$token)
 		$password_set = $row['password_set'];
 		$user_info_set = $row['user_info_set'];
 		$active_user = $row['active_user'];
-		$id = $row['id'];
+		$returned_id = $row['id'];
 		
-		backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
+		backendLogin($returned_id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
 	
 		header('Location: ../canvas.php');
 	}

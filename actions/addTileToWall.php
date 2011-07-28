@@ -1,20 +1,18 @@
 <?php
 
-require('connect.php');
-require('validations.php');
-require('mosaicWallHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('mosaicWallHelperFunctions.php');
 
 session_start();
 $user_id = $_SESSION['id'];
+
 $tile_id = $_POST["tile_id"]; //need to validate this?
 $interest_id = $_POST["interest_id"]; //need to validate this?
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
 mysql_select_db($db_name);
-
-//get interest id from the the tileID
-//$interest_id = getInterestFromTile($tile_id, $connection); 
 
 //get filename from the tileID
 $tile_filename = getFilenameFromTile($tile_id, $connection);

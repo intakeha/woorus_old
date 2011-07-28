@@ -1,7 +1,7 @@
 <?php
-require('connect.php');
-require('validations.php');
-require('loginHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('loginHelperFunctions.php');
 
 $id = validateID($_GET['id']);
 $token = validateToken($_GET['token']);
@@ -33,13 +33,13 @@ if ($id&&$token)
 			$password_set = $row['password_set'];
 			$user_info_set = $row['user_info_set'];
 			$active_user = $row['active_user'];
-			$id = $row['id'];
+			$returned_id = $row['id'];
 			
 			backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
 			
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
-				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$id."', '".$tile_placement."', 0 , 0, NOW()) ";
+				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$returned_id."', '".$tile_placement."', 0 , 0, NOW()) ";
 				$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
 			}
 			
