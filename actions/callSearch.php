@@ -11,7 +11,7 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 //find calls for the user based on: how recent, call not received/accepted
-$conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
+$conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM`conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
