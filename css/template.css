@@ -284,6 +284,43 @@
 	margin-top: 20px;
 }
 
+#crop_profile_thumbnail {
+	width: 650px;	
+	margin: 50px 0 0 250px;
+}
+
+#profile_thumbnail_preview_area {
+    border: 1px solid #CCCCCC;
+    float: left;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 110px;
+    padding: 10px;
+    text-align: center;
+    width: 80px;
+}
+
+#profile_thumbnail_preview_area img{
+	margin-left: 40px;
+}
+
+#profile_post_crop {
+	width: 300px;
+	float: left;
+	margin-right: 50px;
+}
+
+#thumbnail_preview {
+	width: 80px;
+}
+
+#profile_thumbnail_preview {
+    width: 80px;
+	height: 80px;
+	margin-top: 10px;
+    overflow: hidden;
+}
+
 #profile_name {
 	text-align: left;
 	line-height: 20px;

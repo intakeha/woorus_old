@@ -97,8 +97,8 @@
         <div id="profile_post_crop">
             <img class="post_crop_pic" />
         </div>
-        <div id="profile_preview_area">
-        	<font>Profile Thumbnail Preview</font>
+        <div id="profile_thumbnail_preview_area">
+        	<font>Profile Thumbnail</font>
             <div id="profile_thumbnail_preview">
                 <img />
             </div>
@@ -177,12 +177,10 @@
 		return false;
 	});
 	
-	// Call imgAreaSelect to crop picture and associated coordinates
+	// Call imgAreaSelect to crop profile picture and associated coordinates
 	$('.profile_pic').imgAreaSelect({
         handles: true,
 		aspectRatio: "3:2",
-		minWidth: 300,
-		minHeight: 200,
 		onSelectChange: previewProfile,
 		onSelectEnd: function (img, selection) {				
             $('input[name=x1]').val(selection.x1);
@@ -194,7 +192,7 @@
         }		
     });
 
-	// Function used by imgAreaSelect to preview thumbnail	
+	// Function used by imgAreaSelect to preview profile picture	
 	function previewProfile(img, selection) {
 		if (!selection.width || !selection.height)
 		return;
@@ -221,13 +219,68 @@
 					if (data.success == 0){
 						$('#profile_crop_error').html(data.message); 
 					}else{
-						$('.post_crop_pic').attr('src','images/temporary/'+data.message);
-						$('#profile_thumbnail_preview img').attr('src','images/temporary/'+data.message);
+						$('.post_crop_pic').attr('src','images/users/large/'+data.message);
+						$('#profile_thumbnail_preview img').attr('src','images/users/large/'+data.message);
+						$('input[name=cropFile]').val(data.message);
+						$('.profile_pic').imgAreaSelect({
+							hide: true
+						});
 						$('#crop_profile_pic').hide();
 						$('#crop_profile_thumbnail').show();
 					}
 				}, "json"
 			);
 	});
+
+	// Call imgAreaSelect to crop profile thumbnail picture and associated coordinates
+	$('.post_crop_pic').imgAreaSelect({
+        handles: true,
+		aspectRatio: "1:1",
+		onSelectChange: previewProfileThumbnail,
+		onSelectEnd: function (img, selection) {				
+            $('input[name=x1]').val(selection.x1);
+            $('input[name=y1]').val(selection.y1);
+            $('input[name=x2]').val(selection.x2);
+            $('input[name=y2]').val(selection.y2); 
+	        $('input[name=w]').val(selection.width);
+            $('input[name=h]').val(selection.height);
+        }		
+    });
+
+	// Function used by imgAreaSelect to preview profile thumbnail	
+	function previewProfileThumbnail(img, selection) {
+		if (!selection.width || !selection.height)
+		return;
+		
+		var scaleX = 80 / selection.width;
+		var scaleY = 80 / selection.height;
+		
+		$('#profile_thumbnail_preview img').css({
+		width: Math.round(scaleX*img.width),
+		height: Math.round(scaleY*img.height),
+		marginLeft: -Math.round(scaleX * selection.x1),
+		marginTop: -Math.round(scaleY * selection.y1), 
+		});
+			
+	} 
+	
+	$("#profile_thumbnail_form").submit(function(event) {
+		event.preventDefault(); 
+		$.post(
+				"actions/profileCropThumbnail.php",
+				$('#profile_thumbnail_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						$('#profile_crop_error').html(data.message); 
+					}else{
+						$('.profile_pic').imgAreaSelect({
+							hide: true
+						});
+					}
+				}, "json"
+			);
+	});	
+	
+	
 	
 </script>
