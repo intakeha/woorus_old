@@ -89,11 +89,11 @@
                 <br />
                 <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
             </form>
-            <div class="error_text" id="profile_crop_error"></div>
+            <div class="error_text profile_crop_error"></div>
         </div>
     </div>
     <div id="crop_profile_thumbnail" style="display: none;">
-    	<div id="profile_crop_instruction">Now create your thumbnail picture.</div>
+    	<div id="profile_crop_instruction">Now click and drag again to create your profile thumbnail.</div>
         <div id="profile_post_crop">
             <img class="post_crop_pic" />
         </div>
@@ -115,7 +115,7 @@
                 <br />
                 <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
             </form>
-            <div class="error_text" id="profile_crop_error"></div>
+            <div class="error_text profile_crop_error"></div>
         </div>
     </div>
 </div>
@@ -189,7 +189,7 @@
             $('input[name=y2]').val(selection.y2); 
 	        $('input[name=w]').val(selection.width);
             $('input[name=h]').val(selection.height);
-        }		
+        }
     });
 
 	// Function used by imgAreaSelect to preview profile picture	
@@ -210,18 +210,24 @@
 	} 
 	
 	$("#profile_crop_form").submit(function(event) {
-		event.preventDefault(); 
-		
+		event.preventDefault();
 		$.post(
 				"actions/profileCrop.php",
 				$('#profile_crop_form').serialize(),
 				function(data){
 					if (data.success == 0){
-						$('#profile_crop_error').html(data.message); 
+						$('.profile_crop_error').html(data.message); 
 					}else{
 						$('.post_crop_pic').attr('src','images/users/large/'+data.message);
 						$('#profile_thumbnail_preview img').attr('src','images/users/large/'+data.message);
 						$('input[name=cropFile]').val(data.message);
+						$('input[name=x1]').val('');
+						$('input[name=y1]').val('');
+						$('input[name=x2]').val('');
+						$('input[name=y2]').val(''); 
+						$('input[name=w]').val('');
+						$('input[name=h]').val('');
+						$('.profile_crop_error').html(''); 
 						$('.profile_pic').imgAreaSelect({
 							hide: true
 						});
@@ -271,16 +277,14 @@
 				$('#profile_thumbnail_form').serialize(),
 				function(data){
 					if (data.success == 0){
-						$('#profile_crop_error').html(data.message); 
+						$('.profile_crop_error').html(data.message); 
 					}else{
-						$('.profile_pic').imgAreaSelect({
-							hide: true
-						});
+						$('.profile_crop_error').removeClass('error_text').addClass('success_text').html('Thumbnail is saved!');
+						window.location = "canvas.php";
 					}
 				}, "json"
 			);
-	});	
-	
-	
+	});
+
 	
 </script>

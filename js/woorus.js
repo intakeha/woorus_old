@@ -785,7 +785,7 @@ $(document).ready(function(){
 	});	
 	
 	// Idle timeout is in milliseconds (defaults to 30000)
-	$.idleTimer(3000);
+	$.idleTimer(300000);
 	
 	$(document).bind("idle.idleTimer", function(){
 		 // post when the user goes idle
