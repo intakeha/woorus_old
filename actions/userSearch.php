@@ -33,7 +33,6 @@ mysql_select_db($db_name);
 //look for interest based on ID & get users associated with the interest id retreived above
 $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, users.block_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored, 
 			BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
-			FROM `users`
 			FROM `interests`, `mosaic_wall`
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
