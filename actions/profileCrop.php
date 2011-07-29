@@ -18,17 +18,16 @@ $w = $_POST["w"];
 $h = $_POST["h"];
 $picture_name_input= $_POST["cropFile"];  //this may change?
 
-
 /*
+$picture_name_input= "142_temp_profile_1311908848.jpg";
+
 $x1  = 100;
 $y1 = 100;
 $x2 = 400;
 $y2 = 300;
 $w = 300;
 $h = 200;
-
-$picture_name_input= "142_temp_profile_1311309740.jpg";*/
-
+*/
 //if coordinates are null, send error message to JS
 if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input == NULL ){
 

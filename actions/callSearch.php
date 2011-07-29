@@ -14,29 +14,30 @@ mysql_select_db($db_name);
 $conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM`conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
-				LEFT JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 5 SECOND) 
-				AND call_received = 0  AND call_accepted = NULL";
+				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
+				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 DAY) 
+				AND call_received = 0  AND call_accepted IS NULL";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
 $call_array = array();
 
+//now return 1 call to the user
 if (mysql_num_rows($conversation_result) > 0)
 {
 	$row = mysql_fetch_assoc($conversation_result);
 	
-	$tile_filename_array['converations_id'] = $row['id'];
-	$tile_filename_array['caller_id'] = $row['caller_id'];
-	$tile_filename_array['callee_id'] = $row['callee_id'];
-	$tile_filename_array['first_name'] = $row['first_name'];
-	$tile_filename_array['city_id'] = $row['city_id'];
-	$tile_filename_array['social_status'] = $row['social_status'];
-	$tile_filename_array['block_status'] = $row['block_status'];
-	$tile_filename_array['profile_filename_small'] = $row['profile_filename_small'];
+	$call_array['converations_id'] = $row['id'];
+	$call_array['caller_id'] = $row['caller_id'];
+	$call_array['callee_id'] = $row['callee_id'];
+	$call_array['first_name'] = $row['first_name'];
+	$call_array['city_id'] = $row['city_id'];
+	$call_array['social_status'] = $row['social_status'];
+	$call_array['block_status'] = $row['block_status'];
+	$call_array['profile_filename_small'] = $row['profile_filename_small'];
 	
 	//if found something, send info back to JS
-	$output = json_encode($user_search_array);
+	$output = json_encode($call_array);
 	die($output);
 	
 }

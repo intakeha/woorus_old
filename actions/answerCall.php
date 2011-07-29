@@ -16,22 +16,23 @@ mysql_select_db($db_name);
 
 //hardcode for testing
 $call_accepted = "accepted"; 
-$conversation_id = "1";
-$other_user_id= 119;
+$conversation_id = 10;
+$other_user_id= 139;
 
 //set call as accepted or rejected
 $conversation_query = "UPDATE `conversations`
 				SET call_accepted = '".$call_accepted."'
-				WHERE conversations.id = '".$conversation_id."' ";
+				WHERE conversations.id = '".$conversation_id."'  AND caller_id  = '".$other_user_id."' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
-//set both users to be on a call (busy)
-$call_log_query =  "UPDATE `user_login` 
-			SET on_call = 1
-			WHERE user_id = '".$user_id."'  OR user_id = '".$other_user_id."' ";
-$result = mysql_query($call_log_query, $connection) or die ("Error 2");
-
+// if its accepted....set both users to be on a call (busy)
+if ($call_accepted == "accepted"){
+	$call_log_query =  "UPDATE `user_login` 
+				SET on_call = 1
+				WHERE user_id = '".$user_id."'  OR user_id = '".$other_user_id."' ";
+	$result = mysql_query($call_log_query, $connection) or die ("Error 2");
+}
 //if the call is accepted--now makethe Call!
 
 
@@ -75,7 +76,7 @@ function calculateSocialStatus($user_id, $connection){
 					FROM `conversations`
 					WHERE (conversations.caller_id =  '".$user_id."' OR conversations.callee_id =  '".$user_id."' ) 
 					AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
-					AND conversations.call_accepted = accepted ";
+					AND conversations.call_accepted = 'accepted' ";
 
 	$social_status_result = mysql_query($social_status_query, $connection) or die ("Error 1");
 

@@ -28,7 +28,7 @@ $y2 = 180;
 $w = 80;
 $h = 80;
 
-$picture_name_input= "142_profile_1311309809.jpg";
+$picture_name_input= "142_profile_1311908951.jpg";
 */
 
 //if coordinates are null, send error message to JS
@@ -68,5 +68,6 @@ $update_image_query = "UPDATE `profile_picture`
 				
 $result = mysql_query($update_image_query, $connection) or die ("Error");
 
+sendToJS(1, $picture_name);
 
 ?>
