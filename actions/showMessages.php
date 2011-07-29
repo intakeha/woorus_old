@@ -37,9 +37,10 @@ mysql_select_db($db_name);
 //get all messages where user hasnt deleted (other user must be active)
 $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status, users.id as user_id,  users.active_user, 
 					BLOCKER.user_blocker AS BLOCKER_user_blocker, BLOCKER.user_blockee AS BLOCKER_user_blockee, BLOCKEE.user_blocker AS BLOCKEE_user_blocker, BLOCKEE.user_blockee AS BLOCKEE_user_blockee, contacts.user_contactee, 
-					user_login.user_active, user_login.session_set, user_login.on_call
+					user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
 					FROM `mail` 
 					LEFT JOIN `users` on users.id = mail.".$others_mail."
+					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = mail.".$others_mail."
 					LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = users.id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = users.id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' and contacts.active = 1
@@ -69,15 +70,11 @@ $mail_array [0]['message_count'] = $message_count;
 //iterate through the messages returned
 while ($row = mysql_fetch_assoc($show_message_result)){
 
-	$message_id = $row['id'];
-	$first_name =  $row['first_name'];
-	$social_status =  $row['social_status'];
-	$block_status =  $row['block_status'];
+	
 	$message_text = $row['message_text'];
 	$sent_time = convertTime($row['sent_time']);
-	$message_read = $row['message_read'];
+
 	$other_user_id = $row['user_id'];
-	$active_user = $row['active_user'];
 	
 	$session_set = $row['session_set'];
 	$on_call = $row['on_call'];
@@ -96,14 +93,15 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	//check if anyone has blocked...so make sure all are NULL, otherwise return block flag
 	$block = checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee);
 
-	$mail_array[$mail_iterator]['message_id'] = $message_id;
-	$mail_array[$mail_iterator]['first_name'] = $first_name;
-	$mail_array[$mail_iterator]['social_status'] = $social_status;
-	$mail_array[$mail_iterator]['block_status'] = $block_status;
-	$mail_array[$mail_iterator]['active_user'] = $active_user;	
+	$mail_array[$mail_iterator]['message_id'] = $row['id'];
+	$mail_array[$mail_iterator]['first_name'] = $row['first_name'];
+	$mail_array[$mail_iterator]['profile_filename_small'] = $row['profile_filename_small'];
+	$mail_array[$mail_iterator]['social_status'] = $row['social_status'];
+	$mail_array[$mail_iterator]['block_status'] = $row['block_status'];
+	$mail_array[$mail_iterator]['active_user'] = $row['active_user'];
 	$mail_array[$mail_iterator]['message_text'] = substr($message_text, 0, 100);
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
-	$mail_array[$mail_iterator]['message_read'] = $message_read;
+	$mail_array[$mail_iterator]['message_read'] = $row['message_read'];
 	$mail_array[$mail_iterator]['contact'] = $contact;
 	$mail_array[$mail_iterator]['block'] = $block;
 	$mail_array[$mail_iterator]['online_status'] = $onlineStatus;

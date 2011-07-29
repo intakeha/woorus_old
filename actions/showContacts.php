@@ -16,9 +16,10 @@ mysql_select_db($db_name);
 
 
 //show all contacts the user hasnt deleted / blocked ---where the contact is an active user
-$show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.social_status, users.block_status, user_login.user_active, user_login.session_set, user_login.on_call
+$show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.social_status, users.block_status, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
 					FROM `contacts` 
-					LEFT JOIN `users` on users.id =contacts.user_contactee
+					LEFT JOIN `users` on users.id = contacts.user_contactee
+					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contactee
 					LEFT JOIN `user_login` on  user_login.user_id =contacts.user_contactee
 					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 LIMIT ".$offset.", 10";
 					
@@ -52,6 +53,7 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	$onlineStatus = calculateOnlineStatus($session_set, $on_call, $user_active);
 	
 	$contact_array[$contact_iterator]['first_name'] = $row['first_name'];
+	$contact_array[$contact_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 	$contact_array[$contact_iterator]['user_city_id'] = $row['user_city_id']; //need to do lookup
 	$contact_array[$contact_iterator]['social_status'] = $row['social_status'];
 	$contact_array[$contact_iterator]['block_status'] = $row['block_status'];

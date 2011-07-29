@@ -23,6 +23,7 @@ $tile_lounge_array = array(); //declare array
 
 //get count
 $lounge_count_query = "SELECT DISTINCT others_mosaic_wall.user_id, BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee
+				FROM `users`
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
@@ -53,10 +54,11 @@ else
 	
 	//get sorted list of best USER matches
 	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.block_status, users.user_city_id, 
-				BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call
+				BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
+				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = mosaic_wall.user_id
 				LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 				LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
 				LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
@@ -78,6 +80,7 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 	$tile_lounge_array[$user_iterator][0]['social_status'] = $row['social_status'];
 	$tile_lounge_array[$user_iterator][0]['block_status'] = $row['block_status'];
 	$tile_lounge_array[$user_iterator][0]['user_city_id'] = $row['user_city_id'];
+	$tile_lounge_array[$user_iterator][0]['profile_filename_large'] = $row['profile_filename_large'];
 	
 	//calculate  online status
 	$session_set = $row['session_set'];

@@ -32,10 +32,12 @@ mysql_select_db($db_name);
 
 //look for interest based on ID & get users associated with the interest id retreived above
 $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.first_name, users.social_status, users.block_status, mosaic_wall.interest_id, mosaic_wall.tile_id, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored, 
-			BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call
+			BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
+			FROM `users`
 			FROM `interests`, `mosaic_wall`
 			LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
 			LEFT JOIN users ON users.id = mosaic_wall.user_id
+			LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = mosaic_wall.user_id
 			LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 			LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
 			LEFT OUTER JOIN contacts on contacts.user_contactee = mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
@@ -89,6 +91,7 @@ if ( $user_count > 0) //we found matches
 		$user_search_array[$user_iterator]['first_name'] = $row['first_name'];
 		$user_search_array[$user_iterator]['social_status'] = $row['social_status'];
 		$user_search_array[$user_iterator]['block_status'] = $row['block_status'];
+		$user_search_array[$user_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 		$user_search_array[$user_iterator]['contact'] = $contact;
 		$user_search_array[$user_iterator]['online_status'] = $onlineStatus;
 		$user_search_array[$user_iterator]['tile_id'] = $row['tile_id'];
