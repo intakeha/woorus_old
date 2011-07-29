@@ -121,6 +121,9 @@
 </div>
 
 <script type="text/javascript">
+
+	
+
 	$('#profile_frame').mouseover(function() {
 		$(this).css('background-position','0px -283px');
 	});
