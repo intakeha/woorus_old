@@ -23,7 +23,6 @@ $tile_lounge_array = array(); //declare array
 
 //get count
 $lounge_count_query = "SELECT DISTINCT others_mosaic_wall.user_id, BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee
-				FROM `users`
 				FROM mosaic_wall 
 				LEFT JOIN mosaic_wall AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN users ON others_mosaic_wall.user_id = users.id
