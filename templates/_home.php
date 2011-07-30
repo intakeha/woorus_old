@@ -1,8 +1,8 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
 <div id="iprofile">
 	<div id="profile">
-		<div id="profile_frame"></div><div id="profile_pic"><img src="images/global/user_pic.png"></div>
-        <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span>Jessica</span><br />Palo Alto, CA | United States</div>
+		<div id="profile_frame"></div><div id="profile_pic"><img></div>
+        <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
 		<a id="announcement" href="canvas.php?page=mosaic">
 				<div><span>Mosaic Wall</span><br>
 				Customize your mosaic wall and show the world who you are! Create custom tiles  
@@ -121,8 +121,17 @@
 </div>
 
 <script type="text/javascript">
-
-	
+	$(document).ready(function(){
+		$.getJSON("actions/internalProfile.php",function(result){
+			$('#profile_name').find('span').append(result.first_name);
+			if (result.profile_filename_large == ""){
+				$('#profile_pic img').attr('src','images/global/silhouette.png');
+			}
+			else{
+				$('#profile_pic img').attr('src','images/users/large/'+result.profile_filename_large);
+			};
+		});
+	});
 
 	$('#profile_frame').mouseover(function() {
 		$(this).css('background-position','0px -283px');
