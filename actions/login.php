@@ -7,13 +7,8 @@ require('validations.php');
 require('loginHelperFunctions.php');
 
 //get from the form
-/*
 $f_email_address = validateEmail($_POST['email']);
 $f_password = validatePasswordLogin($_POST['password']);
-*/
-
-$f_email_address = "testWall8@gmail.com";
-$f_password = "abc123";
 
 //encrypt password
 $f_password = md5($f_password);
