@@ -123,13 +123,18 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$.getJSON("actions/internalProfile.php",function(result){
-			$('#profile_name').find('span').append(result.first_name);
-			if (result.profile_filename_large == ""){
+			if (result.value){	
+				$('#profile_name').find('span').append(result.first_name);
+				if (result.profile_filename_large == ""){
+					$('#profile_pic img').attr('src','images/global/silhouette.png');
+				}
+				else{
+					$('#profile_pic img').attr('src','images/users/large/'+result.profile_filename_large);
+				};
+			} else {
+				$('#profile_name').find('span').append("Unknown");
 				$('#profile_pic img').attr('src','images/global/silhouette.png');
 			}
-			else{
-				$('#profile_pic img').attr('src','images/users/large/'+result.profile_filename_large);
-			};
 		});
 	});
 
