@@ -20,7 +20,7 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) 
 		LIMIT 0, 5";
 
-$missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error");
+$missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");
 
 $call_iterator = 1;
 while ($row = mysql_fetch_assoc($missed_calls_result)){
@@ -35,14 +35,14 @@ while ($row = mysql_fetch_assoc($missed_calls_result)){
 }
 
 //get newly added contacts
-$new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, users.first_name, profile_picture.profile_filename_small,
+$new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, users.first_name, profile_picture.profile_filename_small
 		FROM `contacts`
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
-		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
 		LIMIT 0, 5";
 
-$new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error");
+$new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error 2");
 
 $contacts_iterator = 1;
 while ($row = mysql_fetch_assoc($new_contacts_result)){
@@ -61,16 +61,15 @@ while ($row = mysql_fetch_assoc($new_contacts_result)){
 
 //get newly added  interests from contacts
 $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, tiles.tile_filename
-		FROM `mosaic_wall`
-		LEFT JOIN `contacts` on  mosaic_wall.user_id = contacts.user_contactee
-		LEFT JOIN `users` on users.id =contacts.user_contactee
+		FROM `contacts`
+		LEFT JOIN `mosaic_wall` on  mosaic_wall.user_id = contacts.user_contactee
+		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
-		WHERE contacts.user_contacter =  '".$user_id ."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
-		GROUP BY users.id
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
 		LIMIT 0, 5";
 
-$new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error");
+$new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error 3");
 
 $interests_iterator = 1;
 while ($row = mysql_fetch_assoc($new_interests_result)){
@@ -92,7 +91,7 @@ $get_common_interest = "SELECT mosaic_wall.interest_id
 					ORDER BY RAND()
 					LIMIT 1";
 					
-$common_interest_id = mysql_query($get_common_interest, $connection) or die ("Error");
+$common_interest_id = mysql_query($get_common_interest, $connection) or die ("Error 4");
 
 if (mysql_num_rows($common_interest_id) > 0){
 	$interest_id = $row['interest_id'];
@@ -102,7 +101,10 @@ $common_interests_query = "SELECT users.id as user_id, users.first_name, profile
 				FROM `mosaic_wall`
 				LEFT JOIN users ON users.id = mosaic_wall.user_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = mosaic_wall.user_id
+				LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
+				LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
 				WHERE mosaic_wall.interest_id = '".$interest_id ."' AND mosaic_wall.user_id <> '".$user_id."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
+				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				GROUP BY users.id
 				ORDER BY RAND()
 				LIMIT 0, 5";
