@@ -40,7 +40,6 @@ $facebook_id = 0; //if theyre registering here, we dont get their facebook ID
 $active_user = 1;
 
 
-
 //at this point, user passes all checks for user entered data
 
 //encrypt password
@@ -52,17 +51,6 @@ mysql_select_db($db_name);
 
 //check if email is already in system
 checkEmailInSystem($f_email_address);
-
-/*$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($f_email_address)."'";
-$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
-$namecheck_count = mysql_num_rows($namecheck_result);
-
-if ($namecheck_count != 0)
-{
-	$error_message = "This email address is already registered with Woorus.";	
-	sendToJS(0, $error_message);
-}
-*/
 
 // Check if you are human via captcha
 require_once('recaptchalib.php');
@@ -107,24 +95,5 @@ if (!$resp->is_valid) {
 	}
 	
 	
-
-	
-	/*
-	//send activation email (turn into a function)
-	$to = $f_email_address;
-	$subject = "Activate your Woorus Account";
-	$headers = "From: admin@woorus.com";
-	
-	
-	$body = "
-	Hello, $f_first_name, \n\n
-	Please activate your woorus account with the link below: \n\n
-	................./activate.php?id=$user_id&token=$f_token \n\n
-	Thanks and welcome to woorus!
-	";
-	
-	mail($to, $subject, $body, $headers);
-	
-	*/
 }
 ?>

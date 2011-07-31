@@ -1,7 +1,5 @@
 <?php
 
-
-
 function checkEmailInSystem($email)
 {
 	require('connect.php');

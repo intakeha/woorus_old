@@ -37,6 +37,10 @@ $result = mysql_query($update_contacts_query, $connection) or die ("Error");
 //recalculate blocks for the user being blocked
 calculateBlockStatus($user_id_blockee, $connection);
 
+//message user saying they have been blocked!
+
+$message_text = "You have been blocked by another user. Please make sure you're being friendly and follow our terms & conditions. Thanks!";
+
 
 
 //-----------------Functions-------------------//
