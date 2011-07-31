@@ -55,16 +55,16 @@
 		</div>
     </div>
    	<div id="updates_missed_calls" class="updates_results" style="display: none;">
-    	Showing missed calls
+    	<div class="dashboard_view"></div>Showing missed calls
     </div>
     <div id="updates_contacts" class="updates_results" style="display: none;">
-	    Showing new contacts
+	    <div class="dashboard_view"></div>Showing new contacts
     </div>
     <div id="updates_contact_interests" class="updates_results" style="display: none;">
-    	Showing contacts' interests
+    	<div class="dashboard_view"></div>Showing contacts' interests
     </div>
     <div id="updates_interests" class="updates_results" style="display: none;">
-    	Showing connected interests
+    	<div class="dashboard_view"></div>Showing connected interests
     </div>
    	<div id="updates_right" class="pagination_home" style="display: none;"><a class="arrows pagination_right" href="#"></a></div>
     <div id="upload_profile_area" style="display: none;">
@@ -331,6 +331,11 @@
 	$('#anchor_interests').click(function(){
 		showUpdatesResult();
 		$('#updates_interests').show();
+	});
+	
+	$('.dashboard_view').click(function(){
+		showUpdates();
+		hideUpdatesResult();
 	});
 	
 	function showUpdatesResult(){

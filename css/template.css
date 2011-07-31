@@ -427,6 +427,13 @@
 	height: 500px;
 }
 
+.dashboard_view {
+	float: right;
+	width: 16px;
+	height: 16px;
+	background:url(../images/global/return_arrow.png) no-repeat;
+}
+
 /* Settings Page */
 #change_settings {
 	height: 580px;
