@@ -17,16 +17,16 @@
    	<div id="updates">
     	<p>Your Woorus Activities This Week:</p>
 	
-	<div id="first_update"><a href="#"><p>115</p>Missed Calls</a>
+	<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p>115</p>Missed Calls</a>
 		<ul>
-			  <li><img src="images/users/james.png"/></li>
+			<li><img src="images/users/james.png"/></li>
 			<li><img src="images/users/james.png"/></li>
 			<li><img src="images/users/james.png"/></li>
 			<li><img src="images/users/james.png"/></li>
 			<li><img src="images/users/james.png"/></li>
 		</ul>
         </div>
-        <div><a href="#"><p>12</p>Added You to Contacts</a>
+        <div><a id="anchor_contacts" class="updates_anchor"><p>12</p>Added You to Contacts</a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -35,7 +35,7 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div><a href="#"><p>173</p>New Interests of Contacts</a>
+        <div><a id="anchor_contact_interests" class="updates_anchor"><p>173</p>New Interests of Contacts</a>
         	<ul>
 				<li><img src="images/interests/41_1306185339.jpg"/></li>
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
@@ -44,7 +44,7 @@
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
             </ul>
         </div>
-        <div><a href="#">People interested in <p>Tennis</p></a>
+        <div><a id="anchor_interests" class="updates_anchor">People interested in <p>Tennis</p></a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -53,6 +53,18 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
 		</div>
+    </div>
+   	<div id="updates_missed_calls" class="updates_results" style="display: none;">
+    	Showing missed calls
+    </div>
+    <div id="updates_contacts" class="updates_results" style="display: none;">
+	    Showing new contacts
+    </div>
+    <div id="updates_contact_interests" class="updates_results" style="display: none;">
+    	Showing contacts' interests
+    </div>
+    <div id="updates_interests" class="updates_results" style="display: none;">
+    	Showing connected interests
     </div>
    	<div id="updates_right" class="pagination_home" style="display: none;"><a class="arrows pagination_right" href="#"></a></div>
     <div id="upload_profile_area" style="display: none;">
@@ -300,6 +312,44 @@
 				}, "json"
 			);
 	});
+	
+	$('#anchor_missed_calls').click(function(){
+		showUpdatesResult();
+		$('#updates_missed_calls').show();
+	});
 
+	$('#anchor_contacts').click(function(){
+		showUpdatesResult();
+		$('#updates_contacts').show();
+	});
+	
+	$('#anchor_contact_interests').click(function(){
+		showUpdatesResult();
+		$('#updates_contact_interests').show();
+	});
+
+	$('#anchor_interests').click(function(){
+		showUpdatesResult();
+		$('#updates_interests').show();
+	});
+	
+	function showUpdatesResult(){
+		$('#updates').hide();
+		$('#updates_left').show();
+		$('#updates_right').show();
+	}
+	
+	function hideUpdatesResult(){
+		$('#updates').show();
+		$('#updates_left').hide();
+		$('#updates_right').hide();
+	}
+	
+	function showUpdates(){
+		$('#updates_missed_calls').hide();
+		$('#updates_contacts').hide();
+		$('#updates_contact_interests').hide();
+		$('#updates_interests').hide();
+	}
 	
 </script>

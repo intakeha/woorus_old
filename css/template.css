@@ -397,6 +397,8 @@
 #updates a:hover {
 	text-decoration: none;
 	color: #215086;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 #updates li {
@@ -417,6 +419,12 @@
 #first_update {
 	border-top: 1px solid #99B8D7;
 	margin-top: 30px;
+}
+
+.updates_results {
+	float: left;
+	width: 478px;
+	height: 500px;
 }
 
 /* Settings Page */
