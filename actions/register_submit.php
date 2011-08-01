@@ -91,9 +91,13 @@ if (!$resp->is_valid) {
 		sendToJS(1, ""); //send success flag to JS
 	}else
 	{
-		sendToJS(0, "Sorry we're experiencing techincal difficulties. <br> Please come back soon!"); //send success flag to JS
+		sendToJS(0, "Sorry we're experiencing techincal difficulties. <br> Please come back soon!"); //send error flag to JS
 	}
 	
-	
+	/*
+	//send activation email (turn into a function)
+	$to = $f_email_address;
+	$subject = "Activate your Woorus Account";
+	*/
 }
 ?>
