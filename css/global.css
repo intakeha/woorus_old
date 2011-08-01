@@ -423,6 +423,12 @@ a.arrows {
 	background-position: 0 -60px;
 }
 
+.online_status_sm {
+	width: 20px;
+	height: 20px;
+	background: url(../images/global/online.png) no-repeat;
+}
+
 .social_status {
 	width: 30px;
 	height: 28px;

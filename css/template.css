@@ -364,7 +364,7 @@
 	width: 70px;
 	height: 280px;
 	float: left;
-	padding-top: 225px;
+	padding-top: 235px;
 }
 
 #updates {
@@ -422,16 +422,53 @@
 }
 
 .updates_results {
+	color: #4980B7;
+	font-size: 16px;
 	float: left;
-	width: 478px;
+	text-align: left;
+	width: 480px;
 	height: 500px;
 }
 
+.updates_results span {
+    font-weight: bold;
+}
+
+.updates_results_list{
+	margin-top: 10px;
+}
+
+.updates_results li {
+	float: left;
+    height: 125px;
+    width: 96px;
+	text-align: center;
+	font-size: 12px;
+	cursor: pointer; 
+	cursor: hand;
+}
+
 .dashboard_view {
-	float: right;
-	width: 16px;
-	height: 16px;
 	background:url(../images/global/return_arrow.png) no-repeat;
+    border: 1px solid #DDDDDD;
+    float: right;
+    font-size: 12px;
+    height: 16px;
+    padding: 1px 0 0 20px;
+    width: 30px;
+}
+
+.dashboard_view:hover {
+	cursor: pointer; 
+	cursor: hand;	
+}
+
+#updates_interest_display li {
+	float:left; 
+	width:75px; 
+	height:75px;
+	text-align: center;
+	margin: 2px;
 }
 
 /* Settings Page */
@@ -958,7 +995,9 @@ div.transparent_tag {
 }
 
 .user_info {
-	height: 32px;
+	float: left;
+    height: 32px;
+    width: 280px;
 }
 
 .action_buttons {
@@ -973,8 +1012,9 @@ div.transparent_tag {
 	margin: 0px 40px;
 }
 
-.online_status a {
-	margin: 5px 0px 0px 30px;
+.online_status_sm a {
+	margin: 5px 0px 0px 22px;
+	padding-top: 2px;
 	display: block;
 	font-weight: bold;
 	width: 225px;
