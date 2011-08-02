@@ -47,16 +47,18 @@ $message_text = "You have been blocked by another user. Please make sure you're 
 
 function getBlockStatus($block_count){
 
-	if  ($block_count < 5)
+	if  ($block_count < 3)
 	{
-		$block_status = "a";
+		$block_status = "a"; //no block status
 	}
 	elseif  ($block_count < 10)
 	{
-		$block_status = "b";
+		$block_status = "b"; //yellow block status
 	}
-	else{
-		$block_status = "c";
+	else ($block_count < 20){
+		$block_status = "c"; //red block status
+	}else {
+		$block_status = "d"; //user is not reccomended
 	}
 	
 	return $block_status;
