@@ -908,7 +908,7 @@ div.transparent_tag {
 /* Message Page */
 
 #message_bg {
-	background: url(../images/global/message_banner.jpg) no-repeat;			
+	background: url(../images/global/message_banner.jpg) no-repeat;	
 	width: 1200px;
 	height: 600px;
 	text-align: left;
@@ -1259,3 +1259,98 @@ div.lounge_transparent_tag {
 	height: 600px;
 	margin:0px auto;
 }
+
+#mail_panel {
+	width: 400px;
+	height: 600px;
+	text-align: left;
+}
+
+#mail_panel li {
+    height: 100px;
+	border-left: 5px solid #fff;
+}
+
+#mail_panel li#selected_message {
+	height: 100px;
+	border-left: 5px solid #4980B7;
+}
+
+.message_container {
+	border-bottom: 1px solid #99B8D7;
+	height: 90px;
+	margin-left: 10px;
+	padding-top: 10px;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+#top_message {
+	border-top: 1px solid #99B8D7;
+}
+
+#mailbox {
+    height: 40px;
+}
+
+#mailbox div {
+	float: left;
+	width: 139px;
+	height: 40px;
+	margin-left: 14px;
+}
+
+#inbox {
+	background: url(../images/global/mailbox.png) no-repeat;
+}
+
+#sent {
+	background: url(../images/global/mailbox.png) no-repeat;
+	background-position: 0px -40px;
+}
+
+.message_info {
+	margin-bottom: 10px;
+	padding-top: 5px;
+	font-weight: bold;
+	color: #4980B7;
+}
+
+.message_info div {
+	margin-right: 10px;
+}
+
+.message_preview {
+	line-height: 15px;
+}
+
+.message_new {
+	font-weight: bold;
+	color: #4980B7;
+}
+
+.mail_archive {
+	background: url(../images/global/archive.png) no-repeat;
+	width: 20px;
+	height: 20px;
+	margin-left: 8px;
+}
+
+.envelope {
+	width: 40px;
+	height: 40px;
+}
+
+.mail_new {
+	background: url(../images/global/mail_envelope.png) no-repeat;
+}
+
+.mail_read {
+	background: url(../images/global/mail_envelope.png) no-repeat;
+	background-position: 0px -40px;
+}
+
+/* External Profile */
+
+
+/* Chat Page */

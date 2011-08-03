@@ -690,6 +690,12 @@
 	
 	$('#profile_frame').click(function(){
 		$('#updates').hide();
+		$('#updates_missed_calls').hide();
+		$('#updates_contacts').hide();
+		$('#updates_contact_interests').hide();
+		$('#updates_interests').hide();
+		$('#updates_left').hide();
+		$('#updates_right').hide();
 		$('#upload_profile_area').show();
 	});
 	
