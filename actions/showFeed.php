@@ -146,21 +146,23 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 
 	//get results of which interest we chose.
 	$row = mysql_fetch_assoc($common_interest_id_result);
-	$feed_array['interest_chosen'][1]['interest_id']= $row['interest_id'];
+	$interest_id = $row['interest_id'];
+	$feed_array['interest_chosen'][1]['interest_id']= $interest_id;
 	$feed_array['interest_chosen'][1]['interest_name']= $row['interest_name'];
 
 	//get count of users w/ common interest, based on interest chosen above
-	$common_interests_count_query = "SELECT mosaic_wall.user_id
+	$common_interests_count_query = "SELECT DISTINCT mosaic_wall.user_id
 					FROM `mosaic_wall`
 					LEFT JOIN users ON users.id = mosaic_wall.user_id
-					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = mosaic_wall.user_id
 					LEFT OUTER JOIN blocks as BLOCKER on BLOCKER.user_blocker = mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
 					LEFT OUTER JOIN blocks as BLOCKEE on BLOCKEE.user_blockee = mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
-					WHERE mosaic_wall.interest_id = '".$interest_id ."' AND mosaic_wall.user_id <> '".$user_id."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
-					AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL";
+					WHERE mosaic_wall.interest_id = '".$interest_id."' AND mosaic_wall.user_id <> '".$user_id."' AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
+					AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
+					GROUP BY mosaic_wall.user_id";
 
 	$common_interests_count_result = mysql_query($common_interests_count_query, $connection) or die ("Error");
 	$common_interests_count = mysql_num_rows($common_interests_count_result);
+	
 	$feed_array['common_interests_count'][1]['user_count']= $common_interests_count;
 
 

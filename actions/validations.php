@@ -694,6 +694,18 @@ function validateUserId($user_id){
 }
 
 
+function validateOffset($number){
+
+	if (!preg_match('/^[0-9 ]+$/', $number)){
+		$error_message = "Error.";
+		sendToJS(0, $error_message);
+	}else
+	{
+		return $number;
+	}
+
+}
+
 function validateMessage($message_text)
 {
 	
