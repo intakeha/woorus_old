@@ -1,6 +1,17 @@
 <?php
 
-//takes in "visual" email, stores it in the "visual" email field & then stores the lowercase, gmail-safe email in 
+/*
+activateNewEmail.php
+
+This script is used when the user changes their email, as we need to validate it before changing.
+We create an access token and send them an email with a link to activate.php?id=USER_ID&token=TOKEN. 
+
+We search for the id/token combination and if found, use this as their "visual" email, convert to the lowercase.
+gmail-safe email (remove dots), and then log the user in.
+
+If not found, we direct to an error page with a message based on the error code.
+
+*/
 
 require_once('connect.php');
 require_once('validations.php');
@@ -8,8 +19,6 @@ require_once('loginHelperFunctions.php');
 
 $id = validateID($_GET['id']);
 $token = validateToken($_GET['token']);
-
-//for testing
 
 if ($id&&$token)
 {

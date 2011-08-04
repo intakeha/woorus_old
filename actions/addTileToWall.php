@@ -1,5 +1,13 @@
 <?php
 
+/*
+addTileToWall.php
+
+This script is used when the user is adding an already made tile to their wall. The inputs are interest_id and
+tile_id. Given the inputs, we store the tile in the next available slot in their mosaic wall table & also keep track of it
+as a user interest. If it's full, we message to the user that their wall is full.
+
+*/
 require_once('connect.php');
 require_once('validations.php');
 require_once('mosaicWallHelperFunctions.php');
@@ -40,6 +48,7 @@ if ($tile_placement == NULL)
 	$success_flag = 1;
 }
 
+//send output to front end
 $messageToSend = array('success' =>$success_flag, 'message'=>$success_message, 'tile_filename'=>$tile_filename, 'tile_id'=>$tile_id, 'interest_name'=>$tile_name, 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
 $output = json_encode($messageToSend);
 die($output);

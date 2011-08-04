@@ -1,10 +1,22 @@
 <?php
 
+/*
+changeSettings.php
+
+This script will be called whenever the user clicks save on the settings page. There are a few different flows:
+a)Ther user has set a password vs. the user has not set a password (facebook user)
+b) The user is changing their password (if no password set, does not have to match original)
+c) The user is changing their email (do not autopopulate that field)
+
+We save the new values and then create a new token if the user is changing their email/they need to activate
+before they can log in with it.
+*/
+
 session_start();
-require('connect.php');
-require('validations.php');
-require('facebook.php');
-require('registerHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('facebook.php');
+require_once('registerHelperFunctions.php');
 
 $id = $_SESSION['id'];
 
@@ -18,10 +30,7 @@ $f_password_old = $_POST['old_password']; // need to check that this is valid
 $f_password_new = $_POST['new_password'];
 $f_password_confirm = $_POST['confirm_password']; // need to check that this matches
 
-
-
-//check if user has a password or not, based on  info
-
+//check if user has a password or not, based on info
 if ($_SESSION['password_created'] == 1)
 {
 	//will determine if either user has nothing entered in password fields or something in every field, & validate that its a valid password in each field if changing password
@@ -110,8 +119,6 @@ $_SESSION['user_info_set'] = 1; //if theyre saving, user info is set
 //for both options, update settings table & redirect
 $query_settings = "UPDATE `settings` SET interest_notify =  '".mysql_real_escape_string($f_interest_notify)."', message_notify =  '".mysql_real_escape_string($f_message_notify)."', contact_notify =  '".mysql_real_escape_string($f_contact_notify)."', missed_call_notify =  '".mysql_real_escape_string($f_missed_call_notify)."' WHERE user_id = '".mysql_real_escape_string($id)."' ";
 $result = mysql_query($query_settings, $connection) or die ("Error 2");
-
-// header( 'Location: ../canvas.php?page=settings') ;
 
 sendToJS(1, $success_message);
 

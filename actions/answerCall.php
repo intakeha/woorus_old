@@ -1,14 +1,17 @@
 <?
 
+/*
+answerCall.php
+
+This script is called after we have identified the user is receiving a call & the input is their response.
+The user can answer a call (accepted). reject a call (rejected) or miss a call (missed)
+If the user accepts the call, we set them as "on_call", recalculate their social status, and then signal
+the front end to start the call.
+
+*/
+
 require_once('connect.php');
 require_once('validations.php');
-
-session_start();
-$user_id= $_SESSION['id'];
-
-//connect
-$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
-mysql_select_db($db_name);
 
 //$call_accepted = validateCallOutcome($_POST["call_accepted"]); 
 //$other_user_id= validateUserId($_POST["user_id_caller"]); 
@@ -18,6 +21,13 @@ mysql_select_db($db_name);
 $call_accepted = "accepted"; 
 $conversation_id = 10;
 $other_user_id= 139;
+
+session_start();
+$user_id= $_SESSION['id'];
+
+//connect
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+mysql_select_db($db_name);
 
 //set call as accepted or rejected
 $conversation_query = "UPDATE `conversations`

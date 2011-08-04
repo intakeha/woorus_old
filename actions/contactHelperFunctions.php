@@ -1,5 +1,25 @@
 <?php
 
+/*
+Functions for contacts:
+
+checkContact($user_id, $other_user_id, $connection)
+	->standalone search to see if other_user_id is a contact of user
+	
+checkContact_search($user_id)
+	->check to see if search is NULL or contains id (id means they are a contact)
+	
+checkBlock($user_id, $other_user_id, $connection)
+	->standalone search to see if one user has blocked the other
+	
+checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee)
+	->check to see if search is NULL or contains id (id means they are a contact)
+
+calculateOnlineStatus($session_set, $on_call, $user_active)
+	->based 3 inputs, determine away, idle, on call, etc
+*/
+
+
 function checkContact($user_id, $other_user_id, $connection){
 
 	$check_contact_query = "SELECT id

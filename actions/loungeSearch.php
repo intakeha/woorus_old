@@ -1,9 +1,9 @@
 <?php
 
-require('connect.php');
-require('validations.php');
-require('mosaicWallHelperFunctions.php');
-require('contactHelperFunctions.php'); 
+require_once('connect.php');
+require_once('validations.php');
+require_once('mosaicWallHelperFunctions.php');
+require_once('contactHelperFunctions.php'); 
 
 session_start();
 

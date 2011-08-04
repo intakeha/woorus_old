@@ -1,4 +1,18 @@
 <?php
+
+/*
+activate.php
+
+This script is used when the user first registers for our site. We create an access token and send them an email
+with a link to activate.php?id=USER_ID&token=TOKEN. 
+
+We search for the id/token combination and if found, we activate the user, sign them in, and signal the front end 
+to redirect to the home page. At this point, we also create the empty rows for their mosaic wall.
+
+If not found, we direct to an error page with a message based on the error code.
+
+*/
+
 require_once('connect.php');
 require_once('validations.php');
 require_once('loginHelperFunctions.php');

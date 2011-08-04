@@ -1,5 +1,12 @@
 <?php
 
+/*
+callSearch.php
+
+This script will be called by the front at set intervals & will look for calls which have not yet been received. Once it finds a call,
+it will return a JSON array with the call information to the callee, including information about the caller.
+*/
+
 require_once('connect.php');
 require_once('validations.php');
 
@@ -15,7 +22,7 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				FROM`conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 DAY) 
+				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 5 SECOND) 
 				AND call_received = 0  AND call_accepted IS NULL";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");

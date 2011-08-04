@@ -1,5 +1,13 @@
 <?php
 
+/*
+checkSession.php
+
+This function is called by the front end to check if hte user is signed in when they come to our homepage. If the session
+variables are set, we redirect to home page.
+
+*/
+
 require('validations.php');
 
 session_start();  

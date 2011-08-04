@@ -1,21 +1,32 @@
 <?php
 
-require('connect.php');
-require('validations.php');
+/*
+blockUser.php
 
-session_start();
-$user_id_blocker = $_SESSION['id'];
+This script is used when the user selects to block a user . Inputs are the id of the other user & a short reason.
+If the user has already blocked (or once has & unblocked), we update the existing row to active. If they have not blocked before,
+we add a new line and set it to active. Then remove from each others contacts & re-calculate the blockee's block status. 
+
+*/
+
+require_once('connect.php');
+require_once('validations.php');
+
 //$user_id_blockee = validateUserId($_POST["user_id_blockee"]); 
 //$block_reason = $_POST["block_reason"]; 
 
 $user_id_blockee = 132;
 $block_reason = "They were rude!";
 
+//get session variables
+session_start();
+$user_id_blocker = $_SESSION['id'];
+
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-
+//update block line in DB, or creat a new one if its not there
 $update_query = "UPDATE `blocks` SET active = 1, update_time = NOW() , block_reason = '".mysql_real_escape_string($block_reason)."' 
 				WHERE user_blockee = '".mysql_real_escape_string($user_id_blockee)."' AND user_blocker = '".mysql_real_escape_string($user_id_blocker)."' ";
 $result = mysql_query($update_query, $connection) or die ("Error");

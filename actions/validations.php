@@ -694,7 +694,7 @@ function validateUserId($user_id){
 }
 
 
-function validateOffset($number){
+function validateNumber($number){
 
 	if (!preg_match('/^[0-9 ]+$/', $number)){
 		$error_message = "Error.";
@@ -715,7 +715,7 @@ function validateMessage($message_text)
 		sendToJS(0, $error_message);
 	}
 	
-	elseif(strlen($message_text) > 50)
+	elseif(strlen($message_text) > 500)
 	{
 		$error_message = "Your message is too long. Stop writing & start talking!";
 		sendToJS(0, $error_message);

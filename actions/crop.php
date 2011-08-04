@@ -1,8 +1,18 @@
 <?php
-require('imageFunctions.php');
-require('connect.php');
-require('validations.php');
-require('mosaicWallHelperFunctions.php');
+
+/*
+crop.php
+
+Scipt used when a user is creating their own tile from an uploaded picture. The inputs are the coordinates of the
+crop, as well as the width & height, the name of the input file, and the name of the new tile
+
+It creates the thumbnail image and then stores it as a user interest and on the user's mosaic wall.
+*/
+
+require_once('imageFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('mosaicWallHelperFunctions.php');
 
 $thumb_width = "75";		// Width of thumbnail image
 $thumb_height = "75";		// Height of thumbnail image
@@ -10,12 +20,12 @@ $thumb_height = "75";		// Height of thumbnail image
 session_start();
 $user_id = $_SESSION['id'];
 
-$x1 = $_POST["x1"];
-$y1 = $_POST["y1"];
-$x2 = $_POST["x2"];
-$y2 = $_POST["y2"];
-$w = $_POST["w"];
-$h = $_POST["h"];
+$x1 = validateNumber($_POST["x1"]);
+$y1 = validateNumber($_POST["y1"]);
+$x2 = validateNumber($_POST["x2"]);
+$y2 = validateNumber($_POST["y2"]);
+$w = validateNumber($_POST["w"]);
+$h = validateNumber($_POST["h"]);
 $picture_name_input= $_POST["cropFile"]; 
 $tile_name = validateInterestTag($_POST["assign_tag"]);
 

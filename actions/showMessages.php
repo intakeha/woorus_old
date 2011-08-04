@@ -1,9 +1,9 @@
 <?php
 
-require('connect.php');
-require('validations.php');
-require('timeHelperFunctions.php');
-require('contactHelperFunctions.php'); 
+require_once('connect.php');
+require_once('validations.php');
+require_once('timeHelperFunctions.php');
+require_once('contactHelperFunctions.php'); 
 
 session_start();
 $user_id= $_SESSION['id'];
