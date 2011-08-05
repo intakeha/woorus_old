@@ -55,12 +55,37 @@
             </div>
             </li>
         </ul>
-        <div id="pagination_mail"></div>
+        <div>
+        	<div class="pagination_mail" id="mail_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+        	<div class="pagination_mail" id="mail_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
+        </div>
     </div>
     <div id="message_panel">
-    	<div id="mail_profile">
+    	<div id="message_container">
+            <div id="mail_profile">
+                <a class="search_profile" href="#"><img src="images/users/james.png"></a>
+                <div id="message_user_info">
+                    <div class="social_status float_right"></div>
+                    <div class="social_status warning_status float_right"></div>
+                    Brad <br /><span>February 14, 2012 8:23 PM</span>
+                    <div id="message_online_status" class="online_status"></div>
+				</div>
+                <div class="action_buttons">
+                    <a class="add_button_sm" href="#"></a>
+                    <a class="write_button_sm" href="#"></a>
+                    <a class="talk_button_sm" href="#"></a>
+                </div>
+            </div>
+            <div id="message">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br />
+            </div>
+            <div id="response">
+            	<form id="message_reply_form" action="../actions/reply.php" method="POST">
+                    <textarea id="response_box" name="response" cols="69" rows="7"></textarea>
+                    <input class="buttons float_right" id="reply_button" type="submit" name="reply" value="Reply">
+                </form>
+            </div>
         </div>
-        <div id="message"></div>
-        <div id="response"></div>
     </div>
+    <div id="pagination_mail"></div>
 </div>

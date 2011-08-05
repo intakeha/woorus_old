@@ -297,6 +297,8 @@ a.arrows {
 	z-index: 1000;
 }
 
+/* Pagination for the slider */
+
 .pagination li {
 	float:left;
 }
