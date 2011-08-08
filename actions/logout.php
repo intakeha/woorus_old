@@ -1,7 +1,7 @@
 <?php
 ob_start();
-require('connect.php');
-require('facebook.php');
+require_once('connect.php');
+require_once('facebook.php');
 
 session_start();
 $user_id = $_SESSION['id'];

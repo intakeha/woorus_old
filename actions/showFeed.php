@@ -25,8 +25,8 @@ $missed_calls_count_query = "SELECT COUNT(*)
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
 $row = mysql_fetch_assoc($missed_calls_count_result);
 $missed_call_count = $row['COUNT(*)'];
-$feed_array['missed_calls_count'][1]['call_count']= $missed_call_count;
-
+//$feed_array['missed_calls_count'][1]['call_count']= $missed_call_count;
+$feed_array['call_count']= $missed_call_count;
 
 //get missed calls
 $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time, users.first_name, profile_picture.profile_filename_small
@@ -62,7 +62,8 @@ $new_contacts_count_query = "SELECT COUNT(*)
 $new_contacts_count_result = mysql_query($new_contacts_count_query, $connection) or die ("Error 2");
 $row = mysql_fetch_assoc($new_contacts_count_result);
 $new_contacts_count = $row['COUNT(*)'];
-$feed_array['new_contacts_count'][1]['contact_count']= $new_contacts_count;
+//$feed_array['new_contacts_count'][1]['contact_count']= $new_contacts_count;
+$feed_array['new_contacts_count']= $new_contacts_count;
 
 //get newly added contacts
 $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, users.first_name, profile_picture.profile_filename_small
@@ -97,13 +98,13 @@ $new_interests_count_query = "SELECT COUNT(*)
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)";
 
 $new_interests_count_result = mysql_query($new_interests_count_query, $connection) or die ("Error 3");
 $row = mysql_fetch_assoc($new_interests_count_result);
 $new_interests_count = $row['COUNT(*)'];
-$feed_array['new_interests_count'][1]['interest_count']= $new_interests_count;
-
+//$feed_array['new_interests_count'][1]['interest_count']= $new_interests_count;
+$feed_array['interest_count']= $new_interests_count;
 
 //get newly added  interests from contacts
 $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, tiles.tile_filename
@@ -112,7 +113,7 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
 		LIMIT 0, 5";
 
 $new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error 3");
@@ -147,8 +148,8 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 	//get results of which interest we chose.
 	$row = mysql_fetch_assoc($common_interest_id_result);
 	$interest_id = $row['interest_id'];
-	$feed_array['interest_chosen'][1]['interest_id']= $interest_id;
-	$feed_array['interest_chosen'][1]['interest_name']= $row['interest_name'];
+	$feed_array['interest_chosen']['interest_id']= $interest_id;
+	$feed_array['interest_chosen']['interest_name']= $row['interest_name'];
 
 	//get count of users w/ common interest, based on interest chosen above
 	$common_interests_count_query = "SELECT DISTINCT mosaic_wall.user_id
@@ -163,7 +164,8 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 	$common_interests_count_result = mysql_query($common_interests_count_query, $connection) or die ("Error");
 	$common_interests_count = mysql_num_rows($common_interests_count_result);
 	
-	$feed_array['common_interests_count'][1]['user_count']= $common_interests_count;
+	//$feed_array['common_interests_count'][1]['user_count']= $common_interests_count;
+	$feed_array['common_interests_count']= $common_interests_count;
 
 
 	//get users w/ common interest, based on interest chosen above

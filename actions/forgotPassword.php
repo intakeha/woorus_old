@@ -2,8 +2,8 @@
 
 //not done--needs to send email to user.
 
-require('connect.php');
-require('validations.php');
+require_once('connect.php');
+require_once('validations.php');
 
 //get from form
 $f_email_address = get_standard_email(validateEmail($_POST['email']));

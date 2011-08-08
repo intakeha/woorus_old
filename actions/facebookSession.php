@@ -1,11 +1,11 @@
 <?php
 
-require('facebook.php');
-require('connect.php');
-require('validations.php');
-require('loginHelperFunctions.php');
-require('imageFunctions.php');
-require('mosaicWallHelperFunctions.php');
+require_once('facebook.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('loginHelperFunctions.php');
+require_once('imageFunctions.php');
+require_once('mosaicWallHelperFunctions.php');
 
 //settings for image tiles
 $thumb_width = "75";		// Width of thumbnail image
@@ -370,7 +370,12 @@ $h = $thumb_width;
 $scale2 = $thumb_width/$w;
 $cropped = resizeThumbnailImage($thumb_image_location, $large_image_location, $w,$h,$x1,$y1,$scale2);
 
+//delete the temp file
+unlink($large_image_location);
+
 return $picture_name;
+
+
 
 }
 

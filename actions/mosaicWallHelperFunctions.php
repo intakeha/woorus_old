@@ -11,7 +11,7 @@ function getTilePlacement($user_id, $connection);
 Note--some of these functions are similar to ones in the facebook_connect scripts, but are different as they don't take in facebook info.
 */
 
-function getTilesOnWall($user_id, $connection){
+function getTilesOnWall($user_id, $tile_filename_array, $connection){
 	
 	$query_mosaic_wall = "SELECT mosaic_wall.user_id, mosaic_wall.tile_placement, mosaic_wall.tile_id, mosaic_wall.interest_id, interests.interest_name, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored
 				FROM `mosaic_wall`
@@ -21,8 +21,6 @@ function getTilesOnWall($user_id, $connection){
 				ORDER BY `tile_placement`";
 				
 	$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 1");
-
-	$tile_filename_array = array();
 
 	//iterate through the mosaic wall rows
 	while ($row = mysql_fetch_assoc($result)){

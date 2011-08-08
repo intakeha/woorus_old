@@ -1,8 +1,8 @@
 <?php
 
-require('connect.php');
-require('validations.php');
-require('mailHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('mailHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -36,7 +36,7 @@ mysql_select_db($db_name);
 
 $delete_message_query = "UPDATE `mail` 
 				SET mail.".$me_delete." = 1 
-				WHERE mail.id =  '".$message_id."' AND mail.".$me_mail."  =  '".$user_id."' ";
+				WHERE mail.id =  '".mysql_real_escape_string($message_id)."' AND mail.".$me_mail."  =  '".mysql_real_escape_string($user_id)."' ";
 
 die($delete_message_query);
 
