@@ -18,39 +18,19 @@
     	<p>Your Woorus Activities This Week:</p>
 	
 	<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p>Missed Calls</a>
-		<ul>
-			<li><img src="images/users/james.png"/></li>
-			<li><img src="images/users/james.png"/></li>
-			<li><img src="images/users/james.png"/></li>
-			<li><img src="images/users/james.png"/></li>
-			<li><img src="images/users/james.png"/></li>
+		<ul id="list_missed_calls">
 		</ul>
         </div>
         <div><a id="anchor_contacts" class="updates_anchor"><p></p>Added You to Contacts</a>
-        	<ul>
-               	<li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
+        	<ul id="list_contacts">
             </ul>
         </div>
         <div><a id="anchor_contact_interests" class="updates_anchor"><p></p>New Interests of Contacts</a>
-        	<ul>
-				<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-				<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
-            	<li><img src="images/interests/41_1306185339.jpg"/></li>
+        	<ul id="list_contact_interests">
             </ul>
         </div>
         <div><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
-        	<ul>
-               	<li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
-                <li><img src="images/users/james.png"/></li>
+        	<ul id="list_interests">
             </ul>
 		</div>
     </div>
@@ -680,13 +660,43 @@
 		});
 		
 		$.getJSON("actions/showFeed.php",function(result){
+			var i=1, tileCount=0;
 			$('#anchor_missed_calls').find('p').append(result.call_count);
-			$.each(missed_calls, function(i, field){
-				alert(field.first_name);
-			});
+			if (result.call_count > 5) {tileCount=5} else {tileCount=result.call_count};
+			for (i=1;i<=tileCount;i++) {
+				if (result.missed_calls[i].profile_filename_small)
+				{source = "images/users/small/"+result.missed_calls[i].profile_filename_small}
+				else {
+					source = "images/global/silhouette_sm.png";}
+				$('#list_missed_calls').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.missed_calls[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+			};
 			$('#anchor_contacts').find('p').append(result.new_contacts_count);
+			if (result.new_contacts_count > 5) {tileCount=5} else {tileCount=result.new_contacts_count};
+			for (i=1;i<=tileCount;i++) {
+				if (result.new_contacts[i].profile_filename_small)
+				{source = "images/users/small/"+result.new_contacts[i].profile_filename_small}
+				else {
+					source = "images/global/silhouette_sm.png";}
+				$('#list_contacts').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.new_contacts[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+			};
 			$('#anchor_contact_interests').find('p').append(result.interest_count);
-			$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);			
+			if (result.interest_count > 5) {tileCount=5} else {tileCount=result.interest_count};
+			for (i=1;i<=tileCount;i++) {
+				if (result.new_interests[i].tile_filename)
+				{source = "images/interests/"+result.new_interests[i].tile_filename}
+				else {
+					source = "images/global/silhouette_sm.png";}
+				$('#list_contact_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.new_interests[i].interest_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+			};
+			$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);		
+			if (result.common_interests_count > 5) {tileCount=5} else {tileCount=result.common_interests_count};
+			for (i=1;i<=tileCount;i++) {
+				if (result.common_interests[i].profile_filename_small)
+				{source = "images/users/small/"+result.common_interests[i].profile_filename_small}
+				else {
+					source = "images/global/silhouette_sm.png";}
+				$('#list_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.common_interests[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+			};
 		});
 		
 	});
@@ -905,7 +915,17 @@
 		$('#updates_contact_interests').hide();
 		$('#updates_interests').hide();
 	}
+
+	function showTransparentUpdate(obj, tag){
+		obj.find('img').addClass('transparent_tile');
+		obj.find('img').before('<div class="transparent_update">'+tag+'</div>');
+	};
 	
+	function hideTransparentUpdate(obj){
+		obj.find('img').removeClass('transparent_tile');
+		obj.find('img').prev('div').remove();
+	};
+
 	function showStatus(obj, tag){
 		obj.find('img').addClass('transparent_tile');
 		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');

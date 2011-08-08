@@ -411,6 +411,17 @@
 	padding-top: 10px;
 }
 
+div.transparent_update {
+    font-weight: bold;
+    height: 60px !important;
+    position: absolute;
+    text-align: center;
+    width: 60px;
+    word-wrap: break-word;
+	font-size: 12px;
+	border: none !important;	
+}
+
 #updates img {
     margin: 5px 5px 0 0;
     width: 60px;
