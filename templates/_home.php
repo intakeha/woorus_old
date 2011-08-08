@@ -17,7 +17,7 @@
    	<div id="updates">
     	<p>Your Woorus Activities This Week:</p>
 	
-	<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p>115</p>Missed Calls</a>
+	<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p>Missed Calls</a>
 		<ul>
 			<li><img src="images/users/james.png"/></li>
 			<li><img src="images/users/james.png"/></li>
@@ -26,7 +26,7 @@
 			<li><img src="images/users/james.png"/></li>
 		</ul>
         </div>
-        <div><a id="anchor_contacts" class="updates_anchor"><p>12</p>Added You to Contacts</a>
+        <div><a id="anchor_contacts" class="updates_anchor"><p></p>Added You to Contacts</a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -35,7 +35,7 @@
                 <li><img src="images/users/james.png"/></li>
             </ul>
         </div>
-        <div><a id="anchor_contact_interests" class="updates_anchor"><p>173</p>New Interests of Contacts</a>
+        <div><a id="anchor_contact_interests" class="updates_anchor"><p></p>New Interests of Contacts</a>
         	<ul>
 				<li><img src="images/interests/41_1306185339.jpg"/></li>
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
@@ -44,7 +44,7 @@
             	<li><img src="images/interests/41_1306185339.jpg"/></li>
             </ul>
         </div>
-        <div><a id="anchor_interests" class="updates_anchor">People interested in <p>Tennis</p></a>
+        <div><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
         	<ul>
                	<li><img src="images/users/james.png"/></li>
                 <li><img src="images/users/james.png"/></li>
@@ -678,6 +678,17 @@
 				$('#profile_name').find('span').append("Unknown");
 			}
 		});
+		
+		$.getJSON("actions/showFeed.php",function(result){
+			$('#anchor_missed_calls').find('p').append(result.call_count);
+			$.each(missed_calls, function(i, field){
+				alert(field.first_name);
+			});
+			$('#anchor_contacts').find('p').append(result.new_contacts_count);
+			$('#anchor_contact_interests').find('p').append(result.interest_count);
+			$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);			
+		});
+		
 	});
 
 	$('#profile_frame').mouseover(function() {

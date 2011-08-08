@@ -449,6 +449,38 @@ a.arrows {
 
 /* Action Buttons */
 
+.talk_button {
+	display: block;
+	width: 74px;
+	height: 75px;
+	background:url(../images/global/action_buttons.png) no-repeat;
+	background-position: 0px 0px;
+}
+
+.write_button {
+	display: block;
+	width: 74px;
+	height: 75px;
+	background:url(../images/global/action_buttons.png) no-repeat;
+	background-position: -74px 0px;
+}
+
+.add_button {
+	display: block;
+	width: 74px;
+	height: 75px;
+	background:url(../images/global/action_buttons.png) no-repeat;
+	background-position: -148px 0px;
+}
+
+.block_button {
+	display: block;
+	width: 74px;
+	height: 75px;
+	background:url(../images/global/action_buttons.png) no-repeat;
+	background-position: -222px 0px;
+}
+
 .talk_button_sm {
 	display: block;
 	width: 62px;
