@@ -1,6 +1,17 @@
 <?php
-require('connect.php');
-require('timeHelperFunctions.php');
+/*
+showFeed.php
+
+This returns all the newsfeed data of 4 types, in the below form:
+missed calls, new contacts, new interests of contacts, common interests (from all users)
+
+{"call_count":"1","missed_calls":{"1":{"first_name":"Jim","user_id":"119","profile_filename_small":"119_profile_small_1312258753.jpg"}},
+"new_contacts_count":"1","new_contacts":{"1":{"first_name":"Test Wall Six","user_id":"139","profile_filename_small":null}},
+"interest_count":"1","new_interests":{"1":{"user_id":"138","interest_name":"Chonabot","tile_filename":"_1306485384.jpg"}},
+"common_interests_count":1,"common_interests":{"1":{"first_name":"Test Wall Five","user_id":"138","profile_filename_small":null}}}
+*/
+require_once('connect.php');
+require_once('timeHelperFunctions.php');
 
 
 //connect
@@ -195,6 +206,9 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 		$common_interests_iterator++;
 	}
 
+}else{
+	//if the user has no interests, cannot have any common interests
+	$feed_array['common_interests_count']= 0;
 }
 
 $output = json_encode($feed_array);

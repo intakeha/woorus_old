@@ -1,5 +1,14 @@
 <?php
 
+/*
+facebookSessionphp
+
+This is when a user logs in with facebook. We check to see if theyve logged in before (by email and facebook user ID), and then take them to the settings page
+if their info is not all set. If they have already set all the info, we take them to the homepage.
+
+If its their first time, we download their info via api & auto-populate their intersts on their mosaic wall.
+*/
+
 require_once('facebook.php');
 require_once('connect.php');
 require_once('validations.php');

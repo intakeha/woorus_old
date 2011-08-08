@@ -1,38 +1,10 @@
 <?php
-//validation functions
 
-//-------------------------for testing-----------------------------------------//
 /*
-$f_first_name = validateFirstName("Alison");
-$f_last_name = validateLastName("Murphy");
+validations.php
 
-echo "$f_first_name \n $f_last_name \n";
-
-$f_visual_email = validateEmail("Alison.Claire.Murphy@gmail.com");
-$f_email_address = get_standard_email($f_visual_email);
-
-$f_email_check = "Alison.Claire.Murphy@gmail.com";
-$email_match = checkEmail($f_visual_email, $f_email_check);
-
-
-echo "$f_visual_email \n$f_email_address \n $f_email_check \n";
-
-$f_password = validatePassword("abc123");
-$f_gender = validateGender("M");
-
-echo "$f_password \n";
-echo "$f_gender \n";
-
-$f_birthday_month = ValidateBirthdayMonth("9");
-$f_birthday_day = ValidateBirthdayDay("9");
-$f_birthday_year = ValidateBirthdayYear("1986");
-$f_birthday = ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year);
-
-echo "$f_birthday \n";
-
-$f_user_city = validateCity("Palo Alto, CA");
-
-echo "$f_user_city \n"; */
+All validations for user entered fields.
+*/
 
 //-------------------------Register / Settings validation functions-----------------------------------------//
 

@@ -1,9 +1,13 @@
 <?php
+/*
+savePassword.php
 
+If the user has to reset their password, this script is called when they are saving the new one.
+*/
 session_start();
-require('connect.php');
-require('validations.php');
-require('loginHelperFunctions.php');
+require_once('connect.php');
+require_once('validations.php');
+require_once('loginHelperFunctions.php');
 
 //get ID from session variable
 $id = $_SESSION['id'];
@@ -16,7 +20,6 @@ checkPassword($f_password_new, $f_password_confirm);
 
 //encrypt password
 $f_password_new = md5($f_password_new);
-
 
 //open database connection
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");

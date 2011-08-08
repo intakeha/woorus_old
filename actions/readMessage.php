@@ -1,4 +1,10 @@
 <?php
+/*
+readMessage.php
+
+This script is when the user is reading their "big" message. The inputs are the message Id & whether its the inbox or outbox.
+We check that the user 
+*/
 
 require_once('connect.php');
 require_once('validations.php');

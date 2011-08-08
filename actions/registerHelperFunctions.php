@@ -1,8 +1,15 @@
 <?php
 
+/*
+registerHelperFunctions.php
+
+checkEmailInSystem($email)
+--> check to see if the email exists in our system
+*/
+
 function checkEmailInSystem($email)
 {
-	require('connect.php');
+	require_once('connect.php');
 	//open database connection
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
 	mysql_select_db($db_name);

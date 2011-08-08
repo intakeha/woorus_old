@@ -1,5 +1,11 @@
 <?php
+/*
+sendOutsideEmail.php
 
+This sounds email to outside email accounts--to be used for activate, password change, notifications, etc
+*/
+
+//hardcoding
 $to = "alisonclairemurphy@gmail.com";
 $subject = "Does this work?";
 $message_text = "Test HTML--Send mail from woorus";

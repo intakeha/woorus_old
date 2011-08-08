@@ -1,8 +1,12 @@
 <?php
-require('connect.php');
-require('validations.php');
-require('timeHelperFunctions.php');
-require('contactHelperFunctions.php'); 
+/*
+showMissedCalls.php
+*/
+
+require_once('connect.php');
+require_once('validations.php');
+require_once('timeHelperFunctions.php');
+require_once('contactHelperFunctions.php'); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

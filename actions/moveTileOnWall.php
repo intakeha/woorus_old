@@ -1,11 +1,14 @@
 <?php
-require('connect.php');
-require('validations.php');
-require('mosaicWallHelperFunctions.php');
-
 /*
-This is for when a user deletes a tile from their wall. 
+moveTileOnWall.php
+
+This is for when a user deletes a tile from their wall or moves the tiles around. It takes in the full array of tile IDs & 
+gets the associated interests from the tile.  If the user has 35 or fewer tiles, it zeros out the last tile--this is in case of a delete.
 */
+
+require_once('connect.php');
+require_once('validations.php');
+require_once('mosaicWallHelperFunctions.php');
 
 session_start();
 $user_id = $_SESSION['id'];

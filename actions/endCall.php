@@ -1,4 +1,9 @@
 <?php
+/*
+endCall.php
+
+This is a WIP
+*/
 
 require_once('connect.php');
 require_once('validations.php');

@@ -1,10 +1,14 @@
 <?php
+/*
+login.php
 
-//needs to update last login table
-
-require('connect.php');
-require('validations.php');
-require('loginHelperFunctions.php');
+This checks to see if the email/password combination is correct & if so, logs the user in.
+We set session variables, set the user to user_active = 1, session_set = 1, on_call = 0 & set last login to NOW.
+We return an error message if the email does not exist or the password is incorrect.
+*/
+require_once('connect.php');
+require_once('validations.php');
+require_once('loginHelperFunctions.php');
 
 //get from the form
 $f_email_address = validateEmail($_POST['email']);
@@ -69,7 +73,7 @@ function authenticate($email, $pass)
 		{
 			//this is where we would need to say welcome back
 			//need to set active_user to 1
-			$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($id)."'";
+			$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($id)."' ";
 			$result = mysql_query($query_users, $connection) or die ("Error");
 		}
 		

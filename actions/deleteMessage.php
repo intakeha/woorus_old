@@ -1,4 +1,12 @@
 <?php
+/*
+deleteMessage.php
+
+This script will mark a message as deleted. The inputs are the message id and if the user is deleting from their inbox or outbox.
+We also check to make sure that the message belongs to that user. (e.g. they can delete out of their inbox if they received it & can delete
+out of their outbox if they sent it)
+*/
+
 
 require_once('connect.php');
 require_once('validations.php');

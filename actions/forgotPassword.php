@@ -1,6 +1,12 @@
 <?php
 
-//not done--needs to send email to user.
+/*
+forgotPassword.php
+
+If the user has forgotten their password, we will create a token for their user ID and send to their email
+(Still needs to send the email to the user)
+*/
+
 
 require_once('connect.php');
 require_once('validations.php');
@@ -14,7 +20,6 @@ $returned_id = checkUser($f_email_address);
 if ($returned_id != NULL)
 {
 	//connect
-	require('connect.php');
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 
 	//create new token from randomly generated number, encrypt & put into password_token
@@ -35,7 +40,7 @@ else
 
 function checkUser($email)
 {
-	require('connect.php');
+	require_once('connect.php');
 	//connect
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 

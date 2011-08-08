@@ -1,9 +1,15 @@
 <?php
+/*
+showAddedToContacts.php
 
-require('connect.php');
-require('validations.php');
-require('timeHelperFunctions.php');
-require('contactHelperFunctions.php'); 
+We call this script from the main newsfeed page, if the user clicks to see all the other users who added them as a contract.
+It goes a search of all users who have added the current user as a contact, based on offset.
+
+*/
+require_once('connect.php');
+require_once('validations.php');
+require_once('timeHelperFunctions.php');
+require_once('contactHelperFunctions.php'); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -37,7 +43,7 @@ $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, use
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
 		LEFT OUTER JOIN `user_login` on  user_login.user_id = contacts.user_contacter
 		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
-		LIMIT ".$offset.", 20";
+		LIMIT ".mysql_real_escape_string$offset).", 20";
 
 $new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error 2");
 

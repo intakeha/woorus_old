@@ -1,6 +1,13 @@
 <?php
+/*
+interestList.php
 
-require('connect.php');
+This is for the autopopulate function from the front end
+WIP--needs to look at the banned words.
+
+*/
+
+require_once('connect.php');
 
 $q =  strtolower($_GET["q"]); //need to validate!!
 

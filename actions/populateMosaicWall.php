@@ -1,4 +1,10 @@
 <?php
+/*
+populateMosaicWall.php
+
+This returns all the tiles on a users own mosaic wall
+*/
+
 require_once('connect.php');
 require_once('mosaicWallHelperFunctions.php');
 

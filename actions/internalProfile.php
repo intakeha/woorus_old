@@ -1,4 +1,9 @@
 <?php
+/*
+internalProfile.php
+
+This just returns the user info to display on the homapage (feed into is in a different script)
+*/
 
 require_once('connect.php');
 require_once('contactHelperFunctions.php'); 

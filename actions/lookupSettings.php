@@ -1,9 +1,11 @@
 <?php
+/*
+lookupSettings.php
 
-require('connect.php');
+This is called when the user clicks on the "Settings page" to pre-populate the form
+*/
 
-//this is called when the user clicks on the "Settings page" to pre-populate the form
-
+require_once('connect.php');
 session_start();
 
 //connect

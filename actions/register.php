@@ -1,9 +1,14 @@
 <?php
-require('connect.php');
-require('validations.php');
-require('registerHelperFunctions.php');
+/*
+register.php
 
-//need to check for under 13
+This takes in all the values & validates--stops at the captcha
+*/
+
+require_once('connect.php');
+require_once('validations.php');
+require_once('registerHelperFunctions.php');
+
 
 $f_first_name = validateFirstName($_POST['first_name']);
 $f_last_name = validateLastName($_POST['last_name']);

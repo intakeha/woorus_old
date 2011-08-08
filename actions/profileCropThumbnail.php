@@ -1,4 +1,9 @@
 <?php
+/*
+profileCropThumbnail.php
+
+This takes in the coorindates when the user is cropping their thumbnail profile picture and then saves the small picture.
+*/
 require_once('imageFunctions.php');
 require_once('connect.php');
 require_once('validations.php');
@@ -10,7 +15,6 @@ $profile_height = "80";		// Height of profile picture
 session_start();
 $user_id = $_SESSION['id'];
 
-
 $x1 = $_POST["x1"];
 $y1 = $_POST["y1"];
 $x2 = $_POST["x2"];
@@ -18,18 +22,6 @@ $y2 = $_POST["y2"];
 $w = $_POST["w"];
 $h = $_POST["h"];
 $picture_name_input= $_POST["cropFile"];  //this may change?
-
-
-/*
-$x1  = 100;
-$y1 = 100;
-$x2 = 180;
-$y2 = 180;
-$w = 80;
-$h = 80;
-
-$picture_name_input= "142_profile_1311908951.jpg";
-*/
 
 //if coordinates are null, send error message to JS
 if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input == NULL ){

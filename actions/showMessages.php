@@ -1,4 +1,10 @@
 <?php
+/*
+removeContact.php
+
+
+*/
+
 
 require_once('connect.php');
 require_once('validations.php');
@@ -46,7 +52,7 @@ $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, u
 					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' and contacts.active = 1
 					LEFT JOIN `user_login` on  user_login.user_id = users.id
 					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0
-					LIMIT ".$offset.", 5";
+					LIMIT ".mysql_real_escape_string($offset).", 5";
 					
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 

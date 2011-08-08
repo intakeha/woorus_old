@@ -1,14 +1,18 @@
 <?php
-require('connect.php');
-require('mosaicWallHelperFunctions.php');
-require('contactHelperFunctions.php');
-require('validations.php');
+/*
+showExternalProfile.php
+
+Sends back the user info & mosaic wall based on the user selected, as long as the user is not blocked
+*/
+require_once('connect.php');
+require_once('mosaicWallHelperFunctions.php');
+require_once('contactHelperFunctions.php');
+require_once('validations.php');
 
 session_start();
 $user_id = $_SESSION['id'];
 
-$other_user_id  = 119; //hardcode for now
-
+$other_user_id  = 119; //hardcode for testing
 //$other_user_id  = validateUserId($_POST["other_user_id"]); 
 
 //connect
@@ -23,8 +27,8 @@ if ($user_blocked == 0){
 	
 	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, users.user_city_id, contacts.user_contactee 
 						FROM `users` 
-						LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."'
-						WHERE users.id = '".$other_user_id."' AND users.active_user = 1 ";
+						LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter = '".$user_id."'
+						WHERE users.id = '".mysql_real_escape_string($other_user_id)."' AND users.active_user = 1 ";
 						
 	$user_info_result = mysql_query($user_info_query, $connection) or die ("Error");
 

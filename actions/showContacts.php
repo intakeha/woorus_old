@@ -1,5 +1,9 @@
 <?php
+/*
+showContacts.php
 
+On the contacts page, shows the user all their contacts based on an offset
+*/
 require_once('connect.php');
 require_once('validations.php');
 require_once('contactHelperFunctions.php'); 
@@ -21,7 +25,8 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 					LEFT JOIN `users` on users.id = contacts.user_contactee
 					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contactee
 					LEFT JOIN `user_login` on  user_login.user_id =contacts.user_contactee
-					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 LIMIT ".$offset.", 10";
+					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 
+					LIMIT ".mysql_real_escape_string$offset).", 10";
 					
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
 
