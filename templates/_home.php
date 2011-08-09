@@ -37,167 +37,7 @@
    	<div id="updates_missed_calls" class="updates_results" style="display: none;">
     	<div class="dashboard_view">back</div>You have <span>115 missed calls</span> this week
         <div class="updates_results_list">
-            <ul>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_busy">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_offline">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_busy">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_offline">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_busy">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_offline">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Busy')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_busy">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Offline')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_offline">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Online')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_online">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
-                <li onmouseover="showStatus($(this), 'Away')" onmouseout="hideStatus($(this))">
-                    <a href="#">
-                    <div class="contact_profile contact_away">
-                            <img src="images/users/james.png"/>
-                    </div>
-                    <div>James Andrew McAvoy</div>
-                    </a>
-                </li>
+            <ul id="show_missed_calls">
             </ul>
         </div>
     </div>
@@ -697,6 +537,41 @@
 					source = "images/global/silhouette_sm.png";}
 				$('#list_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.common_interests[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
+		});
+
+		$.getJSON("actions/showMissedCalls.php",function(result){
+			var missedCallOffset = $('input[name=offset]').val();
+			var missedCallPagination = 20;	
+			$.each(result, function(i, field){
+				if (i == 0){
+					alert(field.missed_calls_count);
+				} else {
+					switch (field.online_status){
+						case "online":
+							statusText = "Online"
+							statusClass = "contact_online"
+							break
+						case "offline":
+							statusText = "Offline"
+							statusClass = "contact_offline"
+							break
+						case "away":
+							statusText = "Away"
+							statusClass = "contact_away"
+							break
+						case "busy":
+							statusText = "Busy"
+							statusClass = "contact_busy"
+							break
+					};
+					if (field.profile_filename_small)
+						{source = "images/users/small/"+field.profile_filename_small}
+					else {
+						source = "images/global/silhouette_sm.png";}
+					$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+					
+				}
+			})
 		});
 		
 	});
