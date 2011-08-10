@@ -475,12 +475,16 @@ div.transparent_update {
 	cursor: hand;	
 }
 
-#updates_interest_display li {
+#show_contact_interests li {
 	float:left; 
 	width:75px; 
 	height:75px;
 	text-align: center;
 	margin: 2px;
+}
+
+#show_missed_calls a:hover, #show_contacts a:hover, #show_contact_interests a:hover, #show_interests a:hover{
+	text-decoration: none;	
 }
 
 /* Settings Page */
