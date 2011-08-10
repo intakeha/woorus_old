@@ -15,12 +15,12 @@ $profile_height = "80";		// Height of profile picture
 session_start();
 $user_id = $_SESSION['id'];
 
-$x1 = $_POST["x1"];
-$y1 = $_POST["y1"];
-$x2 = $_POST["x2"];
-$y2 = $_POST["y2"];
-$w = $_POST["w"];
-$h = $_POST["h"];
+$x1 = validateCoordinates($_POST["x1"]);
+$y1 = validateCoordinates($_POST["y1"]);
+$x2 = validateCoordinates($_POST["x2"]);
+$y2 = validateCoordinates($_POST["y2"]);
+$w = validateCoordinates($_POST["w"]);
+$h = validateCoordinates($_POST["h"]);
 $picture_name_input= $_POST["cropFile"];  //this may change?
 
 //if coordinates are null, send error message to JS

@@ -566,6 +566,18 @@ function validateInterestTag($tag)
 
 }
 
+function validateCoordinates($number){
+
+	if (!preg_match('/^[0-9 ]+$/', $number)){
+		$error_message = "Please click on the image & crop to create your tile.";
+		sendToJS(0, $error_message);
+	}else
+	{
+		return $number;
+	}
+
+}
+
 //-------------------------Search validation functions-----------------------------------------//
 
 function validateInterestTag_Search($tag)

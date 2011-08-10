@@ -2,10 +2,8 @@
 /*
 readMessage.php
 
-This script is when the user is reading their "big" message. The inputs are the message Id & whether its the inbox or outbox.
-We check that the user 
+This lets the user read the inbox or sent messages based on inputs of message ID and inbox_or_sent flag
 */
-
 require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');

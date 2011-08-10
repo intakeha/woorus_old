@@ -1,11 +1,9 @@
 <?php
 /*
-removeContact.php
+readMessage.php
 
-
+This shows the 5 messages in inbox or sent messages based on inputs of offset and inbox_or_sent flag
 */
-
-
 require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');

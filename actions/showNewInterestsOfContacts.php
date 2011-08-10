@@ -31,7 +31,7 @@ $new_interests_count_query = "SELECT COUNT(*)
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)";
 
 $new_interests_count_result = mysql_query($new_interests_count_query, $connection) or die ("Error 3");
 $row = mysql_fetch_assoc($new_interests_count_result);
@@ -46,7 +46,7 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id		
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
 		LIMIT ".mysql_real_escape_string($offset).", 30";
 
 

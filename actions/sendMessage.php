@@ -2,6 +2,7 @@
 /*
 sendMessage.php
 
+This sends a message form one user to another. The input needs to be the recipient's ID & the message
 */
 require_once('connect.php');
 require_once('validations.php');

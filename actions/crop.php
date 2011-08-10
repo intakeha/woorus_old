@@ -20,12 +20,12 @@ $thumb_height = "75";		// Height of thumbnail image
 session_start();
 $user_id = $_SESSION['id'];
 
-$x1 = validateNumber($_POST["x1"]);
-$y1 = validateNumber($_POST["y1"]);
-$x2 = validateNumber($_POST["x2"]);
-$y2 = validateNumber($_POST["y2"]);
-$w = validateNumber($_POST["w"]);
-$h = validateNumber($_POST["h"]);
+$x1 = validateCoordinates($_POST["x1"]);
+$y1 = validateCoordinates($_POST["y1"]);
+$x2 = validateCoordinates($_POST["x2"]);
+$y2 = validateCoordinates($_POST["y2"]);
+$w = validateCoordinates($_POST["w"]);
+$h = validateCoordinates($_POST["h"]);
 $picture_name_input= $_POST["cropFile"]; 
 $tile_name = validateInterestTag($_POST["assign_tag"]);
 
