@@ -12,8 +12,8 @@ we add a new line and set it to active. Then remove from each others contacts & 
 require_once('connect.php');
 require_once('validations.php');
 
-//$user_id_blockee = validateUserId($_POST["user_id_blockee"]); 
-//$block_reason = $_POST["block_reason"]; 
+//$user_id_blockee = validateUserId(strip_tags($_POST["user_id_blockee"])); 
+//$block_reason = strip_tags($_POST["block_reason"]); 
 
 $user_id_blockee = 132;
 $block_reason = "They were rude!";

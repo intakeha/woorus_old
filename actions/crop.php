@@ -20,14 +20,14 @@ $thumb_height = "75";		// Height of thumbnail image
 session_start();
 $user_id = $_SESSION['id'];
 
-$x1 = validateCoordinates($_POST["x1"]);
-$y1 = validateCoordinates($_POST["y1"]);
-$x2 = validateCoordinates($_POST["x2"]);
-$y2 = validateCoordinates($_POST["y2"]);
-$w = validateCoordinates($_POST["w"]);
-$h = validateCoordinates($_POST["h"]);
-$picture_name_input= $_POST["cropFile"]; 
-$tile_name = validateInterestTag($_POST["assign_tag"]);
+$x1 = validateCoordinates(strip_tags($_POST["x1"]));
+$y1 = validateCoordinates(strip_tags($_POST["y1"]));
+$x2 = validateCoordinates(strip_tags($_POST["x2"]));
+$y2 = validateCoordinates(strip_tags($_POST["y2"]));
+$w = validateCoordinates(strip_tags($_POST["w"]));
+$h = validateCoordinates(strip_tags($_POST["h"]));
+$picture_name_input = strip_tags($_POST["cropFile"]); 
+$tile_name = validateInterestTag(strip_tags($_POST["assign_tag"]));
 
 //if coordinates are null, send error message to JS
 if ($x1 == NULL || $y1 == NULL || $x2 == NULL || $y2 == NULL || $w == NULL || $h == NULL || $picture_name_input == NULL || $tile_name == NULL){

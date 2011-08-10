@@ -14,9 +14,9 @@ session_start();
 
 $user_id = $_SESSION['id'];
 
-$tile_search = validateInterestTag_Search($_POST["tile_search"]);
-$query_type = validateQueryType($_POST["query_type"]);
-$offset = validateOffset($_POST["offset"]);
+$tile_search = validateInterestTag_Search(strip_tags($_POST["tile_search"]));
+$query_type = validateQueryType(strip_tags($_POST["query_type"]));
+$offset = validateOffset(strip_tags($_POST["offset"]));
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

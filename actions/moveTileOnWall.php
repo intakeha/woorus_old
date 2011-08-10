@@ -13,7 +13,7 @@ require_once('mosaicWallHelperFunctions.php');
 session_start();
 $user_id = $_SESSION['id'];
 
-$tile_array = explode(",", $_POST["tile_array"]); //need to validate this?
+$tile_array = explode(",", strip_tags($_POST["tile_array"])); //need to validate this?
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("Unable to connect to db.");

@@ -10,8 +10,8 @@ require_once('contactHelperFunctions.php');
 
 session_start();
 $user_id_mailer = $_SESSION['id'];
-//$user_id_mailee = validateUserId($_POST["user_id_mailee"]);
-//$mail_message =  validateMessage($_POST["mail_message"]); 
+//$user_id_mailee = validateUserId(strip_tags($_POST["user_id_mailee"]));
+//$mail_message =  validateMessage(strip_tags($_POST["mail_message"])); 
 
 $user_id_mailee = "132";
 $mail_message = "This is a message to another user";

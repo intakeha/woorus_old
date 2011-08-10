@@ -12,7 +12,7 @@ require_once('connect.php');
 require_once('validations.php');
 
 //get from form
-$f_email_address = get_standard_email(validateEmail($_POST['email']));
+$f_email_address = get_standard_email(validateEmail(strip_tags($_POST['email'])));
 
 //check if email is a valid email & get ID
 $returned_id = checkUser($f_email_address);

@@ -8,8 +8,8 @@ and then logs the user in to change their password.
 require_once('connect.php');
 require_once('validations.php');
 
-$id = validateID($_GET['id']);
-$token = validateToken($_GET['token']);
+$id = validateID(strip_tags($_GET['id']));
+$token = validateToken(strip_tags($_GET['token']));
 
 
 //check if id & token are not null

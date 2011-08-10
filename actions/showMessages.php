@@ -11,8 +11,8 @@ require_once('contactHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
-//$offset = validateOffset($_POST["offset"]); 
-//$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
+//$offset = validateOffset(strip_tags($_POST["offset"])); 
+//$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
 
 $offset  = 0; //hardcode for testing
 $inbox_or_sent = "inbox"; //hardcode for testing

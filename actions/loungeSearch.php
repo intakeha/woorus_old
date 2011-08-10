@@ -15,7 +15,7 @@ require_once('contactHelperFunctions.php');
 session_start();
 
 $user_id = $_SESSION['id'];
-//$offset = validateOffset($_POST["offset"]); 
+//$offset = validateOffset(strip_tags($_POST["offset"])); 
 
 //max offset?
 

@@ -13,9 +13,9 @@ the front end to start the call.
 require_once('connect.php');
 require_once('validations.php');
 
-//$call_accepted = validateCallOutcome($_POST["call_accepted"]); 
-//$other_user_id= validateUserId($_POST["user_id_caller"]); 
-//$conversation_id = validateConversationID($_POST["conversation_id"]); 
+//$call_accepted = validateCallOutcome(strip_tags($_POST["call_accepted"])); 
+//$other_user_id= validateUserId(strip_tags($_POST["user_id_caller"])); 
+//$conversation_id = validateConversationID(strip_tags($_POST["conversation_id"])); 
 
 //hardcode for testing
 $call_accepted = "accepted"; 

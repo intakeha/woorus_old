@@ -17,7 +17,7 @@ mysql_select_db($db_name);
 session_start();
 $user_id = $_SESSION['id'];
 
-//$interest_id = validateNumber($_POST["interest_id"]); 
+//$interest_id = validateNumber(strip_tags($_POST["interest_id"])); 
 
 $interest_id = 320;
 

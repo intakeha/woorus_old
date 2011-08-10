@@ -9,7 +9,7 @@ require_once('validations.php');
 
 session_start();
 $user_id_blocker = $_SESSION['id'];
-$user_id_blockee = $_POST["user_id_blockee"]; 
+$user_id_blockee = validateUserId(strip_tags($_POST["user_id_blockee"])); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

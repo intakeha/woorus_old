@@ -15,8 +15,8 @@ require_once('mailHelperFunctions.php');
 session_start();
 $user_id= $_SESSION['id'];
 
-//$message_id= validateMessageId($_POST["message_id"]); 
-//$inbox_or_sent =validateInboxFlag($_POST["inbox_or_sent"]); 
+//$message_id= validateMessageId(strip_tags($_POST["message_id"])); 
+//$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
 
 $message_id = "2";
 $inbox_or_sent = "sent";

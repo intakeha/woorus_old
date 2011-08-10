@@ -69,7 +69,7 @@ function validateFirstName($name)
 	}
 	else
 	{
-		return ucname(strip_tags(preg_replace('/\s+/', ' ', $name))); //remove tags, double spaces, etc
+		return ucname(preg_replace('/\s+/', ' ', $name)); //remove tags, double spaces, etc
 		
 	}
 
@@ -113,7 +113,7 @@ function validateLastName($name)
 	}
 	else
 	{
-		return ucname(strip_tags(preg_replace('/\s+/', ' ', $name))); //remove tags, double spaces, etc
+		return ucname(preg_replace('/\s+/', ' ', $name)); //remove tags, double spaces, etc
 	}
 
 }
@@ -139,7 +139,7 @@ function validateEmail($email)
 	}
 	else
 	{
-		return strip_tags($email);
+		return $email;
 	}
 
 }
@@ -199,7 +199,7 @@ function validatePassword($password)
 	}
 	else
 	{
-		return strip_tags($password);
+		return $password;
 	}
 	
 }
@@ -220,7 +220,7 @@ function validateGender($gender)
 	
 	else
 	{
-		return strip_tags($gender);
+		return $gender;
 	}
 }
 
@@ -239,7 +239,7 @@ function validateBirthdayMonth($month)
 	}
 	else
 	{
-		return strip_tags($month);
+		return $month;
 	}
 }
 
@@ -258,7 +258,7 @@ function validateBirthdayDay($day)
 	}
 	else
 	{
-		return strip_tags($day);
+		return $day;
 	}
 }
 
@@ -284,7 +284,7 @@ function validateBirthdayYear($year)
 		sendToJS(0, $error_message);
 	}else
 	{
-		return strip_tags($year);
+		return $year;
 	}
 }
 
@@ -356,7 +356,7 @@ function validateCity($city)
 	}
 	else
 	{
-		return ucname(strip_tags($city));
+		return ucname($city);
 	}
 }
 
@@ -374,7 +374,7 @@ function validatePasswordLogin($password)
 	}
 	else
 	{
-		return strip_tags($password);
+		return $password;
 	}
 	
 }
@@ -403,7 +403,7 @@ function validateEmail_emptyOK($email)
 	}
 	else
 	{
-		return strip_tags($email);
+		return $email;
 	}
 
 }
@@ -555,12 +555,12 @@ function validateInterestTag($tag)
 	{
 		if (strtoupper($tag) == $tag) //keep in all caps if all caps,
 		{
-			return strip_tags(trim(preg_replace('/\s+/', ' ', $tag))); //take out tags, multiple spaces
+			return trim(preg_replace('/\s+/', ' ', $tag)); //take out tags, multiple spaces
 			
 			
 		}else //else want Camel-Case
 		{
-			return ucname(strip_tags(trim(preg_replace('/\s+/', ' ', $tag)))); //take out tags, multiple spaces, convert to camel
+			return ucname(trim(preg_replace('/\s+/', ' ', $tag))); //take out tags, multiple spaces, convert to camel
 		}
 	}
 
@@ -568,7 +568,7 @@ function validateInterestTag($tag)
 
 function validateCoordinates($number){
 
-	if (!preg_match('/^[0-9]+$/', $number)){
+	if (!preg_match('/^[0-9 ]+$/', $number)){
 		$error_message = "Please click on the image & crop to create your tile.";
 		sendToJS(0, $error_message);
 	}else
@@ -609,10 +609,10 @@ function validateInterestTag_Search($tag)
 	{
 		if (strtoupper($tag) == $tag) //keep in all caps if all caps
 		{
-			return strip_tags(trim(preg_replace('/\s+/', ' ', $tag)));
+			return trim(preg_replace('/\s+/', ' ', $tag));
 		}else //else want Camel-Case
 		{
-			return ucname(trim(strip_tags(preg_replace('/\s+/', ' ', $tag)))); 
+			return ucname(trim(preg_replace('/\s+/', ' ', $tag))); 
 		}
 	}
 
@@ -630,10 +630,10 @@ function validateInterestTag_Facebook($tag)
 	
 	if (strtoupper($tag) == $tag) //keep in all caps if all caps
 	{
-		return strip_tags(trim(preg_replace('/\s+/', ' ', $tag)));
+		return trim(preg_replace('/\s+/', ' ', $tag));
 	}else //else want Camel-Case
 	{
-		return ucname(strip_tags(trim(preg_replace('/\s+/', ' ', $tag)))); 
+		return ucname(trim(preg_replace('/\s+/', ' ', $tag))); 
 	}
 	
 
@@ -730,7 +730,7 @@ function validateID($id)
 	}
 	else
 	{
-		return strip_tags($id);
+		return $id;
 	}
 }
 
@@ -753,7 +753,7 @@ function validatetoken($token)
 		die();
 	}else
 	{
-		return strip_tags($token);
+		return $token;
 	}
 }
 

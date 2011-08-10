@@ -9,7 +9,7 @@ WIP--needs to look at the banned words.
 
 require_once('connect.php');
 
-$q =  strtolower($_GET["q"]); //need to validate!!
+$q =  strtolower(strip_tags($_GET["q"])); //need to validate!!
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

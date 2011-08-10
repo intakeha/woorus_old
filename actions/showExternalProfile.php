@@ -13,7 +13,7 @@ session_start();
 $user_id = $_SESSION['id'];
 
 $other_user_id  = 119; //hardcode for testing
-//$other_user_id  = validateUserId($_POST["other_user_id"]); 
+//$other_user_id  = validateUserId(strip_tags($_POST["other_user_id"])); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");

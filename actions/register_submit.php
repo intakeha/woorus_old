@@ -9,25 +9,25 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('registerHelperFunctions.php');
 
-$f_first_name = validateFirstName($_POST['first_name']);
-$f_last_name = validateLastName($_POST['last_name']);
+$f_first_name = validateFirstName(strip_tags($_POST['first_name']));
+$f_last_name = validateLastName(strip_tags($_POST['last_name']));
 
-$f_visual_email = validateEmail($_POST['email']);
-$f_email_address = get_standard_email($f_visual_email);
+$f_visual_email = validateEmail(strip_tags($_POST['email']));
+$f_email_address = get_standard_email(strip_tags($f_visual_email));
 
-$f_email_check = $_POST['confirm_email'];
+$f_email_check = strip_tags($_POST['confirm_email']);
 $email_match = checkEmail($f_visual_email, $f_email_check);
 
-$f_password = validatePassword($_POST['password']);
-$f_gender = validateGender($_POST['gender']);
+$f_password =validatePassword(strip_tags($_POST['password']));
+$f_gender = validateGender(strip_tags($_POST['gender']));
 
-$f_birthday_month = ValidateBirthdayMonth($_POST['birthday_month']);
-$f_birthday_day = ValidateBirthdayDay($_POST['birthday_day']);
-$f_birthday_year = ValidateBirthdayYear($_POST['birthday_year']);
+$f_birthday_month = ValidateBirthdayMonth(strip_tags($_POST['birthday_month']));
+$f_birthday_day = ValidateBirthdayDay(strip_tags($_POST['birthday_day']));
+$f_birthday_year = ValidateBirthdayYear(strip_tags($_POST['birthday_year']));
 
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
-$f_user_city = validateCity($_POST['city']);
+$f_user_city = validateCity(strip_tags($_POST['city']));
 
 $f_user_country_id = ("1"); //need to do based on lookup
 $f_user_state_id = ("1"); //need to do based on lookup

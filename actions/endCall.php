@@ -10,7 +10,7 @@ require_once('validations.php');
 
 session_start();
 $user_id= $_SESSION['id'];
-$other_user_id = validateUserId($_POST["call_ender"]);
+$other_user_id = validateUserId(strip_tags($_POST["call_ender"]));
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

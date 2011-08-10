@@ -18,7 +18,7 @@ mysql_select_db($db_name);
 session_start();
 $user_id = $_SESSION['id'];
 
-//$offset = validateOffset($_POST["offset"]); 
+//$offset = validateOffset(strip_tags($_POST["offset"])); 
 $offset = 0;
 
 $missed_calls_array = array(); 

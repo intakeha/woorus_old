@@ -17,8 +17,8 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('loginHelperFunctions.php');
 
-$id = validateID($_GET['id']);
-$token = validateToken($_GET['token']);
+$id = validateID(strip_tags($_GET['id']));
+$token = validateToken(strip_tags($_GET['token']));
 
 if ($id&&$token)
 {

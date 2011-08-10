@@ -14,8 +14,8 @@ $id = $_SESSION['id'];
 $email = $_SESSION['email'];
 
 //validate passwords, check that they match
-$f_password_new = validatePassword($_POST['new_password']);
-$f_password_confirm = validatePassword($_POST['confirm_password']); 
+$f_password_new = validatePassword(strip_tags($_POST['new_password']));
+$f_password_confirm = validatePassword(strip_tags($_POST['confirm_password'])); 
 checkPassword($f_password_new, $f_password_confirm);
 
 //encrypt password

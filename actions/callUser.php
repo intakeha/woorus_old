@@ -10,15 +10,16 @@ saying that there is a new call for the caller, with the timestamp. The callee's
 require_once('connect.php');
 require_once('validations.php');
 
+//$other_user_id= validateUserId(strip_tags($_POST["user_id_callee"])); 
+$other_user_id= 141;
+
+
 session_start();
 $user_id= $_SESSION['id'];
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
-
-//$other_user_id= validateUserId($_POST["user_id_callee"]); 
-$other_user_id= 141;
 
 $distance = 1000; //need to calculate distance off of user locations
 

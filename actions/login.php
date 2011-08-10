@@ -11,8 +11,8 @@ require_once('validations.php');
 require_once('loginHelperFunctions.php');
 
 //get from the form
-$f_email_address = validateEmail($_POST['email']);
-$f_password = validatePasswordLogin($_POST['password']);
+$f_email_address = validateEmail(strip_tags($_POST['email']));
+$f_password = validatePasswordLogin(strip_tags($_POST['password']));
 
 //encrypt password
 $f_password = md5($f_password);

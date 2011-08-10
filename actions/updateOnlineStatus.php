@@ -10,7 +10,7 @@ require_once('validations.php');
 
 session_start();
 $user_id= $_SESSION['id'];
-$active = validateOnlineStatus($_POST["onlineStatus"]); 
+$active = validateOnlineStatus(strip_tags($_POST["onlineStatus"])); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
