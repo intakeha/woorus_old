@@ -73,7 +73,6 @@ $new_contacts_count_query = "SELECT COUNT(*)
 $new_contacts_count_result = mysql_query($new_contacts_count_query, $connection) or die ("Error 2");
 $row = mysql_fetch_assoc($new_contacts_count_result);
 $new_contacts_count = $row['COUNT(*)'];
-//$feed_array['new_contacts_count'][1]['contact_count']= $new_contacts_count;
 $feed_array['new_contacts_count']= $new_contacts_count;
 
 //get newly added contacts

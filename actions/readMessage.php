@@ -90,7 +90,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	//add data to array to send to json
 	$mail_array[$mail_iterator]['first_name'] = $row['first_name'];
 	$mail_array[$mail_iterator]['profile_filename_small'] = $row['profile_filename_small'];
-	$mail_array[$mail_iterator]['message_text'] =  nl2br($row['message_text']);
+	$mail_array[$mail_iterator]['message_text'] =  nl2br(htmlspecialchars($row['message_text']));
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
 	$mail_array[$mail_iterator]['message_read'] = $row['message_read'];
 	$mail_array[$mail_iterator]['social_status'] = $row['social_status'];
