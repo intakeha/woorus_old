@@ -1,6 +1,12 @@
 <?php
-require('imageFunctions.php');
-require('validations.php');
+/*
+uploadFile.php
+
+Used when the user is uploading a new image for use as a tile. This takes the image, checks for acceptable format & resizes if too big.
+Need to change the name
+*/
+require_once('imageFunctions.php');
+require_once('validations.php');
 
 session_start();
 $user_id = $_SESSION['id'];

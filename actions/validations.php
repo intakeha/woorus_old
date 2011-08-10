@@ -192,7 +192,7 @@ function validatePassword($password)
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
 	}
-	elseif (strlen($password) <6 | strlen($password) > 20)
+	elseif (strlen($password) < 6 | strlen($password) > 20)
 	{
 		$error_message = "Your password must be between 6 and 20 characters long.";
 		sendToJS(0, $error_message);

@@ -1,5 +1,7 @@
 <?php
 
+//---> not needed
+
 //make a function based on input: old email, new email, token, id
 //assumptions: temp_email & temp_email_activated & token ALREADY SET (in Change Settings)
 

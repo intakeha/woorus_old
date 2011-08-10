@@ -1,4 +1,14 @@
 <?php
+/*
+timeHelperFunctions.php
+
+convertTime($date_time_in)
+-->converts time to Day/Month (if past), Yesterday, or Time (if today)
+
+convertTime_LargeMessage($date_time_in)
+-->converts time to day/month/year time
+
+*/
 
 function convertTime($date_time_in){
 

@@ -1,5 +1,8 @@
 <?php
+/*
+sendMessage.php
 
+*/
 require_once('connect.php');
 require_once('validations.php');
 require_once('contactHelperFunctions.php'); 

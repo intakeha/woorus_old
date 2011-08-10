@@ -1,6 +1,9 @@
 <?php
 /*
 showMissedCalls.php
+
+This script is called from the main feed page in case the user wants to see all their missed calls that week.
+It will return the profile picture, used ID & online status of all users.
 */
 
 require_once('connect.php');
@@ -30,7 +33,7 @@ $missed_calls_count_query = "SELECT COUNT(*)
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
 $row = mysql_fetch_assoc($missed_calls_count_result);
 $missed_call_count = $row['COUNT(*)'];
-$missed_calls_array['missed_calls_count'] = $missed_call_count;
+$missed_calls_array[0]['missed_calls_count'] = $missed_call_count;
 
 
 //get missed calls
@@ -40,7 +43,7 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
 				LEFT OUTER JOIN `user_login` on  user_login.user_id = conversations.caller_id
 				WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) 
-				LIMIT ".$offset.", 20";
+				LIMIT ".mysql_real_escape_string($offset).", 20";
 
 $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");
 

@@ -1,9 +1,16 @@
 <?php
 
-require('connect.php');
-require('validations.php');
-require('timeHelperFunctions.php');
-require('contactHelperFunctions.php'); 
+/*
+showNewInterestsOfContacts.php
+
+This script is called from the main feed page in case the user wants to see all their missed calls that week.
+It will return the profile picture, used ID & online status of all users.
+*/
+
+require_once('connect.php');
+require_once('validations.php');
+require_once('timeHelperFunctions.php');
+require_once('contactHelperFunctions.php'); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -24,14 +31,13 @@ $new_interests_count_query = "SELECT COUNT(*)
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
 
 $new_interests_count_result = mysql_query($new_interests_count_query, $connection) or die ("Error 3");
 $row = mysql_fetch_assoc($new_interests_count_result);
 $new_interests_count = $row['COUNT(*)'];
 
-$new_interests_array['interest_count']= $new_interests_count;
-
+$new_interests_array[0]['interest_count']= $new_interests_count;
 
 //get newly added  interests from contacts
 $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, tiles.tile_filename
@@ -40,8 +46,8 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 		LEFT JOIN `users` on users.id = contacts.user_contactee
 		LEFT JOIN `interests` on interests.id = mosaic_wall.interest_id
 		LEFT JOIN `tiles` on mosaic_wall.tile_id = tiles.id		
-		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
-		LIMIT ".$offset.", 30";
+		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND mosaic_wall.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		LIMIT ".mysql_real_escape_string($offset).", 30";
 
 
 $new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error 3");

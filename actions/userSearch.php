@@ -1,5 +1,10 @@
 <?php
+/*
+userSearch.php
 
+This script is used if a user is searching by interest tag for users to talk to /message. The only input is the interst tag, and we return user info
+of the people have have that interest on their wall.
+*/
 require_once('connect.php');
 require_once('validations.php');
 require_once('mosaicWallHelperFunctions.php');
@@ -10,19 +15,6 @@ $user_id = $_SESSION['id'];
 
 $user_search = validateInterestTag_Search($_POST["user_search"]);
 $offset = validateOffset($_POST["offset"]); 
-
-/*
-$user_search = "Flowers";
-$offset = 0;*/
-
-/*
-<<<<<<< .mine
-//$user_search =  validateInterestTag_Search("flowers");
-//$offset = 0;
-=======
-//$user_search = "flowers";
-//$offset = 0;
->>>>>>> .r818*/
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -44,7 +36,7 @@ $mosaic_query =  "SELECT interests.interest_name, mosaic_wall.user_id, users.fir
 			WHERE interests.interest_name =  '".mysql_real_escape_string($user_search)."' AND interests.id = mosaic_wall.interest_id AND mosaic_wall.user_id <> '".$user_id."' AND users.active_user = 1 
 			AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 			GROUP BY mosaic_wall.user_id
-			LIMIT ".$offset.", 10";
+			LIMIT ".mysql_real_escape_string($offset).", 10";
 
 $mosaic_result = mysql_query($mosaic_query, $connection) or die ("Error 2");
 

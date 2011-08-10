@@ -28,13 +28,13 @@ $new_contacts_count_query = "SELECT COUNT(*)
 		FROM `contacts`
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
-		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
 
 $new_contacts_count_result = mysql_query($new_contacts_count_query, $connection) or die ("Error 2");
 $row = mysql_fetch_assoc($new_contacts_count_result);
 $new_contacts_count = $row['COUNT(*)'];
 
-$new_contacts_array['new_contacts_count'] = $new_contacts_count;
+$new_contacts_array[0]['new_contacts_count'] = $new_contacts_count;
 
 //get newly added contacts
 $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, users.first_name, profile_picture.profile_filename_small, user_login.user_active, user_login.session_set, user_login.on_call
@@ -42,7 +42,7 @@ $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, use
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
 		LEFT OUTER JOIN `user_login` on  user_login.user_id = contacts.user_contacter
-		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
 		LIMIT ".mysql_real_escape_string$offset).", 20";
 
 $new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error 2");
