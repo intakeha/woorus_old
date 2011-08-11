@@ -29,7 +29,7 @@
         	<ul id="list_contact_interests">
             </ul>
         </div>
-        <div><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
+        <div id="shared_interest"><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
         	<ul id="list_interests">
             </ul>
 		</div>
@@ -147,7 +147,7 @@
 			var i=1, tileCount=0;
 			$('#anchor_missed_calls').find('p').append(result.call_count);
 			if (result.call_count == 0) {
-				$('#list_missed_calls').append('<span>Yay! No missed calls.</span>')
+				$('#list_missed_calls').append('<h1>Yay! No missed calls.</h1>')
 			} else {
 				$('#anchor_missed_calls').click(function(){
 					showUpdatesResult();
@@ -172,7 +172,7 @@
 			};
 			$('#anchor_contacts').find('p').append(result.new_contacts_count);
 			if (result.new_contacts_count == 0) {
-				$('#list_contacts').append('<span>Start chatting to get others to add you to their contacts</span>')
+				$('#list_contacts').append('<h1>Start chatting to get others to add you to their contact list.</h1>')
 			} else {
 				$('#anchor_contacts').click(function(){
 					showUpdatesResult();
@@ -182,7 +182,6 @@
 			if (result.new_contacts_count > 5) {tileCount=5} else {tileCount=result.new_contacts_count};
 			if (result.new_contacts_count == 1) {
 				$('#title_contacts').append('<span>'+result.new_contacts_count+' person</span> added you to his/her contact list this week');
-				
 			} else {
 				$('#title_contacts').append('<span>'+result.new_contacts_count+' people</span> added you to their contact list this week');	
 			};			
@@ -195,7 +194,7 @@
 			};
 			$('#anchor_contact_interests').find('p').append(result.interest_count);
 			if (result.interest_count == 0) {
-				$('#list_contact_interests').append('<span>When your contacts add new interests, we\'ll keep you posted</span>')
+				$('#list_contact_interests').append('<h1>When your contacts add new interests, we\'ll keep you posted!</h1>')
 			} else {
 				$('#anchor_contact_interests').click(function(){
 					showUpdatesResult();
@@ -217,12 +216,22 @@
 					source = "images/global/silhouette_sm.png";}
 				$('#list_contact_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.new_interests[i].interest_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
-			$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);		
-			if (result.common_interests_count > 5) {tileCount=5} else {tileCount=result.common_interests_count};
-			if (result.new_contacts_count == 1) {
-				$('#title_interests').append('This person is interested in <span>'+result.interest_chosen.interest_name+'</span>');
+			if (result.common_interests_count == 0) {
+				$('#shared_interest').html('<h1>We\'ll continue to search for people who share your interests.</h1>')
 			} else {
-				$('#title_interests').append('The following people are interested in <span>'+result.interest_chosen.interest_name+'</span>');	
+				$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);
+				$('#anchor_interests').click(function(){
+					showUpdatesResult();
+					$('#updates_interests').show();
+				});
+			}		
+			if (result.common_interests_count > 5) {tileCount=5} else {tileCount=result.common_interests_count};
+			if (result.common_interests_count != 0){
+				if (result.common_interests_count == 1) {
+					$('#title_interests').append('This person is interested in <span>'+result.interest_chosen.interest_name+'</span>');
+				} else {
+					$('#title_interests').append('The following people are interested in <span>'+result.interest_chosen.interest_name+'</span>');	
+				};
 			};
 			for (i=1;i<=tileCount;i++) {
 				if (result.common_interests[i].profile_filename_small)
@@ -523,11 +532,6 @@
 					}
 				}, "json"
 			);
-	});
-
-	$('#anchor_interests').click(function(){
-		showUpdatesResult();
-		$('#updates_interests').show();
 	});
 	
 	$('.dashboard_view').click(function(){

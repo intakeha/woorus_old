@@ -411,6 +411,19 @@
 	padding-top: 10px;
 }
 
+#updates h1 {
+    border-left: 5px solid #EEE;
+    height: 55px;
+    margin-left: 140px;
+    padding-top: 15px;
+}
+
+#shared_interest h1 {
+    border: none;
+    margin: 10px 0;
+    text-align: center;
+}
+
 div.transparent_update {
     font-weight: bold;
     height: 60px !important;
