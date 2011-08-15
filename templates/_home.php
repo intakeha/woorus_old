@@ -13,13 +13,12 @@
 		<div id="butterfly"></div>
 		<div id="warning"></div>
     </div>
-   	<div id="updates_left" class="pagination_home" style="display: none;"><a class="arrows pagination_left" href="#"></a></div>
+   	<div id="updates_left" class="pagination_home" style="display: none;"><a class="arrows pagination_left" style="display: none;"></a></div>
    	<div id="updates">
-    	<p>Your Woorus Activities This Week:</p>
-	
-	<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p></a>
-		<ul id="list_missed_calls">
-		</ul>
+    	<p>Your Woorus Activities This Week:</p>	
+		<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p></a>
+            <ul id="list_missed_calls">
+            </ul>
         </div>
         <div><a id="anchor_contacts" class="updates_anchor"><p></p>Added You to Contacts</a>
         	<ul id="list_contacts">
@@ -62,7 +61,8 @@
             </ul>
         </div>
     </div>
-   	<div id="updates_right" class="pagination_home" style="display: none;"><a class="arrows pagination_right" href="#"></a></div>
+   	<div id="updates_right" class="pagination_home" style="display: none;"><a class="arrows pagination_right" style="display: none;"></a></div>
+    <input type="hidden" name="offset" value="0" />
     <div id="upload_profile_area" style="display: none;">
     	<p>Select a photo for your profile picture:</p>
 		<form id="profile_upload_form" action="actions/uploadProfilePicture.php" method="post" enctype="multipart/form-data">
@@ -149,9 +149,12 @@
 			if (result.call_count == 0) {
 				$('#list_missed_calls').append('<h1>Yay! No missed calls.</h1>')
 			} else {
+				var missedCallPages = Math.ceil(result.call_count/20);
 				$('#anchor_missed_calls').click(function(){
-					showUpdatesResult();
+					$('#updates').hide();
+					showPagination();
 					$('#updates_missed_calls').show();
+					$('#updates_right').find('a').attr('onclick','alert("Hello Missed Calls")'); // Testing multiple assignments
 				});
 			}
 			if (result.call_count > 5) {tileCount=5} else {tileCount=result.call_count};
@@ -175,7 +178,8 @@
 				$('#list_contacts').append('<h1>Start chatting to get others to add you to their contact list.</h1>')
 			} else {
 				$('#anchor_contacts').click(function(){
-					showUpdatesResult();
+					$('#updates').hide();
+					showPagination();
 					$('#updates_contacts').show();
 				});
 			}
@@ -197,7 +201,7 @@
 				$('#list_contact_interests').append('<h1>When your contacts add new interests, we\'ll keep you posted!</h1>')
 			} else {
 				$('#anchor_contact_interests').click(function(){
-					showUpdatesResult();
+					$('#updates').hide();
 					$('#updates_contact_interests').show();
 				});
 			}
@@ -221,7 +225,7 @@
 			} else {
 				$('#anchor_interests').find('p').append(result.interest_chosen.interest_name);
 				$('#anchor_interests').click(function(){
-					showUpdatesResult();
+					$('#updates').hide();
 					$('#updates_interests').show();
 				});
 			}		
@@ -241,78 +245,102 @@
 				$('#list_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.common_interests[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 		});
+	
+		$.post("actions/showMissedCalls.php", {offset:0},
+			function(data){
+				var currentOffset = $('input[name=offset]').val();
+				$.each(data, function(i, field){
+					if (i == 0){
+						var missedCallPages = Math.ceil(field.missed_calls_count/20);
+						var offsetPage = (currentOffset/20)+1;
+						alert("missedCallPages: "+missedCallPages);
+						alert("offsetPage: "+offsetPage);
+						if (offsetPage < missedCallPages){
+							$('#updates_right').find('a').show();
+							
+						} else {
+							$('#updates_right').find('a').hide();
+						}
+						if (currentOffset > 0){
+							$('#updates_left').find('a').show();
+						}
+					} else {
+						var statusText = "Online", statusClass = "contact_online";
+						switch (field.online_status){
+							case "online":
+								statusText = "Online"
+								statusClass = "contact_online"
+								break
+							case "offline":
+								statusText = "Offline"
+								statusClass = "contact_offline"
+								break
+							case "away":
+								statusText = "Away"
+								statusClass = "contact_away"
+								break
+							case "busy":
+								statusText = "Busy"
+								statusClass = "contact_busy"
+								break
+						};
+						if (field.profile_filename_small)
+							{source = "images/users/small/"+field.profile_filename_small}
+						else {
+							source = "images/global/silhouette_sm.png";}
+						$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+						
+					}
+				})
+			},"json"
+		);
 
-		$.getJSON("actions/showMissedCalls.php",function(result){
-			var missedCallOffset = $('input[name=offset]').val();
-			var missedCallPagination = 20;	
-			$.each(result, function(i, field){
-				if (i == 0){
-
-				} else {
-					var statusText = "Online", statusClass = "contact_online";
-					switch (field.online_status){
-						case "online":
-							statusText = "Online"
-							statusClass = "contact_online"
-							break
-						case "offline":
-							statusText = "Offline"
-							statusClass = "contact_offline"
-							break
-						case "away":
-							statusText = "Away"
-							statusClass = "contact_away"
-							break
-						case "busy":
-							statusText = "Busy"
-							statusClass = "contact_busy"
-							break
-					};
-					if (field.profile_filename_small)
-						{source = "images/users/small/"+field.profile_filename_small}
-					else {
-						source = "images/global/silhouette_sm.png";}
-					$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
-					
-				}
-			})
-		});
-
-		$.getJSON("actions/showAddedToContacts.php",function(result){
-			var missedCallOffset = $('input[name=offset]').val();
-			var missedCallPagination = 20;	
-			$.each(result, function(i, field){
-				if (i == 0){
-
-				} else {
-					var statusText = "Online", statusClass = "contact_online";
-					switch (field.online_status){
-						case "online":
-							statusText = "Online"
-							statusClass = "contact_online"
-							break
-						case "offline":
-							statusText = "Offline"
-							statusClass = "contact_offline"
-							break
-						case "away":
-							statusText = "Away"
-							statusClass = "contact_away"
-							break
-						case "busy":
-							statusText = "Busy"
-							statusClass = "contact_busy"
-							break
-					};
-					if (field.profile_filename_small)
-						{source = "images/users/small/"+field.profile_filename_small}
-					else {
-						source = "images/global/silhouette_sm.png";}
-					$('#show_contacts').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
-					
-				}
-			})
-		});
+		$.post("actions/showAddedToContacts.php", {offset:0},
+			function(result){
+				var currentOffset = $('input[name=offset]').val();
+				$.each(result, function(i, field){
+					if (i == 0){
+						var newContactsPages = Math.ceil(field.new_contacts_count/20);
+						var offsetPage = (currentOffset/20)+1;
+						if (offsetPage < newContactsPages){
+							$('#updates_right').find('a').show();
+							
+						} else {
+							$('#updates_right').find('a').hide();
+						}
+						if (currentOffset > 0){
+							$('#updates_left').find('a').show();
+						}
+					} else {
+						var statusText = "Online", statusClass = "contact_online";
+						switch (field.online_status){
+							case "online":
+								statusText = "Online"
+								statusClass = "contact_online"
+								break
+							case "offline":
+								statusText = "Offline"
+								statusClass = "contact_offline"
+								break
+							case "away":
+								statusText = "Away"
+								statusClass = "contact_away"
+								break
+							case "busy":
+								statusText = "Busy"
+								statusClass = "contact_busy"
+								break
+						};
+						if (field.profile_filename_small)
+							{source = "images/users/small/"+field.profile_filename_small}
+						else {
+							source = "images/global/silhouette_sm.png";}
+						$('#show_contacts').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+						
+					}
+				})
+			}, "json"
+		);
 		
 		$.getJSON("actions/showNewInterestsOfContacts.php",function(result){
 			var missedCallOffset = $('input[name=offset]').val();
@@ -381,6 +409,64 @@
 		$('#updates_right').hide();
 		$('#upload_profile_area').show();
 	});
+	
+	function showPagination(){
+		$('#updates_right').show();
+		$('#updates_left').show();
+	}
+	
+/*	function missedCallRight(offset){
+		$.post(
+			"actions/showMissedCalls.php",
+			{offset: offset},
+			function(data) {
+				$('#show_missed_calls').empty();
+				$.each(data, function(i, field){
+					if (i == 0){
+						var missedCallPages = Math.ceil(field.missed_calls_count/20);
+						var offsetPage = (offset/20)+1;
+						if (offsetPage < missedCallPages){
+							$('#updates_right').find('a').show();
+						} else {
+							$('#updates_right').find('a').hide();
+						}
+						if (offset > 0){
+							$('#updates_left').find('a').show();
+						}
+						$('#updates_right').find('a').live('click', function() {
+							missedCallRight(offset+20);
+						});
+					} else {
+						var statusText = "Online", statusClass = "contact_online";
+						switch (field.online_status){
+							case "online":
+								statusText = "Online"
+								statusClass = "contact_online"
+								break
+							case "offline":
+								statusText = "Offline"
+								statusClass = "contact_offline"
+								break
+							case "away":
+								statusText = "Away"
+								statusClass = "contact_away"
+								break
+							case "busy":
+								statusText = "Busy"
+								statusClass = "contact_busy"
+								break
+						};
+						if (field.profile_filename_small)
+							{source = "images/users/small/"+field.profile_filename_small}
+						else {
+							source = "images/global/silhouette_sm.png";}
+						$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+					}
+				})
+			}, "json"
+		)
+	}
+*/
 	
 	function hideProfile(){
 		$('#profile').hide();
@@ -538,12 +624,6 @@
 		showUpdates();
 		hideUpdatesResult();
 	});
-	
-	function showUpdatesResult(){
-		$('#updates').hide();
-		$('#updates_left').show();
-		$('#updates_right').show();
-	}
 	
 	function hideUpdatesResult(){
 		$('#updates').show();
