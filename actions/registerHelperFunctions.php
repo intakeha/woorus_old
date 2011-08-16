@@ -9,7 +9,7 @@ checkEmailInSystem($email)
 
 function checkEmailInSystem($email)
 {
-	require_once('connect.php');
+	require('connect.php');
 	//open database connection
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
 	mysql_select_db($db_name);

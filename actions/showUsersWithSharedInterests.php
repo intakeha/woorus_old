@@ -17,9 +17,8 @@ mysql_select_db($db_name);
 session_start();
 $user_id = $_SESSION['id'];
 
-//$interest_id = validateNumber(strip_tags($_POST["interest_id"])); 
-
-$interest_id = 320;
+$interest_id = validateNumber(strip_tags($_POST["interest_id"])); 
+$offset = validateOffset(strip_tags($_POST["sharedOffset"])); 
 
 //declare empty array
 $shared_interests_array = array(); 
@@ -52,8 +51,7 @@ $common_interests_query = "SELECT users.id as user_id, users.first_name, profile
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				AND users.active_user = 1 
 				GROUP BY users.id
-				ORDER BY RAND()
-				LIMIT 0, 20";
+				LIMIT ".mysql_real_escape_string($offset).", 20";
 
 $common_interests_result = mysql_query($common_interests_query, $connection) or die ("Error");
 

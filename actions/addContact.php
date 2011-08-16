@@ -16,7 +16,7 @@ session_start();
 $user_id_contacter = $_SESSION['id'];
 
 //$user_id_contactee = validateUserId(strip_tags($_POST["user_id_contactee"])); 
-$user_id_contactee = 139;
+$user_id_contactee = 142;
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

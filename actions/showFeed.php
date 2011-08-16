@@ -31,7 +31,7 @@ $missed_calls_count_query = "SELECT COUNT(*)
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) ";
+		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
 
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
 $row = mysql_fetch_assoc($missed_calls_count_result);
@@ -44,7 +44,7 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) 
+		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
 		LIMIT 0, 5";
 
 $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");
@@ -68,7 +68,7 @@ $new_contacts_count_query = "SELECT COUNT(*)
 		FROM `contacts`
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
-		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)";
+		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK)";
 
 $new_contacts_count_result = mysql_query($new_contacts_count_query, $connection) or die ("Error 2");
 $row = mysql_fetch_assoc($new_contacts_count_result);
@@ -80,7 +80,7 @@ $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, use
 		FROM `contacts`
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
-		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK)
+		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK)
 		LIMIT 0, 5";
 
 $new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error 2");

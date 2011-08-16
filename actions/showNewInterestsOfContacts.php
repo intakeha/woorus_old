@@ -19,8 +19,7 @@ mysql_select_db($db_name);
 session_start();
 $user_id = $_SESSION['id'];
 
-//$offset = validateOffset(strip_tags($_POST["offset"])); 
-$offset = 0;
+$offset = validateOffset(strip_tags($_POST["interestOffset"])); 
 
 $new_interests_array = array(); 
 

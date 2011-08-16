@@ -17,9 +17,7 @@ mysql_select_db($db_name);
 
 session_start();
 $user_id = $_SESSION['id'];
-
-//$offset = validateOffset(strip_tags($_POST["offset"])); 
-$offset = 0;
+$offset = validateOffset(strip_tags($_POST["callOffset"])); 
 
 $missed_calls_array = array(); 
 
@@ -28,7 +26,7 @@ $missed_calls_count_query = "SELECT COUNT(*)
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) ";
+		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
 
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
 $row = mysql_fetch_assoc($missed_calls_count_result);
@@ -42,7 +40,7 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 				LEFT JOIN `users` on users.id =conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
 				LEFT OUTER JOIN `user_login` on  user_login.user_id = conversations.caller_id
-				WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 WEEK) 
+				WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
 				LIMIT ".mysql_real_escape_string($offset).", 20";
 
 $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");

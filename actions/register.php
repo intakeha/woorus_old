@@ -38,7 +38,6 @@ $social_status = "a"; //default value
 $token = rand(23456789, 98765432); //randomly generated number
 $email_verified = 0; //default value
 
-
 //at this point, user passes all checks for user entered data
 
 //encrypt password
