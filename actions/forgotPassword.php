@@ -14,13 +14,15 @@ require_once('validations.php');
 //get from form
 $f_email_address = get_standard_email(validateEmail(strip_tags($_POST['email'])));
 
+//connect
+$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
+mysql_select_db($db_name, $connection);
+
 //check if email is a valid email & get ID
-$returned_id = checkUser($f_email_address);
+$returned_id = checkUser($f_email_address, $connection);
 
 if ($returned_id != NULL)
 {
-	//connect
-	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 
 	//create new token from randomly generated number, encrypt & put into password_token
 	$token = rand(23456789, 98765432); //randomly generated number
@@ -38,12 +40,9 @@ else
 	exit();
 }
 
-function checkUser($email)
+function checkUser($email, $connection)
 {
-	require_once('connect.php');
-	//connect
-	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
-
+	
 	//check if user exists
 	$query = "SELECT id, email_verified from `users` WHERE email_address = '".mysql_real_escape_string($email)."' ";
 	mysql_select_db($db_name);

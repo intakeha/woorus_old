@@ -26,7 +26,20 @@ if ($id&&$token)
 	//connect
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 	mysql_select_db($db_name);
+	
+	//if the user is logged in with another user, log them out
+	session_start();
+	if ( isset($_SESSION['id']) ){
+		$query_logout = "UPDATE `user_login` 
+			SET session_set = 0, on_call = 0, user_active = 0
+			WHERE user_id = '".$_SESSION['id']."' ";
 
+		$result = mysql_query($query_logout, $connection) or die ("Error");
+
+		//then can destroy the session
+		session_destroy();
+	}
+	
 	//check if id & token combination exists
 	$query = "SELECT id, visual_email_address, email_verified, password_set, user_info_set, active_user from `users` WHERE id =  '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
 	$result = mysql_query($query, $connection) or die ("Error");

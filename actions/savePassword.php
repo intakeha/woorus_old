@@ -44,8 +44,6 @@ $active_user = $row['active_user'];
 backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, $verified, $connection);
 
 
-
-
 sendToJS(1, "Your new password has been saved. You'll be logged in momentarily."); //send success flag to JS
 
 
