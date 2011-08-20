@@ -12,11 +12,15 @@ session_start();
 $user_id= $_SESSION['id'];
 
 //$offset = validateOffset(strip_tags($_POST["offset"])); 
+//$searchTerm = validateUserName_Search(strip_tags($_POST["$first_name"])); 
+
 $offset  = 0;
+$searchTerm = "";
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
+
 
 
 //show all contacts the user hasnt deleted / blocked ---where the contact is an active user
@@ -24,9 +28,9 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 					FROM `contacts` 
 					LEFT JOIN `users` on users.id = contacts.user_contactee
 					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contactee
-					LEFT JOIN `user_login` on  user_login.user_id =contacts.user_contactee
-					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 
-					LIMIT ".mysql_real_escape_string$offset).", 10";
+					LEFT OUTER JOIN `user_login` on  user_login.user_id =contacts.user_contactee
+					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'
+					LIMIT ".mysql_real_escape_string($offset).", 10";
 					
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
 
@@ -34,7 +38,7 @@ $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Er
 $contact_count_query = "SELECT COUNT(*) 
 				FROM `contacts` 
 				LEFT JOIN `users` on users.id =contacts.user_contactee
-				WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1";
+				WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'  ";
 
 $contact_count_query_result = mysql_query($contact_count_query, $connection) or die ("Error 10");
 $row = mysql_fetch_assoc($contact_count_query_result);
@@ -59,10 +63,13 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	
 	$contact_array[$contact_iterator]['first_name'] = $row['first_name'];
 	$contact_array[$contact_iterator]['profile_filename_small'] = $row['profile_filename_small'];
+	$contact_array[$contact_iterator]['online_status'] = $onlineStatus;
+	
+	/*
 	$contact_array[$contact_iterator]['user_city_id'] = $row['user_city_id']; //need to do lookup
 	$contact_array[$contact_iterator]['social_status'] = $row['social_status'];
-	$contact_array[$contact_iterator]['block_status'] = $row['block_status'];
-	$contact_array[$contact_iterator]['online_status'] = $onlineStatus;
+	$contact_array[$contact_iterator]['block_status'] = $row['block_status'];*/
+	
 	
 	
 	$contact_iterator++;

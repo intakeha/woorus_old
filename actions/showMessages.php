@@ -39,7 +39,7 @@ mysql_select_db($db_name);
 
 
 //get all messages where user hasnt deleted (other user must be active)
-$show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status, users.id as user_id,  users.active_user, 
+$show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, users.first_name, users.social_status, users.block_status, users.id as user_id,  users.active_user,
 					BLOCKER.user_blocker AS BLOCKER_user_blocker, BLOCKER.user_blockee AS BLOCKER_user_blockee, BLOCKEE.user_blocker AS BLOCKEE_user_blocker, BLOCKEE.user_blockee AS BLOCKEE_user_blockee, contacts.user_contactee, 
 					user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
 					FROM `mail` 
@@ -77,8 +77,6 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	
 	$message_text = $row['message_text'];
 	$sent_time = convertTime($row['sent_time']);
-
-	$other_user_id = $row['user_id'];
 	
 	$session_set = $row['session_set'];
 	$on_call = $row['on_call'];
@@ -94,11 +92,12 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	//check if the sessiom user has added the person therye looking at as a contact
 	$contact = checkContact_search($row['user_contactee']);
 	
-	//check if anyone has blocked...so make sure all are NULL, otherwise return block flag
+	//check if anyone has blocked...so make sure all are NULL, otherwise return block flag (need to do this bc here we still show the message,  you just cant click on them)
 	$block = checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee);
 
 	$mail_array[$mail_iterator]['message_id'] = $row['id'];
 	$mail_array[$mail_iterator]['first_name'] = $row['first_name'];
+	$mail_array[$mail_iterator]['other_user_id'] = $row['user_id']; //note, this is the other user id!
 	$mail_array[$mail_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 	$mail_array[$mail_iterator]['social_status'] = $row['social_status'];
 	$mail_array[$mail_iterator]['block_status'] = $row['block_status'];

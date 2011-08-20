@@ -12,8 +12,8 @@ require_once('validations.php');
 session_start();
 $user_id = $_SESSION['id'];
 
-$other_user_id  = 119; //hardcode for testing
-//$other_user_id  = validateUserId(strip_tags($_POST["other_user_id"])); 
+
+$other_user_id  = validateUserId(strip_tags($_POST["externalID"])); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
@@ -25,8 +25,9 @@ if ($user_blocked == 0){
 
 	$external_profile_array = array();
 	
-	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, users.user_city_id, contacts.user_contactee 
+	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, users.user_city_id, contacts.user_contactee, profile_picture.profile_filename_large 
 						FROM `users` 
+						LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = users.id
 						LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter = '".$user_id."'
 						WHERE users.id = '".mysql_real_escape_string($other_user_id)."' AND users.active_user = 1 ";
 						
@@ -38,11 +39,12 @@ if ($user_blocked == 0){
 		
 		//check if the session user has added the person therye looking at as a contact
 		
-		$external_profile_array['user info']['first_name'] = $row['first_name'];
-		$external_profile_array['user info']['social_status'] = $row['social_status'];
-		$external_profile_array['user info']['block_status'] = $row['block_status'];
-		$external_profile_array['user info']['user_city_id'] = $row['user_city_id'];
-		$external_profile_array['user info']['contact'] =  checkContact_search($row['user_contactee']);
+		$external_profile_array[0]['first_name'] = $row['first_name'];
+		$external_profile_array[0]['profile_filename_large'] = $row['profile_filename_large'];
+		$external_profile_array[0]['social_status'] = $row['social_status'];
+		$external_profile_array[0]['block_status'] = $row['block_status'];
+		$external_profile_array[0]['user_city_id'] = $row['user_city_id'];
+		$external_profile_array[0]['contact'] =  checkContact_search($row['user_contactee']);
 		
 		$external_profile_array = getTilesOnWall($other_user_id, $external_profile_array, $connection);
 		

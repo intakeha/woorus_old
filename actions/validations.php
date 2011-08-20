@@ -618,6 +618,27 @@ function validateInterestTag_Search($tag)
 
 }
 
+function validateUserName_Search($first_name)
+{
+	$first_name = utf8_decode($first_name);
+
+	if(strlen($first_name) > 30)
+	{
+		$error_message = "Search term should be fewer than 30 characters.";
+		sendToJS(0, $error_message);
+	}
+	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $first_name))
+	{
+		$error_message = "Search term contains invalid characters.";
+		sendToJS(0, $error_message);
+	}
+	else
+	{
+		return ucname(trim(preg_replace('/\s+/', ' ', $first_name))); 
+	}
+
+}
+
 
 function validateInterestTag_Facebook($tag)
 {

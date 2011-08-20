@@ -70,13 +70,15 @@ if ($session)
 		mysql_select_db($db_name);
 
 		//check if email is already in system
-		$namecheck_query = "SELECT email_address, id, password_set, user_info_set, active_user, facebook_id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
+		$namecheck_query = 	"SELECT email_address, id, password_set, user_info_set, active_user, facebook_id 
+						FROM `users` 
+						WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 		
 		if ($namecheck_count != 0) //if 1, this means that email is in our database
 		{
-			//if user has already logged in via facebook, get ID & start session
+			//if user has already logged in via facebook, (or woorus) get ID & start session
 			$row = mysql_fetch_assoc($namecheck_result);
 			$user_id = $row['id']; 
 			$password_set = $row['password_set']; 
@@ -86,7 +88,9 @@ if ($session)
 			
 			//update faecbook_ID if its null (means that user signed up with woorus but then logged in with facebook connect--we can get their facebookk ID)
 			if ($retreived_facebook_id == NULL || $retreived_facebook_id == 0){
-				$interest_update_query = "UPDATE `users` SET facebook_id =   '".mysql_real_escape_string($retreived_facebook_id)."'  WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
+				$interest_update_query = 	"UPDATE `users` 
+									SET facebook_id =   '".mysql_real_escape_string($retreived_facebook_id)."'  
+									WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
 				$interest_update_result = mysql_query($interest_update_query, $connection) or die ("Error 4.5");
 			}
 			
@@ -97,7 +101,9 @@ if ($session)
 			{
 				//this is where we would need to say welcome back
 				//need to set active_user to 1
-				$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($user_id)."'";
+				$query_users =	 "UPDATE `users` 
+							SET active_user = 1 
+							WHERE id = '".mysql_real_escape_string($user_id)."'";
 				$result = mysql_query($query_users, $connection) or die ("Error");
 			}
 			
@@ -109,6 +115,7 @@ if ($session)
 			$_SESSION['password_created'] = $password_set;
 			$_SESSION['user_info_set'] = $user_info_set;
 			
+			//if theyve set all info, take to homepage, otherwise, take to settings
 			if ($user_info_set)
 			{
 				header( 'Location: ../canvas.php' );
@@ -120,7 +127,9 @@ if ($session)
 		else{
 			
 			//check if ID is already in system (this is in case the user has changed their facebook email)
-			$fb_id_query = "SELECT email_address, id, password_set, user_info_set from `users` WHERE facebook_id = '".mysql_real_escape_string($facebook_id)."'";
+			$fb_id_query = 	"SELECT email_address, id, password_set, user_info_set 
+						FROM `users` 
+						WHERE facebook_id = '".mysql_real_escape_string($facebook_id)."'";
 			$fb_id_result = mysql_query($fb_id_query, $connection) or die ("Error 1");
 			$fb_id_count = mysql_num_rows($fb_id_result);
 			if ($fb_id_count != 0) //if 1, this means that facebook_ID is in our database
@@ -138,7 +147,7 @@ if ($session)
 				
 				$facebook_first_name =  $me["first_name"];
 				$facebook_last_name = $me["last_name"];
-				$facebook_birthday =  $me["birthday_date"];
+				$facebook_birthday =  $me["birthday_date"]; //not using yet
 				$facebook_city = $me["location"]["name"]; //not using yet
 				$facebook_city_facebook_id =  $me["location"]["id"]; //not using yet
 				$facebook_gender = convertGender($me["gender"]);
@@ -154,8 +163,6 @@ if ($session)
 
 				$password_set = 0; //user hasn't set a password
 				$user_info_set = 0; //user hasn't set info
-				//facebook_id is already set, above
-
 				$active_user = 1;
 
 				//connect
@@ -163,23 +170,29 @@ if ($session)
 				mysql_select_db($db_name);
 				
 				//enter user into system
-				$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, block_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 
-				(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."',  '".$block_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."', '".$active_user."')";
+				$query_users = "INSERT INTO `users` 
+							(id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, block_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 
+							(NULL, '".mysql_real_escape_string($facebook_first_name)."', '".mysql_real_escape_string($facebook_last_name)."', '".mysql_real_escape_string($facebook_email_address)."', '".mysql_real_escape_string($facebook_email_address_visual)."', NULL, NULL, NULL, '".mysql_real_escape_string($facebook_gender)."', '".mysql_real_escape_string($facebook_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."',  '".$block_status."', NOW(), NOW(), NULL , '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."', '".$active_user."')";
 
 				$result = mysql_query($query_users, $connection) or die ("Error 1");
 
 				//re-lookup ID based on email
-				$id_query = "SELECT id from `users` WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."'";
+				$id_query = "SELECT id from `users` 
+						WHERE email_address = '".mysql_real_escape_string($facebook_email_address)."' ";
 				$id_result = mysql_query($id_query, $connection) or die ("Error 2");
 				$id_count = mysql_num_rows($id_result);
 				if ($id_count != 0)
 				{
 					$row = mysql_fetch_assoc($id_result);
 					$user_id = $row['id']; 
+				}else
+				{
+					die("Error logging in");
 				}
 
 				//once we get the ID, set the settings for that user
-				$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) VALUES (NULL, '".mysql_real_escape_string($user_id)."', 'Y', 'Y' , 'Y', 'Y')";
+				$query_settings = "INSERT INTO `settings` (id, user_id, interest_notify, message_notify, contact_notify, missed_call_notify) 
+							VALUES (NULL, '".mysql_real_escape_string($user_id)."', 'Y', 'Y' , 'Y', 'Y')";
 				$result = mysql_query($query_settings, $connection) or die ("Error 3");
 		
 				updateLoginTime($user_id); //need to also update the login table
@@ -251,10 +264,10 @@ function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category
 	$facebook_interest_result = mysql_query($facebook_interest_query, $connection) or die ("Error 4");
 	$facebook_interest_count = mysql_num_rows($facebook_interest_result);
 	
-	// if row exists -> interest is already there from Facebook
+	// if row exists -> interest is already there from Facebook or woorus
 	if ($facebook_interest_count != 0)
 	{
-		// its already there, so do not add to the interest to the table (will add to other tables later)
+		// its already there, so do not add to the interest to the table (will add to other tables)
 	
 		//get id, by lookup on facebook ID
 		$row = mysql_fetch_assoc($facebook_interest_result);
