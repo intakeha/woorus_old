@@ -81,10 +81,15 @@
 										break										
 								};
 								if (i > 0){
+									if (field.profile_filename_small){	
+										profilePic = "images/users/small/"+field.profile_filename_small;			
+									} else { 
+										profilePic = "images/global/silhouette_sm.png";
+									}
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
 								}									
 							});
@@ -132,10 +137,15 @@
 										break
 								};
 								if (i > 0){
+									if (field.profile_filename_small){	
+										profilePic = "images/users/small/"+field.profile_filename_small;			
+									} else { 
+										profilePic = "images/global/silhouette_sm.png";
+									}
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
 								}
 							});
@@ -203,10 +213,15 @@
 										break
 								};
 								if (i > 0){
+									if (field.profile_filename_small){	
+										profilePic = "images/users/small/"+field.profile_filename_small;			
+									} else { 
+										profilePic = "images/global/silhouette_sm.png";
+									}
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
 								}
 							});
@@ -252,10 +267,15 @@
 										break
 								};
 								if (i > 0){
+									if (field.profile_filename_small){	
+										profilePic = "images/users/small/"+field.profile_filename_small;			
+									} else { 
+										profilePic = "images/global/silhouette_sm.png";
+									}
 									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'images/users/james.png\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 									}
 								}
 							});

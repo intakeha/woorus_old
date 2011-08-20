@@ -188,8 +188,7 @@
 			for (i=1;i<=tileCount;i++) {
 				if (result.missed_calls[i].profile_filename_small)
 				{source = "images/users/small/"+result.missed_calls[i].profile_filename_small}
-				else {
-					source = "images/global/silhouette_sm.png";}
+				else {source = "images/global/silhouette_sm.png";}
 				$('#list_missed_calls').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.missed_calls[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 			
@@ -318,7 +317,7 @@
 							}
 							
 						} else {
-							var statusText = "Online", statusClass = "contact_online";
+							var statusText = "Offline", statusClass = "contact_offline";
 							switch (field.online_status){
 								case "online":
 									statusText = "Online"
@@ -389,7 +388,7 @@
 								$("#contacts_left").hide();
 							}
 						} else {
-							var statusText = "Online", statusClass = "contact_online";
+							var statusText = "Offline", statusClass = "contact_offline";
 							switch (field.online_status){
 								case "online":
 									statusText = "Online"
@@ -423,7 +422,7 @@
 		// Bind right pagination with new interests of contacts
 		$("#interests_right").click(function() {
 			var currentOffset = $('input[name=interestOffset]').val();
-			var nextOffset = parseInt(currentOffset)+30;
+			var nextOffset = parseInt(currentOffset)+36;
 			$('input[name=interestOffset]').val(nextOffset);
 			$('#show_contact_interests').empty();
 			interestUpdates();
@@ -432,7 +431,7 @@
 		// Bind left pagination with new interests of contacts
 		$("#interests_left").click(function() {
 			var currentOffset = $('input[name=interestOffset]').val();
-			var prevOffset = parseInt(currentOffset)-30;
+			var prevOffset = parseInt(currentOffset)-36;
 			$('input[name=interestOffset]').val(prevOffset);
 			$('#show_contact_interests').empty();
 			interestUpdates();
@@ -446,9 +445,9 @@
 				function(data){
 					$.each(data, function(i, field){
 						if (i == 0){
-							var interestPages = Math.ceil(field.interest_count/30);	
+							var interestPages = Math.ceil(field.interest_count/36);	
 							var currentOffset = $('input[name=interestOffset]').val();
-							var currentPage = (currentOffset/30)+1;
+							var currentPage = (currentOffset/36)+1;
 							if (currentPage < interestPages) {
 								$("#interests_right").show();
 							} else {
@@ -507,7 +506,7 @@
 								$("#shared_left").hide();
 							}
 						} else {
-							var statusText = "Online", statusClass = "contact_online";
+							var statusText = "Offline", statusClass = "contact_offline";
 							switch (field.online_status){
 								case "online":
 									statusText = "Online"

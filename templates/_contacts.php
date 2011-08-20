@@ -1,12 +1,10 @@
 <div id="contacts">
 	<div>
 		<form id="csearch_form" action="../actions/contactSearch.php" method="POST">
-			<input type="text" class="text_form ac_input" id="contact_search_field" name="contact_search" maxlength="60">
+			<input type="text" class="text_form ac_input" id="contact_search_field" name="first_name" maxlength="60">
 			<input type="hidden" name="offset" value="0" />
 			<input class="buttons" id="contact_search_submit" type="submit" name="contact_search_submit" value="Search">
-		</form>
-        
-       	
+		</form>       	
 		<div id="csearch_error">
 		</div>
 	</div>

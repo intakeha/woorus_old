@@ -1216,6 +1216,13 @@ div.offline {
 	margin: 0px 20px;
 }
 
+#lounge_more {
+	background-image: url(../images/global/more.png);
+	background-repeat: no-repeat;
+	width: 60px;
+	height: 60px;
+}
+
 .lounge_tiles {
 	display: block;
 	height: 150px;
@@ -1246,7 +1253,7 @@ div.offline {
 .lounge_photo {
 	float: left;
 	background-image: url(../images/global/contact_frame.png);
-	background-repeat: repeat-x;
+	background-repeat: no-repeat;
 	width: 264px;
 	height: 190px;
 	padding-top: 22px;
