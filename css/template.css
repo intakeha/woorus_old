@@ -1188,6 +1188,7 @@ div.offline {
 	height: 500px;
 	float: left;
 	color: #215086;
+	margin-left: 110px;
 }
 
 #lounge_area p{
@@ -1214,13 +1215,6 @@ div.offline {
 	float: left;
 	padding-top: 285px;
 	margin: 0px 20px;
-}
-
-#lounge_more {
-	background-image: url(../images/global/more.png);
-	background-repeat: no-repeat;
-	width: 60px;
-	height: 60px;
 }
 
 .lounge_tiles {
@@ -1270,7 +1264,8 @@ div.offline {
 }
 
 .lounge_userInfo span {
-	margin-left: 10px;
+    display: block;
+    margin-left: 5px;
 }
 
 .lounge_userInfo a:hover {

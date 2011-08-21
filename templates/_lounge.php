@@ -57,7 +57,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="pagination_lounge"><a id="lounge_more"></a></div>
+	<div class="pagination_lounge"><a id="lounge_right" class="arrows pagination_right"></a></div>
 	<form id="loungeOffset" action="actions/loungeSearch.php" method="post"><input type="hidden" name="offset" value="0" /></form>
 </div>
 
@@ -65,6 +65,16 @@
 	$(document).ready(function(){	
 		// Get lounge information
 		loungeUpdates();
+		
+		// Bind more pagination with lounge results
+		$("#lounge_right").click(function() {
+			var currentOffset = $('input[name=offset]').val();
+			var nextOffset = parseInt(currentOffset)+2;
+			$('input[name=offset]').val(nextOffset);
+			$('#tile0').empty();
+			$('#tile1').empty();
+			loungeUpdates();
+		});
 		
 		function loungeUpdates(){
 			$.post(
@@ -82,7 +92,7 @@
 					} else { 
 						$('#name0').html('Unknown');
 					}
-					for (i=0; i<12; i++){
+					for (i=0; i<data.tiles_count0; i++){
 						$('#tile0').append('<li onmouseover="showInterest($(this), \''+data.tiles_0[i].interest_name+'\')" onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
 					}
 					
@@ -97,7 +107,7 @@
 					} else { 
 						$('#name1').html('Unknown');
 					}
-					for (i=0; i<12; i++){
+					for (i=0; i<data.tiles_count1; i++){
 						$('#tile1').append('<li onmouseover="showInterest($(this), \''+data.tiles_1[i].interest_name+'\')" onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
 					}
 				}, "json"
