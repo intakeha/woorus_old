@@ -15,18 +15,20 @@ require_once('contactHelperFunctions.php');
 session_start();
 
 $user_id = $_SESSION['id'];
-//$offset = validateOffset(strip_tags($_POST["offset"])); 
+$offset = validateOffset(strip_tags($_POST["offset"])); 
 
 //max offset?
 
 //---testing---//
-$offset = 0;
+//$offset = 0;
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 $tile_lounge_array = array(); //declare array
+
+$tile_id_array = array(); //declare array just for the tile ids
 
 //get count
 $lounge_count_query = "SELECT DISTINCT others_mosaic_wall.user_id, BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, user_login.user_active
@@ -119,7 +121,6 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 	
 	while ($row = mysql_fetch_assoc($user_match_result)){
 
-		
 		$tile_user_id = $row['tile_user_id'];
 		$sponsored = $row['sponsored'];
 		
@@ -135,16 +136,15 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 		
 		$tile_iterator++;
 	}
-	
-	if ($tile_iterator < 11){
+	if ($tile_iterator <= 12){
 	
 		//get other tile info (filler tiles)
 		$mosaic_wall_query = "SELECT mosaic_wall.user_id, mosaic_wall.tile_id, mosaic_wall.interest_id, interests.interest_name, tiles.tile_filename, tiles.user_id as tile_user_id, tiles.sponsored
 						FROM `mosaic_wall`
 						LEFT JOIN `interests` ON mosaic_wall.interest_id = interests.id
 						LEFT JOIN `tiles` ON mosaic_wall.tile_id = tiles.id
-						WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_match_id)."' AND mosaic_wall.interest_id <> 0
-						ORDER BY `tile_placement`";
+						WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_match_id)."' AND mosaic_wall.interest_id <> 0 
+						ORDER BY tile_placement DESC";
 				
 		$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 3");
 		
@@ -152,25 +152,19 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 		while ($row_mosaic = mysql_fetch_assoc($mosaic_wall_result))
 		{
 			
-			$tile_id = $row_mosaic['tile_id'];
-			$interest_id = $row_mosaic['interest_id'];
-			$tile_filename = $row_mosaic['tile_filename'];
 			$tile_user_id = $row_mosaic['tile_user_id'];
 			$sponsored = $row_mosaic['sponsored'];
-			$interest_name = $row_mosaic['interest_name'];
-
+			
 			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 			$tiles_it= "tiles_".$user_iterator;
 			
-			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_filename'] = $row['tile_filename'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = $row['interest_name'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_id'] = $row['tile_id'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row['interest_id'];
+			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_filename'] = $row_mosaic ['tile_filename'];
+			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = $row_mosaic['interest_name'];
+			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_id'] = $row_mosaic['tile_id'];
+			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row_mosaic['interest_id'];
 			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_type'] = $tile_type;
 			
-			
-			
-			if ($tile_iterator >= 11){
+			if ($tile_iterator >= 12){
 				break;
 			}
 		

@@ -11,11 +11,10 @@ require_once('contactHelperFunctions.php');
 session_start();
 $user_id= $_SESSION['id'];
 
-//$offset = validateOffset(strip_tags($_POST["offset"])); 
-//$searchTerm = validateUserName_Search(strip_tags($_POST["$first_name"])); 
+$offset = validateOffset(strip_tags($_POST["offset"])); 
+$searchTerm = validateUserName_Search(strip_tags($_POST["first_name"])); 
 
-$offset  = 0;
-$searchTerm = "";
+
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -30,8 +29,8 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contactee
 					LEFT OUTER JOIN `user_login` on  user_login.user_id =contacts.user_contactee
 					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'
-					LIMIT ".mysql_real_escape_string($offset).", 10";
-					
+					LIMIT ".mysql_real_escape_string($offset).", 20";
+
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
 
 //get count

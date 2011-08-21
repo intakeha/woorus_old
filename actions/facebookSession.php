@@ -242,7 +242,7 @@ if ($session)
 				$_SESSION['facebook'] = 1;
 				$_SESSION['password_created'] = $password_set;
 				$_SESSION['user_info_set'] = $user_info_set;
-				//header( 'Location: ../canvas.php?page=settings') ;
+				header( 'Location: ../canvas.php?page=settings') ;
 			}
 
 		}
@@ -343,61 +343,63 @@ function lookupTileID_Facebook($fb_id, $connection)
 
 function getFacebookImage($fb_interest_id, $user_id, $thumb_width){
 
-//set file path basd on filename
-$large_path = "../images/temporary";
-$thumbnail_path = "../images/interests";
+	//set file path basd on filename
+	$large_path = "../images/temporary";
+	$thumbnail_path = "../images/interests";
 
-$picture_name = "facebook_".$fb_interest_id.".jpg";
+	$picture_name = "facebook_".$fb_interest_id.".jpg";
 
-$large_image_location = $large_path."/".$picture_name;
-$thumb_image_location = $thumbnail_path."/".$picture_name;
+	$large_image_location = $large_path."/".$picture_name;
+	$thumb_image_location = $thumbnail_path."/".$picture_name;
 
-//$large_image_location = $large_path."/".$incoming_file;
-$link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=normal";
+	//$large_image_location = $large_path."/".$incoming_file;
+	$link = "https://graph.facebook.com/".$fb_interest_id."/picture?type=normal";
 
-file_put_contents($large_image_location, file_get_contents($link));
-chmod($large_image_location, 0777);
+	file_put_contents($large_image_location, file_get_contents($link));
+	chmod($large_image_location, 0777);
 
-//get height, width & scale if too big
-$width = getWidth($large_image_location);
-$height = getHeight($large_image_location);	
+	
+	//get height, width & scale if too big
+	$width = getWidth($large_image_location);
+	$height = getHeight($large_image_location);	
+	
+	/*
+	//find out which dimension is smaller
+	if ($width > $height){
+		$min_dimension_num = $height;
+	}else
+	{
+		$min_dimension_num = $width;
+	}
 
-//find out which dimension is smaller
-if ($width > $height){
-	$min_dimension_num = $height;
-}else
-{
-	$min_dimension_num = $width;
-}
+	//Scale the image if it is greater than the thumbnail
+	if ($min_dimension_num > $thumb_width){
+		$scale1 = $thumb_width/$min_dimension_num;
+		$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
+	}else{
+		$scale1 = 1;
+		$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
+	} 
+	
+	//$scale2 = $thumb_width/$width;
+	*/
+	
+	//then crop top left square
+	$x1 = 0;
+	$y1 = 0;
+	$x2 = $thumb_width;
+	$y2 = $thumb_width;
+	$w = $thumb_width;
+	$h = $thumb_width;
 
-//Scale the image if it is greater than the thumbnail
-if ($min_dimension_num > $thumb_width){
-	$scale1 = $thumb_width/$min_dimension_num;
-	$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
-}else{
-	$scale1 = 1;
-	$uploaded = resizeImage($large_image_location,$width,$height,$scale1);
-} 
+	//Scale the image to the thumbnail size & save
+	
+	$cropped = resizeThumbnailImage($thumb_image_location, $large_image_location, $w,$h,$x1,$y1,1);
 
-//then crop top left square
+	//delete the temp file
+	unlink($large_image_location);
 
-$x1 = 0;
-$y1 = 0;
-$x2 = $thumb_width;
-$y2 = $thumb_width;
-$w = $thumb_width;
-$h = $thumb_width;
-
-//Scale the image to the thumbnail size & save
-$scale2 = $thumb_width/$w;
-$cropped = resizeThumbnailImage($thumb_image_location, $large_image_location, $w,$h,$x1,$y1,$scale2);
-
-//delete the temp file
-unlink($large_image_location);
-
-return $picture_name;
-
-
+	return $picture_name;
 
 }
 
