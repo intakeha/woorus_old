@@ -674,16 +674,12 @@ li.forgot_title {
 	margin: 0px 0px 10px 3px;
 }
 
-#tiles_legend a{
-	margin-right: 10px;
-	font-weight: bold;
-	float: left;
-}
-
 #tiles_legend div{
 	width: 120px;
 	height: 20px;
 	margin-right: 14px;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 .legend_squares {
@@ -896,8 +892,12 @@ li.community_wall {
 li.tile_tag {
 	color: #fff;
 	font-size: 12px;
-	cursor: pointer; 
-	cursor: hand; 
+}
+
+li.tile_tag_mosaic {
+	color: #fff;
+	font-size: 12px;
+	cursor: move; 
 }
 
 img.transparent_tile {

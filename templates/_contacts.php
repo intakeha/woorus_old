@@ -131,7 +131,8 @@
 							} else { 
 								profilePic = "images/global/silhouette_sm.png";
 							}
-							$('#contact_mosaic').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+profilePic+'"/></div><div>'+field.first_name+'</div></a></li>')
+							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
+							$('#contact_mosaic').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+profilePic+'"/></div><div>'+firstName+'</div></a></li>')
 						}
 					});
 				}, "json"

@@ -4,7 +4,7 @@
         	<div id="inbox"></div>
             <div id="sent"></div>
         </div>
-        <ul>
+        <ul id="messages">
             <li><div class="message_container" id="top_message">
             	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
                 <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
@@ -87,5 +87,43 @@
             </div>
         </div>
     </div>
-    <div id="pagination_mail"></div>
+    <form id="message_form" action="../actions/showMessages.php" method="POST">
+        <input type="hidden" name="offset" value="0" />
+		<input type="hidden" name="inbox_or_sent" value="inbox" />
+    </form>  
 </div>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		// Remove all pagination arrows
+		$('.pagination_mail').hide();
+		showInbox();
+
+		function showInbox(){
+			$.post(
+				"actions/showMessages.php",
+				$('#message_form').serialize(),
+				function(data){
+					$('#messages').empty();
+					$.each(data, function(i, field){
+						if (i == 0){
+							
+						}else{
+							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
+							if (field.profile_filename_small){	
+								profilePic = "images/users/small/"+field.profile_filename_small;			
+							} else { 
+								profilePic = "images/global/silhouette_sm.png";
+							}
+							$('#messages').append('<li><div class="message_container" id="top_message"><img src="images/users/james.png"><div class="message_info"><div class="float_right">7:27 PM</div>Brad</div><div class="message_preview message_new"><div class="float_right"><div class="mail_archive"></div><div class="envelope mail_new"></div></div>Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...</div></div></li>');
+
+						}
+					});
+				}, "json"
+			);
+		}
+			
+	})
+		
+</script>
