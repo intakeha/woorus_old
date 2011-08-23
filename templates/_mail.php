@@ -1,4 +1,5 @@
 <div id="mail">
+	<div id="myFlash"></div> <!-- Testing ringtone -->
 	<div id="mail_panel">
     	<div id="mailbox">
         	<div id="inbox"></div>
@@ -96,6 +97,12 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		
+		//Testing sound
+		function() {
+			$('#myFlash').flash('media/ringtone.swf');
+		}
+		
 		// Remove all pagination arrows
 		$('.pagination_mail').hide();
 		showInbox();
