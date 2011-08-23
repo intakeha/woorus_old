@@ -22,7 +22,7 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.callee_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.callee_id
-				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 20 SECOND) 
+				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
 				AND call_state = 'accepted' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
