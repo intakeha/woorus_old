@@ -134,6 +134,8 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 		$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row['interest_id'];
 		$tile_lounge_array[$tiles_it][$tile_iterator]['tile_type'] = $tile_type;
 		
+		$tile_id_array[$tile_iterator] = $row['tile_id']; //just keep track of tile id
+		
 		$tile_iterator++;
 	}
 	if ($tile_iterator <= 12){
@@ -151,24 +153,29 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 		//get filler tiles while we dont have enough
 		while ($row_mosaic = mysql_fetch_assoc($mosaic_wall_result))
 		{
+			$tile_id = $row_mosaic['tile_id'];
 			
-			$tile_user_id = $row_mosaic['tile_user_id'];
-			$sponsored = $row_mosaic['sponsored'];
+			//check tile ID (if already present bc it was a match, skip it and try the next one
+			if (!in_array($tile_id, $tile_id_array, true)){
 			
-			$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
-			$tiles_it= "tiles_".$user_iterator;
+				$tile_user_id = $row_mosaic['tile_user_id'];
+				$sponsored = $row_mosaic['sponsored'];
+				
+				$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
+				$tiles_it= "tiles_".$user_iterator;
+				
+				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_filename'] = $row_mosaic ['tile_filename'];
+				$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = $row_mosaic['interest_name'];
+				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_id'] = $tile_id;
+				$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row_mosaic['interest_id'];
+				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_type'] = $tile_type;
+				
+				if ($tile_iterator >= 12){
+					break;
+				}
 			
-			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_filename'] = $row_mosaic ['tile_filename'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = $row_mosaic['interest_name'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_id'] = $row_mosaic['tile_id'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row_mosaic['interest_id'];
-			$tile_lounge_array[$tiles_it][$tile_iterator]['tile_type'] = $tile_type;
-			
-			if ($tile_iterator >= 12){
-				break;
+				$tile_iterator++;
 			}
-		
-			$tile_iterator++;
 		}
 	}
 	

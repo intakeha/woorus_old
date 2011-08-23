@@ -7,6 +7,7 @@ This is for the autopopulate function from the front end--for contact page
 */
 
 require_once('connect.php');
+require_once('validations.php');
 
 $q =  strtolower(strip_tags($_GET["q"])); //need to validate!!
 

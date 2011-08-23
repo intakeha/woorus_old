@@ -618,6 +618,7 @@ function validateInterestTag_Search($tag)
 
 }
 
+
 function validateUserName_Search($first_name)
 {
 	$first_name = utf8_decode($first_name);
@@ -641,7 +642,6 @@ function validateUserName_Search($first_name)
 	}
 
 }
-
 
 function validateInterestTag_Facebook($tag)
 {

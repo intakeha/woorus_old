@@ -19,8 +19,8 @@ require_once('validations.php');
 
 //hardcode for testing
 $call_accepted = "accepted"; 
-$conversation_id = 10;
-$other_user_id= 139;
+$conversation_id = 57;
+$other_user_id= 143;
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -45,11 +45,11 @@ if ($call_accepted == "accepted"){
 }
 //if the call is accepted--now makethe Call!
 
-
 calculateSocialStatus($user_id, $connection);
 calculateSocialStatus($other_user_id, $connection);
 
-//REMEMBER TO END THE CALL
+$message = "Call ".$call_accepted ;
+sendToJS(1, $message);
 
 
 
