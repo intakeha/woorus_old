@@ -20,8 +20,8 @@ mysql_select_db($db_name);
 //find calls that the user made which have been accepted by the callee
 $conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM `conversations`
-				LEFT JOIN `users` on users.id =  conversations.caller_id
-				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
+				LEFT JOIN `users` on users.id =  conversations.callee_id
+				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.callee_id
 				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 20 SECOND) 
 				AND call_state = 'accepted' ";
 				
