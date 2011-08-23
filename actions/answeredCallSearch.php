@@ -17,13 +17,13 @@ $user_id= $_SESSION['id'];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//find calls for the user based on: how recent, call not received/accepted
+//find calls that the user made which have been accepted by the callee
 $conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 20 SECOND) 
-				AND call_received = 0  AND call_accepted IS NULL";
+				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 20 SECOND) 
+				AND call_state = 'accepted' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
@@ -40,7 +40,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	$call_array['caller_id'] = $row['caller_id'];
 	$call_array['callee_id'] = $row['callee_id'];
 	$call_array['first_name'] = $row['first_name'];
-	$call_array['city_id'] = $row['city_id'];
+	$call_array['city_id'] = $row['user_city_id'];
 	$call_array['social_status'] = $row['social_status'];
 	$call_array['block_status'] = $row['block_status'];
 	$call_array['profile_filename_small'] = $row['profile_filename_small'];
@@ -48,7 +48,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	//if found a call, set that call to received--that means this call has been found in the database & only want to find it once
 	
 	$conversation_update_query = 	"UPDATE `conversations` 
-							SET call_received = 1 
+							SET call_state = 'answered' 
 							WHERE conversations.id = '".$conversationID."' ";
 	$conversation_update_result = mysql_query($conversation_update_query, $connection) or die ("Error 2");
 

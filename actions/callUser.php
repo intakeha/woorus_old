@@ -25,8 +25,8 @@ $distance = 1000; //need to calculate distance off of user locations
 
 //update conversations table--at this point user has pressed "call" but call has not gone through to other user
 $conversation_query = "INSERT INTO `conversations`
-				(id, caller_id, callee_id, update_time, call_received, call_accepted, distance) VALUES
-				(NULL,   '".$user_id."' ,  '".mysql_real_escape_string($other_user_id)."', NOW(), 0, NULL,  '".$distance."' )";
+				(id, caller_id, callee_id, update_time, call_state, distance) VALUES
+				(NULL,   '".$user_id."' ,  '".mysql_real_escape_string($other_user_id)."', NOW(), 'not_received' ,  '".$distance."' )";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 

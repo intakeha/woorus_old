@@ -19,7 +19,7 @@ require_once('validations.php');
 
 //hardcode for testing
 $call_accepted = "accepted"; 
-$conversation_id = 57;
+$conversation_id = 62;
 $other_user_id= 143;
 
 session_start();
@@ -31,7 +31,7 @@ mysql_select_db($db_name);
 
 //set call as accepted or rejected
 $conversation_query = "UPDATE `conversations`
-				SET call_accepted = '".$call_accepted."'
+				SET call_state = '".$call_accepted."'
 				WHERE conversations.id = '".$conversation_id."'  AND caller_id  = '".$other_user_id."' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
@@ -86,7 +86,7 @@ function calculateSocialStatus($user_id, $connection){
 					FROM `conversations`
 					WHERE (conversations.caller_id =  '".$user_id."' OR conversations.callee_id =  '".$user_id."' ) 
 					AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
-					AND conversations.call_accepted = 'accepted' ";
+					AND conversations.call_state = 'answered' ";
 
 	$social_status_result = mysql_query($social_status_query, $connection) or die ("Error 1");
 
