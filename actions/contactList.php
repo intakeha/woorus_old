@@ -1,18 +1,15 @@
 <?php
 /*
-contactList.php
+interestList.php
 
-This is for the autopopulate function from the front end--for contact page
+This is for the autopopulate function from the front end
+WIP--needs to look at the banned words.
 
 */
 
 require_once('connect.php');
-require_once('validations.php');
 
 $q =  strtolower(strip_tags($_GET["q"])); //need to validate!!
-
-session_start();
-$user_id = $_SESSION['id'];
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -22,7 +19,7 @@ mysql_select_db($db_name);
 $name_query =  "SELECT contacts.id, users.first_name
 			FROM `contacts` 
 			LEFT JOIN `users` on users.id =contacts.user_contactee
-			WHERE contacts.user_contacter  =  ' ".$user_id." ' AND contacts.active = 1 AND users.active_user = 1
+			WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1
 			ORDER by users.first_name ASC";
 
 $name_result = mysql_query($name_query, $connection) or die ("Error");
