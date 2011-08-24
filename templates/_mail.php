@@ -99,9 +99,7 @@
 	$(document).ready(function(){
 		
 		//Testing sound
-		function() {
-			$('#myFlash').flash('media/ringtone.swf');
-		}
+		$('#myFlash').flash('media/ringtone.swf');
 		
 		// Remove all pagination arrows
 		$('.pagination_mail').hide();
