@@ -31,9 +31,9 @@ $missed_calls_count_query = "SELECT COUNT(*)
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
+		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_state = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
 
-$missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
+$missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1a");
 $row = mysql_fetch_assoc($missed_calls_count_result);
 $missed_call_count = $row['COUNT(*)'];
 //$feed_array['missed_calls_count'][1]['call_count']= $missed_call_count;
@@ -44,10 +44,10 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
+		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_state = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
 		LIMIT 0, 5";
 
-$missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");
+$missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1b");
 
 $call_iterator = 1;
 while ($row = mysql_fetch_assoc($missed_calls_result)){
