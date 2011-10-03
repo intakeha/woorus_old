@@ -31,5 +31,6 @@
 			include('templates/_footer.php');
 		?>
 	</div>
+    
 </body>
 </html>

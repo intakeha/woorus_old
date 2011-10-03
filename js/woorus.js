@@ -1,6 +1,12 @@
 // Using jQuery to validate forms, display slide shows, and set recatpcha settings
 $(document).ready(function(){
 	
+	// Modal Popup
+	$('a.modal').bind('click', function(event) { 
+		event.preventDefault();
+		$('#modal').fadeIn(800);
+	});
+	
 	// Slide show function with slidesjs
 	$("#slide_show").slides({
 			preload: true,
