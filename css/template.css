@@ -1336,25 +1336,33 @@ div.lounge_transparent_tag {
 	width: 139px;
 	height: 40px;
 	margin-left: 14px;
+	margin-top: 7px;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 #inbox {
 	background: url(../images/global/mailbox.png) no-repeat;
-	cursor: pointer; 
-	cursor: hand; 
+}
+
+#inbox_0 {
+	background: url(../images/global/mailbox.png) no-repeat;
+	background-position: 0px -40px;
 }
 
 #sent {
 	background: url(../images/global/mailbox.png) no-repeat;
-	background-position: 0px -40px;
-	cursor: pointer; 
-	cursor: hand; 
+	background-position: 0px -80px;
+}
+
+#sent_0 {
+	background: url(../images/global/mailbox.png) no-repeat;
+	background-position: 0px -120px;
 }
 
 .message_info {
 	margin-bottom: 10px;
 	padding-top: 5px;
-	font-weight: bold;
 	color: #4980B7;
 }
 
@@ -1491,6 +1499,11 @@ div.lounge_transparent_tag {
 
 #reply_button {
 	margin-top: 10px;
+}
+
+#reply_error {
+	margin-top: 15px;
+	text-align: left;
 }
 
 /* External Profile */
