@@ -13,14 +13,14 @@ the front end to start the call.
 require_once('connect.php');
 require_once('validations.php');
 
-//$call_accepted = validateCallOutcome(strip_tags($_POST["call_accepted"])); 
-//$other_user_id= validateUserId(strip_tags($_POST["user_id_caller"])); 
-//$conversation_id = validateConversationID(strip_tags($_POST["conversation_id"])); 
+//this is only called if the call is accepted
+$call_accepted = "accepted"; 
+$other_user_id= validateUserId(strip_tags($_POST["user_id_caller"])); 
+$conversation_id = validateNumber(strip_tags($_POST["conversation_id"])); 
 
 //hardcode for testing
-$call_accepted = "accepted"; 
-$conversation_id = 63;
-$other_user_id= 143;
+//$conversation_id = 64;
+//$other_user_id= 158;
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -36,20 +36,18 @@ $conversation_query = "UPDATE `conversations`
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
-/*
 // if its accepted....set both users to be on a call (busy)
 if ($call_accepted == "accepted"){
 	$call_log_query =  "UPDATE `user_login` 
 				SET on_call = 1
 				WHERE user_id = '".$user_id."'  OR user_id = '".$other_user_id."' ";
 	$result = mysql_query($call_log_query, $connection) or die ("Error 2");
-	
-	calculateSocialStatus($user_id, $connection);
-	calculateSocialStatus($other_user_id, $connection);
 }
-//if the call is accepted--now makethe Call!
+//the call is accepted--now makethe Call!
 
-*/
+calculateSocialStatus($user_id, $connection);
+calculateSocialStatus($other_user_id, $connection);
+
 $message = "Call ".$call_accepted ;
 sendToJS(1, $message);
 

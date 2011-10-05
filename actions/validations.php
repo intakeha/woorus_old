@@ -736,6 +736,17 @@ function validateMessage($message_text)
 }
 
 
+function validateInboxFlag($inbox_flag){
+
+	if ($inbox_flag == "inbox" or $inbox_flag == "sent")
+	{
+		return $inbox_flag;
+	}else
+	{
+		$error_message = "Invalid mail command.";
+		sendToJS(0, $error_message);
+	}
+}
 
 //-------------------------Email activation validation functions-----------------------------------------//
 

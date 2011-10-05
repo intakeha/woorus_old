@@ -17,13 +17,14 @@ $user_id= $_SESSION['id'];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//find calls that the user made which have been accepted by the callee
+//find calls that the user made which have been accepted by the callee, assuming the user is not already on another call
 $conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.callee_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.callee_id
+				LEFT OUTER JOIN `user_login` on user_login.user_id = '".$user_id."'
 				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
-				AND call_state = 'accepted' ";
+				AND call_state = 'accepted' AND user_login.on_call = 0 ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
@@ -45,7 +46,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	$call_array['block_status'] = $row['block_status'];
 	$call_array['profile_filename_small'] = $row['profile_filename_small'];
 	
-	//if found a call, set that call to received--that means this call has been found in the database & only want to find it once
+	//if found a call, set that call to answered--that means this call has been found in the database & only want to find it once
 	
 	$conversation_update_query = 	"UPDATE `conversations` 
 							SET call_state = 'answered' 

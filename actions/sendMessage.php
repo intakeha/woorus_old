@@ -13,7 +13,7 @@ $user_id_mailer = $_SESSION['id'];
 //$user_id_mailee = validateUserId(strip_tags($_POST["user_id_mailee"]));
 //$mail_message =  validateMessage(strip_tags($_POST["mail_message"])); 
 
-$user_id_mailee = "132";
+$user_id_mailee = "142";
 $mail_message = "This is a message to another user";
 
 //connect
@@ -47,7 +47,7 @@ if ($mail_count > 20){
 	$result = mysql_query($send_message_query, $connection) or die ("Error");
 
 	$success_message = "Message sent";
-	sendToJS(1, $success_message);
+	sendToJS(0, $success_message);
 
 }
 

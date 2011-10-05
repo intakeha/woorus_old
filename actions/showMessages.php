@@ -11,11 +11,11 @@ require_once('contactHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
-//$offset = validateOffset(strip_tags($_POST["offset"])); 
-//$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
+$offset = validateOffset(strip_tags($_POST["offset"])); 
+$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
 
-$offset  = 0; //hardcode for testing
-$inbox_or_sent = "inbox"; //hardcode for testing
+//$offset  = 0; //hardcode for testing
+//$inbox_or_sent = "sent"; //hardcode for testing
 
 if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
@@ -50,6 +50,7 @@ $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, u
 					LEFT OUTER JOIN contacts on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' and contacts.active = 1
 					LEFT JOIN `user_login` on  user_login.user_id = users.id
 					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0
+					ORDER BY  mail.sent_time DESC
 					LIMIT ".mysql_real_escape_string($offset).", 5";
 					
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");

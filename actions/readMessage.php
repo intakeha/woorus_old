@@ -10,13 +10,9 @@ require_once('timeHelperFunctions.php');
 require_once('contactHelperFunctions.php'); 
 
 session_start();
-//$user_id= $_SESSION['id'];
-//$message_id= validateMessageId(strip_tags($_POST["message_id"])); 
-//$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
-
-$user_id= 142;
-$message_id = "8";
-$inbox_or_sent = "inbox";
+$user_id= $_SESSION['id'];
+$message_id= validateNumber(strip_tags($_POST["message_id"])); 
+$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
 
 if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
@@ -88,19 +84,19 @@ if(mysql_num_rows($show_message_result) > 0){
 	$sent_time = convertTime_LargeMessage($row['sent_time']);
 
 	//add data to array to send to json
-	$mail_array[$mail_iterator]['first_name'] = $row['first_name'];
-	$mail_array[$mail_iterator]['other_user_id'] = $row['user_id']; //note, this is the other user id!
-	$mail_array[$mail_iterator]['profile_filename_small'] = $row['profile_filename_small'];
-	$mail_array[$mail_iterator]['message_text'] =  nl2br(htmlspecialchars($row['message_text']));
-	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
-	$mail_array[$mail_iterator]['message_read'] = $row['message_read'];
-	$mail_array[$mail_iterator]['social_status'] = $row['social_status'];
-	$mail_array[$mail_iterator]['block_status'] = $row['block_status'];
-	$mail_array[$mail_iterator]['active_user'] = $row['active_user'];
-	$mail_array[$mail_iterator]['user_city_id'] = $row['user_city_id'];
-	$mail_array[$mail_iterator]['contact'] = $contact;
-	$mail_array[$mail_iterator]['block'] = $block;
-	$mail_array[$mail_iterator]['online_status'] = $onlineStatus;
+	$mail_array['first_name'] = $row['first_name'];
+	$mail_array['other_user_id'] = $row['user_id']; //note, this is the other user id!
+	$mail_array['profile_filename_small'] = $row['profile_filename_small'];
+	$mail_array['message_text'] =  nl2br(htmlspecialchars($row['message_text']));
+	$mail_array['sent_time'] = $sent_time;
+	$mail_array['message_read'] = $row['message_read'];
+	$mail_array['social_status'] = $row['social_status'];
+	$mail_array['block_status'] = $row['block_status'];
+	$mail_array['active_user'] = $row['active_user'];
+	$mail_array['user_city_id'] = $row['user_city_id'];
+	$mail_array['contact'] = $contact;
+	$mail_array['block'] = $block;
+	$mail_array['online_status'] = $onlineStatus;
 
 }
 

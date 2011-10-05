@@ -11,7 +11,7 @@ require_once('connect.php');
 require_once('validations.php');
 
 //$other_user_id= validateUserId(strip_tags($_POST["user_id_callee"])); 
-$other_user_id= 142;
+$other_user_id= 160;
 
 
 session_start();
@@ -30,8 +30,16 @@ $conversation_query = "INSERT INTO `conversations`
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
-$message = "Call made";
-sendToJS(1, $message);
+//send back conversation_id
+
+$call_array = array();
+
+$call_array['converations_id'] = mysql_insert_id();
+$call_array['caller_id'] = $user_id;
+$call_array['callee_id'] = $other_user_id;
+
+$output = json_encode($call_array);
+die($output);
 
 //now, wait for polling to see this as a call
 

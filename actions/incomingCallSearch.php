@@ -3,8 +3,8 @@
 /*
 callSearch.php
 
-This script will be called by the front at set intervals & will look for calls which have not yet been received. Once it finds a call,
-it will return a JSON array with the call information to the callee, including information about the caller.
+This script will be called by the front at set intervals if the user is not on a call & will look for calls which have not yet been received. 
+Once it finds a call, it will return a JSON array with the call information to the callee, including information about the caller.
 */
 
 require_once('connect.php');
@@ -17,13 +17,14 @@ $user_id= $_SESSION['id'];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//find calls for the user based on: how recent, call not received/accepted
+//find calls for the user based on: how recent, call not received/accepted, IF the user is not on a call
 $conversation_query = "SELECT conversations.id, conversations.caller_id, conversations.callee_id, users.first_name, users.user_city_id, users.social_status, users.block_status, profile_picture.profile_filename_small
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
+				LEFT OUTER JOIN `user_login` on user_login.user_id = '".$user_id."'
 				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
-				AND call_state = 'not_received' 
+				AND call_state = 'not_received' AND user_login.on_call = 0
 				ORDER by conversations.update_time ASC";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");

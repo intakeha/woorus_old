@@ -10,16 +10,12 @@ out of their outbox if they sent it)
 
 require_once('connect.php');
 require_once('validations.php');
-require_once('mailHelperFunctions.php');
 
 session_start();
 $user_id= $_SESSION['id'];
 
-//$message_id= validateMessageId(strip_tags($_POST["message_id"])); 
-//$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
-
-$message_id = "2";
-$inbox_or_sent = "sent";
+$message_id= validateNumber(strip_tags($_POST["message_id"])); 
+$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
 
 if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
@@ -45,8 +41,6 @@ mysql_select_db($db_name);
 $delete_message_query = "UPDATE `mail` 
 				SET mail.".$me_delete." = 1 
 				WHERE mail.id =  '".mysql_real_escape_string($message_id)."' AND mail.".$me_mail."  =  '".mysql_real_escape_string($user_id)."' ";
-
-die($delete_message_query);
 
 $delete_message_result = mysql_query($delete_message_query, $connection) or die ("Error");
 
