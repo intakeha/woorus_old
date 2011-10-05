@@ -1345,9 +1345,8 @@ div.lounge_transparent_tag {
 	background: url(../images/global/mailbox.png) no-repeat;
 }
 
-#inbox_0 {
-	background: url(../images/global/mailbox.png) no-repeat;
-	background-position: 0px -40px;
+.inbox_0 {
+	background-position: 0px -40px !important;
 }
 
 #sent {
@@ -1355,9 +1354,8 @@ div.lounge_transparent_tag {
 	background-position: 0px -80px;
 }
 
-#sent_0 {
-	background: url(../images/global/mailbox.png) no-repeat;
-	background-position: 0px -120px;
+.sent_0 {
+	background-position: 0px -120px !important;
 }
 
 .message_info {

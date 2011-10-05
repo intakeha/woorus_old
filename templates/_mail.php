@@ -1,11 +1,11 @@
 <div id="mail">
 	<div id="mail_panel">
     	<div id="mailbox">
-        	<div id="inbox_0"></div>
-            <div id="sent"></div>
+        	<div id="inbox"></div>
+            <div id="sent" class="sent_0"></div>
         </div>
         <ul id="messages">
-        
+			<li><div id="top_message"><img src="images/global/mailbox_empty.png"/></div></li>
         <!--
             <li><div class="message_container" id="top_message">
             	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
@@ -67,7 +67,8 @@
     <div id="message_panel">
     	<div id="message_container">
             <div id="mail_profile">
-                <a class="search_profile" href="#"><img src="images/users/james.png"></a>
+<!-- 
+               <a class="search_profile" href="#"><img src="images/users/james.png"></a>
                 <div id="message_user_info">
                     <div class="social_status float_right"></div>
                     <div class="social_status warning_status float_right"></div>
@@ -79,6 +80,7 @@
                     <a class="write_button_sm" href="#"></a>
                     <a class="talk_button_sm" href="#"></a>
                 </div>
+-->
             </div>
 
             <div id="message">
@@ -86,7 +88,7 @@
             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br />        
 -->
             </div>
-            <div id="response">
+            <div id="response" style="display: none;">
             	<form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
                     <input type="hidden" name="user_id_mailee" value="" />
                     <textarea id="response_box" name="mail_message" cols="69" rows="7"></textarea>
@@ -108,7 +110,7 @@
 		
 		// Remove all pagination arrows
 		$('.pagination_mail').hide();
-		showMailbox();
+		//showMailbox();
 
 		function showMailbox(){
 			$.post(
@@ -118,6 +120,9 @@
 					$('#messages').empty();
 					$.each(data, function(i, field){
 						if (i == 0){
+							if (field.message_count == 0){
+								
+							}
 						}else{
 							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
 							if (field.profile_filename_small){	
@@ -125,7 +130,10 @@
 							} else { 
 								profilePic = "images/global/silhouette_sm.png";
 							}
-							if (i == 1){top_message = "top_message"} else {top_message = ""}
+							if (i == 1){
+								top_message = "top_message";
+								showMessage(field.message_id);
+							}
 							if (field.message_read == 0){readFont = "message_container message_new"; envelope = "envelope mail_new"} else {readFont = "message_container"; envelope = "envelope mail_read"}
 							$('#messages').append('<li><div class="'+readFont+'" id="'+top_message+'"><div class="search_profile"><img src="'+profilePic+'"></div><div class="message_info"><div class="float_right">'+field.sent_time+'</div>'+firstName+'</div><div class="message_preview"><div class="float_right"><div class="mail_archive" id="'+field.message_id+'"></div><div class="'+envelope+'"></div></div>'+field.message_text+'</div></div></li>');
 						}
@@ -136,12 +144,15 @@
 				
 		$('#inbox').click(function() {
 			$('input[name=inbox_or_sent]').val('inbox');
-			
+			$('#inbox').removeClass();
+			$('#sent').addClass('sent_0');
 			showMailbox();
 		});
 		
 		$('#sent').click(function() {
 			$('input[name=inbox_or_sent]').val('sent');
+			$('#sent').removeClass();
+			$('#inbox').addClass('inbox_0');
 			showMailbox();
 		});
 		
@@ -149,15 +160,21 @@
 			$('li').removeAttr('id');
 			$(this).attr("id","selected_message").find('div.envelope').removeClass('mail_new').addClass('mail_read');
 			$(this).find('div.message_container').removeClass('message_new');
+			messageID = $(this).find('div.mail_archive').attr('id');
+			showMessage(messageID);
+		});
+		
+		function showMessage(messageID){
 			$.ajax({
 				type: "POST",
 				url: "actions/readMessage.php",
-				data: "message_id="+$(this).find('div.mail_archive').attr('id')+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val(), dataType: "json",
+				data: "message_id="+messageID+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val(), dataType: "json",
 				success: function(data){
 					$('#mail_profile').empty();
 					$('#message').empty();
 					$('#reply_error').empty().removeClass();
 					$('textarea[name=mail_message]').val('');
+					$('#response').show();
 					$('input[name=user_id_mailee]').val(data.other_user_id);				
 					if (data.first_name){firstName = data.first_name} else {firstName = "Unknown"};
 					if (data.profile_filename_small){	
@@ -183,7 +200,7 @@
 					$('#message').append(data.message_text);
 				}
 			});
-		});
+		}
 		
 		// Hover bar on mailbox message
 		$("li").live("mouseover mouseout",
