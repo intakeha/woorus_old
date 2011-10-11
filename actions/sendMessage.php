@@ -47,7 +47,7 @@ if ($mail_count > 20){
 	$result = mysql_query($send_message_query, $connection) or die ("Error");
 
 	$success_message = "Message sent";
-	sendToJS(0, $success_message);
+	sendToJS(1, $success_message);
 
 }
 

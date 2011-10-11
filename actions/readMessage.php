@@ -70,10 +70,12 @@ if(mysql_num_rows($show_message_result) > 0){
 	$BLOCKER_user_blockee = $row['BLOCKER_user_blockee'];
 	$BLOCKEE_user_blocker = $row['BLOCKEE_user_blocker'];
 	$BLOCKEE_user_blockee = $row['BLOCKEE_user_blockee'];
-
+	
+	/*
 	//mark message as read
 	$read_message_query = "UPDATE `mail` SET message_read = 1 WHERE mail.id =  '".$message_id."' ";
 	$read_message_result = mysql_query($read_message_query, $connection) or die ("Error");
+	*/
 	
 	//check if contact field is NULL or not
 	$contact = checkContact_search($row['user_contactee']);

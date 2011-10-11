@@ -73,7 +73,9 @@ function authenticate($email, $pass)
 		{
 			//this is where we would need to say welcome back
 			//need to set active_user to 1
-			$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($id)."' ";
+			$query_users = "UPDATE `users` 
+						SET active_user = 1 
+						WHERE id = '".mysql_real_escape_string($id)."' ";
 			$result = mysql_query($query_users, $connection) or die ("Error");
 		}
 		
@@ -83,7 +85,9 @@ function authenticate($email, $pass)
 	{
 		//check if user is in the system at all
 		
-		$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($email)."'";
+		$namecheck_query = "SELECT email_address 
+						FROM `users` 
+						WHERE email_address = '".mysql_real_escape_string($email)."'";
 		$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
 		$namecheck_count = mysql_num_rows($namecheck_result);
 

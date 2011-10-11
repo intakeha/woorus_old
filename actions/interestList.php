@@ -18,6 +18,10 @@ mysql_select_db($db_name);
 
 $interest_query = "SELECT interests.id, interests.interest_name
 		FROM `interests`
+		WHERE NOT EXISTS 
+		(SELECT *
+ 		FROM  banned_words
+  		WHERE  banned_words.word = interests.interest_name)
 		ORDER by interests.interest_name ASC";
 
 $interest_result = mysql_query($interest_query, $connection) or die ("Error");

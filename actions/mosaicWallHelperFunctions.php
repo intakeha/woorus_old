@@ -86,18 +86,8 @@ function updateTileTable($user_id, $interest_id, $fb_interest_id, $tile_filename
 function updateMosaicWallTable($user_id, $interest_id, $tile_id, $tile_placement, $connection)
 {
 	$mosaic_wall_query = "UPDATE `mosaic_wall` 
-					SET tile_id = '".mysql_real_escape_string($tile_id)."', interest_id = '".mysql_real_escape_string($interest_id)."', update_time = NOW() 
-					WHERE user_id = '".mysql_real_escape_string($user_id)."' AND tile_placement = '".mysql_real_escape_string($tile_placement)."' ";
-	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
-}
-
-
-//same as above, but dont update the TIME
-function updateMosaicWallTable_move($user_id, $interest_id, $tile_id, $tile_placement, $connection)
-{
-	$mosaic_wall_query = "UPDATE `mosaic_wall` 
 					SET tile_id = '".mysql_real_escape_string($tile_id)."', interest_id = '".mysql_real_escape_string($interest_id)."' 
-					WHERE user_id = '".$user_id."' AND tile_placement = '".mysql_real_escape_string($tile_placement)."' ";
+					WHERE user_id = '".mysql_real_escape_string($user_id)."' AND tile_placement = '".mysql_real_escape_string($tile_placement)."' ";
 	$mosaic_wall_result = mysql_query($mosaic_wall_query, $connection) or die ("Error 10");
 }
 

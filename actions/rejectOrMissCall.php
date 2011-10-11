@@ -1,7 +1,7 @@
 <?php
 
 /*
-cancelCall.php
+answerCall.php
 
 This script is called after we have identified the user is receiving a call & the input is their response.
 The user can answer a call (accepted). reject a call (rejected) or miss a call (missed)
@@ -13,30 +13,37 @@ the front end to start the call.
 require_once('connect.php');
 require_once('validations.php');
 
-$call_accepted = "canceled"; 
-$conversation_id = 104; //value will be given by front end
-
-//hardcode for testing
+//$call_accepted = validateCallOutcome(strip_tags($_POST["call_accepted"])); 
+//$other_user_id= validateUserId(strip_tags($_POST["user_id_caller"])); 
 //$conversation_id = validateConversationID(strip_tags($_POST["conversation_id"])); 
 
+//hardcode for testing
+$call_accepted = "rejected"; 
+$conversation_id = 110;
+$other_user_id= 143;
+
 session_start();
-$user_id = $_SESSION['id'];
+$user_id= $_SESSION['id'];
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//set call as canceled
+//set call as accepted or rejected
 $conversation_query = "UPDATE `conversations`
 				SET call_state = '".$call_accepted."'
-				WHERE conversations.id = '".$conversation_id."'  AND caller_id  = '".$user_id."' ";
+				WHERE conversations.id = '".$conversation_id."'  AND caller_id  = '".$other_user_id."' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
-//set users as not on the call?
+$call_array = array();
+$call_array['call_accepted'] = $call_accepted;
+$call_array['converations_id'] = $conversation_id;
+$call_array['callee_id'] = $other_user_id;
 
-$message = "Call ".$call_accepted ;
-sendToJS(1, $message);
+//send info back to JS
+$output = json_encode($call_array);
+die($output);
 
 
 ?>

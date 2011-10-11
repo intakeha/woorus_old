@@ -24,7 +24,7 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
 				LEFT OUTER JOIN `user_login` on user_login.user_id = '".$user_id."'
 				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
-				AND call_state = 'not_received' AND user_login.on_call = 0
+				AND call_state = 'not_received'
 				ORDER by conversations.update_time ASC";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");

@@ -36,7 +36,6 @@ $profile_query_result = mysql_query($profile_query, $connection) or die ("Error 
 		$session_set = $row['session_set'];
 		$on_call = $row['on_call'];
 		$user_active = $row['user_active'];
-		
 		$onlineStatus = calculateOnlineStatus($session_set, $on_call, $user_active);
 
 		$profile_array['first_name'] = $row['first_name'];

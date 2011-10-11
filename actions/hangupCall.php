@@ -1,7 +1,7 @@
 <?php
 
 /*
-cancelCall.php
+hangupCall.php
 
 This script is called after we have identified the user is receiving a call & the input is their response.
 The user can answer a call (accepted). reject a call (rejected) or miss a call (missed)
@@ -13,11 +13,7 @@ the front end to start the call.
 require_once('connect.php');
 require_once('validations.php');
 
-$call_accepted = "canceled"; 
-$conversation_id = 104; //value will be given by front end
-
-//hardcode for testing
-//$conversation_id = validateConversationID(strip_tags($_POST["conversation_id"])); 
+$other_user_id= validateUserId(strip_tags($_POST["other_user_id"])); 
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -26,16 +22,13 @@ $user_id = $_SESSION['id'];
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//set call as canceled
-$conversation_query = "UPDATE `conversations`
-				SET call_state = '".$call_accepted."'
-				WHERE conversations.id = '".$conversation_id."'  AND caller_id  = '".$user_id."' ";
-				
-$conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
+//set both users as off the call
+$call_log_query =  "UPDATE `user_login` 
+				SET on_call = 0
+				WHERE user_id = '".$user_id."'  OR user_id = '".$other_user_id."' ";
+	$result = mysql_query($call_log_query, $connection) or die ("Error 2");
 
-//set users as not on the call?
-
-$message = "Call ".$call_accepted ;
+$message = "Call Ended";
 sendToJS(1, $message);
 
 

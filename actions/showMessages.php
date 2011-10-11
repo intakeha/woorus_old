@@ -22,7 +22,7 @@ if ($inbox_or_sent == "inbox"){
 	$others_mail = 'user_mailer';
 	
 	$me_delete = 'message_deleted_by_mailee';
-	
+	$message_read_flag = 1;
 	
 }elseif ($inbox_or_sent == "sent")
 {
@@ -30,6 +30,7 @@ if ($inbox_or_sent == "inbox"){
 	$others_mail = 'user_mailee';
 	
 	$me_delete =  'message_deleted_by_mailer';
+	$message_read_flag = 0;
 	
 }
 
@@ -105,7 +106,9 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	$mail_array[$mail_iterator]['active_user'] = $row['active_user'];
 	$mail_array[$mail_iterator]['message_text'] = nl2br(htmlspecialchars(substr($message_text, 0, 100)));
 	$mail_array[$mail_iterator]['sent_time'] = $sent_time;
-	$mail_array[$mail_iterator]['message_read'] = $row['message_read'];
+	if($message_read_flag == 1){
+		$mail_array[$mail_iterator]['message_read'] = $row['message_read']; //only send  message read flag if its the inbox
+	}
 	$mail_array[$mail_iterator]['contact'] = $contact;
 	$mail_array[$mail_iterator]['block'] = $block;
 	$mail_array[$mail_iterator]['online_status'] = $onlineStatus;
