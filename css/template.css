@@ -1,3 +1,43 @@
+/* Modal */
+#fade { /*--Transparent background layer--*/
+	display: none; /*--hidden by default--*/
+	background: #000;
+	position: fixed; left: 0; top: 0;
+	width: 100%; height: 100%;
+	opacity: .80;
+	z-index: 9999;
+}
+.popup_block{
+	display: none; /*--hidden by default--*/
+	background: #fff;
+	padding: 20px;
+	border: 20px solid #ddd;
+	float: left;
+	font-size: 1.2em;
+	position: fixed;
+	top: 50%; left: 50%;
+	z-index: 99999;
+	/*--CSS3 Box Shadows--*/
+	-webkit-box-shadow: 0px 0px 20px #000;
+	-moz-box-shadow: 0px 0px 20px #000;
+	box-shadow: 0px 0px 20px #000;
+	/*--CSS3 Rounded Corners--*/
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+}
+img.btn_close {
+	float: right;
+	margin: -55px -55px 0 0;
+}
+/*--Making IE6 Understand Fixed Positioning--*/
+*html #fade {
+	position: absolute;
+}
+*html .popup_block {
+	position: absolute;
+}
+
 /* Index Page */
 .bg_canvas {
 	height: 254px;
@@ -198,6 +238,7 @@
 #profile_pic {
     margin: -259px 25px 30px;
     width: 350px;
+	height: 233px;
 }
 
 #profile_pic img {
@@ -1218,10 +1259,11 @@ div.offline {
 }
 
 .lounge_tiles {
-	display: block;
-	height: 150px;
-	margin: 190px 0px 0px 10px;
-	width: 440px;
+    display: block;
+    height: 145px;
+    margin: 190px 0 0 10px;
+    overflow: hidden;
+    width: 440px;
 }
 
 .lounge_tiles li {
@@ -1358,6 +1400,18 @@ div.lounge_transparent_tag {
 	background-position: 0px -120px !important;
 }
 
+#empty_mailbox {
+	float: left;
+	margin-left: 5px;
+}
+
+.no_messages {
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 140px;
+    padding-top: 30px;
+}
+
 .message_info {
 	margin-bottom: 10px;
 	padding-top: 5px;
@@ -1365,7 +1419,7 @@ div.lounge_transparent_tag {
 }
 
 .message_info div {
-	margin-right: 10px;
+	margin-right: 4px;
 }
 
 .message_preview {
@@ -1385,8 +1439,12 @@ div.lounge_transparent_tag {
 }
 
 .envelope {
-	width: 40px;
-	height: 40px;
+    height: 40px;
+    margin: 60px 0 0 360px;
+    position: absolute;
+    width: 40px;
+	cursor: pointer; 
+	cursor: hand; 
 }
 
 .mail_new {
@@ -1409,6 +1467,16 @@ div.lounge_transparent_tag {
 
 .pagination_mail:hover {
 	color: #215086;
+}
+
+#mail_current_page {
+    color: #CCCCCC;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 22px 0 0 120px;
+    position: absolute;
+    text-align: center;
+    width: 170px;	
 }
 
 #mail_left {

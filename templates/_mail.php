@@ -5,90 +5,18 @@
             <div id="sent" class="sent_0"></div>
         </div>
         <ul id="messages">
-			<li><div id="top_message"><img src="images/global/mailbox_empty.png"/></div></li>
-        <!--
-            <li><div class="message_container" id="top_message">
-            	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
-                <div class="message_preview message_new">
-                	<div class="float_right"><div class="mail_archive"></div><div class="envelope mail_new"></div></div>
-                    Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...
-                </div>
-                </div>
-            </li>
-            <li>
-            	<div class="message_container">
-            	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
-                <div class="message_preview message_new">
-                	<div class="float_right"><div class="mail_archive"></div><div class="envelope mail_new"></div></div>
-                    Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...
-                </div>
-                </div>
-            </li>
-            <li id="selected_message">
-            <div class="message_container">
-            	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
-                <div class="message_preview">
-                	<div class="float_right"><div class="mail_archive"></div><div class="envelope mail_read"></div></div>
-                    Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...
-                </div>
-            </div>
-            </li>
-            <li>
-            <div class="message_container">
-            	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
-                <div class="message_preview">
-                	<div class="float_right"><div class="mail_archive"></div><div class="envelope mail_read"></div></div>
-                    Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...
-                </div>
-            </div>
-            </li>
-            <li>
-            <div class="message_container">
-            	<a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div class="message_info"><div class="float_right">7:27 PM</div>Brad</div>
-                <div class="message_preview">
-                	<div class="float_right"><div class="mail_archive"></div><div class="envelope mail_read"></div></div>
-                    Hi! I see that you also like Ippudo ramen.  How about we meet up this Saturday...
-                </div>
-            </div>
-            </li>
-        -->
-            
         </ul>
         <div>
         	<div class="pagination_mail" id="mail_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+            <div id="mail_current_page"></div>
         	<div class="pagination_mail" id="mail_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
         </div>
     </div>
     <div id="message_panel">
     	<div id="message_container">
-            <div id="mail_profile">
-<!-- 
-               <a class="search_profile" href="#"><img src="images/users/james.png"></a>
-                <div id="message_user_info">
-                    <div class="social_status float_right"></div>
-                    <div class="social_status warning_status float_right"></div>
-                    Brad <br /><span>February 14, 2012 8:23 PM</span>
-                    <div id="message_online_status" class="online_status"></div>
-				</div>
-                <div class="action_buttons">
-                    <a class="add_button_sm" href="#"></a>
-                    <a class="write_button_sm" href="#"></a>
-                    <a class="talk_button_sm" href="#"></a>
-                </div>
--->
-            </div>
-
-            <div id="message">
-<!--
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br /><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p><br /><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit it</p><br />        
--->
-            </div>
-            <div id="response" style="display: none;">
+            <div id="mail_profile"></div>
+            <div id="message"></div>
+            <div id="response">
             	<form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
                     <input type="hidden" name="user_id_mailee" value="" />
                     <textarea id="response_box" name="mail_message" cols="69" rows="7"></textarea>
@@ -108,10 +36,13 @@
 
 	$(document).ready(function(){
 		
-		// Remove all pagination arrows
+		// Remove pagination arrows
 		$('.pagination_mail').hide();
-		//showMailbox();
+		$('input[name=offset]').val('0');
+		$('#mail_current_page').empty();
+		showMailbox();
 
+		// Load mailbox
 		function showMailbox(){
 			$.post(
 				"actions/showMessages.php",
@@ -121,7 +52,28 @@
 					$.each(data, function(i, field){
 						if (i == 0){
 							if (field.message_count == 0){
-								
+								$('#message_container').hide();
+								if ($('input[name=inbox_or_sent]').val()== "inbox"){
+									$('#messages').append('<li><img src="images/global/mailbox_empty.png" id="empty_mailbox"><div id="top_message" class="no_messages">There are no messages in your inbox.</div></li>');
+								} else {
+									$('#messages').append('<li><img src="images/global/mailbox_empty.png" id="empty_mailbox"><div id="top_message" class="no_messages">There are no messages in your sent mail.</div></li>');
+								}
+							}
+							var mailPages = Math.ceil(field.message_count/5);	
+							var currentOffset = $('input[name=offset]').val();
+							var currentPage = (currentOffset/5)+1;
+							if (mailPages > 1){
+								$('#mail_current_page').empty().append('Page '+currentPage+' of '+mailPages)
+							}
+							if (currentPage < mailPages) {
+								$("#mail_right").show();
+							} else {
+								$("#mail_right").hide();
+							}
+							if (currentPage > 1) {
+								$("#mail_left").show();
+							} else {
+								$("#mail_left").hide();
 							}
 						}else{
 							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
@@ -133,15 +85,17 @@
 							if (i == 1){
 								top_message = "top_message";
 								showMessage(field.message_id);
-							}
+							} else {top_message = "";}
 							if (field.message_read == 0){readFont = "message_container message_new"; envelope = "envelope mail_new"} else {readFont = "message_container"; envelope = "envelope mail_read"}
-							$('#messages').append('<li><div class="'+readFont+'" id="'+top_message+'"><div class="search_profile"><img src="'+profilePic+'"></div><div class="message_info"><div class="float_right">'+field.sent_time+'</div>'+firstName+'</div><div class="message_preview"><div class="float_right"><div class="mail_archive" id="'+field.message_id+'"></div><div class="'+envelope+'"></div></div>'+field.message_text+'</div></div></li>');
+							$('#messages').append('<li><div class="'+envelope+'" id="'+field.message_id+'"></div><div class="'+readFont+'" id="'+top_message+'"><div class="search_profile"><img src="'+profilePic+'"></div><div class="message_info"><div class="float_right">'+field.sent_time+'</div>'+firstName+'</div><div class="message_preview"><div class="float_right"><div class="mail_archive" id="'+field.message_id+'"></div></div>'+field.message_text+'</div></div></li>');
 						}
 					});
+					$('#messages li:first-child').attr("id","selected_message");
 				}, "json"
 			);
 		}
-				
+		
+		// Inbox tab
 		$('#inbox').click(function() {
 			$('input[name=inbox_or_sent]').val('inbox');
 			$('#inbox').removeClass();
@@ -149,6 +103,7 @@
 			showMailbox();
 		});
 		
+		// Sent mail tab
 		$('#sent').click(function() {
 			$('input[name=inbox_or_sent]').val('sent');
 			$('#sent').removeClass();
@@ -156,14 +111,56 @@
 			showMailbox();
 		});
 		
-		$('li').live('click', function(event) {
+		// Click to view message
+		$('div.message_container').live('click', function(event) {
+			$('#messages').find('li#selected_message').find('div.envelope').removeClass('mail_new').addClass('mail_read');
+			$('#messages').find('li#selected_message').find('div.message_container').removeClass('message_new');
+			messageID = $('#messages').find('li#selected_message').find('div.mail_archive').attr('id');
+			if (messageID){markAsRead(messageID, 'read');}
 			$('li').removeAttr('id');
-			$(this).attr("id","selected_message").find('div.envelope').removeClass('mail_new').addClass('mail_read');
-			$(this).find('div.message_container').removeClass('message_new');
+			$(this).parent('li').attr("id","selected_message");
 			messageID = $(this).find('div.mail_archive').attr('id');
-			showMessage(messageID);
+			if (messageID){showMessage(messageID);}
 		});
 		
+		// Click to mark messages unread
+		$('div.envelope').live('click', function(event) {
+			messageID = $(this).attr('id');
+			if (messageID){markAsRead(messageID, 'unread');}
+			$(this).removeClass('mail_read').addClass('mail_new');
+			$(this).next().addClass('message_new');
+		});
+		
+		// Bind right pagination with mailbox
+		$("#mail_right").click(function() {
+			var currentOffset = $('input[name=offset]').val();
+			var nextOffset = parseInt(currentOffset)+5;
+			$('input[name=offset]').val(nextOffset);
+			$('#messages').empty();
+			showMailbox();
+		});
+		
+		// Bind left pagination with mailbox
+		$("#mail_left").click(function() {
+			var currentOffset = $('input[name=offset]').val();
+			var prevOffset = parseInt(currentOffset)-5;
+			$('input[name=offset]').val(prevOffset);
+			$('#messages').empty();
+			showMailbox();
+		});
+		
+		// Marking messages as read
+		function markAsRead(messageID, flag){
+			$.ajax({
+				type: "POST",
+				url: "actions/markMessageAsRead.php",
+				data: "message_id="+messageID+"&read_flag="+flag,
+				success: function(){
+			 	}
+			});
+		}
+		
+		// Show messages
 		function showMessage(messageID){
 			$.ajax({
 				type: "POST",
@@ -174,7 +171,8 @@
 					$('#message').empty();
 					$('#reply_error').empty().removeClass();
 					$('textarea[name=mail_message]').val('');
-					$('#response').show();
+					$('#message_container').show();
+					$('#message_reply_form').show();
 					$('input[name=user_id_mailee]').val(data.other_user_id);				
 					if (data.first_name){firstName = data.first_name} else {firstName = "Unknown"};
 					if (data.profile_filename_small){	
@@ -220,7 +218,8 @@
 				}
 			 });
 		});
-				
+		
+		// Validate form and send reply to messages
 		$("#message_reply_form").validate({
 			onsubmit: true,
 			onfocusout: false,
@@ -243,6 +242,7 @@
 							$('#reply_error').addClass('error_text').append(data.message);
 						} else {
 							$('#reply_error').addClass('success_text').append(data.message);
+							$('#message_reply_form').hide();
 						}
 							
 					}, "json"

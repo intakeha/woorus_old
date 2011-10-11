@@ -71,8 +71,6 @@
 			var currentOffset = $('input[name=offset]').val();
 			var nextOffset = parseInt(currentOffset)+2;
 			$('input[name=offset]').val(nextOffset);
-			$('#tile0').empty();
-			$('#tile1').empty();
 			loungeUpdates();
 		});
 		
@@ -81,6 +79,9 @@
 				"actions/loungeSearch.php",
 				$('#loungeOffset').serialize(),
 				function(data){
+					$('#tile0').empty();
+					$('#tile1').empty();
+					
 					// Left profile panel
 					if (data.profile[0].profile_filename_large){	
 						$('#photo_left').attr('src','images/users/large/'+data.profile[0].profile_filename_large);			
