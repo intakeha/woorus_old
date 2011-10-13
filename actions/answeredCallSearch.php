@@ -53,20 +53,25 @@ if (mysql_num_rows($conversation_result) > 0)
 	switch ($call_state){
 	
 		case 'accepted':
-			$call_state_rec = 'accepted_rec';
+			$call_state_recv = 'accepted_recv';
 			break;
 		case 'missed':
-			$call_state_rec = 'missed_rec';
+			$call_state_recv = 'missed_recv';
 			break;
 		case 'rejected':
-			$call_state_rec = 'rejected_rec';
+			$call_state_recv = 'rejected_recv';
 			break;
+		default:
+			$call_state_recv = 'canceled';
+			break;
+
 	}
 	
+	$call_array['call_state_recv'] = $call_state_recv;
 	
 	//if found a call, set that call to received-that means this call has been found in the database & only want to find it once
 	$conversation_update_query = 	"UPDATE `conversations` 
-							SET call_state = '".$call_state_rec."'
+							SET call_state = '".$call_state_recv."'
 							WHERE conversations.id = '".$conversationID."' ";
 	$conversation_update_result = mysql_query($conversation_update_query, $connection) or die ("Error 2");
 

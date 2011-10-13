@@ -791,7 +791,7 @@ $(document).ready(function(){
 	});	
 	
 	// Idle timeout is in milliseconds (defaults to 30000)
-	$.idleTimer(300000);
+	$(document).idleTimer(300000);
 	
 	$(document).bind("idle.idleTimer", function(){
 		 // post when the user goes idle
@@ -804,7 +804,6 @@ $(document).ready(function(){
 		 $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
 		 $('#profile_online_status').removeClass('away_status');
 	});
-
 
 });
 

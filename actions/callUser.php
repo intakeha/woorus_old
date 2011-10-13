@@ -11,7 +11,7 @@ require_once('connect.php');
 require_once('validations.php');
 
 //$other_user_id= validateUserId(strip_tags($_POST["user_id_callee"])); 
-$other_user_id= 160;
+$other_user_id= 142;
 
 
 session_start();
