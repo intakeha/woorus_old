@@ -13,12 +13,6 @@
 		<div id="butterfly"></div>
 		<div id="warning"></div>
     </div>
-   	<div id="updates_left" class="pagination_home" style="display: none;">
-    	<a id="calls_left" class="arrows pagination_left"></a>
-        <a id="contacts_left" class="arrows pagination_left"></a>
-        <a id="interests_left" class="arrows pagination_left"></a>
-        <a id="shared_left" class="arrows pagination_left"></a>
-    </div>
    	<div id="updates">
     	<p>Your Woorus Activities This Week:</p>	
 		<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p></a>
@@ -66,12 +60,25 @@
             </ul>
         </div>
     </div>
+    <div id="pagination_home">
+    	<a id="calls_left contacts_left interests_left shared_left" class="arrows pagination_left"></a><a id="calls_right contacts_right interests_right shared_right" class="arrows pagination_right"></a>
+    </div>
+    
+<!--
+    <div id="updates_left" class="pagination_home" style="display: none;">
+    	<a id="calls_left" class="arrows pagination_left"></a>
+        <a id="contacts_left" class="arrows pagination_left"></a>
+        <a id="interests_left" class="arrows pagination_left"></a>
+        <a id="shared_left" class="arrows pagination_left"></a>
+    </div>
    	<div id="updates_right" class="pagination_home" style="display: none;">
         <a id="calls_right" class="arrows pagination_right"></a>
         <a id="contacts_right" class="arrows pagination_right"></a>
         <a id="interests_right" class="arrows pagination_right"></a>
         <a id="shared_right" class="arrows pagination_right"></a>
     </div>
+-->    
+    
     <form id="callsOffset" action="actions/showMissedCalls.php" method="post"><input type="hidden" name="callOffset" value="0" /></form>
     <form id="contactsOffset" action="actions/showAddedToContacts.php" method="post"><input type="hidden" name="contactOffset" value="0" /></form>
     <form id="interestsOffset" action="actions/showNewInterestsOfContacts.php" method="post"><input type="hidden" name="interestOffset" value="0" /></form>
@@ -553,14 +560,12 @@
 		$('#updates_contacts').hide();
 		$('#updates_contact_interests').hide();
 		$('#updates_interests').hide();
-		$('#updates_left').hide();
-		$('#updates_right').hide();
+		$('#pagination_home').hide();
 		$('#upload_profile_area').show();
 	});
 	
 	function showPagination(){
-		$('#updates_right').show();
-		$('#updates_left').show();
+		$('#pagination_home').show();
 	}
 		
 	function hideProfile(){
@@ -732,8 +737,7 @@
 	
 	function hideUpdatesResult(){
 		$('#updates').show();
-		$('#updates_left').hide();
-		$('#updates_right').hide();
+		$('#pagination_home').hide();
 	}
 	
 	function showUpdates(){

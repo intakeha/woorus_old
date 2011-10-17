@@ -25,16 +25,23 @@
 	?>
 </head>
 <body>
+	<input type="hidden" name="conversation_id" value="" />
+    <input type="hidden" name="user_id_caller" value="" />
+    <input type="hidden" name="user_id_callee" value="" />
+    <div id="calling" class="popup_block">
+    	<div>Calling...</div>
+        <div id="ringCaller"></div>
+	</div>
 	<div id="incomingCall" class="popup_block">
     	<div>Incoming call from</div>
         <button id="answer" class="buttons">Answer</button><button id="decline" class="buttons">Decline</button>
-        <div id="ring"></div>
+        <div id="ringCallee"></div>
 	</div>
     <div id="videoPhone" class="popup_block">
 	</div>
     
 	<div class="globalContainer">
-    <div id="testCall" class="buttons">Click to call</div>
+    	<div id="testCall" class="buttons">Click to call</div>
 		<?php
 			include('templates/_header.php');
 			include('templates/_'.$page.'.php');
@@ -43,27 +50,87 @@
 	</div>
     <script type="text/javascript">
 		$(document).ready(function(){			
-			// Send status to backend for last active
+			// Update initial status as active
 			$.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
 
+		//-- Caller Actions --//
+		
 			// Test Call Button
 			$('#testCall').click(function() {
 				$.post("actions/callUser.php", 
 					function(data) {
+						clearInterval(callListenInterval);
+						modal('#calling','300');
+						$('#ringCaller').flash({swf:'media/ringtone.swf', height:1, width:1});
+						var answeredCallInterval = setInterval(answeredCallListen, 3000);
+						missedCallTimout = setTimeout(function() { clearInterval(answeredCallInterval); callMissed(data.conversation_id, data.callee_id);}, 30000);
 					}, 
 					"json"
 				);
 			});
 			
+			// Listening for answered calls
+			function answeredCallListen() {
+				$.post("actions/answeredCallSearch.php", 
+					function(data) {
+						if (data){
+							clearTimeout(missedCallTimout);	
+							$('#calling').hide();
+							$('#ringCaller').flash().remove();
+							$('#videoPhone').flash({
+								swf:'actions/VideoPhoneCallee.swf',
+								height: 630,
+								width: 530,
+								quality: 'high',
+								bgcolor: '#ffffff',
+								allowScriptAccess: 'sameDomain',
+								allowFullScreen: true,
+								movie: 'VideoPhoneCallee.swf',
+								classid: 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000',
+								flashvars: {
+									userIdHTML: data.caller_id,
+									friendIdHTML: data.callee_id,
+									conversationIdHTML: data.conversation_id
+								},
+								attributes: {
+									id: 'VideoPhoneCallee',
+									name: 'VideoPhoneCallee',
+									align: 'middle'
+								}
+							});
+							modal('#videoPhone','800');
+						}
+					}, 
+					"json"
+				);
+			}
+			
+			// Missed call updated and notified
+			function callMissed(conversation_id, callee_id) {
+				$.post("actions/rejectOrMissCall.php", 
+					{ call_accepted: "missed", conversation_id: conversation_id, other_user_id: callee_id},
+					function(data) {
+						var callListenInterval = setInterval(callListen, 3000);
+						alert ("Your call was not answered");
+					},
+					"json"
+				);
+			}
+
+		//-- Callee Actions --//
+
 			// Listening for calls
-			window.setInterval(callListen, 3000);
+			var callListenInterval = setInterval(callListen, 3000);
 			function callListen() {
 				$.post("actions/incomingCallSearch.php", 
 					function(data) {
-						alert(data.conversation_id);
 						if (data){
 							modal('#incomingCall','300');
-							$('#ring').flash({swf:'media/ringtone.swf', height:1, width:1});
+							clearInterval(callListenInterval);
+							$('input[name=conversation_id]').val(data.conversation_id);
+							$('input[name=user_id_caller]').val(data.caller_id);
+							$('input[name=user_id_callee]').val(data.callee_id);
+							$('#ringCallee').flash({swf:'media/ringtone.swf', height:1, width:1});
 							$('#videoPhone').flash({
 								swf:'actions/VideoPhoneCaller.swf',
 								height: 630,
@@ -89,40 +156,29 @@
 					},
 					"json"
 				);
-			}
+			};
 			
-			// Listening for answered calls
-			window.setInterval(answeredCallListen, 3000);
-			function answeredCallListen() {
-				$.post("actions/answeredCallSearch.php", 
+			// Callee answers call
+			$('#answer').click(function() {
+				$('#incomingCall').hide();
+				$('#ringCallee').flash().remove();
+				modal('#videoPhone','800');
+			});
+			
+			// Callee rejects call
+			$('#decline').click(function() {
+				$('#incomingCall').hide();
+				$('#ringCallee').flash().remove();
+				conversation_id = $('input[name=conversation_id]').val();
+				callee_id = $('input[name=user_id_callee]').val();
+				$.post("actions/rejectOrMissCall.php", 
+					{ call_accepted: "rejected", conversation_id: conversation_id, other_user_id: callee_id},
 					function(data) {
-						if (data){
-							$('#videoPhone').flash({
-								swf:'actions/VideoPhoneCallee.swf',
-								height: 630,
-								width: 530,
-								quality: 'high',
-								bgcolor: '#ffffff',
-								allowScriptAccess: 'sameDomain',
-								allowFullScreen: true,
-								flashvars: {
-									userIdHTML: data.callee_id,
-									friendIdHTML: data.caller_id,
-									conversationIdHTML: data.conversation_id
-								}
-							});
-							modal('#videoPhone','600');
-						}
-					}, 
+						var callListenInterval = setInterval(callListen, 3000);
+						alert ("Your call was rejected");
+					},
 					"json"
 				);
-			}
-			
-			$('#answer').click(function() {
-				$('#fade , .popup_block').fadeOut(function() {
-					$('#fade, a.close').remove();
-				});
-				modal('#videoPhone','600');
 			});
 			
 			// Modal popup

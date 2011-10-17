@@ -19,7 +19,7 @@
             <div id="response">
             	<form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
                     <input type="hidden" name="user_id_mailee" value="" />
-                    <textarea id="response_box" name="mail_message" cols="69" rows="7"></textarea>
+                    <textarea id="response_box" name="mail_message" cols="62" rows="7"></textarea>
                     <input class="buttons float_right" id="reply_button" type="submit" name="reply" value="Reply">
                 </form>
                 <div id="reply_error"></div>
