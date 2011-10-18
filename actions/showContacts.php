@@ -12,7 +12,7 @@ session_start();
 $user_id= $_SESSION['id'];
 
 $offset = validateOffset(strip_tags($_POST["offset"])); 
-$searchTerm = validateUserName_Search(strip_tags($_POST["first_name"])); 
+$searchTerm = validateSearchTerm(strip_tags($_POST["first_name"])); 
 
 
 
@@ -28,7 +28,7 @@ $show_contact_query = 	"SELECT  users.first_name, users.user_city_id, users.soci
 					LEFT JOIN `users` on users.id = contacts.user_contactee
 					LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contactee
 					LEFT OUTER JOIN `user_login` on  user_login.user_id =contacts.user_contactee
-					WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'
+					WHERE contacts.user_contacter  =  '".mysql_real_escape_string($user_id)."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'
 					LIMIT ".mysql_real_escape_string($offset).", 20";
 
 $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Error");
@@ -37,7 +37,7 @@ $show_contact_result = mysql_query($show_contact_query, $connection) or die ("Er
 $contact_count_query = "SELECT COUNT(*) 
 				FROM `contacts` 
 				LEFT JOIN `users` on users.id =contacts.user_contactee
-				WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'  ";
+				WHERE contacts.user_contacter  =  '".mysql_real_escape_string($user_id)."' AND contacts.active = 1 AND users.active_user = 1 AND users.first_name LIKE '".mysql_real_escape_string($searchTerm)."%'  ";
 
 $contact_count_query_result = mysql_query($contact_count_query, $connection) or die ("Error 10");
 $row = mysql_fetch_assoc($contact_count_query_result);

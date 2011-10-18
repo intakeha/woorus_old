@@ -91,7 +91,7 @@ function calculateBlockStatus($user_id, $connection){
 
 	$block_status_query = "SELECT COUNT(*)
 					FROM `blocks`
-					WHERE blocks.user_blockee =  '".$user_id."' AND blocks.active = 1 AND  blocks.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
+					WHERE blocks.user_blockee =  '".mysql_real_escape_string($user_id)."' AND blocks.active = 1 AND  blocks.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH) ";
 
 	$block_status_result = mysql_query($block_status_query, $connection) or die ("Error 1");
 
@@ -103,8 +103,8 @@ function calculateBlockStatus($user_id, $connection){
 
 	//update users table for current block status
 	$users_query = 	"UPDATE `users` 
-				SET users.block_status = '".$block_rating."' 
-				WHERE users.id = '".$user_id."' ";
+				SET users.block_status = '".mysql_real_escape_string($block_rating)."' 
+				WHERE users.id = '".mysql_real_escape_string($user_id)."' ";
 
 	$users_result = mysql_query($users_query, $connection) or die ("Error 2");
 

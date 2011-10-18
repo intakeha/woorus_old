@@ -9,7 +9,7 @@ WIP--needs to look at the banned words.
 
 require_once('connect.php');
 
-$q =  strtolower(strip_tags($_GET["q"])); //need to validate!!
+$q =  strtolower(validateSearchTerm(strip_tags($_GET["q"])));
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -21,7 +21,7 @@ $interest_query = "SELECT interests.id, interests.interest_name
 		WHERE NOT EXISTS 
 		(SELECT *
  		FROM  banned_words
-  		WHERE  banned_words.word = interests.interest_name)
+   		WHERE  (INSTR(interests.interest_name, banned_words.word) > 0) )
 		ORDER by interests.interest_name ASC";
 
 $interest_result = mysql_query($interest_query, $connection) or die ("Error");

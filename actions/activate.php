@@ -27,12 +27,12 @@ if ($id&&$token)
 	$connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 	mysql_select_db($db_name);
 	
-	//if the user is logged in with another user, log them out
+	//if the user is logged in with another user, log them out-->we could also ask the user if they want to do this...
 	session_start();
 	if ( isset($_SESSION['id']) ){
 		$query_logout = "UPDATE `user_login` 
-			SET session_set = 0, on_call = 0, user_active = 0
-			WHERE user_id = '".$_SESSION['id']."' ";
+			SET session_set = 0, on_call = 0
+			WHERE user_id = '".mysql_real_escape_string($_SESSION['id'])."' ";
 
 		$result = mysql_query($query_logout, $connection) or die ("Error");
 
@@ -41,7 +41,8 @@ if ($id&&$token)
 	}
 	
 	//check if id & token combination exists
-	$query =	 "SELECT id, visual_email_address, email_verified, password_set, user_info_set, active_user from `users` 
+	$query =	 "SELECT id, visual_email_address, email_verified, password_set, user_info_set, active_user 
+			FROM `users` 
 			WHERE id =  '".mysql_real_escape_string($id)."' AND email_token = '".mysql_real_escape_string($token)."' ";
 	$result = mysql_query($query, $connection) or die ("Error");
 
@@ -56,6 +57,7 @@ if ($id&&$token)
 			//set email as verified & token to NULL
 			$activate_query = "UPDATE users SET email_verified= '1' , email_token = NULL 
 						WHERE id = '".mysql_real_escape_string($id)."' ";  
+						
 			$activate_result = mysql_query($activate_query, $connection) or die ("Error");
 			
 			$email_address = $row['visual_email_address'];
@@ -68,7 +70,8 @@ if ($id&&$token)
 			
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
-				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id) VALUES (NULL, '".$returned_id."', '".$tile_placement."', 0 , 0)) ";
+				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id) 
+								VALUES (NULL, '".$returned_id."', '".$tile_placement."', 0 , 0)) ";
 				$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
 			}
 			

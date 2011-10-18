@@ -52,7 +52,9 @@ function authenticate($email, $pass)
 	$email = get_standard_email($email);
 
 	//check if user exists
-	$query = "SELECT id, email_verified, active_user from `users` WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
+	$query = "SELECT id, email_verified, active_user 
+			FROM`users` 
+			WHERE email_address = '".mysql_real_escape_string($email)."' AND password = '".mysql_real_escape_string($pass)."'";
 	$result = mysql_query($query, $connection) or die ("Error");
 
 	// if row exists -> user/pass combination is correct

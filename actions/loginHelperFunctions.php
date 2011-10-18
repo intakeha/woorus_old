@@ -17,8 +17,7 @@ function updateLoginTime($id)
 	
 	if (mysql_affected_rows() == 0) {
 
-		$query_login = 	"INSERT INTO
-					`user_login` (id, user_id, last_login_time, user_active, session_set, on_call)
+		$query_login = 	"INSERT INTO `user_login` (id, user_id, last_login_time, user_active, session_set, on_call)
 					VALUES (NULL,  '".mysql_real_escape_string($id)."', NOW(), 1, 1, 0)";
 		$result = mysql_query($query_login, $connection) or die ("Error 2");
 
@@ -44,7 +43,9 @@ function backendLogin($id, $email_address, $password_set, $user_info_set, $activ
 	{
 		//this is where we would need to say welcome back
 		//need to set active_user to 1
-		$query_users = "UPDATE `users` SET active_user = 1 WHERE id = '".mysql_real_escape_string($id)."'";
+		$query_users = "UPDATE `users` 
+					SET active_user = 1 
+					WHERE id = '".mysql_real_escape_string($id)."'";
 		$result = mysql_query($query_users, $connection) or die ("Error");
 	}
 	

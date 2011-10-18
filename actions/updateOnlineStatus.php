@@ -18,7 +18,7 @@ mysql_select_db($db_name);
 
 //save most recent active time if the user if active
 
-if ($active  == 1){
+if ($active == 1){
 	$save_status_query = "UPDATE `user_login` 
 				SET user_active = NOW()
 				WHERE user_id = '".$user_id."' ";

@@ -11,7 +11,7 @@ require_once('connect.php');
 require_once('validations.php');
 
 session_start();
-$user_id= $_SESSION['id'];
+$user_id = $_SESSION['id'];
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -22,8 +22,8 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-				LEFT OUTER JOIN `user_login` on user_login.user_id = '".$user_id."'
-				WHERE callee_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
+				LEFT OUTER JOIN `user_login` on user_login.user_id = '".mysql_real_escape_string($user_id)."'
+				WHERE callee_id =   '".mysql_real_escape_string($user_id)."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
 				AND call_state = 'not_received'
 				ORDER by conversations.update_time ASC";
 				
@@ -38,7 +38,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	
 	$conversationID = $row['id'];
 	
-	$call_array['converations_id'] = $conversationID;
+	$call_array['conversation_id'] = $conversationID;
 	$call_array['caller_id'] = $row['caller_id'];
 	$call_array['callee_id'] = $row['callee_id'];
 	$call_array['first_name'] = $row['first_name'];
@@ -51,7 +51,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	
 	$conversation_update_query = 	"UPDATE `conversations` 
 							SET call_state = 'received'
-							WHERE conversations.id = '".$conversationID."' ";
+							WHERE conversations.id = '".mysql_real_escape_string($conversationID)."' ";
 	$conversation_update_result = mysql_query($conversation_update_query, $connection) or die ("Error 2");
 
 	

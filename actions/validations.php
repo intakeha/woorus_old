@@ -37,7 +37,7 @@ function validateFirstName($name)
 {
 	$name = utf8_decode($name);
 	
-	if($name == NULL | strlen($name) == 0)
+	if($name == NULL || strlen($name) == 0)
 	{
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
@@ -81,7 +81,7 @@ function validateLastName($name)
 {
 	$name = utf8_decode($name);
 	
-	if($name == NULL | strlen($name) == 0)
+	if($name == NULL || strlen($name) == 0)
 	{
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
@@ -122,7 +122,7 @@ function validateLastName($name)
 //different function used for change settings script
 function validateEmail($email)
 {	
-	if($email == NULL | strlen($email) == 0)
+	if($email == NULL || strlen($email) == 0)
 	{
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
@@ -162,7 +162,7 @@ function get_standard_email($email)
 //check email match
 function checkEmail($email, $confirm_email)
 {
-	if (strlen($confirm_email) == 0)
+	if ($confirm_email == NULL || strlen($confirm_email) == 0)
 	{
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
@@ -187,7 +187,7 @@ function checkEmail($email, $confirm_email)
 //different function used for change settings
 function validatePassword($password)
 {
-	if (strlen($password) == 0)
+	if ($password == NULL || strlen($password) == 0)
 	{
 		$error_message = "Please fill in all fields.";
 		sendToJS(0, $error_message);
@@ -207,7 +207,7 @@ function validatePassword($password)
 //check gender selected--check not -1
 function validateGender($gender)
 {
-	if ($gender == -1)
+	if ($gender == NULL || $gender == -1)
 	{
 		$error_message = "Please select your gender.";
 		sendToJS(0, $error_message);
@@ -227,7 +227,7 @@ function validateGender($gender)
 //check birthday month--check not -1
 function validateBirthdayMonth($month)
 {
-	if ($month == -1)
+	if ($month == NULL || $month == -1)
 	{
 		$error_message = "Please select your birthday month.";
 		sendToJS(0, $error_message);
@@ -246,7 +246,7 @@ function validateBirthdayMonth($month)
 //check birthday day--check not -1
 function validateBirthdayDay($day)
 {
-	if ($day == -1)
+	if ($day == NULL || $day == -1)
 	{
 		$error_message = "Please select your birthday date.";
 		sendToJS(0, $error_message);
@@ -268,7 +268,7 @@ function validateBirthdayYear($year)
 	$today = getdate(); 
 	$cur_year = ($today['year']); 
 	
-	if ($year == -1)
+	if ($year == NULL || $year == -1)
 	{
 		$error_message = "Please select your birthday year.";
 		sendToJS(0, $error_message);
@@ -367,7 +367,7 @@ function validateCity($city)
 //password validation, only used at login page
 function validatePasswordLogin($password)
 {
-	if (strlen($password) == 0)
+	if ($password == NULL || strlen($password) == 0)
 	{
 		$error_message = "Please fill in your password.";
 		sendToJS(0, $error_message);
@@ -386,7 +386,7 @@ function validatePasswordLogin($password)
 //settings page validate email---because email can be empty--means theyre not changing it.
 function validateEmail_emptyOK($email)
 {	
-	if($email == NULL | strlen($email) == 0)
+	if($email == NULL || strlen($email) == 0)
 	{
 		//don't update email
 		return NULL;
@@ -489,7 +489,7 @@ function validateNewPasswordOnly($password_new, $password_confirm)
 //check if password and password confirm match
 function checkPassword($password, $password_confirm)
 {
-	if ($password != $password_confirm)
+	if ($password != $password_confirm || $password == NULL || strlen(password) == 0 )
 	{
 		$error_message = "Your new passwords do not match.";
 		sendToJS(0, $error_message);
@@ -521,7 +521,7 @@ function validateInterestTag($tag)
 {
 	$tag = utf8_decode($tag);
 	
-	if($tag == NULL | strlen($tag) == 0)
+	if($tag == NULL || strlen($tag) == 0)
 	{
 		$error_message = "Please tag your tile.";
 		sendToJS(0, $error_message);
@@ -568,9 +568,16 @@ function validateInterestTag($tag)
 
 function validateCoordinates($number){
 
-	if (!preg_match('/^[0-9 ]+$/', $number)){
+	if($number == NULL || strlen($number) == 0)
+	{
 		$error_message = "Please click on the image & crop to create your tile.";
 		sendToJS(0, $error_message);
+	
+	}elseif (!preg_match('/^[0-9 ]+$/', $number)){
+		
+		$error_message = "Please click on the image & crop to create your tile.";
+		sendToJS(0, $error_message);
+	
 	}else
 	{
 		return $number;
@@ -580,11 +587,11 @@ function validateCoordinates($number){
 
 //-------------------------Search validation functions-----------------------------------------//
 
-function validateInterestTag_Search($tag)
+function validateInterestTag_Search($tag)  //this can't be empty
 {
 	$tag = utf8_decode($tag);
 	
-	if($tag == NULL | strlen($tag) == 0)
+	if($tag == NULL || strlen($tag) == 0)
 	{
 		$error_message = "Please enter an interest in the search field.";
 		sendToJS(0, $error_message);
@@ -619,26 +626,26 @@ function validateInterestTag_Search($tag)
 }
 
 
-function validateUserName_Search($first_name)
+function validateSearchTerm($tag) //this is allowed to be empty (used for contacts and interestList.php)
 {
-	$first_name = utf8_decode($first_name);
+	$tag = utf8_decode($tag);
 	
-	if(empty($first_name)) {
-		return trim(preg_replace('/\s+/', ' ', $first_name)); 
+	if(empty($tag)) {
+		return trim(preg_replace('/\s+/', ' ', $tag));  //allowed to be empty
 	} 
-	elseif(strlen($first_name) > 30)
+	elseif(strlen($tag) > 30)
 	{
 		$error_message = "Search term should be fewer than 30 characters.";
 		sendToJS(0, $error_message);
 	}
-	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $first_name))
+	elseif (!preg_match('/^[0-9A-Za-zÀ-ÖØ-öø-ÿ\s\'\-]+$/', $tag))
 	{
 		$error_message = "Search term contains invalid characters.";
 		sendToJS(0, $error_message);
 	}
 	else
 	{
-		return ucname(trim(preg_replace('/\s+/', ' ', $first_name))); 
+		return ucname(trim(preg_replace('/\s+/', ' ', $tag))); 
 	}
 
 }
@@ -691,7 +698,13 @@ function validateOffset($offset){
 
 function validateUserId($user_id){
 
-	if (!preg_match('/^[0-9 ]+$/', $user_id)){
+	if($user_id == NULL || strlen($user_id) == 0)
+	{
+		$error_message = "Invalid user id.";
+		sendToJS(0, $error_message);
+		
+	}elseif (!preg_match('/^[0-9 ]+$/', $user_id)){
+	
 		$error_message = "Invalid user id.";
 		sendToJS(0, $error_message);
 	}else
@@ -704,7 +717,12 @@ function validateUserId($user_id){
 
 function validateNumber($number){
 
-	if (!preg_match('/^[0-9 ]+$/', $number)){
+	if($number == NULL || strlen($number) == 0)
+	{
+		$error_message = "Error.";
+		sendToJS(0, $error_message);
+		
+	}elseif (!preg_match('/^[0-9 ]+$/', $number)){
 		$error_message = "Error.";
 		sendToJS(0, $error_message);
 	}else
@@ -752,7 +770,7 @@ function validateInboxFlag($inbox_flag){
 
 function validateID($id)
 {
-	if ($id == NULL)
+	if ($id == NULL || strlen($id) == 0)
 	{
 		header('Location: ../message.php?messageID=5');
 		die();
@@ -772,7 +790,7 @@ function validateID($id)
 
 function validatetoken($token)
 {
-	if ($token == NULL)
+	if ($token == NULL || strlen($token == 0))
 	{
 		header('Location: ../message.php?messageID=5');
 		die();
@@ -828,7 +846,12 @@ function validateOnlineStatus($status){
 
 function validateConversationID($id){
 
-	if (!preg_match('/^[0-9 ]+$/', $id)){
+	if($id == NULL || strlen($id) == 0)
+	{
+		$error_message = "Error.";
+		sendToJS(0, $error_message);
+		
+	}elseif (!preg_match('/^[0-9 ]+$/', $id)){
 		$error_message = "Error";
 		sendToJS(0, $error_message);
 	}else
@@ -836,6 +859,24 @@ function validateConversationID($id){
 		return $id;
 	}
 
+}
+
+function validateCallOutcome($outcome){
+
+	if($outcome == NULL || strlen($outcome) == 0)
+	{
+		$error_message = "Error.";
+		sendToJS(0, $error_message);
+		
+	}elseif($outcome == "missed" || $outcome == "rejected"){
+	
+		return $outcome;
+		
+	}else{
+	
+		$error_message = "Error.";
+		sendToJS(0, $error_message);
+	}
 }
 
 

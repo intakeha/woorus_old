@@ -19,13 +19,15 @@ $connection = mysql_connect($db_host, $db_user, $db_pass) or die ("Error 1");
 mysql_select_db($db_name, $connection);
 
 //update active_user field to 0
-$query_users = "UPDATE `users` SET active_user = 0 WHERE id = '".mysql_real_escape_string($user_id)."'";
+$query_users = "UPDATE `users` 
+			SET active_user = 0 
+			WHERE id = '".mysql_real_escape_string($user_id)."'";
 $result = mysql_query($query_users, $connection) or die ("Error");
 
 //update user_login fields all to 0
 $query_logout = "UPDATE `user_login` 
 			SET session_set = 0, on_call = 0, user_active = 0
-			WHERE user_id = '".$user_id."' ";
+			WHERE user_id = '".mysql_real_escape_string($user_id)."' ";
 $result = mysql_query($query_logout, $connection) or die ("Error");
 
 

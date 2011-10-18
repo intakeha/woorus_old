@@ -35,10 +35,10 @@ $lounge_count_query = "SELECT DISTINCT others_mosaic_wall.user_id, BLOCKER.user_
 				FROM `mosaic_wall` 
 				LEFT JOIN `mosaic_wall` AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN `users` ON others_mosaic_wall.user_id = users.id
-				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
-				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".mysql_real_escape_string($user_id)."' AND BLOCKER.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".mysql_real_escape_string($user_id)."' AND BLOCKEE.active = 1
 				LEFT OUTER JOIN `user_login` on  user_login.user_id = others_mosaic_wall.user_id 
-				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1 
+				WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_id)."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1 
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				GROUP BY others_mosaic_wall.user_id
 				ORDER BY  user_login.user_active DESC, COUNT(others_mosaic_wall.user_id) DESC";
@@ -55,9 +55,9 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 				BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large
 				FROM `users`
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = users.id
-				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = users.id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
-				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = users.id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
-				LEFT OUTER JOIN `contacts` on contacts.user_contactee = users.id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = users.id AND BLOCKER.user_blockee = '".mysql_real_escape_string($user_id)."' AND BLOCKER.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = users.id AND BLOCKEE.user_blocker = '".mysql_real_escape_string($user_id)."' AND BLOCKEE.active = 1
+				LEFT OUTER JOIN `contacts` on contacts.user_contactee = users.id AND contacts.user_contacter ='".mysql_real_escape_string($user_id)."' AND contacts.active = 1
 				LEFT OUTER JOIN `user_login` on  user_login.user_id = users.id
 				WHERE users.active_user = 1
 				ORDER BY user_login.user_active DESC, RAND()
@@ -72,11 +72,11 @@ else
 				LEFT JOIN `mosaic_wall` AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN `users` ON users.id = others_mosaic_wall.user_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = others_mosaic_wall.user_id
-				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".$user_id."' AND BLOCKER.active = 1
-				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".$user_id."' AND BLOCKEE.active = 1
-				LEFT OUTER JOIN `contacts` on contacts.user_contactee = others_mosaic_wall.user_id AND contacts.user_contacter ='".$user_id."' AND contacts.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKER on BLOCKER.user_blocker = others_mosaic_wall.user_id AND BLOCKER.user_blockee = '".mysql_real_escape_string($user_id)."' AND BLOCKER.active = 1
+				LEFT OUTER JOIN `blocks` as BLOCKEE on BLOCKEE.user_blockee = others_mosaic_wall.user_id AND BLOCKEE.user_blocker = '".mysql_real_escape_string($user_id)."' AND BLOCKEE.active = 1
+				LEFT OUTER JOIN `contacts` on contacts.user_contactee = others_mosaic_wall.user_id AND contacts.user_contacter ='".mysql_real_escape_string($user_id)."' AND contacts.active = 1
 				LEFT JOIN `user_login` on  user_login.user_id = others_mosaic_wall.user_id
-				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
+				WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_id)."' AND mosaic_wall.user_id <> others_mosaic_wall.user_id AND mosaic_wall.interest_id <> 0 AND users.active_user = 1
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				GROUP BY others_mosaic_wall.user_id
 				ORDER BY user_login.user_active DESC, COUNT(others_mosaic_wall.user_id) DESC 
@@ -115,7 +115,7 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 					LEFT JOIN `interests` on mosaic_wall.interest_id = interests.id
 					LEFT JOIN `mosaic_wall` AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 					LEFT JOIN `tiles` ON others_mosaic_wall.tile_id = tiles.id
-					WHERE mosaic_wall.user_id =  '".$user_id."' AND others_mosaic_wall.user_id  =  '".mysql_real_escape_string($user_match_id)."' AND mosaic_wall.interest_id <> 0
+					WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_id)."' AND others_mosaic_wall.user_id  =  '".mysql_real_escape_string($user_match_id)."' AND mosaic_wall.interest_id <> 0
 					LIMIT 0, 12";
 	$user_match_result = mysql_query($user_match_query, $connection) or die ("Error 1");
 	

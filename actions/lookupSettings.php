@@ -12,11 +12,13 @@ session_start();
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
+$user_id = $_SESSION['id'];
+
 //lookup user data
 $lookup_query = "SELECT first_name, last_name, gender, birthday, user_city_id, visual_email_address, interest_notify, message_notify, contact_notify, missed_call_notify
 			FROM `users`
 			LEFT OUTER JOIN `settings` on settings.user_id  = users.id
-			WHERE users.id =  '".$_SESSION['id']."' ";
+			WHERE users.id =  '".mysql_real_escape_string($user_id)."' ";
 $result = mysql_query($lookup_query, $connection) or die ("Error");
 
 //if we found a match

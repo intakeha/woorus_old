@@ -17,7 +17,7 @@ function getTilesOnWall($user_id, $tile_filename_array, $connection){
 				FROM `mosaic_wall`
 				LEFT JOIN interests ON mosaic_wall.interest_id = interests.id
 				LEFT JOIN tiles ON mosaic_wall.tile_id = tiles.id
-				WHERE mosaic_wall.user_id =  '".$user_id."' AND mosaic_wall.interest_id <> 0
+				WHERE mosaic_wall.user_id =  '".mysql_real_escape_string($user_id)."' AND mosaic_wall.interest_id <> 0
 				ORDER BY `tile_placement`";
 				
 	$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 1");
@@ -70,7 +70,8 @@ function lookupInterestID($interest, $connection)
 
 function updateUserInterestTable($user_id, $interest_id, $tile_id, $connection)
 {
-	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, tile_id, update_time) VALUES (NULL, '". mysql_real_escape_string($user_id)."' , '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_id)."', NOW() )";
+	$query_add_interest = "INSERT INTO `user_interests` (id, user_id, interest_id, tile_id, update_time) 
+					VALUES (NULL, '". mysql_real_escape_string($user_id)."' , '".mysql_real_escape_string($interest_id)."', '".mysql_real_escape_string($tile_id)."', NOW() )";
 	$result = mysql_query($query_add_interest, $connection) or die ("Error 7");
 }
 
@@ -115,7 +116,7 @@ function getTilePlacement($user_id, $connection){
 
 	$tile_placement_query =  "SELECT min(tile_placement) 
 					    FROM `mosaic_wall` 
-					    WHERE tile_id = 0 AND interest_id = 0 AND user_id = '".$user_id."' ";
+					    WHERE tile_id = 0 AND interest_id = 0 AND user_id = '".mysql_real_escape_string($user_id)."' ";
 	$tile_placement_result = mysql_query($tile_placement_query, $connection) or die ("Error");
 	$tile_placement_count = mysql_num_rows($tile_placement_result); //necessary?
 	$row = mysql_fetch_assoc($tile_placement_result); //min function means that a row will always be returned
@@ -133,7 +134,9 @@ function getTilePlacement($user_id, $connection){
 
 function getInterestFromTile($tile_id, $connection){
 
-	$interest_query = "SELECT interest_id from `tiles` WHERE id = '".mysql_real_escape_string($tile_id)."' ";
+	$interest_query = "SELECT interest_id 
+				FROM `tiles` 
+				WHERE id = '".mysql_real_escape_string($tile_id)."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error");
 	if (mysql_num_rows($interest_result) > 0)
 	{
@@ -148,7 +151,9 @@ function getInterestFromTile($tile_id, $connection){
 
 function getFilenameFromTile($tile_id, $connection){
 
-	$filename_query = "SELECT tile_filename from `tiles` WHERE id = '".mysql_real_escape_string($tile_id)."' ";
+	$filename_query = "SELECT tile_filename 
+				FROM `tiles` 
+				WHERE id = '".mysql_real_escape_string($tile_id)."' ";
 	$filename_result = mysql_query($filename_query, $connection) or die ("Error");
 	if (mysql_num_rows($filename_result) > 0)
 	{
@@ -163,7 +168,9 @@ function getFilenameFromTile($tile_id, $connection){
 
 function getInterestFromId($interest_id, $connection){
 
-	$interest_query = "SELECT interest_name from `interests` WHERE id = '".mysql_real_escape_string($interest_id)."' ";
+	$interest_query = "SELECT interest_name 
+	FROM `interests` 
+	WHERE id = '".mysql_real_escape_string($interest_id)."' ";
 	$interest_result = mysql_query($interest_query, $connection) or die ("Error");
 	if (mysql_num_rows($interest_result) > 0)
 	{

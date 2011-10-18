@@ -19,9 +19,9 @@ $profile_array = array();
 
 $profile_query =  "SELECT users.first_name, users.user_city_id, users.social_status, users.block_status, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large
 			FROM `users`
-			LEFT OUTER JOIN `user_login` on  user_login.user_id = '".$user_id."'
-			LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = '".$user_id."'
-			WHERE  users.id = '".$user_id."' ";
+			LEFT OUTER JOIN `user_login` on  user_login.user_id = '".mysql_real_escape_string($user_id)."'
+			LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = '".mysql_real_escape_string($user_id)."'
+			WHERE  users.id = '".mysql_real_escape_string($user_id)."' ";
 
 $profile_query_result = mysql_query($profile_query, $connection) or die ("Error 1");
 
