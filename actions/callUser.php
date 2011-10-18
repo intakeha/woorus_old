@@ -11,7 +11,11 @@ require_once('connect.php');
 require_once('validations.php');
 
 //$other_user_id= validateUserId(strip_tags($_POST["user_id_callee"])); 
+<<<<<<< .mine
+$other_user_id= 143;
+=======
 $other_user_id= 142;
+>>>>>>> .r973
 
 
 session_start();
@@ -25,8 +29,8 @@ $distance = 1000; //need to calculate distance off of user locations
 
 //update conversations table--at this point user has pressed "call" but call has not gone through to other user
 $conversation_query = "INSERT INTO `conversations`
-				(id, caller_id, callee_id, update_time, call_state, distance) VALUES
-				(NULL,   '".$user_id."' ,  '".mysql_real_escape_string($other_user_id)."', NOW(), 'not_received' ,  '".$distance."' )";
+				(id, caller_id, callee_id, update_time, call_state, call_ended, distance) VALUES
+				(NULL,   '".mysql_real_escape_string($user_id)."' ,  '".mysql_real_escape_string($other_user_id)."', NOW(), 'not_received' , 0 , '".mysql_real_escape_string($distance)."' )";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
 
@@ -34,9 +38,16 @@ $conversation_result = mysql_query($conversation_query, $connection) or die ("Er
 
 $call_array = array();
 
-$call_array['converations_id'] = mysql_insert_id();
+$call_array['conversation_id'] = mysql_insert_id();
 $call_array['caller_id'] = $user_id;
 $call_array['callee_id'] = $other_user_id;
+
+//set user as on call
+$call_log_query =  "UPDATE `user_login` 
+				SET on_call = 1
+				WHERE user_id = '".mysql_real_escape_string($user_id)."' ";
+$result = mysql_query($call_log_query, $connection) or die ("Error 2");
+
 
 $output = json_encode($call_array);
 die($output);

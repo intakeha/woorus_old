@@ -22,8 +22,8 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				FROM `conversations`
 				LEFT JOIN `users` on users.id =  conversations.callee_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.callee_id
-				LEFT OUTER JOIN `user_login` on user_login.user_id = '".$user_id."'
-				WHERE caller_id =   '".$user_id."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
+				LEFT OUTER JOIN `user_login` on user_login.user_id = '".mysql_real_escape_string($user_id)."'
+				WHERE caller_id =   '".mysql_real_escape_string($user_id)."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
 				AND (call_state = 'accepted' OR call_state = 'missed' OR call_state = 'rejected') ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
@@ -71,8 +71,13 @@ if (mysql_num_rows($conversation_result) > 0)
 	
 	//if found a call, set that call to received-that means this call has been found in the database & only want to find it once
 	$conversation_update_query = 	"UPDATE `conversations` 
+<<<<<<< .mine
+							SET call_state = '".mysql_real_escape_string($call_state_recv)."'
+							WHERE conversations.id = '".mysql_real_escape_string($conversationID)."' ";
+=======
 							SET call_state = '".$call_state_recv."'
 							WHERE conversations.id = '".$conversationID."' ";
+>>>>>>> .r973
 	$conversation_update_result = mysql_query($conversation_update_query, $connection) or die ("Error 2");
 
 	
