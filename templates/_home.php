@@ -638,10 +638,10 @@
 		width: Math.round(scaleX*img.width),
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),
-		marginTop: -Math.round(scaleY * selection.y1), 
+		marginTop: -Math.round(scaleY * selection.y1) 
 		});
 			
-	} 
+	};
 	
 	$("#profile_crop_form").submit(function(event) {
 		event.preventDefault();
@@ -699,10 +699,10 @@
 		width: Math.round(scaleX*img.width),
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),
-		marginTop: -Math.round(scaleY * selection.y1), 
+		marginTop: -Math.round(scaleY * selection.y1) 
 		});
 			
-	} 
+	};
 	
 	$("#profile_thumbnail_form").submit(function(event) {
 		event.preventDefault(); 
@@ -738,14 +738,14 @@
 	function hideUpdatesResult(){
 		$('#updates').show();
 		$('#pagination_home').hide();
-	}
+	};
 	
 	function showUpdates(){
 		$('#updates_missed_calls').hide();
 		$('#updates_contacts').hide();
 		$('#updates_contact_interests').hide();
 		$('#updates_interests').hide();
-	}
+	};
 
 	function showTransparentUpdate(obj, tag){
 		obj.find('img').addClass('transparent_tile');

@@ -682,18 +682,18 @@ $(document).ready(function(){
 	
 	// Call imgAreaSelect to crop picture and associated coordinates
 	$('.tile_pic').imgAreaSelect({
-        handles: true,
+		handles: true,
 		aspectRatio: "1:1",
 		onSelectChange: previewTile,
 		onSelectEnd: function (img, selection) {				
-            $('input[name=x1]').val(selection.x1);
-            $('input[name=y1]').val(selection.y1);
-            $('input[name=x2]').val(selection.x2);
-            $('input[name=y2]').val(selection.y2); 
-	        $('input[name=w]').val(selection.width);
-            $('input[name=h]').val(selection.height);
-        }		
-    });
+			$('input[name=x1]').val(selection.x1);
+			$('input[name=y1]').val(selection.y1);
+			$('input[name=x2]').val(selection.x2);
+			$('input[name=y2]').val(selection.y2); 
+			$('input[name=w]').val(selection.width);
+			$('input[name=h]').val(selection.height);
+		}		
+	});
 
 	// Function used by imgAreaSelect to preview thumbnail	
 	function previewTile(img, selection) {
@@ -707,10 +707,10 @@ $(document).ready(function(){
 		width: Math.round(scaleX*img.width),
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),
-		marginTop: -Math.round(scaleY * selection.y1), 
+		marginTop: -Math.round(scaleY * selection.y1)
 		});
 			
-	} 
+	} ;
 	
 	// Validate Tile_Crop_Form and send data to backend
 	$("#tile_crop_form").validate({
