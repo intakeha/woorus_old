@@ -76,7 +76,7 @@ a:hover {
  
 /* Header */
 #header_container {
-	background: #215086;
+	background: #fff url(../images/global/header_bg.jpg) no-repeat center;
 }
 
 .header {
