@@ -216,26 +216,32 @@ a#nav_trends_1 {
 }
 
 /* Footer */
+#footer_container {
+	background: #215086 url(../images/global/footer.jpg) no-repeat center;
+}
+
 .footer {
-	background: url(../images/global/footer.png);
-	height: 106px;
+	height: 100px;
 	font-size: 20px;
-	color: #FFF;
+	color: #78BCE3;
 	text-align: center;
+	margin: 0 auto;
+	overflow: hidden;
+	border-top: 5px solid #99B8D7;
 }
 
 .footer a:link, .footer a:active, .footer a:visited {
-	color: #FFF;
+	color: #78BCE3;
 	text-decoration: none;
 }
 
 .footer a:hover {
-	color: #4980B7;
+	color: #fff;
 	text-decoration: none;
 }
 
 #nav_footer {
-	padding: 45px;
+	padding-top: 40px;
 }
 
 .error_text {

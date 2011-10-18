@@ -107,7 +107,7 @@
 			
 			// Missed call updated and notified
 			function callMissed(conversation_id, callee_id) {
-				$.post("actions/rejectOrMissCall.php", 
+				$.post("actions/respondToCall.php", 
 					{ call_accepted: "missed", conversation_id: conversation_id, other_user_id: callee_id},
 					function(data) {
 						var callListenInterval = setInterval(callListen, 3000);
@@ -171,7 +171,7 @@
 				$('#ringCallee').flash().remove();
 				conversation_id = $('input[name=conversation_id]').val();
 				callee_id = $('input[name=user_id_callee]').val();
-				$.post("actions/rejectOrMissCall.php", 
+				$.post("actions/respondToCall.php", 
 					{ call_accepted: "rejected", conversation_id: conversation_id, other_user_id: callee_id},
 					function(data) {
 						var callListenInterval = setInterval(callListen, 3000);
