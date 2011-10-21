@@ -15,8 +15,8 @@
 	float: left;
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 1.2em;
-	position: fixed;
-	top: 50%; left: 50%;
+	position: absolute;
+	left: 50%; /*--top:50%--*/
 	z-index: 99999;
 	/*--CSS3 Box Shadows--*/
 	-webkit-box-shadow: 0px 0px 20px #000;
@@ -402,19 +402,59 @@ img.btn_close {
 
 
 #pagination_home {
-	width: 70px;
-	height: 0px;
-	float: left;
+    float: left;
+    margin-left: 80px;
+	height: 60px;
+    width: 478px;
+}
+
+.pagination_home {
+    color: #99B8D7;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    width: 105px;
+}
+
+.pagination_home:hover {
+	color: #215086;
+}
+
+#home_current_page {
+    color: #CCCCCC;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 22px 0 0 154px;
+    position: absolute;
+    text-align: center;
+    width: 170px;
+}
+
+#updates_right {
+    float: right;
+}
+
+#updates_right div {
+    margin-top: 22px;
+}
+
+#updates_left {
+    float: left;
+}
+
+#updates_left div {
+    float: right;
+    margin-top: 22px;
 }
 
 #updates {
-	color: #4980B7;
+    color: #4980B7;
     float: left;
     font-size: 16px;
-    height: 500px;
+    height: 420px;
+    margin: 10px 0 0 80px;
     text-align: left;
     width: 480px;
-	margin: 10px 0 0 80px;
 }
 
 #updates p {
@@ -486,13 +526,15 @@ div.transparent_update {
 }
 
 .updates_results {
-	color: #4980B7;
-	font-size: 16px;
-	float: left;
-	margin-left: 80px;
-	text-align: left;
-	width: 480px;
-	height: 500px;
+    border-bottom: 1px dotted #CCCCCC;
+    color: #4980B7;
+    float: left;
+    font-size: 16px;
+    margin-left: 80px;
+	min-height: 405px;
+    padding-bottom: 15px;
+    text-align: left;
+    width: 480px;
 }
 
 .updates_results span {
@@ -1470,7 +1512,7 @@ div.lounge_transparent_tag {
     color: #CCCCCC;
     font-size: 16px;
     font-weight: bold;
-    margin: 22px 0 0 120px;
+    margin: 22px 0 0 125px;
     position: absolute;
     text-align: center;
     width: 170px;	
@@ -1478,7 +1520,7 @@ div.lounge_transparent_tag {
 
 #mail_left {
 	float: left;
-	margin-left: 10px;
+	margin-left: 15px;
 }
 
 #mail_left div {

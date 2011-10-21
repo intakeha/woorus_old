@@ -62,8 +62,8 @@
 						clearInterval(callListenInterval);
 						modal('#calling','300');
 						$('#ringCaller').flash({swf:'media/ringtone.swf', height:1, width:1});
-						var answeredCallInterval = setInterval(answeredCallListen, 3000);
-						missedCallTimout = setTimeout(function() { clearInterval(answeredCallInterval); callMissed(data.conversation_id, data.callee_id);}, 30000);
+						answeredCallInterval = setInterval(answeredCallListen, 3000);
+						missedCallTimout = setTimeout(function() { clearInterval(answeredCallInterval); callMissed(data.conversation_id, data.caller_id);}, 30000);
 					}, 
 					"json"
 				);
@@ -74,48 +74,110 @@
 				$.post("actions/answeredCallSearch.php", 
 					function(data) {
 						if (data){
-							clearTimeout(missedCallTimout);	
-							$('#calling').hide();
-							$('#ringCaller').flash().remove();
-							$('#videoPhone').flash({
-								swf:'actions/VideoPhoneCallee.swf',
-								height: 630,
-								width: 530,
-								quality: 'high',
-								bgcolor: '#ffffff',
-								allowScriptAccess: 'sameDomain',
-								allowFullScreen: true,
-								movie: 'VideoPhoneCallee.swf',
-								classid: 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000',
-								flashvars: {
-									userIdHTML: data.caller_id,
-									friendIdHTML: data.callee_id,
-									conversationIdHTML: data.conversation_id
-								},
-								attributes: {
-									id: 'VideoPhoneCallee',
-									name: 'VideoPhoneCallee',
-									align: 'middle'
-								}
-							});
-							modal('#videoPhone','800');
-						}
+							if (data.call_state == "accepted"){
+								clearTimeout(missedCallTimout);	
+								clearInterval(answeredCallInterval);
+								$('input[name=conversation_id]').val(data.conversation_id);
+								$('#calling').hide();
+								$('#ringCaller').flash().remove();
+								$('#videoPhone').flash({
+									swf:'actions/VideoPhoneCallee.swf',
+									height: 630,
+									width: 530,
+									quality: 'high',
+									bgcolor: '#ffffff',
+									allowScriptAccess: 'sameDomain',
+									allowFullScreen: true,
+									movie: 'VideoPhoneCallee.swf',
+									classid: 'clsid:D27CDB6E-AE6D-11cf-96B8-444553540000',
+									flashvars: {
+										userIdHTML: data.caller_id,
+										friendIdHTML: data.callee_id,
+										conversationIdHTML: data.conversation_id
+									},
+									attributes: {
+										id: 'VideoPhoneCallee',
+										name: 'VideoPhoneCallee',
+										align: 'middle'
+									}
+								});
+								modal('#videoPhone','800');
+								videoPhoneClass();
+								hangupCallInterval = setInterval(hangupListen, 3000);
+							};
+							if (data.call_state == "rejected"){
+								$('#ringCaller').flash().remove();
+								clearTimeout(missedCallTimout);	
+								clearInterval(answeredCallInterval);
+								callListenInterval = setInterval(callListen, 3000);
+								alert("The person you call is unable to take your call right now.");
+							};
+						};
 					}, 
 					"json"
 				);
-			}
+			};
+			
+			// Assign class to videoPhone modal
+			function videoPhoneClass() {
+				$('#videoPhone a').addClass('videoModal');
+				$('#fade').addClass('videoModal');
+			};
+			
+			// Call hangupHTML when caller closes modal
+			$('a.videoModal, #fade.videoModal').live('click', function() {
+				conversationID = $('input[name=conversation_id]').val();
+				$.post("actions/hangupCallHTML.php", 
+					{ conversation_id: conversationID},
+					function(data) {
+						if (data){
+							if (data.success == 1){
+								clearInterval(hangupCallInterval);
+								clearInterval(answeredCallInterval);
+								callListenInterval = setInterval(callListen, 3000);
+								alert ("This call has ended.");
+							};
+						};
+					},
+					"json"
+				);
+				$('#fade , .popup_block').fadeOut(function() {
+					$('#fade, a.close').remove();
+				});
+				return false;
+			});
+			
+			// Listen for hangup from callee
+			function hangupListen() {
+				conversationID = $('input[name=conversation_id]').val();
+				$.post("actions/hangupCallSearch.php", 
+					{ conversation_id: conversationID},
+					function(data) {
+						if (data){
+							if (data.success == 1){
+								clearInterval(hangupCallInterval);
+								clearInterval(answeredCallInterval);
+								callListenInterval = setInterval(callListen, 3000);
+								alert ("This call has ended.");
+							};
+						};
+					},
+					"json"
+				);
+			};
 			
 			// Missed call updated and notified
-			function callMissed(conversation_id, callee_id) {
+			function callMissed(conversation_id, caller_id) {
 				$.post("actions/respondToCall.php", 
-					{ call_accepted: "missed", conversation_id: conversation_id, other_user_id: callee_id},
+					{ call_response: "missed", conversation_id: conversation_id, user_id_caller: caller_id},
 					function(data) {
-						var callListenInterval = setInterval(callListen, 3000);
+						callListenInterval = setInterval(callListen, 3000);
+						$('#ringCaller').flash().remove();
 						alert ("Your call was not answered");
 					},
 					"json"
 				);
-			}
+			};
 
 		//-- Callee Actions --//
 
@@ -130,6 +192,7 @@
 							$('input[name=conversation_id]').val(data.conversation_id);
 							$('input[name=user_id_caller]').val(data.caller_id);
 							$('input[name=user_id_callee]').val(data.callee_id);
+							calleeMissedListen = setInterval(calleeMissedCall, 5000);
 							$('#ringCallee').flash({swf:'media/ringtone.swf', height:1, width:1});
 							$('#videoPhone').flash({
 								swf:'actions/VideoPhoneCaller.swf',
@@ -157,25 +220,93 @@
 					"json"
 				);
 			};
-			
+
+			// Callee missed call
+			function calleeMissedCall() {
+				conversationID = $('input[name=conversation_id]').val();
+				userIdCaller = $('input[name=user_id_caller]').val();
+				$.post("actions/missedCallSearch.php", 
+					{ conversation_id: conversationID, user_id_caller: userIdCaller},
+					function(data) {
+						if (data){
+							clearInterval(calleeMissedListen);
+							callListenInterval = setInterval(callListen, 3000);
+							//$('#incomingCall').hide();
+							$('#fade , .popup_block').fadeOut(function() {
+								$('#fade, a.close').remove();
+							});
+							$('#ringCallee').flash().remove();
+							alert ("You missed a call.");
+						};
+					},
+					"json"
+				);
+			};
+					
 			// Callee answers call
 			$('#answer').click(function() {
 				$('#incomingCall').hide();
 				$('#ringCallee').flash().remove();
+				clearInterval(calleeMissedListen);
+				endCallListen = setInterval(endCall, 3000);
 				modal('#videoPhone','800');
+				videoPhoneClass();
 			});
+
+			// Call hangupHTML when callee closes modal
+			$('a.videoModal, #fade.videoModal').live('click', function() {
+				conversationID = $('input[name=conversation_id]').val();
+				$.post("actions/hangupCallHTML.php", 
+					{ conversation_id: conversationID},
+					function(data) {
+						if (data){
+							if (data.success == 1){
+								clearInterval(endCallListen);
+								callListenInterval = setInterval(callListen, 3000);
+								alert ("This call sucks.");
+							};
+						};
+					},
+					"json"
+				);
+				$('#fade , .popup_block').fadeOut(function() {
+					$('#fade, a.close').remove();
+				});
+				return false;
+			});
+
+			// Callee ends call - Leveraging the hangupCallSearch script to close modal
+			function endCall() {
+				conversationID = $('input[name=conversation_id]').val();
+				$.post("actions/hangupCallSearch.php", 
+					{ conversation_id: conversationID},
+					function(data) {
+						if (data){
+							if (data.success == 1){
+								clearInterval(endCallListen);
+								callListenInterval = setInterval(callListen, 3000);
+								alert ("You ended the call.");
+							};
+						};
+					},
+					"json"
+				);
+			};
 			
 			// Callee rejects call
 			$('#decline').click(function() {
 				$('#incomingCall').hide();
 				$('#ringCallee').flash().remove();
 				conversation_id = $('input[name=conversation_id]').val();
-				callee_id = $('input[name=user_id_callee]').val();
+				caller_id = $('input[name=user_id_caller]').val();
 				$.post("actions/respondToCall.php", 
-					{ call_accepted: "rejected", conversation_id: conversation_id, other_user_id: callee_id},
+					{ call_response: "rejected", conversation_id: conversation_id, user_id_caller: caller_id},
 					function(data) {
-						var callListenInterval = setInterval(callListen, 3000);
-						alert ("Your call was rejected");
+						callListenInterval = setInterval(callListen, 3000);
+						$('#fade , .popup_block').fadeOut(function() {
+							$('#fade, a.close').remove();
+						});
+						return false;
 					},
 					"json"
 				);
@@ -188,12 +319,12 @@
 				$(modalID).fadeIn().css({ 'width': Number( modalWidth ) }).prepend('<a href="#" class="close"><img src="/images/global/close_modal.png" class="btn_close" title="Close Window" alt="Close" /></a>');
 			
 				//Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
-				var popMargTop = ($(modalID).height() + 80) / 2;
+				//var popMargTop = ($(modalID).height() + 80) / 2;
 				var popMargLeft = ($(modalID).width() + 80) / 2;
 			
 				//Apply Margin to Popup
 				$(modalID).css({
-					'margin-top' : -popMargTop,
+					//'margin-top' : -popMargTop,
 					'margin-left' : -popMargLeft
 				});
 			
@@ -203,7 +334,7 @@
 			
 				return false;
 			
-			}
+			};
 			
 			//Close Popups and Fade Layer
 			$('a.close, #fade').live('click', function() {

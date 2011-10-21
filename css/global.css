@@ -217,7 +217,7 @@ a#nav_trends_1 {
 
 /* Footer */
 #footer_container {
-	background: #215086 url(../images/global/footer.jpg) no-repeat center;
+	background: url(../images/global/footer.jpg) no-repeat center;
 }
 
 .footer {
@@ -228,6 +228,7 @@ a#nav_trends_1 {
 	margin: 0 auto;
 	overflow: hidden;
 	border-top: 5px solid #99B8D7;
+	border-bottom: none;
 }
 
 .footer a:link, .footer a:active, .footer a:visited {

@@ -59,30 +59,15 @@
             <ul id="show_interests">
             </ul>
         </div>
-    </div>
-    <div id="pagination_home">
-    	<a id="calls_left contacts_left interests_left shared_left" class="arrows pagination_left"></a><a id="calls_right contacts_right interests_right shared_right" class="arrows pagination_right"></a>
+    </div> 
+    <div id="pagination_home" style="display: none;">
+        <div class="pagination_home" id="updates_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+        <div id="home_current_page"></div>
+        <div class="pagination_home" id="updates_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
     </div>
     
-<!--
-    <div id="updates_left" class="pagination_home" style="display: none;">
-    	<a id="calls_left" class="arrows pagination_left"></a>
-        <a id="contacts_left" class="arrows pagination_left"></a>
-        <a id="interests_left" class="arrows pagination_left"></a>
-        <a id="shared_left" class="arrows pagination_left"></a>
-    </div>
-   	<div id="updates_right" class="pagination_home" style="display: none;">
-        <a id="calls_right" class="arrows pagination_right"></a>
-        <a id="contacts_right" class="arrows pagination_right"></a>
-        <a id="interests_right" class="arrows pagination_right"></a>
-        <a id="shared_right" class="arrows pagination_right"></a>
-    </div>
--->    
-    
-    <form id="callsOffset" action="actions/showMissedCalls.php" method="post"><input type="hidden" name="callOffset" value="0" /></form>
-    <form id="contactsOffset" action="actions/showAddedToContacts.php" method="post"><input type="hidden" name="contactOffset" value="0" /></form>
-    <form id="interestsOffset" action="actions/showNewInterestsOfContacts.php" method="post"><input type="hidden" name="interestOffset" value="0" /></form>
-    <form id="sharedOffset" action="actions/showUsersWithSharedInterests.php" method="post"><input type="hidden" name="interest_id" value="0" /><input type="hidden" name="sharedOffset" value="0" /></form>
+	<input type="hidden" name="offset" value="0" />
+    <input type="hidden" name="interest_id" value="" />
     <div id="upload_profile_area" style="display: none;">
     	<p>Select a photo for your profile picture:</p>
 		<form id="profile_upload_form" action="actions/uploadProfilePicture.php" method="post" enctype="multipart/form-data">
@@ -151,7 +136,9 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		// Remove all pagination arrows
-		$('.arrows').hide();
+		$('.pagination_home').hide();
+		$('#home_current_page').empty();
+		$('input[name=offset]').val(0);		// Clear offsets
 		
 		// Get user profile information
 		$.getJSON("actions/internalProfile.php",function(result){
@@ -180,6 +167,7 @@
 					$('#updates').hide();
 					showPagination();
 					callUpdates();
+					$('#pagination_home').removeClass().addClass('missedCalls');  // Add class for pagination reference
 					$('#updates_missed_calls').show();
 				});
 			}
@@ -208,6 +196,7 @@
 					$('#updates').hide();
 					showPagination();
 					contactUpdates();
+					$('#pagination_home').removeClass().addClass('newContacts');  // Add class for pagination reference
 					$('#updates_contacts').show();
 				});
 			}
@@ -234,6 +223,7 @@
 					$('#updates').hide();
 					showPagination();
 					interestUpdates();
+					$('#pagination_home').removeClass().addClass('contactInterests');  // Add class for pagination reference
 					$('#updates_contact_interests').show();
 				});
 			}
@@ -263,6 +253,7 @@
 					$('#updates').hide();
 					showPagination();
 					sharedUpdates();
+					$('#pagination_home').removeClass().addClass('sharedInterests');  // Add class for pagination reference
 					$('#updates_interests').show();
 				});
 			}		
@@ -284,43 +275,100 @@
 		});
 		
 		// Bind right pagination with missed calls updates
-		$("#calls_right").click(function() {
-			var currentOffset = $('input[name=callOffset]').val();
-			var nextOffset = parseInt(currentOffset)+20;
-			$('input[name=callOffset]').val(nextOffset);
-			$('#show_missed_calls').empty();
-			callUpdates();
+		$("#updates_right").click(function() {
+			paginationClass = $(this).parent('#pagination_home').attr('class');
+			switch(paginationClass){
+				case "missedCalls":
+				  	var currentOffset = $('input[name=offset]').val();
+					var nextOffset = parseInt(currentOffset)+15;
+					$('input[name=offset]').val(nextOffset);
+					callUpdates();
+					break;
+				case "newContacts":
+					var currentOffset = $('input[name=offset]').val();
+					var nextOffset = parseInt(currentOffset)+15;
+					$('input[name=offset]').val(nextOffset);
+					contactUpdates();
+					break;
+				case "contactInterests":
+					var currentOffset = $('input[name=offset]').val();
+					var nextOffset = parseInt(currentOffset)+30;
+					$('input[name=offset]').val(nextOffset);
+					interestUpdates();
+					break;
+				case "sharedInterests":
+					var currentOffset = $('input[name=offset]').val();
+					var nextOffset = parseInt(currentOffset)+15;
+					$('input[name=offset]').val(nextOffset);
+					sharedUpdates();
+					break;
+				default:
+					$('.pagination_home').hide();
+			}
 		});
 		
 		// Bind left pagination with missed calls updates
-		$("#calls_left").click(function() {
-			var currentOffset = $('input[name=callOffset]').val();
-			var prevOffset = parseInt(currentOffset)-20;
-			$('input[name=callOffset]').val(prevOffset);
-			$('#show_missed_calls').empty();
-			callUpdates();
+		$("#updates_left").click(function() {
+			paginationClass = $(this).parent('#pagination_home').attr('class');
+			switch(paginationClass){
+				case "missedCalls":
+					var currentOffset = $('input[name=offset]').val();
+					var prevOffset = parseInt(currentOffset)-15;
+					$('input[name=offset]').val(prevOffset);
+					$('#show_missed_calls').empty();
+					callUpdates();
+					break;
+				case "newContacts":
+					var currentOffset = $('input[name=offset]').val();
+					var prevOffset = parseInt(currentOffset)-15;
+					$('input[name=offset]').val(prevOffset);
+					$('#show_contacts').empty();
+					contactUpdates();
+					break;
+				case "contactInterests":
+					var currentOffset = $('input[name=offset]').val();
+					var prevOffset = parseInt(currentOffset)-30;
+					$('input[name=offset]').val(prevOffset);
+					$('#show_contact_interests').empty();
+					interestUpdates();
+					break;
+				case "sharedInterests":
+					var currentOffset = $('input[name=offset]').val();
+					var prevOffset = parseInt(currentOffset)-15;
+					$('input[name=offset]').val(prevOffset);
+					$('#show_interests').empty();
+					sharedUpdates();
+					break;
+				default:
+					$('.pagination_home').hide();
+			}
 		});
 		
 		// Show missed calls
 		function callUpdates(){
+			offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showMissedCalls.php", 
-				$('#callsOffset').serialize(),
+				{callOffset: offset},
 				function(data){
+					$('#show_missed_calls').empty();
 					$.each(data, function(i, field){
 						if (i == 0){
-							var missedCallPages = Math.ceil(field.missed_calls_count/20);	
-							var currentOffset = $('input[name=callOffset]').val();
-							var currentPage = (currentOffset/20)+1;
+							var missedCallPages = Math.ceil(field.missed_calls_count/15);	
+							var currentOffset = $('input[name=offset]').val();
+							var currentPage = (currentOffset/15)+1;
+							if (missedCallPages > 1){
+								$('#home_current_page').empty().show().append('Page '+currentPage+' of '+missedCallPages)
+							}
 							if (currentPage < missedCallPages) {
-								$("#calls_right").show();
+								$("#updates_right").show();
 							} else {
-								$("#calls_right").hide();
+								$("#updates_right").hide();
 							}
 							if (currentPage > 1) {
-								$("#calls_left").show();
+								$("#updates_left").show();
 							} else {
-								$("#calls_left").hide();
+								$("#updates_left").hide();
 							}
 							
 						} else {
@@ -353,46 +401,33 @@
 					})
 				},"json"
 			)
-		}
-		
-		// Bind right pagination with added to contacts updates
-		$("#contacts_right").click(function() {
-			var currentOffset = $('input[name=contactOffset]').val();
-			var nextOffset = parseInt(currentOffset)+20;
-			$('input[name=contactOffset]').val(nextOffset);
-			$('#show_contacts').empty();
-			contactUpdates();
-		});
-		
-		// Bind left pagination with added to contacts updates
-		$("#contacts_left").click(function() {
-			var currentOffset = $('input[name=contactOffset]').val();
-			var prevOffset = parseInt(currentOffset)-20;
-			$('input[name=contactOffset]').val(prevOffset);
-			$('#show_contacts').empty();
-			contactUpdates();
-		});
+		};
 		
 		// Show added to contacts
 		function contactUpdates(){
+			offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showAddedToContacts.php", 
-				$('#contactsOffset').serialize(),
+				{contactOffset: offset},
 				function(data){
+					$('#show_contacts').empty();
 					$.each(data, function(i, field){
 						if (i == 0){
-							var contactPages = Math.ceil(field.new_contacts_count/20);	
-							var currentOffset = $('input[name=contactOffset]').val();
-							var currentPage = (currentOffset/20)+1;
+							var contactPages = Math.ceil(field.new_contacts_count/15);	
+							var currentOffset = $('input[name=offset]').val();
+							var currentPage = (currentOffset/15)+1;
+							if (contactPages > 1){
+								$('#home_current_page').empty().show().append('Page '+currentPage+' of '+contactPages)
+							}
 							if (currentPage < contactPages) {
-								$("#contacts_right").show();
+								$("#updates_right").show();
 							} else {
-								$("#contacts_right").hide();
+								$("#updates_right").hide();
 							}
 							if (currentPage > 1) {
-								$("#contacts_left").show();
+								$("#updates_left").show();
 							} else {
-								$("#contacts_left").hide();
+								$("#updates_left").hide();
 							}
 						} else {
 							var statusText = "Offline", statusClass = "contact_offline";
@@ -424,46 +459,33 @@
 					})
 				}, "json"
 			);
-		}
-		
-		// Bind right pagination with new interests of contacts
-		$("#interests_right").click(function() {
-			var currentOffset = $('input[name=interestOffset]').val();
-			var nextOffset = parseInt(currentOffset)+36;
-			$('input[name=interestOffset]').val(nextOffset);
-			$('#show_contact_interests').empty();
-			interestUpdates();
-		});
-		
-		// Bind left pagination with new interests of contacts
-		$("#interests_left").click(function() {
-			var currentOffset = $('input[name=interestOffset]').val();
-			var prevOffset = parseInt(currentOffset)-36;
-			$('input[name=interestOffset]').val(prevOffset);
-			$('#show_contact_interests').empty();
-			interestUpdates();
-		});
+		};
 		
 		// Show new interests of contacts
 		function interestUpdates(){
+			offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showNewInterestsOfContacts.php",
-				$('#interestsOffset').serialize(),
+				{interestOffset: offset},
 				function(data){
+					$('#show_contact_interests').empty();
 					$.each(data, function(i, field){
 						if (i == 0){
-							var interestPages = Math.ceil(field.interest_count/36);	
-							var currentOffset = $('input[name=interestOffset]').val();
-							var currentPage = (currentOffset/36)+1;
+							var interestPages = Math.ceil(field.interest_count/30);	
+							var currentOffset = $('input[name=offset]').val();
+							var currentPage = (currentOffset/30)+1;
+							if (interestPages > 1){
+								$('#home_current_page').empty().show().append('Page '+currentPage+' of '+interestPages)
+							}
 							if (currentPage < interestPages) {
-								$("#interests_right").show();
+								$("#updates_right").show();
 							} else {
-								$("#interests_right").hide();
+								$("#updates_right").hide();
 							}
 							if (currentPage > 1) {
-								$("#interests_left").show();
+								$("#updates_left").show();
 							} else {
-								$("#interests_left").hide();
+								$("#updates_left").hide();
 							}
 						} else {
 							$('#show_contact_interests').append('<li class="community_wall tile_tag" onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), \''+field.interest_name+'\')"><img src="images/interests/'+field.tile_filename+'"></li>');
@@ -471,46 +493,34 @@
 					})
 				}, "json"
 			);
-		}
-
-		// Bind right pagination with shared interest
-		$("#shared_right").click(function() {
-			var currentOffset = $('input[name=sharedOffset]').val();
-			var nextOffset = parseInt(currentOffset)+20;
-			$('input[name=sharedOffset]').val(nextOffset);
-			$('#show_interests').empty();
-			sharedUpdates();
-		});
-		
-		// Bind left pagination with shared interest
-		$("#shared_left").click(function() {
-			var currentOffset = $('input[name=sharedOffset]').val();
-			var prevOffset = parseInt(currentOffset)-20;
-			$('input[name=sharedOffset]').val(prevOffset);
-			$('#show_interests').empty();
-			sharedUpdates();
-		});
+		};
 
 		// Show shared interests update
 		function sharedUpdates(){
+			offset = $('input[name=offset]').val();
+			interestID = $('input[name=interest_id]').val();
 			$.post(
 				"actions/showUsersWithSharedInterests.php",
-				$('#sharedOffset').serialize(),
+				{sharedOffset: offset, interest_id: interestID},
 				function(data){
+					$('#show_interests').empty();
 					$.each(data, function(i, field){
 						if (i == 0){
-							var sharedPages = Math.ceil(field.user_count/20);	
-							var currentOffset = $('input[name=sharedOffset]').val();
-							var currentPage = (currentOffset/20)+1;
+							var sharedPages = Math.ceil(field.user_count/15);	
+							var currentOffset = $('input[name=offset]').val();
+							var currentPage = (currentOffset/15)+1;
+							if (sharedPages > 1){
+								$('#home_current_page').empty().show().append('Page '+currentPage+' of '+sharedPages)
+							}
 							if (currentPage < sharedPages) {
-								$("#shared_right").show();
+								$("#updates_right").show();
 							} else {
-								$("#shared_right").hide();
+								$("#updates_right").hide();
 							}
 							if (currentPage > 1) {
-								$("#shared_left").show();
+								$("#updates_left").show();
 							} else {
-								$("#shared_left").hide();
+								$("#updates_left").hide();
 							}
 						} else {
 							var statusText = "Offline", statusClass = "contact_offline";
@@ -541,7 +551,7 @@
 					})
 				}, "json"
 			);
-		}
+		};
 		
 
 	});
@@ -722,19 +732,13 @@
 	
 	// Clicking the back button to get to the dashboard view
 	$('.dashboard_view').click(function(){
+		$('.pagination_home, #home_current_page').hide();	// Hide pagination
+		$('input[name=offset]').val(0);		// Clear offsets
+		$('#show_missed_calls, #show_contacts, #show_contact_interests, #show_interests, #home_current_page').empty();	// Clear all updates
 		showUpdates();
 		hideUpdatesResult();
-		$('input[name=callOffset]').val(0); 	// Reset all offset values
-		$('input[name=contactOffset]').val(0);
-		$('input[name=interestOffset]').val(0);
-		$('input[name=sharedOffset]').val(0);
-		$('#show_missed_calls').empty();	// Clear all updates
-		$('#show_contacts').empty();
-		$('#show_contact_interests').empty();
-		$('#show_interests').empty();
-		$(".arrows").hide();	// Hide pagination arrows
 	});
-	
+		
 	function hideUpdatesResult(){
 		$('#updates').show();
 		$('#pagination_home').hide();
