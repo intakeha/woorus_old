@@ -346,7 +346,7 @@
 		
 		// Show missed calls
 		function callUpdates(){
-			offset = $('input[name=offset]').val();
+			var offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showMissedCalls.php", 
 				{callOffset: offset},
@@ -405,7 +405,7 @@
 		
 		// Show added to contacts
 		function contactUpdates(){
-			offset = $('input[name=offset]').val();
+			var offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showAddedToContacts.php", 
 				{contactOffset: offset},
@@ -463,7 +463,7 @@
 		
 		// Show new interests of contacts
 		function interestUpdates(){
-			offset = $('input[name=offset]').val();
+			var offset = $('input[name=offset]').val();
 			$.post(
 				"actions/showNewInterestsOfContacts.php",
 				{interestOffset: offset},
@@ -497,7 +497,7 @@
 
 		// Show shared interests update
 		function sharedUpdates(){
-			offset = $('input[name=offset]').val();
+			var offset = $('input[name=offset]').val();
 			interestID = $('input[name=interest_id]').val();
 			$.post(
 				"actions/showUsersWithSharedInterests.php",

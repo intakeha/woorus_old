@@ -1,25 +1,27 @@
-<div id="search" style="background: url(../images/ads/prius.jpg) no-repeat;">
-	<div id="search_slide"></div>
-    <div>
-        <form id="search_form" action="../actions/userSearch.php" method="POST">
-                <input type="text" class="text_form ac_input" id="user_search_field" name="user_search" maxlength="60">
-                <input type="hidden" name="offset" value="0" />
-                <input class="buttons" id="user_search_submit" type="submit" name="user_search_submit" value="Search">
-        </form>
-        <div id="search_error">
+<div id="search_container" class="fluid" style="background: url(../images/ads/prius.jpg) no-repeat scroll 50% 20% transparent;">
+    <div id="search">
+        <div id="search_slide"></div>
+        <div>
+            <form id="search_form" action="../actions/userSearch.php" method="POST">
+                    <input type="text" class="text_form ac_input" id="user_search_field" name="user_search" maxlength="60">
+                    <input type="hidden" name="offset" value="0" />
+                    <input class="buttons" id="user_search_submit" type="submit" name="user_search_submit" value="Search">
+            </form>
+            <div id="search_error">
+            </div>
         </div>
-    </div>
-    <div id="search_results" style="display: none;">
-    	<div class="pagination_search"><a id="search_left" class="arrows pagination_left"></a></div>
-    	<div class="result_column center_column">
-        	<ul id="result_entries_left">
-            </ul>
+        <div id="search_results" style="display: none;">
+            <div class="pagination_search"><a id="search_left" class="arrows pagination_left"></a></div>
+            <div class="result_column center_column">
+                <ul id="result_entries_left">
+                </ul>
+            </div>
+            <div class="result_column">
+                <ul id="result_entries_right">
+                </ul>
+            </div>
+            <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
         </div>
-        <div class="result_column">
-        	<ul id="result_entries_right">
-            </ul>
-        </div>
-        <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
     </div>
 </div>
 
@@ -120,6 +122,7 @@
 							$("#search_error").html(data.message);
 						} else {
 							showResults();
+							$('#search_container').css('background','');
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
