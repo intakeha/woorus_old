@@ -122,7 +122,6 @@
 							$("#search_error").html(data.message);
 						} else {
 							showResults();
-							$('#search_container').css('background','');
 							$.each(data, function(i, field){
 								var resultEntryCSS = "result_entry";
 								switch (i){
@@ -297,6 +296,7 @@
 		}
 		
 		function showResults(){
+			$('#search_container').css('background','');
 			$('#search_slide').hide();
 			$('#search').css('background','none');
 			$('#search_results').show();

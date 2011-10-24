@@ -17,6 +17,38 @@
     <script type="text/javascript" src="actions/swfobject.js"></script>
     <script type="text/javascript" src="js/jquery.crop.js"></script> 
     <script type="text/javascript" src="js/woorus.js"></script>
+    <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+	<script type="text/javascript">
+		var apiKey = '6483831';
+		var sessionId = '1sdemo00855f8290f8efa648d9347d718f7e06fd';
+		var token = 'moderator_token';           
+	 
+		TB.setLogLevel(TB.DEBUG); // Set this for helpful debugging messages in console
+	 
+		var session = TB.initSession(sessionId);  
+		session.connect(6483831, "devtoken");
+		
+		session.addEventListener("sessionConnected", sessionConnectedHandler);
+		session.addEventListener("streamCreated", streamCreatedHandler);
+		
+		function sessionConnectedHandler (event) {
+			 subscribeToStreams(event.streams);
+			 session.publish();
+		}
+		
+		function subscribeToStreams(streams) {
+			for (i = 0; i < streams.length; i++) {
+				var stream = streams[i];
+				if (stream.connection.connectionId != session.connection.connectionId) {
+					session.subscribe(stream);
+				}
+			}
+		}
+		
+		function streamCreatedHandler(event) {
+			subscribeToStreams(event.streams);
+		}
+  </script>
 
 	<?php 
 		$page = $_REQUEST['page'];
@@ -28,6 +60,7 @@
 	<input type="hidden" name="conversation_id" value="" />
     <input type="hidden" name="user_id_caller" value="" />
     <input type="hidden" name="user_id_callee" value="" />
+    <div id="myPublisherDiv"></div>
     <div id="calling" class="popup_block">
     	<div>Calling...</div>
         <div id="ringCaller"></div>
@@ -62,8 +95,8 @@
 						clearInterval(callListenInterval);
 						modal('#calling','300');
 						$('#ringCaller').flash({swf:'media/ringtone.swf', height:1, width:1});
-						answeredCallInterval = setInterval(answeredCallListen, 3000);
-						missedCallTimout = setTimeout(function() { clearInterval(answeredCallInterval); callMissed(data.conversation_id, data.caller_id);}, 30000);
+						//answeredCallInterval = setInterval(answeredCallListen, 3000);
+						missedCallTimeout = setTimeout(function() { clearInterval(answeredCallInterval); callMissed(data.conversation_id, data.caller_id);}, 30000);
 					}, 
 					"json"
 				);
@@ -75,7 +108,7 @@
 					function(data) {
 						if (data){
 							if (data.call_state == "accepted"){
-								clearTimeout(missedCallTimout);	
+								clearTimeout(missedCallTimeout);	
 								clearInterval(answeredCallInterval);
 								$('input[name=conversation_id]').val(data.conversation_id);
 								$('#calling').hide();
@@ -101,16 +134,16 @@
 										align: 'middle'
 									}
 								});
-								modal('#videoPhone','800');
-								videoPhoneClass();
+								modal('#videoPhone','70%');
+								videoPhoneClass('caller');
 								hangupCallInterval = setInterval(hangupListen, 3000);
 							};
 							if (data.call_state == "rejected"){
 								$('#ringCaller').flash().remove();
-								clearTimeout(missedCallTimout);	
+								clearTimeout(missedCallTimeout);	
 								clearInterval(answeredCallInterval);
 								callListenInterval = setInterval(callListen, 3000);
-								alert("The person you call is unable to take your call right now.");
+								alert("The person you are calling is unable to take your call right now.");
 							};
 						};
 					}, 
@@ -119,15 +152,19 @@
 			};
 			
 			// Assign class to videoPhone modal
-			function videoPhoneClass() {
-				$('#videoPhone a').addClass('videoModal');
-				$('#fade').addClass('videoModal');
+			function videoPhoneClass(user) {
+				if (user == 'caller'){
+					$('#videoPhone a, #fade').addClass('videoModalCaller');
+				}
+				if (user == 'callee'){
+					$('#videoPhone a, #fade').addClass('videoModalCallee');
+				}
 			};
 			
 			// Call hangupHTML when caller closes modal
-			$('a.videoModal, #fade.videoModal').live('click', function() {
-				conversationID = $('input[name=conversation_id]').val();
-				$.post("actions/hangupCallHTML.php", 
+			$('a.videoModalCaller, #fade.videoModalCaller').live('click', function() {
+				var conversationID = $('input[name=conversation_id]').val();
+				$.post("actions/hangupCallHTML.php",
 					{ conversation_id: conversationID},
 					function(data) {
 						if (data){
@@ -149,7 +186,7 @@
 			
 			// Listen for hangup from callee
 			function hangupListen() {
-				conversationID = $('input[name=conversation_id]').val();
+				var conversationID = $('input[name=conversation_id]').val();
 				$.post("actions/hangupCallSearch.php", 
 					{ conversation_id: conversationID},
 					function(data) {
@@ -182,7 +219,8 @@
 		//-- Callee Actions --//
 
 			// Listening for calls
-			var callListenInterval = setInterval(callListen, 3000);
+			
+			var callListenInterval = setInterval(callListen, 3000);			
 			function callListen() {
 				$.post("actions/incomingCallSearch.php", 
 					function(data) {
@@ -223,8 +261,8 @@
 
 			// Callee missed call
 			function calleeMissedCall() {
-				conversationID = $('input[name=conversation_id]').val();
-				userIdCaller = $('input[name=user_id_caller]').val();
+				var conversationID = $('input[name=conversation_id]').val();
+				var userIdCaller = $('input[name=user_id_caller]').val();
 				$.post("actions/missedCallSearch.php", 
 					{ conversation_id: conversationID, user_id_caller: userIdCaller},
 					function(data) {
@@ -249,13 +287,13 @@
 				$('#ringCallee').flash().remove();
 				clearInterval(calleeMissedListen);
 				endCallListen = setInterval(endCall, 3000);
-				modal('#videoPhone','800');
-				videoPhoneClass();
+				modal('#videoPhone','70%');
+				videoPhoneClass('callee');
 			});
 
 			// Call hangupHTML when callee closes modal
-			$('a.videoModal, #fade.videoModal').live('click', function() {
-				conversationID = $('input[name=conversation_id]').val();
+			$('a.videoModalCallee, #fade.videoModalCallee').live('click', function() {
+				var conversationID = $('input[name=conversation_id]').val();
 				$.post("actions/hangupCallHTML.php", 
 					{ conversation_id: conversationID},
 					function(data) {
@@ -263,7 +301,6 @@
 							if (data.success == 1){
 								clearInterval(endCallListen);
 								callListenInterval = setInterval(callListen, 3000);
-								alert ("This call sucks.");
 							};
 						};
 					},
@@ -277,7 +314,7 @@
 
 			// Callee ends call - Leveraging the hangupCallSearch script to close modal
 			function endCall() {
-				conversationID = $('input[name=conversation_id]').val();
+				var conversationID = $('input[name=conversation_id]').val();
 				$.post("actions/hangupCallSearch.php", 
 					{ conversation_id: conversationID},
 					function(data) {
@@ -285,7 +322,7 @@
 							if (data.success == 1){
 								clearInterval(endCallListen);
 								callListenInterval = setInterval(callListen, 3000);
-								alert ("You ended the call.");
+								alert ("The call has ended.");
 							};
 						};
 					},
@@ -297,8 +334,8 @@
 			$('#decline').click(function() {
 				$('#incomingCall').hide();
 				$('#ringCallee').flash().remove();
-				conversation_id = $('input[name=conversation_id]').val();
-				caller_id = $('input[name=user_id_caller]').val();
+				var conversation_id = $('input[name=conversation_id]').val();
+				var caller_id = $('input[name=user_id_caller]').val();
 				$.post("actions/respondToCall.php", 
 					{ call_response: "rejected", conversation_id: conversation_id, user_id_caller: caller_id},
 					function(data) {
@@ -316,7 +353,7 @@
 			function modal(modalID, modalWidth){
 		
 				//Fade in the Popup and add close button
-				$(modalID).fadeIn().css({ 'width': Number( modalWidth ) }).prepend('<a href="#" class="close"><img src="/images/global/close_modal.png" class="btn_close" title="Close Window" alt="Close" /></a>');
+				$(modalID).fadeIn().css({ 'width': modalWidth }).prepend('<a href="#" class="close"><img src="/images/global/close_modal.png" class="btn_close" title="Close Window" alt="Close" /></a>');
 			
 				//Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
 				//var popMargTop = ($(modalID).height() + 80) / 2;
