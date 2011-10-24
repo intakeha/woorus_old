@@ -23,7 +23,7 @@ $conversation_query = "SELECT conversations.id, conversations.caller_id, convers
 				LEFT JOIN `users` on users.id =  conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
 				LEFT OUTER JOIN `user_login` on user_login.user_id = '".mysql_real_escape_string($user_id)."'
-				WHERE callee_id =   '".mysql_real_escape_string($user_id)."'  AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
+				WHERE callee_id =   '".mysql_real_escape_string($user_id)."'  AND conversations.call_ended = 0 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 30 SECOND) 
 				AND call_state = 'not_received'
 				ORDER by conversations.update_time ASC";
 				
@@ -38,6 +38,7 @@ if (mysql_num_rows($conversation_result) > 0)
 	
 	$conversationID = $row['id'];
 	
+	$call_array['success'] = 1;
 	$call_array['conversation_id'] = $conversationID;
 	$call_array['caller_id'] = $row['caller_id'];
 	$call_array['callee_id'] = $row['callee_id'];

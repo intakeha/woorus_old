@@ -8,6 +8,7 @@ WIP--needs to look at the banned words.
 */
 
 require_once('connect.php');
+require_once('validations.php');
 
 $q =  strtolower(validateSearchTerm(strip_tags($_GET["q"])));
 
