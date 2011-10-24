@@ -1,7 +1,7 @@
 <?php
 
 /*
-DO NOT NEED CANCEL CALL
+If user needs to cancel the call from the HTML
 */
 
 require_once('connect.php');

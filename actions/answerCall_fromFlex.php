@@ -12,7 +12,7 @@ require_once('connect.php');
 require_once('validations.php');
 
 //this is only called if the call is accepted
-$call_accepted = "accepted"; 
+$call_response = "accepted"; 
 $other_user_id= validateUserId(strip_tags($_POST["user_id_caller"])); 
 $conversation_id = validateNumber(strip_tags($_POST["conversation_id"])); 
 
@@ -29,10 +29,18 @@ mysql_select_db($db_name);
 
 //set call as accepted or rejected
 $conversation_query = "UPDATE `conversations`
-				SET call_state = '".mysql_real_escape_string($call_accepted)."'
+				SET call_state = '".mysql_real_escape_string($call_response)."'
 				WHERE conversations.id = '".mysql_real_escape_string($conversation_id)."'  AND caller_id  = '".mysql_real_escape_string($other_user_id)."' AND callee_id  = '".mysql_real_escape_string($user_id)."' ";
 				
 $conversation_result = mysql_query($conversation_query, $connection) or die ("Error 2");
+
+// if its accepted....set users to be on a call (busy)
+if ($call_response == "accepted"){
+	$call_log_query =  "UPDATE `user_login` 
+				SET on_call = 1
+				WHERE user_id = '".mysql_real_escape_string($user_id)."' ";
+	$result = mysql_query($call_log_query, $connection) or die ("Error 2");
+}
 
 //the call is accepted--now makethe Call!
 
