@@ -9,6 +9,7 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');
 require_once('contactHelperFunctions.php'); 
+require_once('constants.php');
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -52,7 +53,7 @@ $common_interests_query = "SELECT users.id as user_id, users.first_name, profile
 				AND BLOCKEE.user_blockee IS NULL AND BLOCKEE.user_blockee IS NULL AND BLOCKER.user_blocker IS NULL AND BLOCKER.user_blockee IS NULL
 				AND users.active_user = 1 
 				GROUP BY users.id
-				LIMIT ".mysql_real_escape_string($offset).", 20";
+				LIMIT ".mysql_real_escape_string($offset).",  ".$shared_interests_max_search_results." ";
 
 $common_interests_result = mysql_query($common_interests_query, $connection) or die ("Error");
 

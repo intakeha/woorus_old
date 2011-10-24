@@ -868,7 +868,7 @@ function validateCallOutcome($outcome){
 		$error_message = "Error.";
 		sendToJS(0, $error_message);
 		
-	}elseif($outcome == "missed" || $outcome == "rejected"){
+	}elseif($outcome == "missed" || $outcome == "rejected" || $outcome == "accepted"){
 	
 		return $outcome;
 		

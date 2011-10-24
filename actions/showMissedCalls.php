@@ -10,6 +10,7 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');
 require_once('contactHelperFunctions.php'); 
+require_once('constants.php');
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -26,7 +27,7 @@ $missed_calls_count_query = "SELECT COUNT(*)
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
+		WHERE conversations.callee_id =  '".$user_id ."' AND (conversations.call_state = 'missed_recv' OR conversations.call_state = 'not_received') AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
 
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1");
 $row = mysql_fetch_assoc($missed_calls_count_result);
@@ -40,8 +41,8 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 				LEFT JOIN `users` on users.id =conversations.caller_id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
 				LEFT OUTER JOIN `user_login` on  user_login.user_id = conversations.caller_id
-				WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_accepted = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
-				LIMIT ".mysql_real_escape_string($offset).", 20";
+				WHERE conversations.callee_id =  '".$user_id ."' AND (conversations.call_state = 'missed_recv' OR conversations.call_state = 'not_received')  AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
+				LIMIT ".mysql_real_escape_string($offset).", ".$missed_calls_max_search_results." ";
 
 $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1");
 

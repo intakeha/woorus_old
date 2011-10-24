@@ -11,6 +11,7 @@ missed calls, new contacts, new interests of contacts, common interests (from al
 "common_interests_count":1,"common_interests":{"1":{"first_name":"Test Wall Five","user_id":"138","profile_filename_small":null}}}
 */
 require_once('connect.php');
+require_once('constants.php');
 require_once('timeHelperFunctions.php');
 
 
@@ -31,7 +32,7 @@ $missed_calls_count_query = "SELECT COUNT(*)
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_state = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
+		WHERE conversations.callee_id =  '".$user_id ."' AND (conversations.call_state = 'missed_recv' OR conversations.call_state = 'not_received') AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) ";
 
 $missed_calls_count_result = mysql_query($missed_calls_count_query, $connection) or die ("Error 1a");
 $row = mysql_fetch_assoc($missed_calls_count_result);
@@ -44,8 +45,8 @@ $missed_calls_query = "SELECT conversations.caller_id, conversations.update_time
 		FROM `conversations`
 		LEFT JOIN `users` on users.id =conversations.caller_id
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = conversations.caller_id
-		WHERE conversations.callee_id =  '".$user_id ."' AND conversations.call_state = 'missed' AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
-		LIMIT 0, 5";
+		WHERE conversations.callee_id =  '".$user_id ."' AND (conversations.call_state = 'missed_recv' OR conversations.call_state = 'not_received') AND users.active_user = 1 AND conversations.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK) 
+		LIMIT 0, ".$feed_max_search_results." ";
 
 $missed_calls_result = mysql_query($missed_calls_query, $connection) or die ("Error 1b");
 
@@ -81,7 +82,7 @@ $new_contacts_query = "SELECT contacts.user_contacter, contacts.update_time, use
 		LEFT JOIN `users` on users.id = contacts.user_contacter
 		LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = contacts.user_contacter
 		WHERE contacts.user_contactee =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND contacts.update_time >  DATE_SUB(NOW(), INTERVAL 2 WEEK)
-		LIMIT 0, 5";
+		LIMIT 0, ".$feed_max_search_results." ";
 
 $new_contacts_result = mysql_query($new_contacts_query, $connection) or die ("Error 2");
 
@@ -124,7 +125,7 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 		LEFT JOIN `interests` on interests.id = user_interests.interest_id
 		LEFT JOIN `tiles` on user_interests.tile_id = tiles.id
 		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND user_interests.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
-		LIMIT 0, 5";
+		LIMIT 0, ".$feed_max_search_results." ";
 
 $new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error 3");
 
@@ -191,7 +192,7 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 					AND users.active_user = 1 
 					GROUP BY users.id
 					ORDER BY RAND()
-					LIMIT 0, 5";
+					LIMIT 0, ".$feed_max_search_results." ";
 
 	$common_interests_result = mysql_query($common_interests_query, $connection) or die ("Error");
 

@@ -11,6 +11,7 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');
 require_once('contactHelperFunctions.php'); 
+require_once('constants.php');
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
@@ -47,7 +48,7 @@ $new_interests_query = "SELECT users.id as user_id,  interests.interest_name, ti
 		LEFT JOIN `interests` on interests.id = user_interests.interest_id
 		LEFT JOIN `tiles` on user_interests.tile_id = tiles.id		
 		WHERE contacts.user_contacter =  '".$user_id ."' AND contacts.active = 1 AND users.active_user = 1 AND user_interests.update_time >  DATE_SUB(NOW(), INTERVAL 1 MONTH)
-		LIMIT ".mysql_real_escape_string($offset).", 36";
+		LIMIT ".mysql_real_escape_string($offset).", ".$contact_interests_max_search_results." ";
 
 
 $new_interests_result = mysql_query($new_interests_query, $connection) or die ("Error 3");

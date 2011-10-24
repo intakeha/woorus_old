@@ -8,6 +8,7 @@ require_once('connect.php');
 require_once('validations.php');
 require_once('timeHelperFunctions.php');
 require_once('contactHelperFunctions.php'); 
+require_once('constants.php');
 
 session_start();
 $user_id= $_SESSION['id'];
@@ -52,7 +53,7 @@ $show_message_query = 	"SELECT mail.id, message_text, sent_time, message_read, u
 					LEFT JOIN `user_login` on  user_login.user_id = users.id
 					WHERE mail.".$me_mail."  =  '".$user_id."' AND mail.".$me_delete." = 0
 					ORDER BY  mail.sent_time DESC
-					LIMIT ".mysql_real_escape_string($offset).", 5";
+					LIMIT ".mysql_real_escape_string($offset).",  ".$message_max_search_results." ";
 					
 $show_message_result = mysql_query($show_message_query, $connection) or die ("Error");
 
