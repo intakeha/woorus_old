@@ -85,13 +85,13 @@ function calculateOnlineStatus($session_set, $on_call, $user_active_time_in){
 	$five_min_ago =  date("Y-m-d H:i:s", time()-300);
 	$one_hour_ago =  date("Y-m-d H:i:s", time()-3600);
 	
-	if($on_call == 1)
-	{
-		return "busy";
-	}
-	elseif ($user_active_time_in <  $one_hour_ago || $session_set == 0)
+	if ($user_active_time_in <  $one_hour_ago || $session_set == 0)
 	{
 		return "offline";
+	}
+	elseif($on_call == 1)
+	{
+		return "busy";
 	}
 	elseif ($user_active_time_in > $five_min_ago)
 	{
