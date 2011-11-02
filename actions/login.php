@@ -85,8 +85,14 @@ function authenticate($email, $pass)
 	}
 	else
 	{
-		//check if user is in the system at all
 		
+		//log this as a failed login
+		$failed_login_query = 	"INSERT into `failed_logins` (id, user_email,  ip_address, update_time)
+					VALUES (NULL,  '".mysql_real_escape_string($email)."', '".mysql_real_escape_string($_SERVER['REMOTE_ADDR'])."', NOW() ) ";
+	
+		$failed_login_result = mysql_query($failed_login_query, $connection) or die ("Error 1");
+	
+		//check if user is in the system at all
 		$namecheck_query = "SELECT email_address 
 						FROM `users` 
 						WHERE email_address = '".mysql_real_escape_string($email)."'";
@@ -106,6 +112,9 @@ function authenticate($email, $pass)
 			sendToJS(0, $error_message);
 			return NULL;
 		}
+		
+		
+		
 	}
 }
 
