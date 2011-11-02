@@ -22,7 +22,7 @@
         <div id="customized_tile">
         	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
             	<p>Create your own customized tile: </p>     
-                <form id="tile_upload_form" action="actions/upload_file.php" method="post" enctype="multipart/form-data">
+                <form id="tile_upload_form" action="actions/uploadTile.php" method="post" enctype="multipart/form-data">
                     <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
                     <br />
                     <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
@@ -47,7 +47,7 @@
         <div class="clear"></div>
         <div id="tag_tile">
         	Tag your tile with your interest
-            <form id="tile_crop_form" action="actions/crop.php" method="POST">
+            <form id="tile_crop_form" action="actions/tileCrop.php" method="POST">
             	<input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
                 <input type="hidden" name="x1" value="" />
                 <input type="hidden" name="y1" value="" />
