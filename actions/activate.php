@@ -71,7 +71,8 @@ if ($id&&$token)
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
 				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id) 
-								VALUES (NULL, '".$returned_id."', '".$tile_placement."', 0 , 0)) ";
+								VALUES (NULL, '".$returned_id."', '".$tile_placement."', 0 , 0) ";
+			
 				$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
 			}
 			

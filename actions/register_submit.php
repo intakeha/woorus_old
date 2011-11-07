@@ -27,11 +27,9 @@ $f_birthday_year = ValidateBirthdayYear(strip_tags($_POST['birthday_year']));
 
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
-$f_user_city = validateCity(strip_tags($_POST['city']));
+$f_user_city_id = validateCity_Id(strip_tags($_POST['city_id']));
 
-$f_user_country_id = ("1"); //need to do based on lookup
-$f_user_state_id = ("1"); //need to do based on lookup
-$f_user_city_id = ("1"); //need to do based on lookup
+//$f_user_city_id = ("1"); //need to do based on lookup
 
 $social_status = "a"; //default value
 $block_status = "a"; //default value
@@ -72,8 +70,8 @@ if (!$resp->is_valid) {
 	// Your code here to handle a successful verification
 
 	//enter user into system
-	$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_country_id, user_state_id, user_city_id, social_status, block_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 
-	(NULL, '".mysql_real_escape_string($f_first_name)."', '".mysql_real_escape_string($f_last_name)."', '".mysql_real_escape_string($f_email_address)."', '".mysql_real_escape_string($f_visual_email)."', NULL, '".mysql_real_escape_string($f_password)."', NULL, '".mysql_real_escape_string($f_gender)."', '".mysql_real_escape_string($f_birthday)."', '".mysql_real_escape_string($f_user_country_id)."', '".mysql_real_escape_string($f_user_state_id)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."',  '".$block_status."',  NOW(), NOW(), '".mysql_real_escape_string($token)."', '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."', '".$active_user."')";
+	$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_city_id, social_status, block_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 
+	(NULL, '".mysql_real_escape_string($f_first_name)."', '".mysql_real_escape_string($f_last_name)."', '".mysql_real_escape_string($f_email_address)."', '".mysql_real_escape_string($f_visual_email)."', NULL, '".mysql_real_escape_string($f_password)."', NULL, '".mysql_real_escape_string($f_gender)."', '".mysql_real_escape_string($f_birthday)."', '".mysql_real_escape_string($f_user_city_id)."', '".$social_status."',  '".$block_status."',  NOW(), NOW(), '".mysql_real_escape_string($token)."', '".$email_verified."', '".$password_set."', '".$user_info_set."', '".$facebook_id."', '".$active_user."')";
 	
 	$result = mysql_query($query_users, $connection) or die ("Error 2");
 	

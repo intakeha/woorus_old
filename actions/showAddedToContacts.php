@@ -62,7 +62,7 @@ while ($row = mysql_fetch_assoc($new_contacts_result)){
 	
 	$new_contacts_array[$contacts_iterator]['user_id']= $row['user_contacter'];
 	$new_contacts_array[$contacts_iterator]['online_status']= $onlineStatus;
-	$new_contacts_array[$contacts_iterator]['first_name']= $row['first_name'];
+	$new_contacts_array[$contacts_iterator]['first_name']= htmlentities($row['first_name'], ENT_QUOTES);
 	$new_contacts_array[$contacts_iterator]['profile_filename_small']= $row['profile_filename_small'];
 	
 	

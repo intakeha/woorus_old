@@ -22,7 +22,7 @@ function ucname($string)
 {
 	$string =ucwords(strtolower($string));
 
-	foreach (array('-', '\'') as $delimiter) {
+	foreach (array('-') as $delimiter) {
 		if (strpos($string, $delimiter)!==false) 
 		{
 			$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
@@ -320,7 +320,7 @@ function checkOver13($birthday)
 }
 
 //check user entered in city (check not null)
-function validateCity($city)
+/*function validateCity($city)
 {
 	$city = utf8_decode($city);
 	
@@ -359,6 +359,64 @@ function validateCity($city)
 		return ucname($city);
 	}
 }
+*/
+
+function validateCity_Id($city_id){
+
+	require_once('constants.php');
+
+	if($city_id == NULL || strlen($city_id) == 0)
+	{
+		$error_message = "Error 4.";
+		sendToJS(0, $error_message);
+		
+	}elseif (!preg_match('/^[0-9 ]+$/', $city_id)){
+	
+		$error_message = "Error 5";
+		sendToJS(0, $error_message);
+		
+	}elseif ((int)$city_id < 0 || (int)$city_id > $number_of_cities_in_table){
+	
+		$error_message = "Error 6";
+		sendToJS(0, $error_message);
+		
+	}else{
+	
+		return $city_id;
+	}
+
+}
+
+function validateCity_Search($city)
+{
+	$city = utf8_decode($city);
+	
+	if(!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ]/', $city))
+	{
+		$error_message = "City should not start or end with a symbol.";
+		sendToJS(0, $error_message);
+	}
+	elseif(!preg_match('/[A-Za-zÀ-ÖØ-öø-ÿ]$/', $city))
+	{
+		$error_message = "City should not start or end with a symbol.";
+		sendToJS(0, $error_message);
+	}
+	elseif (strlen($city) > 255)
+	{
+		$error_message = "Please enter no more than 255 characters for your city.";
+		sendToJS(0, $error_message);
+	}
+	elseif (!preg_match('/^[A-Za-zÀ-ÖØ-öø-ÿ\s\'\-\,]+$/', $city))
+	{
+		$error_message = "City contains invalid characters.";
+		sendToJS(0, $error_message);
+	}
+	else
+	{
+		return ucname($city);
+	}
+}
+
 
 
 //-------------------------Login validation functions-----------------------------------------//

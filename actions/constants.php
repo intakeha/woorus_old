@@ -21,4 +21,7 @@ $shared_interests_max_search_results = 15;
 //showAddedToContacts.php
 $new_contacts_max_search_results = 15;
 
+//validations
+$number_of_cities_in_table = 227951;
+
 ?>

@@ -54,7 +54,9 @@ function checkBlock($user_id, $other_user_id, $connection){
 
 	$check_block_query = "SELECT id
 					FROM `blocks`
-					WHERE (blocks.user_blocker = '".mysql_real_escape_string($user_id)."' AND blocks.user_blockee = '".mysql_real_escape_string($other_user_id)."' )  OR  (blocks.user_blockee = '".mysql_real_escape_string($user_id)."' AND blocks.user_blocker = '".$mysql_real_escape_string(other_user_id)."' ) AND blocks.active = 1";
+					WHERE (blocks.user_blocker = '".mysql_real_escape_string($user_id)."' AND blocks.user_blockee = '".mysql_real_escape_string($other_user_id)."' )  
+					   OR  (blocks.user_blockee = '".mysql_real_escape_string($user_id)."' AND blocks.user_blocker = '".mysql_real_escape_string($other_user_id)."' ) 
+					   AND blocks.active = 1";
 
 	$check_block_result =  mysql_query($check_block_query, $connection) or die ("Error 12");
 	

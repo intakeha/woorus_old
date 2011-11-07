@@ -70,7 +70,7 @@ while ($row = mysql_fetch_assoc($tile_query_result)){
 	$tile_type = getTileType($sponsored, $tile_user_id, $user_id);
 	
 	$tile_search_array[$tile_iterator]['tile_filename'] = $row['tile_filename'];
-	$tile_search_array[$tile_iterator]['interest_name'] =  $row['interest_name'];
+	$tile_search_array[$tile_iterator]['interest_name'] =   htmlentities($row['interest_name'], ENT_QUOTES);
 	$tile_search_array[$tile_iterator]['tile_id'] = $row['id'];
 	$tile_search_array[$tile_iterator]['interest_id'] = $row['interest_id'];
 	$tile_search_array[$tile_iterator]['tile_type'] = $tile_type;

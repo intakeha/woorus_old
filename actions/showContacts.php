@@ -60,7 +60,7 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	
 	$onlineStatus = calculateOnlineStatus($session_set, $on_call, $user_active);
 	
-	$contact_array[$contact_iterator]['first_name'] = $row['first_name'];
+	$contact_array[$contact_iterator]['first_name'] = htmlentities($row['first_name'], ENT_QUOTES);
 	$contact_array[$contact_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 	$contact_array[$contact_iterator]['online_status'] = $onlineStatus;
 	

@@ -70,7 +70,7 @@ while ($row = mysql_fetch_assoc($common_interests_result)){
 	
 	$onlineStatus = calculateOnlineStatus($session_set, $on_call, $user_active);
 	
-	$shared_interests_array[$common_interests_iterator]['first_name']= $row['first_name'];
+	$shared_interests_array[$common_interests_iterator]['first_name']= htmlentities($row['first_name'], ENT_QUOTES);
 	$shared_interests_array[$common_interests_iterator]['user_id']= $row['user_id'];
 	$shared_interests_array[$common_interests_iterator]['profile_filename_small']= $row['profile_filename_small'];
 	$shared_interests_array[$common_interests_iterator]['online_status']= $onlineStatus;

@@ -15,9 +15,10 @@ mysql_select_db($db_name);
 $user_id = $_SESSION['id'];
 
 //lookup user data
-$lookup_query = "SELECT first_name, last_name, gender, birthday, user_city_id, visual_email_address, interest_notify, message_notify, contact_notify, missed_call_notify
+$lookup_query = "SELECT first_name, last_name, gender, birthday, user_city_id, visual_email_address, interest_notify, message_notify, contact_notify, missed_call_notify, city.city_name
 			FROM `users`
 			LEFT OUTER JOIN `settings` on settings.user_id  = users.id
+			LEFT OUTER JOIN `city` on users.user_city_id = city.id
 			WHERE users.id =  '".mysql_real_escape_string($user_id)."' ";
 $result = mysql_query($lookup_query, $connection) or die ("Error");
 
@@ -27,10 +28,11 @@ if (mysql_num_rows($result) == 1)
 	$row = mysql_fetch_assoc($result);
 	
 	//fetch data
-	$first_name = $row['first_name'];
-	$last_name = $row['last_name'];
+	$first_name =  htmlentities($row['first_name'], ENT_QUOTES);
+	$last_name =  htmlentities($row['last_name'], ENT_QUOTES);
 	$gender = $row['gender'];
 	$user_city_id = $row['user_city_id'];
+	$user_city = htmlentities($row['city_name'], ENT_QUOTES);
 	$email = $row['visual_email_address'];
 	
 	$birthday = $row['birthday'];
@@ -44,7 +46,7 @@ if (mysql_num_rows($result) == 1)
 	$missed_call_notify = convertNotifications($row['missed_call_notify']);
 	
 	//set user data array & print to JavaSrcipt
-	$user_data = array('first_name'=>$first_name, 'last_name'=>$last_name, 'gender'=>$gender, 'birthday_month'=>$month, 'birthday_day'=>$day, 'birthday_year'=>$year, 'user_city_id'=>$user_city_id, 'email'=>$email, 'interest_notify'=>$interest_notify, 'message_notify'=>$message_notify, 'contact_notify'=>$contact_notify, 'missed_call_notify'=>$missed_call_notify);
+	$user_data = array('first_name'=>$first_name, 'last_name'=>$last_name, 'gender'=>$gender, 'birthday_month'=>$month, 'birthday_day'=>$day, 'birthday_year'=>$year, 'city_id'=>$user_city_id,  'city_name'=>$user_city, 'email'=>$email, 'interest_notify'=>$interest_notify, 'message_notify'=>$message_notify, 'contact_notify'=>$contact_notify, 'missed_call_notify'=>$missed_call_notify);
 	$output = json_encode($user_data);
 	print($output);
 	

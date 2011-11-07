@@ -58,7 +58,7 @@ while ($row = mysql_fetch_assoc($new_interests_result)){
 
 	//retreive data
 	$new_interests_array[$interests_iterator]['user_id']= $row['user_id'];
-	$new_interests_array[$interests_iterator]['interest_name'] = $row['interest_name'];
+	$new_interests_array[$interests_iterator]['interest_name'] = htmlentities($row['interest_name'], ENT_QUOTES); 
 	$new_interests_array[$interests_iterator]['tile_filename'] = $row['tile_filename'];
 	
 	$interests_iterator++;

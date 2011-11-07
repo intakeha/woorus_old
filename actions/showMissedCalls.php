@@ -59,7 +59,7 @@ while ($row = mysql_fetch_assoc($missed_calls_result)){
 	//set data to send
 	//$feed_array['missed_calls'][$call_iterator]['update_time']= convertTime($row['update_time']);
 	
-	$missed_calls_array[$call_iterator]['first_name']= $row['first_name'];
+	$missed_calls_array[$call_iterator]['first_name']= htmlentities($row['first_name'], ENT_QUOTES);
 	$missed_calls_array[$call_iterator]['user_id']= $row['caller_id'];
 	$missed_calls_array[$call_iterator]['online_status']= $onlineStatus;
 	$missed_calls_array[$call_iterator]['profile_filename_small']= $row['profile_filename_small'];

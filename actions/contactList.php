@@ -19,11 +19,8 @@ mysql_select_db($db_name);
 $name_query =  "SELECT contacts.id, users.first_name
 			FROM `contacts` 
 			LEFT JOIN `users` on users.id =contacts.user_contactee
-<<<<<<< .mine
 			WHERE contacts.user_contacter  =  ' ".mysql_real_escape_string($user_id)." ' AND contacts.active = 1 AND users.active_user = 1
-=======
-			WHERE contacts.user_contacter  =  '".$user_id."' AND contacts.active = 1 AND users.active_user = 1
->>>>>>> .r973
+			  AND  users.first_name LIKE '".mysql_real_escape_string($q)."%'
 			ORDER by users.first_name ASC";
 
 $name_result = mysql_query($name_query, $connection) or die ("Error");
@@ -46,7 +43,7 @@ foreach ($name_array as $key=>$value) {
 	if (strpos(strtolower($value), $q) === 0) {
 		array_push($result, array(
 			"id" => $key,
-			"first_name" => $value
+			"first_name" => htmlentities($value, ENT_QUOTES)
 		));
 		$search_iterator++;
 	}

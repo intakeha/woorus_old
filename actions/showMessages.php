@@ -99,7 +99,7 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 	$block = checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee);
 
 	$mail_array[$mail_iterator]['message_id'] = $row['id'];
-	$mail_array[$mail_iterator]['first_name'] = $row['first_name'];
+	$mail_array[$mail_iterator]['first_name'] = htmlentities($row['first_name'], ENT_QUOTES);
 	$mail_array[$mail_iterator]['other_user_id'] = $row['user_id']; //note, this is the other user id!
 	$mail_array[$mail_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 	$mail_array[$mail_iterator]['social_status'] = $row['social_status'];

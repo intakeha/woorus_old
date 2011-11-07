@@ -54,8 +54,7 @@ $call_iterator = 1;
 while ($row = mysql_fetch_assoc($missed_calls_result)){
 
 	//set data to send
-	//$feed_array['missed_calls'][$call_iterator]['update_time']= convertTime($row['update_time']);
-	$feed_array['missed_calls'][$call_iterator]['first_name']= $row['first_name'];
+	$feed_array['missed_calls'][$call_iterator]['first_name']=  htmlentities($row['first_name'], ENT_QUOTES);
 	$feed_array['missed_calls'][$call_iterator]['user_id']= $row['caller_id'];
 	$feed_array['missed_calls'][$call_iterator]['profile_filename_small']= $row['profile_filename_small'];
 
@@ -92,7 +91,7 @@ while ($row = mysql_fetch_assoc($new_contacts_result)){
 	
 	//set data to send
 	//$feed_array['new_contacts'][$contacts_iterator]['update_time']= convertTime($row['update_time']);
-	$feed_array['new_contacts'][$contacts_iterator]['first_name']= $row['first_name'];
+	$feed_array['new_contacts'][$contacts_iterator]['first_name']= htmlentities($row['first_name'], ENT_QUOTES);
 	$feed_array['new_contacts'][$contacts_iterator]['user_id']= $row['user_contacter'];
 	$feed_array['new_contacts'][$contacts_iterator]['profile_filename_small']= $row['profile_filename_small'];
 	
@@ -134,7 +133,7 @@ while ($row = mysql_fetch_assoc($new_interests_result)){
 
 	//retreive data
 	$feed_array['new_interests'][$interests_iterator]['user_id']= $row['user_id'];
-	$feed_array['new_interests'][$interests_iterator]['interest_name']= $row['interest_name'];
+	$feed_array['new_interests'][$interests_iterator]['interest_name']= htmlentities($row['interest_name'], ENT_QUOTES); 
 	$feed_array['new_interests'][$interests_iterator]['tile_filename']= $row['tile_filename'];
 
 	$interests_iterator++;
@@ -201,7 +200,7 @@ if (mysql_num_rows($common_interest_id_result) > 0){
 	while ($row = mysql_fetch_assoc($common_interests_result)){
 
 		//retreive data
-		$feed_array['common_interests'][$common_interests_iterator]['first_name']= $row['first_name'];
+		$feed_array['common_interests'][$common_interests_iterator]['first_name']= htmlentities($row['first_name'], ENT_QUOTES);
 		$feed_array['common_interests'][$common_interests_iterator]['user_id']= $row['user_id'];
 		$feed_array['common_interests'][$common_interests_iterator]['profile_filename_small']= $row['profile_filename_small'];
 

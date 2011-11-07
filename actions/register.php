@@ -28,11 +28,9 @@ $f_birthday_year = ValidateBirthdayYear(strip_tags($_POST['birthday_year']));
 
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
-$f_user_city = validateCity(strip_tags($_POST['city']));
+$f_user_city_id = validateCity_Id(strip_tags($_POST['city_id']));
 
-$f_user_country_id = ("1"); //need to do based on lookup
-$f_user_state_id = ("1"); //need to do based on lookup
-$f_user_city_id = ("1"); //need to do based on lookup
+//$f_user_city_id = ("1"); //need to do based on lookup
 
 $social_status = "a"; //default value
 $token = rand(23456789, 98765432); //randomly generated number
@@ -49,17 +47,6 @@ mysql_select_db($db_name);
 
 //check if email is already in system
 checkEmailInSystem($f_email_address);
-
-/*$namecheck_query = "SELECT email_address from `users` WHERE email_address = '".mysql_real_escape_string($f_email_address)."'";
-$namecheck_result = mysql_query($namecheck_query, $connection) or die ("Error 1");
-$namecheck_count = mysql_num_rows($namecheck_result);
-
-if ($namecheck_count != 0)
-{
-	$error_message = "This email address is already registered with Woorus.";	
-	sendToJS(0, $error_message);
-}
-*/
 
 //no errors, send success flag
 sendToJS(1, "");

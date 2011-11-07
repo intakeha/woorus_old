@@ -50,11 +50,7 @@ $f_birthday_day = ValidateBirthdayDay(strip_tags($_POST['birthday_day']));
 $f_birthday_year = ValidateBirthdayYear(strip_tags($_POST['birthday_year']));
 $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_birthday_year));
 
-$f_user_city = validateCity(strip_tags($_POST['city']));
-
-$f_user_country_id = ("1"); //need to do based on lookup
-$f_user_state_id = ("1"); //need to do based on lookup
-$f_user_city_id = ("1"); //need to do based on lookup
+$f_user_city_id = validateCity_Id(strip_tags($_POST['city_id']));
 
 $f_interest_notify  = checkboxValidate(strip_tags($_POST['interest_notify']));
 $f_message_notify= checkboxValidate(strip_tags($_POST['message_notify']));
@@ -83,14 +79,14 @@ if ($f_password_new != NULL) //change password
 		checkEmailInSystem($f_temp_email_address);
 		$email_token = rand(23456789, 98765432); //randomly generated number
 		$query_users = "UPDATE `users` 
-					SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), password_set = 1, user_info_set = 1 
+					SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), password_set = 1, user_info_set = 1 
 					WHERE id = '".mysql_real_escape_string($id)."'";
 		$success_message = "Your information has been saved. <br>Please check your mail at ".$f_temp_email_address;
 	}
 	else	//change password, but don't change email
 	{
 		$query_users = "UPDATE `users` 
-					SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), password_set = 1, user_info_set = 1 
+					SET password = '".mysql_real_escape_string($f_password_new)."', first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."',  user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), password_set = 1, user_info_set = 1 
 					WHERE id = '".mysql_real_escape_string($id)."'";
 		$success_message = "Your information has been saved.";
 	}
@@ -105,14 +101,14 @@ else //dont change password
 		checkEmailInSystem($f_temp_email_address);
 		$email_token = rand(23456789, 98765432); //randomly generated number
 		$query_users = "UPDATE `users` 
-					SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), user_info_set = 1 
+					SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', temp_email_address =  '".mysql_real_escape_string($f_temp_email_address)."', email_token = '".mysql_real_escape_string($email_token)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), user_info_set = 1 
 					WHERE id = '".mysql_real_escape_string($id)."'";
 		$success_message = "Your information has been saved. <br>Please check your mail at ".$f_temp_email_address;
 	}
 	else	//change neither email, nor password
 	{
 		$query_users = 	"UPDATE `users` 
-					SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_country_id = '".mysql_real_escape_string($f_user_country_id)."', user_state_id = '".mysql_real_escape_string($f_user_state_id)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), user_info_set = 1 
+					SET first_name = '".mysql_real_escape_string($f_first_name)."', last_name = '".mysql_real_escape_string($f_last_name)."', gender = '".mysql_real_escape_string($f_gender)."', birthday = '".mysql_real_escape_string($f_birthday)."', user_city_id = '".mysql_real_escape_string($f_user_city_id)."', update_time = NOW(), user_info_set = 1 
 					WHERE id = '".mysql_real_escape_string($id)."'";
 		$success_message = "Your information has been saved.";
 	}
@@ -122,6 +118,8 @@ else //dont change password
 
 //query_users is defned above.
 $result = mysql_query($query_users, $connection) or die ("Error 2");
+
+//update session info
 $_SESSION['user_info_set'] = 1; //if theyre saving, user info is set
 
 //for both options, update settings table & redirect
@@ -142,7 +140,7 @@ function authenticatePassword($id, $password)
 	$query = "SELECT id from `users` 
 		WHERE id = '".mysql_real_escape_string($id)."' AND password = '".mysql_real_escape_string($password)."'";
 	mysql_select_db($db_name);
-	$result = mysql_query($query, $connection) or die ("Error");
+	$result = mysql_query($query, $connection) or die ("Error 3");
 
 	// if row exists -> id/pass combination is correct
 	if (mysql_num_rows($result) == 1)

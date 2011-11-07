@@ -3,7 +3,6 @@
 interestList.php
 
 This is for the autopopulate function from the front end
-WIP--needs to look at the banned words.
 
 */
 
@@ -19,7 +18,7 @@ mysql_select_db($db_name);
 
 $interest_query = "SELECT interests.id, interests.interest_name
 		FROM `interests`
-		WHERE NOT EXISTS 
+		WHERE interests.interest_name LIKE '".mysql_real_escape_string($q)."%'  AND NOT EXISTS 
 		(SELECT *
  		FROM  banned_words
    		WHERE  (INSTR(interests.interest_name, banned_words.word) > 0) )
@@ -42,13 +41,12 @@ while ($row = mysql_fetch_assoc($interest_result)){
 $result = array();
 $search_iterator = 1;
 foreach ($interest_array as $key=>$value) {
-	if (strpos(strtolower($value), $q) === 0) {
-		array_push($result, array(
-			"id" => $key,
-			"interest_name" => $value
-		));
-		$search_iterator++;
-	}
+	
+	array_push($result, array(
+		"id" => $key,
+		"interest_name" => $value
+	));
+	$search_iterator++;
 	if ($search_iterator > 5){
 		break;
 	}
