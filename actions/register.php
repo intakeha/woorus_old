@@ -30,21 +30,6 @@ $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_bi
 
 $f_user_city_id = validateCity_Id(strip_tags($_POST['city_id']));
 
-//$f_user_city_id = ("1"); //need to do based on lookup
-
-$social_status = "a"; //default value
-$token = rand(23456789, 98765432); //randomly generated number
-$email_verified = 0; //default value
-
-//at this point, user passes all checks for user entered data
-
-//encrypt password
-$f_password = md5($f_password);
-
-//open database connection
-$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
-mysql_select_db($db_name);
-
 //check if email is already in system
 checkEmailInSystem($f_email_address);
 

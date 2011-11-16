@@ -6,6 +6,7 @@ validations.php
 All validations for user entered fields.
 */
 
+
 //-------------------------Register / Settings validation functions-----------------------------------------//
 
 function sendToJS($successFlag, $message){
@@ -16,16 +17,16 @@ function sendToJS($successFlag, $message){
 }
 
 
-
-//helper function for validateName convert to camel case (also looks at apostrophe's & dashes)
+//helper function for validateName convert to camel case (also looks at & dashes)
 function ucname($string) 
 {
-	$string =ucwords(strtolower($string));
+	
+	$string = ucwords(strtolower($string));
 
 	foreach (array('-') as $delimiter) {
 		if (strpos($string, $delimiter)!==false) 
 		{
-			$string =implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
+			$string = implode($delimiter, array_map('ucfirst', explode($delimiter, $string)));
 		}
 	}
 	return $string;
@@ -938,5 +939,30 @@ function validateCallOutcome($outcome){
 }
 
 
+//-------------------------Beta testing functions-----------------------------------------//
+
+
+function validateAccessCode($token)
+{
+	if ($token == NULL || strlen($token == 0))
+	{
+		$error_message = "Invitation code is incorrect.";
+		sendToJS(0, $error_message);
+	}
+	elseif (!preg_match('/^[0-9 ]+$/', $token))
+	{
+		$error_message = "Invitation code is incorrect.";
+		sendToJS(0, $error_message);
+	}
+	elseif ((int) $token< 23456789| (int)$token > 98765432)
+	{
+		$error_message = "Invitation code is incorrect.";
+		sendToJS(0, $error_message);
+		
+	}else
+	{
+		return $token;
+	}
+}
 
 ?>

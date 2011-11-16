@@ -31,7 +31,7 @@ while ($row = mysql_fetch_assoc($interest_result)){
 
 	//retreive interest ID & interest name
 	$interest_id = $row['id'];
-	$interest_name = $row['interest_name'];	
+	$interest_name = htmlentities($row['interest_name'], ENT_QUOTES);	
 	
 	//set interest ID & name pairs
 	$interest_array[$interest_id] = $interest_name;

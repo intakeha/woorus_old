@@ -24,4 +24,8 @@ $new_contacts_max_search_results = 15;
 //validations
 $number_of_cities_in_table = 227951;
 
+//inviteUser
+$number_of_invites_given = 10;
+$invite_check_date = "2011-01-10 01:01:01";
+
 ?>

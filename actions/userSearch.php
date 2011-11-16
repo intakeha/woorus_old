@@ -90,7 +90,7 @@ if ( $user_count > 0) //we found matches
 		$user_search_array[$user_iterator]['tile_id'] = $row['tile_id'];
 		$user_search_array[$user_iterator]['interest_id'] = $row['interest_id'];
 		$user_search_array[$user_iterator]['tile_filename'] = $row['tile_filename'];
-		$user_search_array[$user_iterator]['interest_name'] = $row['interest_name'];
+		$user_search_array[$user_iterator]['interest_name'] = htmlentities($row['interest_name'], ENT_QUOTES);
 		$user_search_array[$user_iterator]['tile_type'] = $tile_type;
 
 		$user_iterator++;

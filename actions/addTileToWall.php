@@ -49,7 +49,7 @@ if ($tile_placement == NULL)
 }
 
 //send output to front end
-$messageToSend = array('success' =>$success_flag, 'message'=>$success_message, 'tile_filename'=>$tile_filename, 'tile_id'=>$tile_id, 'interest_name'=>$tile_name, 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
+$messageToSend = array('success' =>$success_flag, 'message'=>$success_message, 'tile_filename'=>$tile_filename, 'tile_id'=>$tile_id, 'interest_name'=>htmlentities($tile_name, ENT_QUOTES), 'interest_id'=>$interest_id, 'tile_placement'=>$tile_placement);
 $output = json_encode($messageToSend);
 die($output);
 

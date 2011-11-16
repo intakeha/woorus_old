@@ -29,7 +29,7 @@ $f_birthday = checkOver13(ValidateDate($f_birthday_month, $f_birthday_day, $f_bi
 
 $f_user_city_id = validateCity_Id(strip_tags($_POST['city_id']));
 
-//$f_user_city_id = ("1"); //need to do based on lookup
+$code = validateAccessCode(strip_tags($_POST['access_code']));
 
 $social_status = "a"; //default value
 $block_status = "a"; //default value
@@ -67,7 +67,9 @@ if (!$resp->is_valid) {
 	$error_message = "The reCAPTCHA wasn't entered correctly. Please try again.";
 	sendToJS(0, $error_message);
 } else {
-	// Your code here to handle a successful verification
+	// create the user
+
+	checkInviteCode_RS($code, $connection); //for beta, check the invite code
 
 	//enter user into system
 	$query_users = "INSERT INTO `users` (id, first_name, last_name, email_address, visual_email_address, temp_email_address, password, password_token, gender, birthday, user_city_id, social_status, block_status, join_date, update_time, email_token, email_verified, password_set, user_info_set, facebook_id, active_user) VALUES 

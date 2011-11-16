@@ -68,6 +68,7 @@ if ($id&&$token)
 			
 			backendLogin($id, $email_address, $password_set, $user_info_set, $active_user, 1 , $connection);
 			
+			//create mosaic wall tiles
 			for ($tile_placement = 1; $tile_placement <= 36; $tile_placement++){
 		
 				$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id) 
@@ -75,7 +76,7 @@ if ($id&&$token)
 			
 				$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
 			}
-			
+						
 			header('Location: ../canvas.php');
 			//use function where WE log them in (for acticate, save password, etc)
 		
