@@ -49,7 +49,7 @@
 		
 	function showInterest(obj, tag){
 		obj.find('img').addClass('transparent_tile');
-		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
+		obj.find('img').before("<div class='transparent_tag'>"+tag+"</div>");
 	};
 	
 	function hideInterest(obj){

@@ -49,7 +49,6 @@
 			formatResult: function(item) {
 				return item.interest_name;
 			},
-			autoFill: true,
 			minChars: 1,
 			selectFirst: true,
 			max: 5,
@@ -57,6 +56,8 @@
 		}).result( function (){
 			if($("#search_form").valid()) { 
 				$('input[name=offset]').val(0);
+				search_term = $('input[name=user_search]').val();
+				$('input[name=user_search]').val(decodeHTML(search_term));
 				$.post(
 					"actions/userSearch.php",
 					$('#search_form').serialize(),

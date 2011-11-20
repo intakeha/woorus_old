@@ -80,7 +80,7 @@
 		$('#tiles_legend').hide();
 		$.getJSON("actions/populateMosaicWall.php",function(result){
 			$.each(result, function(i, field){
-			  $('#wall_display').append("<li class=\'community_wall tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+			  $('#wall_display').append("<li class=\'community_wall tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 			});
 		});	
 
@@ -119,7 +119,6 @@
 			formatResult: function(item) {
 				return item.interest_name;
 			},
-			autoFill: true,
 			minChars: 1,
 			selectFirst: true,
 			max: 5,
@@ -160,7 +159,7 @@
 							}else{
 								$('#tiles_legend').show();
 								$('#tiles_bank').slideDown('fast');								
-								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
 					}, "json"
@@ -188,7 +187,6 @@
 			formatResult: function(item) {
 				return item.interest_name;
 			},
-			autoFill: true,
 			minChars: 1,
 			selectFirst: true,
 			max: 5,
@@ -246,7 +244,7 @@
 								}else{
 									$('#tiles_legend').show();
 									$('#tiles_bank').slideDown('fast');								
-									$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+									$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 								}
 							});
 						}
@@ -310,7 +308,7 @@
 									$('#tile_bank_message').text('No sponsored tiles found for \"'+$('#tile_search_field').val()+'\".').show();
 								}
 							}else{
-								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
 					}, "json"
@@ -355,7 +353,7 @@
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Be the first one to upload a tile for this interest!').show();
 								}
 							}else{
-								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
 					}, "json"
@@ -400,7 +398,7 @@
 									$('#tile_bank_message').text('No tiles found for \"'+$('#tile_search_field').val()+'\". Customize your own tile for this interest!').show();
 								}
 							}else{
-								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
 					}, "json"
@@ -441,7 +439,7 @@
 									$('#tile_bank_left').show();
 								}
 							}else{
-								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+								$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 							}
 						});
 					}, "json"
@@ -481,7 +479,7 @@
 								$('#tile_bank_left').hide();
 							}		
 						}else{
-							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\"showInterest($(this), \'"+field.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
+							$('#tile_display').append("<li class=\'"+tile_type+" tile_tag_mosaic\' id=\'"+field.tile_id+"\' onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+field.tile_id+"\',\'"+field.interest_id+"\')\" ><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 						}
 					});
 				}, "json"
@@ -505,16 +503,6 @@
 		
 	});
 	
-	function showInterest(obj, tag){
-		obj.find('img').addClass('transparent_tile');
-		obj.find('img').before('<div class="transparent_tag">'+tag+'</div>');
-	};
-	
-	function hideInterest(obj){
-		obj.find('img').removeClass('transparent_tile');
-		obj.find('div').remove();
-	};
-	
 	function addToWall(tileID, interestID){
 		$.post(
 			"actions/addTileToWall.php",
@@ -525,13 +513,23 @@
 					$('#tile_upload_error').html(data.message); 
 					$('#tile_upload_error').show();
 				} else {
-					$('#wall_display').append("<li class=\'community_wall tile_tag_mosaic\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+					$('#wall_display').append("<li class=\'community_wall tile_tag_mosaic\' id=\'"+data.tile_id+"\' onmouseover=\'showInterest($(this), \""+data.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
 					$('.tile_sort').sortable( "refresh" );
 					$('#tile_upload_error').hide();
 				}
 			}, "json"
 		);
 		return false;
+	};
+	
+	function showInterest(obj, tag){
+		obj.find('img').addClass('transparent_tile');
+		obj.find('img').before("<div class='transparent_tag'>"+tag+"</div>");
+	};
+	
+	function hideInterest(obj){
+		obj.find('img').removeClass('transparent_tile');
+		obj.find('div').remove();
 	};
 	
 </script>

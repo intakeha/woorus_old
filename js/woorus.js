@@ -111,6 +111,109 @@ $(document).ready(function(){
 		}
 	});	
 	
+	// Show invite to guest list panel
+	$("#guestlist").click(function() {
+		$("#get_invite").show();
+		$("#enter_code").hide();
+	});
+	
+	// Validate invitation form
+	$("#invitation_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#invitation_error").addClass('error_text').text(validator.errorList[0].message);
+			}
+		},
+		submitHandler: function(form) {
+			$.post(
+				"actions/checkAccessCode.php",
+				$('#invitation_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						if ($('#invitation_error').hasClass('success_text')){
+							$('#invitation_error').removeClass('success_text');
+						}
+						$('#invitation_error').addClass('error_text').text(data.message); 
+					}else{
+						invite_code = $('input[id=access_code]').val();
+						$('input[id=access_code_submit]').val(invite_code);
+						$('#invitation').hide();
+						$('#register').show();
+					}
+				}, "json"
+			);
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {						// Adding validation rules for each input //
+			access_code: {
+				required: true,
+				minlength: 8,
+				maxlength: 8
+			}
+		},
+		messages: {						// Customized error messages for each error //
+			access_code: {
+				required: "Please enter your invitation code.",
+				minlength: "Invitation code is incorrect.",
+				maxlength: "Invitation code is incorrect."
+			}
+		}
+	});	
+	
+	// Guest list form
+	$("#guest_form").validate({
+		onsubmit: true,
+		onfocusout: false,
+		onkeyup: false,
+		onclick: false,
+		invalidHandler: function(form, validator) {
+			var errors = validator.numberOfInvalids();
+			if (errors) {
+				$("#invitation_error").text(validator.errorList[0].message);
+			}
+		},
+		submitHandler: function(form) {
+			$.post(
+				"actions/addToGuestlist.php",
+				$('#guest_form').serialize(),
+				function(data){
+					if (data.success == 0){
+						if ($('#guestlist_error').hasClass('success_text')){
+							$('#guestlist_error').removeClass('success_text').addClass('error_text');
+						}
+						$('#guestlist_error').text(data.message); 
+					}else{
+						$('#guestlist_error').text(data.message);
+					}
+				}, "json"
+			);
+		},
+		errorPlacement: function(error, element) {
+			// Override error placement to not show error messages beside elements //
+		},
+		rules: {						// Adding validation rules for each input //
+			email: {
+				required: true,
+				email: true,
+				maxlength: 254
+			}
+		},
+		messages: {						// Customized error messages for each error //
+			email: {
+				required: "Please enter your email.",
+				email: "Please enter a valid email address.",
+				maxlength: "Please enter no more than 254 characters for your email."
+			}
+		}
+	});	
+	
 	// Validate registration form
 	$("#registration_form").validate({
 		onsubmit: true,
@@ -192,12 +295,12 @@ $(document).ready(function(){
 			},
 			city: {
 				required: true,
-				validcity: true,
-				startsymbol: true,
-				endsymbol: true,
 				minlength: 2,
 				maxlength: 255
-			}
+			},
+			city_id: {
+				required: true
+			},
 		},
 		messages: {
 			first_name: {
@@ -247,12 +350,12 @@ $(document).ready(function(){
 				range: "Please select your birthday year."
 			},
 			city: {
-				required: "Please fill in all fields.",
-				validcity: "City contains invalid characters.",
-				startsymbol: "City should not start or end with a symbol.",
-				endsymbol: "City should not start or end with a symbol.",
+				required: "Please fill in your city.",
 				minlength: "Please provide your current city.",
 				maxlength: "Please enter no more than 255 characters for your city."
+			},
+			city_id: {
+				required: "Please enter a valid city."
 			}
 		}
 	});	
@@ -407,11 +510,11 @@ $(document).ready(function(){
 			},
 			city: {
 				required: true,
-				validcity: true,
-				startsymbol: true,
-				endsymbol: true,
 				minlength: 2,
 				maxlength: 255
+			},
+			city_id: {
+				required: true
 			},
 			new_email: {
 				email: true,
@@ -471,11 +574,11 @@ $(document).ready(function(){
 			},
 			city: {
 				required: "Please fill in your city.",
-				validcity: "City contains invalid characters.",
-				startsymbol: "City should not start or end with a symbol.",
-				endsymbol: "City should not start or end with a symbol.",
 				minlength: "Please provide your current city.",
 				maxlength: "Please enter no more than 255 characters for your city."
+			},
+			city_id: {
+				required: "Please enter a valid city."
 			},
 			new_email: {
 				email: "Please enter a valid email address.",
@@ -567,11 +670,11 @@ $(document).ready(function(){
 			},
 			city: {
 				required: true,
-				validcity: true,
-				startsymbol: true,
-				endsymbol: true,
 				minlength: 2,
 				maxlength: 255
+			},
+			city_id: {
+				required: true
 			},
 			new_email: {
 				email: true,
@@ -622,11 +725,11 @@ $(document).ready(function(){
 			},
 			city: {
 				required: "Please fill in your city.",
-				validcity: "City contains invalid characters.",
-				startsymbol: "City should not start or end with a symbol.",
-				endsymbol: "City should not start or end with a symbol.",
 				minlength: "Please provide your current city.",
 				maxlength: "Please enter no more than 255 characters for your city."
+			},
+			city_id: {
+				required: "Please enter a valid city."
 			},
 			new_email: {
 				email: "Please enter a valid email address.",
@@ -642,6 +745,38 @@ $(document).ready(function(){
 			}
 		}
 	});	
+	
+	// Activate autocomplete to the city field
+	$("#city").autocomplete("actions/cityList.php",{
+		dataType: 'json',
+		parse: function(data) {
+			return $.map(data, function(item) {
+				return {
+					data: item,
+					value: item.city_name,
+					result: item.city_name
+				}
+			}); 
+		}, 
+		formatItem: function(item) {
+			return item.city_name;
+		},
+		formatMatch: function(item) {
+			return item.city_name;
+		},
+		formatResult: function(item) {
+			return item.city_name;
+		},
+		minChars: 1,
+		selectFirst: true,
+		max: 5,
+		delay: 1
+	}).result(function(event, item){
+		var encoded = $("#city").val();
+		var decoded = $('<textarea />').html(encoded).val();
+		$("#city").val(decoded);
+		$("#city_id").val(item.city_id);
+	});
 	
 	// Upload picture file for tile crop
 	$('#tile_pic_upload').click(function(){
@@ -692,7 +827,7 @@ $(document).ready(function(){
 			$('input[name=y2]').val(selection.y2); 
 			$('input[name=w]').val(selection.width);
 			$('input[name=h]').val(selection.height);
-		}		
+		},
 	});
 
 	// Function used by imgAreaSelect to preview thumbnail	
@@ -708,9 +843,8 @@ $(document).ready(function(){
 		height: Math.round(scaleY*img.height),
 		marginLeft: -Math.round(scaleX * selection.x1),
 		marginTop: -Math.round(scaleY * selection.y1)
-		});
-			
-	} ;
+		});	
+	};
 	
 	// Validate Tile_Crop_Form and send data to backend
 	$("#tile_crop_form").validate({
@@ -838,5 +972,11 @@ jQuery.validator.addMethod("validtag", function(value, element) {
 // Captcha Theme Settings //
 var RecaptchaOptions = { 
 	theme : 'clean'
+};
+
+// Decode HTML entities from PHP function
+function decodeHTML(encodedStr) {
+	var decodedStr = $('<textarea />').html(encodedStr).val();
+	return decodedStr;			
 };
 

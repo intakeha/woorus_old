@@ -184,7 +184,7 @@
 				if (result.missed_calls[i].profile_filename_small)
 				{source = "images/users/small/"+result.missed_calls[i].profile_filename_small}
 				else {source = "images/global/silhouette_sm.png";}
-				$('#list_missed_calls').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.missed_calls[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+				$('#list_missed_calls').append('<li onmouseover=\'showTransparentUpdate($(this), \"'+result.missed_calls[i].first_name+'\")\' onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 			
 			// Show added to contact information on the feed panel
@@ -211,7 +211,7 @@
 				{source = "images/users/small/"+result.new_contacts[i].profile_filename_small}
 				else {
 					source = "images/global/silhouette_sm.png";}
-				$('#list_contacts').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.new_contacts[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+				$('#list_contacts').append('<li onmouseover=\'showTransparentUpdate($(this), \"'+result.new_contacts[i].first_name+'\")\' onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 			
 			// Show contacts' interest information on the feed panel
@@ -240,7 +240,7 @@
 				{source = "images/interests/"+result.new_interests[i].tile_filename}
 				else {
 					source = "images/global/silhouette_sm.png";}
-				$('#list_contact_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.new_interests[i].interest_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+				$('#list_contact_interests').append('<li onmouseover=\'showTransparentUpdate($(this), \"'+result.new_interests[i].interest_name+'\")\' onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 			
 			// Show shared interest information on the feed panel
@@ -270,7 +270,7 @@
 				{source = "images/users/small/"+result.common_interests[i].profile_filename_small}
 				else {
 					source = "images/global/silhouette_sm.png";}
-				$('#list_interests').append('<li onmouseover=\"showTransparentUpdate($(this), \''+result.common_interests[i].first_name+'\')\" onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
+				$('#list_interests').append('<li onmouseover=\'showTransparentUpdate($(this), \"'+result.common_interests[i].first_name+'\")\' onmouseout="hideTransparentUpdate($(this))"><img src=\"'+source+'\"/></li>');
 			};
 		});
 		
@@ -488,7 +488,7 @@
 								$("#updates_left").hide();
 							}
 						} else {
-							$('#show_contact_interests').append('<li class="community_wall tile_tag" onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), \''+field.interest_name+'\')"><img src="images/interests/'+field.tile_filename+'"></li>');
+							$('#show_contact_interests').append('<li class="community_wall tile_tag" onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover=\'showInterest($(this), \"'+field.interest_name+'\")\'><img src="images/interests/'+field.tile_filename+'"></li>');
 						}
 					})
 				}, "json"

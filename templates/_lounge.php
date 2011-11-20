@@ -94,7 +94,7 @@
 						$('#name0').html('Unknown');
 					}
 					for (i=0; i<data.tiles_count0; i++){
-						$('#tile0').append('<li onmouseover="showInterest($(this), \''+data.tiles_0[i].interest_name+'\')" onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
+						$('#tile0').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_0[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
 					}
 					
 					// Right profile panel
@@ -109,7 +109,7 @@
 						$('#name1').html('Unknown');
 					}
 					for (i=0; i<data.tiles_count1; i++){
-						$('#tile1').append('<li onmouseover="showInterest($(this), \''+data.tiles_1[i].interest_name+'\')" onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
+						$('#tile1').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_1[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
 					}
 				}, "json"
 			);

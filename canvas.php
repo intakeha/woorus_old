@@ -19,7 +19,7 @@
     <script type="text/javascript" src="js/woorus.js"></script>
     <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 	<script type="text/javascript">
-		var apiKey = '6483831';
+/*		var apiKey = '6483831';
 		var sessionId = '1_MX4xMjMyMDgxfn4yMDExLTEwLTI0IDA0OjE3OjIzLjA2Mzc5MCswMDowMH4wLjcxMjA4MzcyODQ3OH4';
 		var token = 'devtoken';
 		 
@@ -60,6 +60,7 @@
 			session.subscribe(streams[i], div.id);
 		  }
 		}
+*/
 	</script>
 
 	<?php 
@@ -94,7 +95,8 @@
 		?>
 	</div>
     <script type="text/javascript">
-		$(document).ready(function(){			
+/*		$(document).ready(function(){	
+			alert("Javascript Still works");		
 			// Update initial status as active
 			$.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
 
@@ -393,6 +395,7 @@
 				return false;
 			});
 		});
+*/
 	</script>
 </body>
 </html>

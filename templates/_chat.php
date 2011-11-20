@@ -90,7 +90,7 @@
 <script type="text/javascript">
 	function showInterest(obj, tag){
 		obj.find('img').addClass('transparent_tile');
-		obj.find('img').before('<div class="lounge_transparent_tag">'+tag+'</div>');
+		obj.find('img').before("<div class='lounge_transparent_tag'>"+tag+"</div>");
 	};
 	
 	function hideInterest(obj){
