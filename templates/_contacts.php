@@ -1,25 +1,27 @@
-<div id="contacts">
-	<div>
-		<form id="csearch_form" action="../actions/showContacts.php" method="POST">
-			<input type="text" class="text_form ac_input" id="contact_search_field" name="first_name" maxlength="60">
-			<input type="hidden" name="offset" value="0" />
-			<input class="buttons" id="contact_search_submit" type="submit" name="contact_search_submit" value="Search">
-		</form>       	
-		<div id="csearch_error">
-		</div>
-	</div>
-	<div id="contact_results">
-		<div class="pagination_contacts"><a id="contact_left" class="arrows pagination_left"></a></div>
-		<ul id="contact_mosaic">			
-		</ul>
-		<div class="pagination_contacts"><a id="contact_right" class="arrows pagination_right"></a></div>
-		<div id="contact_legend">
-			<div class="online"><span class="legend_squares" id="greenSquare"></span>Online</div>
-			<div class="away"><span class="legend_squares" id="orangeSquare"></span>Away</div>
-			<div class="busy"><span class="legend_squares" id="redSquare"></span>Busy</div>
-			<div class="offline"><span class="legend_squares" id="graySquare"></span>Offline</div>
-		</div>
-	</div>
+<div id="contact_container" class="fluid">
+    <div id="contacts">
+        <div>
+            <form id="csearch_form" action="../actions/showContacts.php" method="POST">
+                <input type="text" class="text_form ac_input" id="contact_search_field" name="first_name" maxlength="60">
+                <input type="hidden" name="offset" value="0" />
+                <input class="buttons" id="contact_search_submit" type="submit" name="contact_search_submit" value="Search">
+            </form>       	
+            <div id="csearch_error">
+            </div>
+        </div>
+        <div id="contact_results">
+            <div class="pagination_contacts"><a id="contact_left" class="arrows pagination_left"></a></div>
+            <ul id="contact_mosaic">			
+            </ul>
+            <div class="pagination_contacts"><a id="contact_right" class="arrows pagination_right"></a></div>
+            <div id="contact_legend">
+                <div class="online"><span class="legend_squares" id="greenSquare"></span>Online</div>
+                <div class="away"><span class="legend_squares" id="orangeSquare"></span>Away</div>
+                <div class="busy"><span class="legend_squares" id="redSquare"></span>Busy</div>
+                <div class="offline"><span class="legend_squares" id="graySquare"></span>Offline</div>
+            </div>
+        </div>
+    </div>
 </div>
 <script type="text/javascript">
 

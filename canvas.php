@@ -87,7 +87,7 @@
 	</div>
     
 	<div class="globalContainer">
-    	<div id="testCall" class="buttons">Click to call</div>
+    	<!-- <div id="testCall" class="buttons">Click to call</div> -->
 		<?php
 			include('templates/_header.php');
 			include('templates/_'.$page.'.php');

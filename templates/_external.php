@@ -1,23 +1,25 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
-<div id="eprofile">
-	<div id="profile">
-		<div id="external_profile_frame"></div><div id="profile_pic"><img></div>
-        <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
-        <div id="actions">
-            <a class="talk_button" href="#"></a>
-            <a class="write_button" href="#"></a>
-            <a class="add_button" href="#"></a>
-		</div>
+<div id="eprofile_container" class="fluid">
+    <div id="eprofile">
+        <div id="profile">
+            <div id="external_profile_frame"></div><div id="profile_pic"><img></div>
+            <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
+            <div id="actions">
+                <a class="talk_button" href="#"></a>
+                <a class="write_button" href="#"></a>
+                <a class="add_button" href="#"></a>
+            </div>
+        </div>
+        <div id="profile_social_status">
+            <div id="butterfly"></div>
+            <div id="warning"></div>
+        </div>
+        <div id="external_wall">
+            <ul id="wall_display"></ul>
+        
+        </div>
+        <form id="externalID" action="actions/showExternalProfile.php" method="post"><input type="hidden" name="externalID" value="119" /></form>
     </div>
-    <div id="profile_social_status">
-		<div id="butterfly"></div>
-		<div id="warning"></div>
-    </div>
-    <div id="external_wall">
-    	<ul id="wall_display"></ul>
-    
-    </div>
-    <form id="externalID" action="actions/showExternalProfile.php" method="post"><input type="hidden" name="externalID" value="119" /></form>
 </div>
 
 <script type="text/javascript">

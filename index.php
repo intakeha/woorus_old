@@ -20,7 +20,7 @@
 <body>
 	<div class="fluid" id="globalContainerIndex">
 		<div id="header">
-			<a id="logo" href="#"></a>
+			<a id="logo" href="http://woorus.com"></a>
 			<div id="panel">
 				<div class="login_panel">
 					<form id="login_form" action="actions/login.php" method="POST">
@@ -28,29 +28,29 @@
 						Password <input class="login_text" type="password" name="password"> &nbsp; 
 						<input id="login_button" class="buttons" type="submit" name="login" value="Login">
 					</form>
-					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#recover_email').val($('#login_email').val());">Forgot your password?</a>
+					<div class="switch_link" id="switch_recover" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#recover_email').val($('#login_email').val()); $('#auth_error').removeClass('auth_error_login').addClass('auth_error_recover');">Forgot your password?</div>
 				</div>
 				<div class="login_panel" style="display: none;">
 					<form id="recover_form" action="actions/forgotPassword.php" method="POST">
 						Email <input class="text_form" id="recover_email" type="text" name="email"> &nbsp; 
 						<input id="recover_button" class="buttons" type="submit" name="forgot" value="Reset Password">
 					</form>
-					<a class="switch_link" href="#" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#login_email').val($('#recover_email').val());">Log in</a>
+					<div class="switch_link" id="switch_login" onClick="$('.login_panel').toggle(); $('#auth_error').empty(); $('#login_email').val($('#recover_email').val()); $('#auth_error').removeClass('auth_error_recover').addClass('auth_error_login');">Log in</div>
 				</div>
-				<div id="auth_error" class="error_text"></div>
+				<div id="auth_error" class="error_text auth_error_login"></div>
 			</div>
 		</div>
 	</div>
     <div class="fluid">
         <div id="indexContent">
             <div id="slide_show">              
-                <a href="#" class="prev arrows pagination_left"></a>
+                <a href="#" class="prev arrows pagination_left" style="display: none"></a>
                 <div class="slides_container">
                     <div title="Mosaic Wall"><img src="images/global/slideshow_mosaic.jpg" /></div>
                     <div title="Video Chats"><img src="images/global/slideshow_chat.jpg"/></div>
                     <div title="Social Status"><img src="images/global/slideshow_social.jpg" /></div>
                 </div>
-                <a href="#" class="next arrows pagination_right"></a>
+                <a href="#" class="next arrows pagination_right" style="display: none"></a>
             </div>
             <div id="sign_up">
             	<div id="invitation">
@@ -65,17 +65,23 @@
                         </ul>
                         </form>
                         <span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
-                        <div id="guestlist" style="display: block;">Add me to the guest list<img src="images/global/guestlist.jpg"></div>
+                        <div id="guestlist" style="display: block;">Add me to the guest list <img src="images/global/guestlist.jpg"></div>
 					</div>
                     <div id="get_invite" style="display: none;">
-                        <div>Need an invitation code?  Don't worry, just enter you email address below and we'll put you on our guest list!</div>
+                        <div>Need an invitation code?  Don't worry, just enter your email address below and we'll put you on our guest list!</div>
                         <form id="guest_form" action="actions/addToGuestList.php" method="post">
                         <ul>
-                            <li><input class="text_form" id="guestlist_email" type="text" name="email" maxlength="254"> <input id="guestlist" class="buttons" type="submit" name="guestlist" value="Add to List"></li>
+                            <li><input class="text_form" id="guestlist_email" type="text" name="email" maxlength="254"> <input id="guestlist_add" class="buttons" type="submit" name="guestlist" value="Add to List"></li>
                             <li><font id="guestlist_error"></font></li>
                         </ul>
                         </form>    
-                    </div>                
+                    </div>
+                    <div id="guestlist_confirmed" style="display: none;">
+                        <div>
+                            <div>Thank you for your interest in Woorus. We have entered <font></font> to the guest list.</div>
+                            <div>Invitations are currently being sent out upon limited availability. Please check your email periodically for an invite code. We look forward to seeing you soon!</div>
+                        </div>
+                    </div>
                 </div>
                 <div id="register" style="display:none;">
                     <div id="facebook_login">

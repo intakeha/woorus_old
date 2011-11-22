@@ -42,6 +42,7 @@ table {
 	#215086 (Deep Blue - Top of Water)
 	#000418 (Dark Blue/Black - Deep Ocean)
 	#78BCE3 (Medium Highlighted Blue - Shadows)
+	#173966 (Dark Blue - Ocean Floor Footer)
 */
 
 /* Page styles */
@@ -217,7 +218,7 @@ a#nav_trends_1 {
 
 /* Footer */
 #footer_container {
-	background: url(../images/global/footer.jpg) no-repeat center;
+	background: #173966 url(../images/global/footer.jpg) no-repeat center;
 }
 
 .footer {
@@ -313,7 +314,7 @@ a.arrows {
 .pagination_div{
 	width:40px;
 	float: left;
-	margin: -200px 0px 0px 370px;
+	margin: -200px 0px 0px 305px;
 	position: relative;
 	z-index: 1000;
 }

@@ -1,37 +1,38 @@
-<div id="mail">
-	<div id="mail_panel">
-    	<div id="mailbox">
-        	<div id="inbox"></div>
-            <div id="sent" class="sent_0"></div>
-        </div>
-        <ul id="messages">
-        </ul>
-        <div>
-        	<div class="pagination_mail" id="mail_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
-            <div id="mail_current_page"></div>
-        	<div class="pagination_mail" id="mail_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
-        </div>
-    </div>
-    <div id="message_panel">
-    	<div id="message_container">
-            <div id="mail_profile"></div>
-            <div id="message"></div>
-            <div id="response">
-            	<form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
-                    <input type="hidden" name="user_id_mailee" value="" />
-                    <textarea id="response_box" name="mail_message" cols="62" rows="7"></textarea>
-                    <input class="buttons float_right" id="reply_button" type="submit" name="reply" value="Reply">
-                </form>
-                <div id="reply_error"></div>
+<div id="mail_container" class="fluid">
+    <div id="mail">
+        <div id="mail_panel">
+            <div id="mailbox">
+                <div id="inbox"></div>
+                <div id="sent" class="sent_0"></div>
+            </div>
+            <ul id="messages">
+            </ul>
+            <div>
+                <div class="pagination_mail" id="mail_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+                <div id="mail_current_page"></div>
+                <div class="pagination_mail" id="mail_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
             </div>
         </div>
+        <div id="message_panel">
+            <div id="message_container">
+                <div id="mail_profile"></div>
+                <div id="message"></div>
+                <div id="response">
+                    <form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
+                        <input type="hidden" name="user_id_mailee" value="" />
+                        <textarea id="response_box" name="mail_message" cols="62" rows="7"></textarea>
+                        <input class="buttons float_right" id="reply_button" type="submit" name="reply" value="Reply">
+                    </form>
+                    <div id="reply_error"></div>
+                </div>
+            </div>
+        </div>
+        <form id="message_form" action="../actions/showMessages.php" method="POST">
+            <input type="hidden" name="offset" value="0" />
+            <input type="hidden" name="inbox_or_sent" value="inbox" />
+        </form>  
     </div>
-    <form id="message_form" action="../actions/showMessages.php" method="POST">
-        <input type="hidden" name="offset" value="0" />
-		<input type="hidden" name="inbox_or_sent" value="inbox" />
-    </form>  
 </div>
-
 <script type="text/javascript">
 
 	$(document).ready(function(){

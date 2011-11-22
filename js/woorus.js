@@ -176,7 +176,8 @@ $(document).ready(function(){
 		invalidHandler: function(form, validator) {
 			var errors = validator.numberOfInvalids();
 			if (errors) {
-				$("#invitation_error").text(validator.errorList[0].message);
+				$('#guestlist_error').removeClass('success_text').addClass('error_text');
+				$("#guestlist_error").text(validator.errorList[0].message);
 			}
 		},
 		submitHandler: function(form) {
@@ -190,6 +191,13 @@ $(document).ready(function(){
 						}
 						$('#guestlist_error').text(data.message); 
 					}else{
+						guestlist_email = $('input[id=guestlist_email]').val();
+						$('#guestlist_confirmed').find('font').text(guestlist_email);
+						$("#get_invite").hide();
+						$('#guestlist_confirmed').show();
+						if ($('#guestlist_error').hasClass('error_text')){
+							$('#guestlist_error').removeClass('error_text').addClass('success_text');
+						}
 						$('#guestlist_error').text(data.message);
 					}
 				}, "json"

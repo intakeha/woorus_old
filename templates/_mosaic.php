@@ -1,75 +1,76 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
-
-<div id="mosaic">
-	<div class="pagination_mosaic"><a id="tile_bank_left" class="arrows pagination_left" style="display: none;"></a></div>
-	<div id="tiles">
-	    <form id="tsearch_form" action="actions/tileSearch.php" method="POST">
-            <input type="text" id="tile_search_field" name="tile_search" maxlength="60">
-            <input type="hidden" name="query_type" value="" />
-            <input type="hidden" name="offset" value="0" />
-            <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
-        </form>
-        <div id="tile_bank_message" class="error_text" style="display: none;"></div>
-		<div id="tiles_legend">
-            <div id="sponsoredTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
-			<div id="communityTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
-            <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
-        </div>
-        <div id="tiles_bank">
-            <ul id="tile_display">
-            </ul>
-        </div><div id="clear"></div>
-        <div id="customized_tile">
-        	<span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
-            	<p>Create your own customized tile: </p>     
-                <form id="tile_upload_form" action="actions/uploadTile.php" method="post" enctype="multipart/form-data">
-                    <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
-                    <br />
-                    <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
-                    <div class="error_text" id="tile_upload_error"></div>
-                    <div class="success_text" id="tile_upload_success" style="display: none;"></div>
-                    <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
-                </form>
-        </div>
-    </div>
-	<div class="pagination_mosaic"><a id="tile_bank_right" class="arrows pagination_right" style="display: none;"></a></div>
-    <div id="tile_crop" style="display: none;">
-    	<div id="tile_crop_instruction">Click and drag on the image to customize your tile.</div>
-        <div id="tile_original_photo">
-            <img class="tile_pic" />
-        </div>
-        <div id="tile_preview_area">
-        	<font>Tile Preview</font>
-            <div id="tile_preview">
-                <img />
+<div id="mosaic_container" class="fluid">
+    <div id="mosaic">
+        <div class="pagination_mosaic"><a id="tile_bank_left" class="arrows pagination_left" style="display: none;"></a></div>
+        <div id="tiles">
+            <form id="tsearch_form" action="actions/tileSearch.php" method="POST">
+                <input type="text" id="tile_search_field" name="tile_search" maxlength="60">
+                <input type="hidden" name="query_type" value="" />
+                <input type="hidden" name="offset" value="0" />
+                <input class="buttons" id="tile_search_submit" type="submit" name="tile_search_submit" value="Search">
+            </form>
+            <div id="tile_bank_message" class="error_text" style="display: none;"></div>
+            <div id="tiles_legend">
+                <div id="sponsoredTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="redSquare"></span>Sponsored Tiles</div>
+                <div id="communityTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="graySquare"></span>Community Tiles</div>
+                <div id="myTiles" onmouseover="$(this).addClass('hoverFilter')" onmouseout="$(this).removeClass('hoverFilter')"><span class="legend_squares" id="blueSquare"></span>My Uploaded Tiles</div>
+            </div>
+            <div id="tiles_bank">
+                <ul id="tile_display">
+                </ul>
+            </div><div id="clear"></div>
+            <div id="customized_tile">
+                <span>&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;</span>
+                    <p>Create your own customized tile: </p>     
+                    <form id="tile_upload_form" action="actions/uploadTile.php" method="post" enctype="multipart/form-data">
+                        <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /> 
+                        <br />
+                        <input class="buttons" id="tile_pic_upload" type="submit" name="filename" value="Upload">
+                        <div class="error_text" id="tile_upload_error"></div>
+                        <div class="success_text" id="tile_upload_success" style="display: none;"></div>
+                        <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
+                    </form>
             </div>
         </div>
-        <div class="clear"></div>
-        <div id="tag_tile">
-        	Tag your tile with your interest
-            <form id="tile_crop_form" action="actions/tileCrop.php" method="POST">
-            	<input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
-                <input type="hidden" name="x1" value="" />
-                <input type="hidden" name="y1" value="" />
-                <input type="hidden" name="x2" value="" />
-                <input type="hidden" name="y2" value="" />
-				<input type="hidden" name="w" value="" />
-                <input type="hidden" name="h" value="" />
-                <input type="hidden" name="cropFile" value="" />
-                <br />
-                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
-            </form>
-            <div class="error_text" id="crop_error"></div>
+        <div class="pagination_mosaic"><a id="tile_bank_right" class="arrows pagination_right" style="display: none;"></a></div>
+        <div id="tile_crop" style="display: none;">
+            <div id="tile_crop_instruction">Click and drag on the image to customize your tile.</div>
+            <div id="tile_original_photo">
+                <img class="tile_pic" />
+            </div>
+            <div id="tile_preview_area">
+                <font>Tile Preview</font>
+                <div id="tile_preview">
+                    <img />
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div id="tag_tile">
+                Tag your tile with your interest
+                <form id="tile_crop_form" action="actions/tileCrop.php" method="POST">
+                    <input type="text" class="text_form" id="assign_tag" name="assign_tag" maxlength="60">            
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="x2" value="" />
+                    <input type="hidden" name="y2" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
+                    <input type="hidden" name="cropFile" value="" />
+                    <br />
+                    <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=mosaic'"/>
+                </form>
+                <div class="error_text" id="crop_error"></div>
+            </div>
         </div>
-    </div>
-    <div id="mosaic_wall">
-        &laquo; Personalize your mosaic interest wall &raquo;         
-        <div id="wall">
-            <ul id="wall_display" class="tile_sort">
-            </ul>
+        <div id="mosaic_wall">
+            &laquo; Personalize your mosaic interest wall &raquo;         
+            <div id="wall">
+                <ul id="wall_display" class="tile_sort">
+                </ul>
+            </div>
         </div>
+        <div id="wall_trash"><ul class="tile_sort" id="remove_tile"></ul></div>
     </div>
-    <div id="wall_trash"><ul class="tile_sort" id="remove_tile"></ul></div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function () {

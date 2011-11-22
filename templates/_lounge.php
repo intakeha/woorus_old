@@ -1,66 +1,67 @@
-<div id="lounge">
-	<div id="lounge_area">
-		<span>Welcome to the lounge</span>
-		<p>We have selected several people that you might find interesting based on your mosaic wall. <br>Check out their profiles and start meeting new people from around the world!</p>
-		<div id="lounge_profiles">
-			<div class="lounge_match">
-				<div class="lounge_info">
-					<a href="#">
-					<div class="lounge_photo">
-						<img id="photo_left">
-					</div></a>
-					<div>
-						<div>	
-							<div class="lounge_icons float_right">
-								<div class="social_status float_right"></div>
-								<div class="social_status warning_status float_right"></div>
-							</div>						
-							<div class="lounge_userInfo">
-								<a href="#"><span id="name0"></span></a>
-								<div id="online_status" class="lounge_online"></div> 
-							</div>
-						</div>
-						<div class="action_buttons">
-							<a class="add_button_sm" href="#"></a>
-							<a class="write_button_sm" href="#"></a>
-							<a class="talk_button_sm" href="#"></a>
-						</div>
-					</div>
-				</div>
-				<ul class="lounge_tiles" id="tile0"></ul>
-			</div>
-			<div class="lounge_match">
-				<div class="lounge_info">
-					<a href="#">
-					<div class="lounge_photo">
-						<img id="photo_right">
-					</div></a>
-					<div>
-						<div>	
-							<div class="lounge_icons float_right">
-								<div class="social_status float_right"></div>
-								<div class="social_status warning_status float_right"></div>
-							</div>						
-							<div class="lounge_userInfo">
-								<a href="#"><span id="name1"></span></a>
-								<div id="online_status" class="lounge_online"></div> 
-							</div>
-						</div>
-						<div class="action_buttons">
-							<a class="add_button_sm" href="#"></a>
-							<a class="write_button_sm" href="#"></a>
-							<a class="talk_button_sm" href="#"></a>
-						</div>
-					</div>
-				</div>
-				<ul class="lounge_tiles" id="tile1"></ul>
-			</div>
-		</div>
-	</div>
-	<div class="pagination_lounge"><a id="lounge_right" class="arrows pagination_right"></a></div>
-	<form id="loungeOffset" action="actions/loungeSearch.php" method="post"><input type="hidden" name="offset" value="0" /></form>
+<div id="lounge_container" class="fluid">
+    <div id="lounge">
+        <div id="lounge_area">
+            <span>Welcome to the lounge</span>
+            <p>We have selected several people that you might find interesting based on your mosaic wall. <br>Check out their profiles and start meeting new people from around the world!</p>
+            <div id="lounge_profiles">
+                <div class="lounge_match">
+                    <div class="lounge_info">
+                        <a href="#">
+                        <div class="lounge_photo">
+                            <img id="photo_left">
+                        </div></a>
+                        <div>
+                            <div>	
+                                <div class="lounge_icons float_right">
+                                    <div class="social_status float_right"></div>
+                                    <div class="social_status warning_status float_right"></div>
+                                </div>						
+                                <div class="lounge_userInfo">
+                                    <a href="#"><span id="name0"></span></a>
+                                    <div id="online_status" class="lounge_online"></div> 
+                                </div>
+                            </div>
+                            <div class="action_buttons">
+                                <a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="lounge_tiles" id="tile0"></ul>
+                </div>
+                <div class="lounge_match">
+                    <div class="lounge_info">
+                        <a href="#">
+                        <div class="lounge_photo">
+                            <img id="photo_right">
+                        </div></a>
+                        <div>
+                            <div>	
+                                <div class="lounge_icons float_right">
+                                    <div class="social_status float_right"></div>
+                                    <div class="social_status warning_status float_right"></div>
+                                </div>						
+                                <div class="lounge_userInfo">
+                                    <a href="#"><span id="name1"></span></a>
+                                    <div id="online_status" class="lounge_online"></div> 
+                                </div>
+                            </div>
+                            <div class="action_buttons">
+                                <a class="add_button_sm" href="#"></a>
+                                <a class="write_button_sm" href="#"></a>
+                                <a class="talk_button_sm" href="#"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="lounge_tiles" id="tile1"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="pagination_lounge"><a id="lounge_right" class="arrows pagination_right"></a></div>
+        <form id="loungeOffset" action="actions/loungeSearch.php" method="post"><input type="hidden" name="offset" value="0" /></form>
+    </div>
 </div>
-
 <script type="text/javascript">
 	$(document).ready(function(){	
 		// Get lounge information

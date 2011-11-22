@@ -18,9 +18,7 @@ mysql_select_db($db_name);
 
 $city_query = "SELECT city.id, city.city_name
 		FROM `city`
-		WHERE city.city_name LIKE '".mysql_real_escape_string($q)."%'
-		ORDER by city.city_name ASC
-		LIMIT 0,5 ";
+		ORDER by city.city_name ASC";
 
 $city_result = mysql_query($city_query, $connection) or die ("Error");
 
@@ -39,11 +37,13 @@ while ($row = mysql_fetch_assoc($city_result)){
 $result = array();
 $search_iterator = 1;
 foreach ($city_array as $key=>$value) {
-	array_push($result, array(
-		"city_id" => $key,
-		"city_name" =>  htmlentities($value, ENT_QUOTES)
-	));
-	$search_iterator++;
+	if (strpos(strtolower($value), $q) === 0) {
+		array_push($result, array(
+			"id" => $key,
+			"city_name" => htmlentities($value, ENT_QUOTES)
+		));
+		$search_iterator++;
+	}
 	if ($search_iterator > 5){
 		break;
 	}

@@ -47,7 +47,7 @@ img.btn_close {
 }
 
 #header {
-	width: 1200px;
+	width: 960px;
 	height: 450px;
 	background: url(../images/global/home_bg_banner.jpg) no-repeat;
 	text-align: left;
@@ -59,7 +59,7 @@ img.btn_close {
 	width: 300px;
 	height: 60px;
 	float: left;
-	margin: 30px 0px 0px 100px;
+	margin: 30px 0px 0px 10px;
 }
 
 #panel {
@@ -85,8 +85,21 @@ img.btn_close {
 
 .switch_link {
 	font-size: 12px;
-	margin: 5px 120px 0px 0px;
 	float: right;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+.switch_link:hover {
+	text-decoration: underline;
+}
+
+#switch_recover {
+	margin: 5px 130px 0px 0px;
+}
+
+#switch_login {
+	margin: 5px 120px 0px 0px;
 }
 
 #recover_button {
@@ -94,8 +107,19 @@ img.btn_close {
 	border: 2px solid #FFF;
 }
 
-#auth_error{
-	margin: 5px 0px 0px -35px;
+#auth_error {
+    margin-top: 5px;
+    text-align: left;
+}
+
+.auth_error_login {
+	margin-left: 78px;
+    width: 230px;
+}
+
+.auth_error_recover {
+	margin-left: 95px;
+    width: 250px;
 }
 
 #reg_error_container{
@@ -126,11 +150,11 @@ img.btn_close {
 #indexContent {
     height: 400px;
     margin: 0 auto;
-    width: 1200px;
+    width: 960px;
 }
 
 #slide_show {
-	width: 650px;
+	width: 475px;
 	height: 400px;
 	border-right: 1px solid #CCC;
 	float: left;
@@ -155,16 +179,15 @@ img.btn_close {
 }
 
 #sign_up {
-	font-family: Arial, Helvetica, sans-serif;
-	width: 469px;
-	height: 400px;
-	margin-left: 60px;
-	text-align: left;
-	line-height: 30px;
-	float: left;
     color: #215086;
+    float: left;
+    font-family: Arial,Helvetica,sans-serif;
     font-size: 17px;
+    height: 400px;
     line-height: 35px;
+    margin-left: 35px;
+    text-align: left;
+    width: 449px;
 }
 
 #invitation {
@@ -182,6 +205,20 @@ img.btn_close {
 
 #invitation form{
 	margin: 20px 0 20px 0;
+}
+
+#guestlist {
+	width: 200px;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+#guestlist:hover {
+	text-decoration: underline;
+}
+
+#guestlist_confirmed font {
+	font-weight: bold;
 }
 
 #facebook_login {
@@ -226,8 +263,8 @@ img.btn_close {
 /* Home Page - Internal Profile */
 #iprofile {
 	width: 960px;
-	height:	700px;
-	margin: 0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #profile {
@@ -604,8 +641,8 @@ div.transparent_update {
 /* Settings Page */
 #settings {
 	width: 960px;
-	height: 600px;
-	margin:0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #change_settings {
@@ -743,8 +780,8 @@ li.forgot_title {
 /* Mosaic Page */
 #mosaic {
 	width: 1150px;
-	height: 600px;
-	margin: 0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 .pagination_mosaic {
@@ -1066,8 +1103,8 @@ div.transparent_tag {
 
 #search {
 	width: 960px;
-	height: 600px;
-	margin:0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 	overflow: hidden;
 }
 
@@ -1166,8 +1203,8 @@ div.transparent_tag {
 
 #contacts{
 	width: 960px;
-	height: 600px;
-	margin:0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #contact_search_field {
@@ -1289,8 +1326,8 @@ div.offline {
 
 #lounge {
 	width: 960px;
-	height: 500px;
-	margin:0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #lounge_area {
@@ -1398,8 +1435,8 @@ div.lounge_transparent_tag {
 /* Mail Page */
 #mail {
 	width: 960px;
-	height: 600px;
-	margin:0px auto;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #mail_panel {
@@ -1643,9 +1680,9 @@ div.lounge_transparent_tag {
 /* External Profile */
 
 #eprofile {
-    height: 540px;
-    margin: 0 auto;
     width: 960px;
+	height:	642px;
+	margin: 50px auto 0px;
 }
 
 #external_profile_frame {

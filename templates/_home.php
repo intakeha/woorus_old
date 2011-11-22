@@ -1,134 +1,136 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
-<div id="iprofile">
-	<div id="profile">
-		<div id="profile_frame"></div><div id="profile_pic"><img></div>
-        <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
-		<a id="announcement" href="canvas.php?page=mosaic">
-				<div><span>Mosaic Wall</span><br>
-				Customize your mosaic wall and show the world who you are! Create custom tiles  
-				or leverage tiles from others to get started quickly.</div>
-		</a>
-    </div>
-    <div id="profile_social_status">
-		<div id="butterfly"></div>
-		<div id="warning"></div>
-    </div>
-   	<div id="updates">
-    	<p>Your Woorus Activities This Week:</p>	
-		<div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p></a>
-            <ul id="list_missed_calls">
-            </ul>
+<div id="iprofile_container" class="fluid">
+    <div id="iprofile">
+        <div id="profile">
+            <div id="profile_frame"></div><div id="profile_pic"><img></div>
+            <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
+            <a id="announcement" href="canvas.php?page=mosaic">
+                    <div><span>Mosaic Wall</span><br>
+                    Customize your mosaic wall and show the world who you are! Create custom tiles  
+                    or leverage tiles from others to get started quickly.</div>
+            </a>
         </div>
-        <div><a id="anchor_contacts" class="updates_anchor"><p></p>Added You to Contacts</a>
-        	<ul id="list_contacts">
-            </ul>
+        <div id="profile_social_status">
+            <div id="butterfly"></div>
+            <div id="warning"></div>
         </div>
-        <div><a id="anchor_contact_interests" class="updates_anchor"><p></p></a>
-        	<ul id="list_contact_interests">
-            </ul>
-        </div>
-        <div id="shared_interest"><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
-        	<ul id="list_interests">
-            </ul>
-		</div>
-    </div>
-   	<div id="updates_missed_calls" class="updates_results" style="display: none;">
-    	<div class="dashboard_view">back</div><div id="title_missed_calls"></div>
-        <div class="updates_results_list">
-            <ul id="show_missed_calls">
-            </ul>
-        </div>
-    </div>
-    <div id="updates_contacts" class="updates_results" style="display: none;">
-	    <div class="dashboard_view">back</div><div id="title_contacts"></div>
-        <div class="updates_results_list">
-            <ul id="show_contacts">
-            </ul>
-        </div>
-    </div>
-    <div id="updates_contact_interests" class="updates_results" style="display: none;">
-    	<div class="dashboard_view">back</div><div id="title_contact_interests"></div>
-		<div class="updates_results_list">
-            <ul id="show_contact_interests">
-            </ul>
-        </div>
-    </div>
-    <div id="updates_interests" class="updates_results" style="display: none;">
-    	<div class="dashboard_view">back</div><div id="title_interests"></div>
-        <div class="updates_results_list">
-            <ul id="show_interests">
-            </ul>
-        </div>
-    </div> 
-    <div id="pagination_home" style="display: none;">
-        <div class="pagination_home" id="updates_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
-        <div id="home_current_page"></div>
-        <div class="pagination_home" id="updates_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
-    </div>
-    
-	<input type="hidden" name="offset" value="0" />
-    <input type="hidden" name="interest_id" value="" />
-    <div id="upload_profile_area" style="display: none;">
-    	<p>Select a photo for your profile picture:</p>
-		<form id="profile_upload_form" action="actions/uploadProfilePicture.php" method="post" enctype="multipart/form-data">
-            <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /><br />
-            <input class="buttons" id="profile_pic_upload" type="submit" name="filename" value="Upload">
-            <div class="error_text" id="profile_upload_error"></div>
-            <div class="success_text" id="profile_upload_success" style="display: none;"></div>
-            <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
-		</form>
-    </div>
-    <div id="crop_profile_pic" style="display: none;">
-    	<div id="profile_crop_instruction">Click and drag on the image below to create your profile picture.</div>
-        <div id="profile_original_photo">
-            <img class="profile_pic" />
-        </div>
-        <div id="profile_preview_area">
-        	<font>Profile Photo Preview</font>
-            <div id="profile_preview">
-                <img />
+        <div id="updates">
+            <p>Your Woorus Activities This Week:</p>	
+            <div id="first_update"><a id="anchor_missed_calls" class="updates_anchor"><p></p></a>
+                <ul id="list_missed_calls">
+                </ul>
             </div>
+            <div><a id="anchor_contacts" class="updates_anchor"><p></p>Added You to Contacts</a>
+                <ul id="list_contacts">
+                </ul>
+            </div>
+            <div><a id="anchor_contact_interests" class="updates_anchor"><p></p></a>
+                <ul id="list_contact_interests">
+                </ul>
+            </div>
+            <div id="shared_interest"><a id="anchor_interests" class="updates_anchor">People interested in <p></p></a>
+                <ul id="list_interests">
+                </ul>
+            </div>
+        </div>
+        <div id="updates_missed_calls" class="updates_results" style="display: none;">
+            <div class="dashboard_view">back</div><div id="title_missed_calls"></div>
+            <div class="updates_results_list">
+                <ul id="show_missed_calls">
+                </ul>
+            </div>
+        </div>
+        <div id="updates_contacts" class="updates_results" style="display: none;">
+            <div class="dashboard_view">back</div><div id="title_contacts"></div>
+            <div class="updates_results_list">
+                <ul id="show_contacts">
+                </ul>
+            </div>
+        </div>
+        <div id="updates_contact_interests" class="updates_results" style="display: none;">
+            <div class="dashboard_view">back</div><div id="title_contact_interests"></div>
+            <div class="updates_results_list">
+                <ul id="show_contact_interests">
+                </ul>
+            </div>
+        </div>
+        <div id="updates_interests" class="updates_results" style="display: none;">
+            <div class="dashboard_view">back</div><div id="title_interests"></div>
+            <div class="updates_results_list">
+                <ul id="show_interests">
+                </ul>
+            </div>
+        </div> 
+        <div id="pagination_home" style="display: none;">
+            <div class="pagination_home" id="updates_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+            <div id="home_current_page"></div>
+            <div class="pagination_home" id="updates_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
+        </div>
         
-        </div>
-        <div id="profile_save">
-            <form id="profile_crop_form" action="actions/profileCrop.php" method="POST">       
-                <input type="hidden" name="x1" value="" />
-                <input type="hidden" name="y1" value="" />
-                <input type="hidden" name="x2" value="" />
-                <input type="hidden" name="y2" value="" />
-                <input type="hidden" name="w" value="" />
-                <input type="hidden" name="h" value="" />
-                <input type="hidden" name="cropFile" value="" />
-                <br />
-                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+        <input type="hidden" name="offset" value="0" />
+        <input type="hidden" name="interest_id" value="" />
+        <div id="upload_profile_area" style="display: none;">
+            <p>Select a photo for your profile picture:</p>
+            <form id="profile_upload_form" action="actions/uploadProfilePicture.php" method="post" enctype="multipart/form-data">
+                <input class="text_form" type="file" name="file" id="file" style="width: 430px;" /><br />
+                <input class="buttons" id="profile_pic_upload" type="submit" name="filename" value="Upload">
+                <div class="error_text" id="profile_upload_error"></div>
+                <div class="success_text" id="profile_upload_success" style="display: none;"></div>
+                <img id="tile_loading" style="display: none;" src="images/global/loading.gif" />
             </form>
-            <div class="error_text profile_crop_error"></div>
         </div>
-    </div>
-    <div id="crop_profile_thumbnail" style="display: none;">
-    	<div id="profile_crop_instruction">Now click and drag again to create your profile thumbnail.</div>
-        <div id="profile_post_crop">
-            <img class="post_crop_pic" />
-        </div>
-        <div id="profile_thumbnail_preview_area">
-        	<font>Profile Thumbnail</font>
-            <div id="profile_thumbnail_preview">
-                <img />
+        <div id="crop_profile_pic" style="display: none;">
+            <div id="profile_crop_instruction">Click and drag on the image below to create your profile picture.</div>
+            <div id="profile_original_photo">
+                <img class="profile_pic" />
+            </div>
+            <div id="profile_preview_area">
+                <font>Profile Photo Preview</font>
+                <div id="profile_preview">
+                    <img />
+                </div>
+            
+            </div>
+            <div id="profile_save">
+                <form id="profile_crop_form" action="actions/profileCrop.php" method="POST">       
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="x2" value="" />
+                    <input type="hidden" name="y2" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
+                    <input type="hidden" name="cropFile" value="" />
+                    <br />
+                    <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+                </form>
+                <div class="error_text profile_crop_error"></div>
             </div>
         </div>
-        <div id="profile_save">
-            <form id="profile_thumbnail_form" action="actions/profileCropThumbnail.php" method="POST">       
-                <input type="hidden" name="x1" value="" />
-                <input type="hidden" name="y1" value="" />
-                <input type="hidden" name="x2" value="" />
-                <input type="hidden" name="y2" value="" />
-                <input type="hidden" name="w" value="" />
-                <input type="hidden" name="h" value="" />
-                <input type="hidden" name="cropFile" value="" />
-                <br />
-                <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
-            </form>
-            <div class="error_text profile_crop_error"></div>
+        <div id="crop_profile_thumbnail" style="display: none;">
+            <div id="profile_crop_instruction">Now click and drag again to create your profile thumbnail.</div>
+            <div id="profile_post_crop">
+                <img class="post_crop_pic" />
+            </div>
+            <div id="profile_thumbnail_preview_area">
+                <font>Profile Thumbnail</font>
+                <div id="profile_thumbnail_preview">
+                    <img />
+                </div>
+            </div>
+            <div id="profile_save">
+                <form id="profile_thumbnail_form" action="actions/profileCropThumbnail.php" method="POST">       
+                    <input type="hidden" name="x1" value="" />
+                    <input type="hidden" name="y1" value="" />
+                    <input type="hidden" name="x2" value="" />
+                    <input type="hidden" name="y2" value="" />
+                    <input type="hidden" name="w" value="" />
+                    <input type="hidden" name="h" value="" />
+                    <input type="hidden" name="cropFile" value="" />
+                    <br />
+                    <input type="submit" id="crop_save" class="buttons save" name="submit" value="Save" /><input class="buttons cancel" type="button" name="cancel" value="Cancel" onclick="location.href='canvas.php?page=home'"/>
+                </form>
+                <div class="error_text profile_crop_error"></div>
+            </div>
         </div>
     </div>
 </div>
