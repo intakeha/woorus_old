@@ -998,50 +998,36 @@ div#tile_bank_message {
 	overflow: hidden;
 }
 
+#wall_display { // set drop area for wall tile display
+	width: 486px;
+	height: 486px;
+}
+
 #tile_display li, #wall_display li {
-	float:left; 
+	float: left;
 	width:75px; 
 	height:75px;
 	text-align: center;
 	margin: 3px;
+	cursor: pointer;
+	cursor: hand;
 }
 
 li.uploaded {
-	border: 3px solid #4980B7;
 	background-color: #4980B7;
 }
 
 li.sponsored {
-	border: 3px solid #C00;
 	background-color: #C00;
 }
 
 li.community {
-	border: 3px solid #666;
-	background-color: #666;
-}
-
-li.uploaded_wall {
-	background-color: #4980B7;
-}
-
-li.sponsored_wall {
-	background-color: #C00;
-}
-
-li.community_wall {
 	background-color: #666;
 }
 
 li.tile_tag {
 	color: #fff;
 	font-size: 12px;
-}
-
-li.tile_tag_mosaic {
-	color: #fff;
-	font-size: 12px;
-	cursor: move; 
 }
 
 img.transparent_tile {
