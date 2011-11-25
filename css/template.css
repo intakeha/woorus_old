@@ -490,7 +490,7 @@ img.btn_close {
 }
 
 #updates_right div {
-    margin-top: 22px;
+	float: right;
 }
 
 #updates_left {
@@ -499,7 +499,10 @@ img.btn_close {
 
 #updates_left div {
     float: right;
-    margin-top: 22px;
+}
+
+.updates_next_prev {
+	margin-top: 22px;
 }
 
 #updates {
@@ -1690,6 +1693,7 @@ div.lounge_transparent_tag {
 	padding: 10px;
 	overflow-y: auto;
 	overflow-x: hidden;
+	resize: none;
 }
 
 #reply_button {

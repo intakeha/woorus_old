@@ -62,9 +62,9 @@
             </div>
         </div> 
         <div id="pagination_home" style="display: none;">
-            <div class="pagination_home" id="updates_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+            <div class="pagination_home" id="updates_left"><div class="updates_next_prev">Prev</div><div class="arrows pagination_left" href="#"></div></div>
             <div id="home_current_page"></div>
-            <div class="pagination_home" id="updates_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
+            <div class="pagination_home" id="updates_right"><div class="arrows pagination_right float_right" href="#"></div><div class="updates_next_prev">Next</div></div>
         </div>
         
         <input type="hidden" name="offset" value="0" />

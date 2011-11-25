@@ -10,10 +10,10 @@
             </div>
         </div>
         <div id="contact_results">
-            <div class="pagination_contacts"><a id="contact_left" class="arrows pagination_left"></a></div>
+            <div class="pagination_contacts"><div id="contact_left" class="arrows pagination_left"></div></div>
             <ul id="contact_mosaic">			
             </ul>
-            <div class="pagination_contacts"><a id="contact_right" class="arrows pagination_right"></a></div>
+            <div class="pagination_contacts"><div id="contact_right" class="arrows pagination_right"></div></div>
             <div id="contact_legend">
                 <div class="online"><span class="legend_squares" id="greenSquare"></span>Online</div>
                 <div class="away"><span class="legend_squares" id="orangeSquare"></span>Away</div>
@@ -102,31 +102,31 @@
 								$("#contact_right").show();
 							} else {
 								$("#contact_right").hide();
-							}
+							};
 							if (currentPage > 1) {
 								$("#contact_left").show();
 							} else {
 								$("#contact_left").hide();
-							}
+							};
 						} else {
 							var statusText = "Offline", statusClass = "contact_offline";
 							switch (field.online_status){
 								case "online":
-									statusText = "Online"
-									statusClass = "contact_online"
-									break
+									statusText = "Online";
+									statusClass = "contact_online";
+									break;
 								case "offline":
-									statusText = "Offline"
-									statusClass = "contact_offline"
-									break
+									statusText = "Offline";
+									statusClass = "contact_offline";
+									break;
 								case "away":
-									statusText = "Away"
-									statusClass = "contact_away"
+									statusText = "Away";
+									statusClass = "contact_away";
 									break
 								case "busy":
-									statusText = "Busy"
-									statusClass = "contact_busy"
-									break
+									statusText = "Busy";
+									statusClass = "contact_busy";
+									break;
 							};
 							if (field.profile_filename_small){	
 								profilePic = "images/users/small/"+field.profile_filename_small;			

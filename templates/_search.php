@@ -11,7 +11,7 @@
             </div>
         </div>
         <div id="search_results" style="display: none;">
-            <div class="pagination_search"><a id="search_left" class="arrows pagination_left"></a></div>
+            <div class="pagination_search"><div id="search_left" class="arrows pagination_left"></div></div>
             <div class="result_column center_column">
                 <ul id="result_entries_left">
                 </ul>
@@ -20,7 +20,7 @@
                 <ul id="result_entries_right">
                 </ul>
             </div>
-            <div class="pagination_search"><a id="search_right" class="arrows pagination_right"></a></div>
+            <div class="pagination_search"><div id="search_right" class="arrows pagination_right"></div></div>
         </div>
     </div>
 </div>
@@ -58,47 +58,7 @@
 				$('input[name=offset]').val(0);
 				search_term = $('input[name=user_search]').val();
 				$('input[name=user_search]').val(decodeHTML(search_term));
-				$.post(
-					"actions/userSearch.php",
-					$('#search_form').serialize(),
-					function(data){
-						searchReset();
-						if (data.success == 0){
-							$("#search_error").html(data.message);
-						} else {
-							showResults();
-							$.each(data, function(i, field){
-								var resultEntryCSS = "result_entry";
-								switch (i){
-									case 0:
-										var userSearchPages = Math.ceil(field.user_count/10);
-										if (userSearchPages > 1){
-											$('#search_right').show();
-										}
-										break
-									case 1:
-										resultEntryCSS = "result_entry_first"
-										break
-									case 6:
-										resultEntryCSS = "result_entry_first"
-										break										
-								};
-								if (i > 0){
-									if (field.profile_filename_small){	
-										profilePic = "images/users/small/"+field.profile_filename_small;			
-									} else { 
-										profilePic = "images/global/silhouette_sm.png";
-									}
-									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}
-								}									
-							});
-						}
-					}, "json"
-				);
+				userSearch();
 			}
 		});
 		
@@ -114,47 +74,7 @@
 			},
 			submitHandler: function(form) {
 				$('input[name=offset]').val(0);
-				$.post(
-					"actions/userSearch.php",
-					$('#search_form').serialize(),
-					function(data){
-						searchReset();
-						if (data.success == 0){
-							$("#search_error").html(data.message);
-						} else {
-							showResults();
-							$.each(data, function(i, field){
-								var resultEntryCSS = "result_entry";
-								switch (i){
-									case 0:
-										var userSearchPages = Math.ceil(field.user_count/10);
-										if (userSearchPages > 1){
-											$('#search_right').show();
-										}
-										break
-									case 1:
-										resultEntryCSS = "result_entry_first"
-										break
-									case 6:
-										resultEntryCSS = "result_entry_first"
-										break
-								};
-								if (i > 0){
-									if (field.profile_filename_small){	
-										profilePic = "images/users/small/"+field.profile_filename_small;			
-									} else { 
-										profilePic = "images/global/silhouette_sm.png";
-									}
-									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}
-								}
-							});
-						}
-					}, "json"
-				);
+				userSearch();
 			},
 			errorPlacement: function(error, element) {
 				// Override error placement to not show error messages beside elements //
@@ -168,14 +88,14 @@
 			},
 			messages: {
 				user_search: {			
-					required: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.",
-					minlength: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge.",
-					maxlength: "We found no matches for your interest. Please search by a new interest or meet someone in the lounge."
+					required: "We did not find any matches for your search. Please try another interest or meet someone in the lounge.",
+					minlength: "We did not find any matches for your search. Please try another interest or meet someone in the lounge.",
+					maxlength: "We did not find any matches for your search. Please try another interest or meet someone in the lounge."
 				}
 			}
 		});
 		
-		// Clear error messages upon blur on search field
+		// Clear error messages upon blur in the search field
 		$("#user_search_field").blur(function() {
 			$("#search_error").html('');
 		});
@@ -186,51 +106,7 @@
 			var nextOffset = parseInt(currentOffset)+10;
 			$('input[name=offset]').val(nextOffset);
 			if($("#search_form").valid()) { 
-				$.post(
-					"actions/userSearch.php",
-					$('#search_form').serialize(),
-					function(data){
-						searchReset();
-						if (data.success == 0){
-							$("#search_error").html(data.message);
-						} else {
-							showResults();
-							$.each(data, function(i, field){
-								var resultEntryCSS = "result_entry";
-								switch (i){
-									case 0:
-										var userSearchPages = Math.ceil(field.user_count/10);
-										var offsetPage = ((nextOffset)/10)+1;
-										if (offsetPage == userSearchPages){
-											$('#search_right').hide();
-										}
-										if (nextOffset > 0){
-											$('#search_left').show();
-										}
-										break
-									case 1:
-										resultEntryCSS = "result_entry_first"
-										break
-									case 6:
-										resultEntryCSS = "result_entry_first"
-										break
-								};
-								if (i > 0){
-									if (field.profile_filename_small){	
-										profilePic = "images/users/small/"+field.profile_filename_small;			
-									} else { 
-										profilePic = "images/global/silhouette_sm.png";
-									}
-									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}
-								}
-							});
-						}
-					}, "json"
-				);
+				userSearch();
 			}
 		});
 		
@@ -240,68 +116,89 @@
 			var prevOffset = parseInt(currentOffset)-10;
 			$('input[name=offset]').val(prevOffset);
 			if($("#search_form").valid()) { 
-				$.post(
-					"actions/userSearch.php",
-					$('#search_form').serialize(),
-					function(data){
-						searchReset();
-						if (data.success == 0){
-							$("#search_error").html(data.message);
-						} else {
-							showResults();
-							$.each(data, function(i, field){
-								var resultEntryCSS = "result_entry";
-								switch (i){
-									case 0:
-										var userSearchPages = Math.ceil(field.user_count/10);
-										var offsetPage = ((prevOffset)/10)+1;
-										if (offsetPage < userSearchPages){
-											$('#search_right').show();
-										}
-										if (prevOffset == 0){
-											$('#search_left').hide();
-										}
-										break
-									case 1:
-										resultEntryCSS = "result_entry_first"
-										break
-									case 6:
-										resultEntryCSS = "result_entry_first"
-										break
-								};
-								if (i > 0){
-									if (field.profile_filename_small){	
-										profilePic = "images/users/small/"+field.profile_filename_small;			
-									} else { 
-										profilePic = "images/global/silhouette_sm.png";
-									}
-									if (i < 6) {
-										$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}else{
-										$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'online_status_sm\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
-									}
-								}
-							});
-						}
-					}, "json"
-				);
+				userSearch();
 			}
 		});
 		
+		function userSearch(){
+			$.post(
+				"actions/userSearch.php",
+				$('#search_form').serialize(),
+				function(data){
+					searchReset();
+					if (data.success == 0){
+						$("#search_error").html(data.message);
+					} else {
+						showResults();
+						$.each(data, function(i, field){
+							var resultEntryCSS = "result_entry";
+							switch (i){
+								case 0:
+									var userSearchPages = Math.ceil(field.user_count/10);
+									var currentOffset = $('input[name=offset]').val();
+									var currentPage = (currentOffset/10)+1;
+									if (currentPage < userSearchPages) {
+										$("#search_right").show();
+									} else {
+										$("#search_right").hide();
+									};
+									if (currentPage > 1) {
+										$("#search_left").show();
+									} else {
+										$("#search_left").hide();
+									};
+									break;
+								case 1:
+									resultEntryCSS = "result_entry_first";
+									break;
+								case 6:
+									resultEntryCSS = "result_entry_first";
+									break;
+							};
+							if (i > 0){
+								if (field.profile_filename_small){	
+									profilePic = "images/users/small/"+field.profile_filename_small;			
+								} else { 
+									profilePic = "images/global/silhouette_sm.png";
+								};
+								switch (field.online_status){
+									case "online":
+										onlineStatus = "online_status_sm";
+										break;
+									case "offline":
+										onlineStatus = "online_status_sm offline_status_sm";
+										break;
+									case "away":
+										onlineStatus = "online_status_sm away_status_sm";
+										break;
+									case "busy":
+										onlineStatus = "online_status_sm busy_status_sm";
+										break;
+								};
+								if (i < 6) {
+									$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+								}else{
+									$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'#\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'#\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'#\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+								};
+							};
+						});
+					}
+				}, "json"
+			);
+		};
+		
 		function searchReset(){
-			$('#search_left').hide();
-			$('#search_right').hide();
+			$('#search_left, #search_right').hide();
 			$("#search_error").html('');
-			$('#result_entries_left').empty();
-			$('#result_entries_right').empty();
-		}
+			$('#result_entries_left, #result_entries_right').empty();
+		};
 		
 		function showResults(){
 			$('#search_container').css('background','');
 			$('#search_slide').hide();
 			$('#search').css('background','none');
 			$('#search_results').show();
-		}
+		};
 			
 	});
 </script>
