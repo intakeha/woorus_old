@@ -67,7 +67,7 @@
 			var currentOffset = $('input[name=offset]').val();
 			var nextOffset = parseInt(currentOffset)+20;
 			$('input[name=offset]').val(nextOffset);
-			$('#contact_mosaic').empty();
+			$("#contact_left, #contact_right").hide();
 			showContacts();
 		});
 		
@@ -76,14 +76,13 @@
 			var currentOffset = $('input[name=offset]').val();
 			var prevOffset = parseInt(currentOffset)-20;
 			$('input[name=offset]').val(prevOffset);
-			$('#contact_mosaic').empty();
+			$("#contact_left, #contact_right").hide();
 			showContacts();
 		});
 		
 		$("#csearch_form").submit(function(event) {
 			event.preventDefault();
 			$('input[name=offset]').val(0);
-			$('#contact_mosaic').empty();
 			showContacts();
 		});
 		

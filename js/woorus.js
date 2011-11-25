@@ -881,6 +881,13 @@ $(document).ready(function(){
 						$('#tile_crop').hide();
 						$('#tiles, #mosaic_wall').show();
 						$('#tile_upload_error').hide();
+						// Reset all crop values
+						$('input[name=x1]').val('');
+						$('input[name=y1]').val('');
+						$('input[name=x2]').val('');
+						$('input[name=y2]').val(''); 
+						$('input[name=w]').val('');
+						$('input[name=h]').val('');
 						switch (data.tile_type){
 							case "S":
 								tile_type = "sponsored"
@@ -933,7 +940,7 @@ $(document).ready(function(){
 	});	
 	
 	// Idle timeout is in milliseconds (defaults to 30000)
-	$(document).idleTimer(300000);
+	$(document).idleTimer(60000);
 	
 	$(document).bind("idle.idleTimer", function(){
 		 // post when the user goes idle
