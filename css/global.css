@@ -292,7 +292,7 @@ div.clear {
 
 /*	Pagination */
 
-a.arrows {
+div.arrows {
 	display: block;
 	width: 70px;
 	height: 60px;
@@ -415,7 +415,7 @@ a.arrows {
 }
 
 .ac_loading {
-	background: white url('indicator.gif') right center no-repeat;
+	background: white url('../images/global/loading_sm.gif') right center no-repeat;
 }
 
 .ac_odd {

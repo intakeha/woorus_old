@@ -111,7 +111,7 @@ $(document).ready(function(){
 		}
 	});	
 	
-	// Show invite to guest list panel
+	// Show panel for invited guests to enter invite code
 	$("#guestlist").click(function() {
 		$("#get_invite").show();
 		$("#enter_code").hide();
@@ -786,7 +786,7 @@ $(document).ready(function(){
 		$("#city_id").val(item.city_id);
 	});
 	
-	// Upload picture file for tile crop
+	// Upload picture file for tile crop on mosaic wall
 	$('#tile_pic_upload').click(function(){
 		$("#tile_loading")
 		.ajaxStart(function(){
@@ -809,8 +809,9 @@ $(document).ready(function(){
 					$('#tile_upload_error').show();
 					$('#tile_upload_error').html(data.message); 
 				} else {
+					$('input[id=file]').val('');
 					$('.pagination_mosaic').hide();
-					$('#tiles').hide();
+					$('#tiles, #mosaic_wall').hide();
 					$('#tile_crop').show();
 					$('input[name=assign_tag]').val('');
 					$('.tile_pic').attr('src','images/temporary/'+data.message);
@@ -878,8 +879,7 @@ $(document).ready(function(){
 						$('#tile_display').empty();
 						$('#crop_error').empty();
 						$('#tile_crop').hide();
-						$('.pagination_mosaic').show();
-						$('#tiles').show();
+						$('#tiles, #mosaic_wall').show();
 						$('#tile_upload_error').hide();
 						switch (data.tile_type){
 							case "S":
@@ -892,9 +892,9 @@ $(document).ready(function(){
 								tile_type = "community"
 								break
 						};
-						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\')\" ><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+						$('#tile_display').append("<li class=\'"+tile_type+" tile_tag\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\' onclick=\"addToWall(\'"+data.tile_id+"\',\'"+data.interest_id+"\',\'"+tile_type+"\')\" ><img src=\'images/interests/"+data.tile_filename+"\'></li>");
 						if ($('#wall_display li').length < 36){
-							$('#wall_display').append("<li class=\'community_wall tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
+							$('#wall_display').append("<li class=\'"+tile_type+" tile_tag\' id=\'"+data.tile_id+"\' onmouseover=\"showInterest($(this), \'"+data.interest_name+"\')\" onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+data.tile_filename+"\'></li>");
 							$('.tile_sort').sortable( "refresh" );		
 						}else{
 							$('#tile_upload_error').show().html('Your wall is full. Your tile has been placed in the tile bank.');

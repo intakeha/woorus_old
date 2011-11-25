@@ -8,9 +8,9 @@
             <ul id="messages">
             </ul>
             <div>
-                <div class="pagination_mail" id="mail_left"><div>Prev</div><a class="arrows pagination_left" href="#"></a></div>
+                <div class="pagination_mail" id="mail_left"><div class="mail_next_prev">Prev</div><div class="arrows pagination_left"></div></div>
                 <div id="mail_current_page"></div>
-                <div class="pagination_mail" id="mail_right"><a class="arrows pagination_right float_right" href="#"></a><div>Next</div></div>
+                <div class="pagination_mail" id="mail_right"><div class="arrows pagination_right float_right"></div><div class="mail_next_prev">Next</div></div>
             </div>
         </div>
         <div id="message_panel">
@@ -36,12 +36,16 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
-		
-		// Remove pagination arrows
-		$('.pagination_mail').hide();
-		$('input[name=offset]').val('0');
-		$('#mail_current_page').empty();
+		// Initialize inbox
+		mailboxReset();
 		showMailbox();
+
+		//Remove pagination arrows and reset offset
+		function mailboxReset(){
+			$('.pagination_mail').hide();
+			$('input[name=offset]').val('0');
+			$('#mail_current_page').empty();
+		}
 
 		// Load mailbox
 		function showMailbox(){
@@ -59,23 +63,26 @@
 								} else {
 									$('#messages').append('<li><img src="images/global/mailbox_empty.png" id="empty_mailbox"><div id="top_message" class="no_messages">There are no messages in your sent mail.</div></li>');
 								}
-							}
-							var mailPages = Math.ceil(field.message_count/5);	
-							var currentOffset = $('input[name=offset]').val();
-							var currentPage = (currentOffset/5)+1;
-							if (mailPages > 1){
-								$('#mail_current_page').empty().append('Page '+currentPage+' of '+mailPages)
-							}
-							if (currentPage < mailPages) {
-								$("#mail_right").show();
 							} else {
-								$("#mail_right").hide();
-							}
-							if (currentPage > 1) {
-								$("#mail_left").show();
-							} else {
-								$("#mail_left").hide();
-							}
+								var mailPages = Math.ceil(field.message_count/5);	
+								var currentOffset = $('input[name=offset]').val();
+								var currentPage = (currentOffset/5)+1;
+								if (mailPages > 1){
+									$('#mail_current_page').empty().append('Page '+currentPage+' of '+mailPages);
+								} else {
+									$('#mail_current_page').empty();
+								};
+								if (currentPage < mailPages) {
+									$("#mail_right").show();
+								} else {
+									$("#mail_right").hide();
+								};
+								if (currentPage > 1) {
+									$("#mail_left").show();
+								} else {
+									$("#mail_left").hide();
+								};
+							};
 						}else{
 							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
 							if (field.profile_filename_small){	
@@ -101,6 +108,7 @@
 			$('input[name=inbox_or_sent]').val('inbox');
 			$('#inbox').removeClass();
 			$('#sent').addClass('sent_0');
+			mailboxReset();
 			showMailbox();
 		});
 		
@@ -109,6 +117,7 @@
 			$('input[name=inbox_or_sent]').val('sent');
 			$('#sent').removeClass();
 			$('#inbox').addClass('inbox_0');
+			mailboxReset();
 			showMailbox();
 		});
 		
@@ -215,6 +224,10 @@
 				url: "actions/deleteMessage.php",
 				data: "message_id="+event.target.id+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val(),
 				success: function(){
+					if ( $('#messages li').length == 1 ){	
+						currentOffset = $('input[name=offset]').val();
+						$('input[name=offset]').val(currentOffset-5);
+					};
 					showMailbox();
 				}
 			 });
@@ -245,7 +258,6 @@
 							$('#reply_error').addClass('success_text').append(data.message);
 							$('#message_reply_form').hide();
 						}
-							
 					}, "json"
 				);
 			},

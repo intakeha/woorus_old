@@ -779,16 +779,43 @@ li.forgot_title {
 
 /* Mosaic Page */
 #mosaic {
-	width: 1150px;
+	width: 960px;
 	height:	642px;
 	margin: 50px auto 0px;
 }
 
+#pagination_mosaic {
+	height: 60px;
+}
+
 .pagination_mosaic {
-	width: 70px;
-	height: 280px;
+	width: 105px;
+	font-size: 16px;
+	color: #99B8D7;
+	font-weight: bold;
+	cursor: pointer; 
+	cursor: hand; 
+}
+
+.pagination_mosaic:hover {
+	color: #215086;
+}
+
+#mosaic_left {
 	float: left;
-	padding-top: 200px;
+}
+
+#mosaic_left div {
+	float: right;
+}
+
+#mosaic_right {
+	float: right;
+	margin-right: 25px;
+}
+
+.mosaic_next_prev {
+	margin-top: 22px;
 }
 
 #tiles {
@@ -881,7 +908,7 @@ div#tile_bank_message {
 }
 
 #tiles_bank {
-	height: 280px;
+	height: 245px;
 	margin-top: 40px;
 	overflow: hidden;
 }
@@ -932,17 +959,23 @@ div#tile_bank_message {
 	margin-top: 10px;
 }
 
-#tile_crop {
-	width: 575px;
-	height: 520px;
+#crop_panel {
+    width: 500px;
+    height: 450px;
 	float: left;
-	font-size: 18px;
-	color: #215086;
-	text-align: left;
+}
+
+#tile_crop {
+    color: #215086;
+    float: left;
+    font-size: 18px;
+    height: 520px;
+    text-align: left;
+    width: 960px;
 }
 
 #tile_crop_instruction {
-	margin: 2px 0px 20px;
+	margin: 10px 0px 20px;
 }
 
 #tile_original_photo{
@@ -968,7 +1001,12 @@ div#tile_bank_message {
 }
 
 #tag_tile {
-	margin-top: 10px;
+	float: left;
+    font-size: 12px;
+    font-weight: bold;
+    height: 200px;
+    margin-left: 50px;
+    width: 300px;
 }
 
 #crop_error {
@@ -1045,15 +1083,16 @@ div.transparent_tag {
 }
 
 #wall_trash{
-	width: 50px;
-	padding-top: 470px;
-	margin-left: 5px;
-	float: left;
+    border: 1px solid #CCCCCC;
+    float: left;
+    margin-top: 10px;
+    width: 492px;
 }
 
 #remove_tile { 
-	width: 50px;
+	width: 470px;
     height: 50px;
+    margin: 10px;
     overflow: hidden;
 	background: url(../images/global/trash.png) no-repeat;
 }
@@ -1577,14 +1616,13 @@ div.lounge_transparent_tag {
 
 #mail_left div {
 	float: right;
-	margin-top: 22px;
 }
 
 #mail_right {
 	float: right;
 }
 
-#mail_right div {
+.mail_next_prev {
 	margin-top: 22px;
 }
 
