@@ -95,6 +95,7 @@
 		?>
 	</div>
     <script type="text/javascript">
+		
 /*		$(document).ready(function(){	
 			alert("Javascript Still works");		
 			// Update initial status as active

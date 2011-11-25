@@ -163,7 +163,7 @@
 			// Show missed call information on the feed panel
 			$('#anchor_missed_calls').find('p').append(result.call_count);
 			if (result.call_count == 0) {
-				$('#list_missed_calls').append('<h1>Yay! No missed calls.</h1>')
+				$('#list_missed_calls').append('<h1>Woohoo! No missed calls.</h1>')
 			} else {
 				$('#anchor_missed_calls').click(function(){
 					$('#updates').hide();
@@ -548,7 +548,7 @@
 								{source = "images/users/small/"+field.profile_filename_small}
 							else {
 								source = "images/global/silhouette_sm.png";}
-							$('#show_interests').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');	
+							$('#show_interests').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a class="external_page" href="canvas.php?page=external&eid='+field.user_id+'"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');	
 						}
 					})
 				}, "json"

@@ -1,4 +1,5 @@
 <script type="text/javascript" src="js/ajaxfileupload.js"></script>
+<?php $externalID = $_GET['eid']; ?>
 <div id="eprofile_container" class="fluid">
     <div id="eprofile">
         <div id="profile">
@@ -18,7 +19,6 @@
             <ul id="wall_display"></ul>
         
         </div>
-        <form id="externalID" action="actions/showExternalProfile.php" method="post"><input type="hidden" name="externalID" value="119" /></form>
     </div>
 </div>
 
@@ -27,7 +27,7 @@
 	$(document).ready(function(){
 		$.post(
 			"actions/showExternalProfile.php",
-			$('#externalID').serialize(),
+			{externalID: <?php echo $externalID ?>},
 			function(data){
 				$.each(data, function(i, field){
 					if (i == 0){				
@@ -42,7 +42,7 @@
 							$('#profile_name').find('span').append("Unknown");
 						}
 					} else {
-						$('#wall_display').append('<li onmouseup="hideInterest($(this))" onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), \''+field.interest_name+'\')"><img src="images/interests/'+field.tile_filename+'"></li>');
+						$('#wall_display').append("<li onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 					}
 				});
 			}, "json"

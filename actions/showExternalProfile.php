@@ -9,12 +9,9 @@ require_once('mosaicWallHelperFunctions.php');
 require_once('contactHelperFunctions.php');
 require_once('validations.php');
 
-//session_start();
-//$user_id = $_SESSION['id'];
-//$other_user_id  = validateUserId(strip_tags($_POST["externalID"])); 
-
-$user_id = 143;
-$other_user_id = 142;
+session_start();
+$user_id = $_SESSION['id'];
+$other_user_id  = validateUserId(strip_tags($_POST["externalID"])); 
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");

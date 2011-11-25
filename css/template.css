@@ -417,6 +417,7 @@ img.btn_close {
 	text-align: left;
 	line-height: 20px;
 	margin: 15px;
+	cursor: default;
 }
 
 #announcement {
@@ -554,12 +555,14 @@ img.btn_close {
     height: 55px;
     margin-left: 150px;
     padding: 15px 0 0 30px;
+	cursor: default;
 }
 
 #shared_interest h1 {
     border: none;
     margin: 10px 0;
     text-align: center;
+	cursor: default;
 }
 
 div.transparent_update {
