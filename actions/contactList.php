@@ -1,22 +1,24 @@
 <?php
 /*
-interestList.php
+contactList.php
 
 This is for the autopopulate function from the front end
-WIP--needs to look at the banned words.
 
 */
 
 require_once('connect.php');
 
-$q =  strtolower(strip_tags($_GET["q"])); //need to validate!!
+session_start();
+$user_id = $_SESSION['id'];
+
+$q =  strtolower(strip_tags($_GET["q"]));
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
 
-$name_query =  "SELECT contacts.id, users.first_name
+$name_query =  "SELECT users.id, users.first_name
 			FROM `contacts` 
 			LEFT JOIN `users` on users.id =contacts.user_contactee
 			WHERE contacts.user_contacter  =  ' ".mysql_real_escape_string($user_id)." ' AND contacts.active = 1 AND users.active_user = 1
