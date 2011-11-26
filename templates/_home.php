@@ -398,7 +398,7 @@
 							} else {
 								source = "images/global/silhouette_sm.png";
 							}
-							$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+							$('#show_missed_calls').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a class="external_page" href="canvas.php?page=external&eid='+field.user_id+'"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
 						}
 					})
 				},"json"
@@ -455,7 +455,7 @@
 								{source = "images/users/small/"+field.profile_filename_small}
 							else {
 								source = "images/global/silhouette_sm.png";}
-							$('#show_contacts').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
+							$('#show_contacts').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a class="external_page" href="canvas.php?page=external&eid='+field.user_id+'"><div class="contact_profile '+statusClass+'"><img src="'+source+'"/></div><div>'+field.first_name+'</div></a></li>');
 							
 						}
 					})

@@ -638,6 +638,8 @@ div.transparent_update {
 	height:75px;
 	text-align: center;
 	margin: 2px;
+	color: #4980B7 !important;
+	cursor: default;
 }
 
 #show_missed_calls a:hover, #show_contacts a:hover, #show_contact_interests a:hover, #show_interests a:hover{
@@ -1734,6 +1736,10 @@ div.lounge_transparent_tag {
     width: 486px;
 	float: left;
 	color: #215086;
+}
+
+#external_wall li{
+	cursor: default;
 }
 
 #actions {
