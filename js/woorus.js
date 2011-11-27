@@ -942,10 +942,11 @@ $(document).ready(function(){
 	// Update user_active time on mouse click
 	$(document).click(function() {
 	   $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
+	   $('#profile_online_status').removeClass('away_status');
 	});
 
 	// Idle timeout is in milliseconds (defaults to 30000)
-	$(document).idleTimer(300000);
+	$(document).idleTimer(60000);
 	
 	$(document).bind("idle.idleTimer", function(){
 		 // post when the user goes idle
