@@ -3,7 +3,7 @@
     <div id="iprofile">
         <div id="profile">
             <div id="profile_frame"></div><div id="profile_pic"><img></div>
-            <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br />Palo Alto, CA | United States</div>
+            <div id="profile_name"><div id="profile_online_status" class="online_status float_right"></div><span></span><br /></div>
             <a id="announcement" href="canvas.php?page=mosaic">
                     <div><span>Mosaic Wall</span><br>
                     Customize your mosaic wall and show the world who you are! Create custom tiles  
@@ -148,12 +148,30 @@
 				$('#profile_pic img').attr('src','images/users/large/'+result.profile_filename_large);			
 			} else { 
 				$('#profile_pic img').attr('src','images/global/silhouette.png');
-			}
+			};
 			if (result.first_name){	
-				$('#profile_name').find('span').append(result.first_name);		
+				firstName = decodeHTML(result.first_name);
+				$('#profile_name').find('span').append(firstName);		
 			} else { 
 				$('#profile_name').find('span').append("Unknown");
-			}
+			};
+			if (result.city_name){
+				city = decodeHTML(result.city_name);
+				$('#profile_name').find('br').after(city);
+			};	
+			if (result.online_status){
+				switch (result.online_status){
+					case "offline":
+						$('#profile_online_status').addClass("offline_status");
+						break
+					case "away":
+						$('#profile_online_status').addClass("away_status");
+						break
+					case "busy":
+						$('#profile_online_status').addClass("busy_status");
+						break
+				};
+			};
 		});
 		
 		// Get feed updates for the past week's activities

@@ -90,14 +90,17 @@
 		});	
 		
 		// Create sortable lists between tile bank and mosaic wall
-		$("#tile_display, #wall_display").sortable({
-			connectWith: ".wall_sort",
-			tolerance: "pointer",
-			containment: 'document',
+		$("#wall_display").sortable({
 			update: function(event, ui) {
 				var data = $('#wall_display').sortable('toArray').toString();
 				$.post('actions/moveTileOnWall.php', {tile_array: data}); 
 			}
+		}).disableSelection();
+
+		$("#tile_display").sortable({
+			connectWith: ".wall_sort",
+			tolerance: "pointer",
+			dropOnEmpty: true			
 		}).disableSelection();
 		
 		// Create sortable lists between mosaic wall and trash can
