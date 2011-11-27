@@ -26,7 +26,7 @@ $profile_query =  "SELECT users.first_name, users.social_status, users.block_sta
 
 $profile_query_result = mysql_query($profile_query, $connection) or die ("Error 1");
 
-//iterate through all users who have this interest on their wall
+//If user exist send associated data
 	if (mysql_num_rows($profile_query_result) > 0){
 		
 		
@@ -34,6 +34,7 @@ $profile_query_result = mysql_query($profile_query, $connection) or die ("Error 
 		// get /store data
 		$row = mysql_fetch_assoc($profile_query_result);
 		
+		// Get variables to determain online status
 		$session_set = $row['session_set'];
 		$on_call = $row['on_call'];
 		$user_active = $row['user_active'];
