@@ -204,7 +204,7 @@
 							statusClass = "online_status busy_status"
 							break
 					};
-					$('#mail_profile').append('<a class="search_profile" href="#"><img src="'+profilePic+'"></a><div id="message_user_info"><div class="social_status float_right"></div><div class="social_status warning_status float_right"></div>'+firstName+'<br /><span>'+data.sent_time+'</span><div id="message_online_status" class="'+statusClass+'"></div></div><div class="action_buttons"><a class="add_button_sm" href="#"></a><a class="write_button_sm" href="#"></a><a class="talk_button_sm" href="#"></a></div>');
+					$('#mail_profile').append('<a class="search_profile" href="canvas.php?page=external&eid='+data.other_user_id+'"><img src="'+profilePic+'"></a><div id="message_user_info"><div class="social_status float_right"></div><div class="social_status warning_status float_right"></div>'+firstName+'<br /><span>'+data.sent_time+'</span><div id="message_online_status" class="'+statusClass+'"></div></div><div class="action_buttons"><a class="add_button_sm" href="#"></a><a class="write_button_sm" href="#"></a><a class="talk_button_sm" href="#"></a></div>');
 					$('#message').append(data.message_text);
 				}
 			});

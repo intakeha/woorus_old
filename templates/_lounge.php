@@ -6,7 +6,7 @@
             <div id="lounge_profiles">
                 <div class="lounge_match">
                     <div class="lounge_info">
-                        <a href="#">
+                        <a class="lounge_external0" href="#">
                         <div class="lounge_photo">
                             <img id="photo_left">
                         </div></a>
@@ -17,7 +17,7 @@
                                     <div class="social_status warning_status float_right"></div>
                                 </div>						
                                 <div class="lounge_userInfo">
-                                    <a href="#"><span id="name0"></span></a>
+                                    <a class="lounge_external0" href="#"><span id="name0"></span></a>
                                     <div id="online_status" class="lounge_online"></div> 
                                 </div>
                             </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="lounge_match">
                     <div class="lounge_info">
-                        <a href="#">
+                        <a class="lounge_external1" href="#">
                         <div class="lounge_photo">
                             <img id="photo_right">
                         </div></a>
@@ -43,7 +43,7 @@
                                     <div class="social_status warning_status float_right"></div>
                                 </div>						
                                 <div class="lounge_userInfo">
-                                    <a href="#"><span id="name1"></span></a>
+                                    <a class="lounge_external1" href="#"><span id="name1"></span></a>
                                     <div id="online_status" class="lounge_online"></div> 
                                 </div>
                             </div>
@@ -84,34 +84,40 @@
 					$('#tile1').empty();
 					
 					// Left profile panel
+					if (data.profile[0].user_id){	
+						$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
+					};
 					if (data.profile[0].profile_filename_large){	
 						$('#photo_left').attr('src','images/users/large/'+data.profile[0].profile_filename_large);			
 					} else { 
 						$('#photo_left').attr('src','images/global/silhouette.png');
-					}
+					};
 					if (data.profile[0].first_name){	
 						$('#name0').html(data.profile[0].first_name);			
 					} else { 
 						$('#name0').html('Unknown');
-					}
+					};
 					for (i=0; i<data.tiles_count0; i++){
 						$('#tile0').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_0[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
-					}
+					};
 					
 					// Right profile panel
+					if (data.profile[1].user_id){	
+						$('.lounge_external1').attr('href','canvas.php?page=external&eid='+data.profile[1].user_id);			
+					};
 					if (data.profile[1].profile_filename_large){	
 						$('#photo_right').attr('src','images/users/large/'+data.profile[1].profile_filename_large);			
 					} else { 
 						$('#photo_right').attr('src','images/global/silhouette.png');
-					}
+					};
 					if (data.profile[1].first_name){	
 						$('#name1').html(data.profile[1].first_name);			
 					} else { 
 						$('#name1').html('Unknown');
-					}
+					};
 					for (i=0; i<data.tiles_count1; i++){
 						$('#tile1').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_1[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
-					}
+					};
 				}, "json"
 			);
 		}
