@@ -6,9 +6,9 @@
             <div id="external_profile_frame"></div><div id="profile_pic"><img></div>
             <div id="profile_name"><div id="eprofile_online_status" class="online_status float_right"></div><span></span><br /></div>
             <div id="actions">
-                <a class="talk_button" href="#"></a>
-                <a class="write_button" href="#"></a>
-                <a class="add_button" href="#"></a>
+                <div class="talk_button"></div>
+                <div class="write_button"></div>
+                <div class="add_button"></div>
             </div>
         </div>
         <div id="profile_social_status">
@@ -38,7 +38,7 @@
 						};
 						if (field.first_name){	
 							firstName = decodeHTML(field.first_name);
-							$('#profile_name').find('span').append(firstName);		
+							$('#profile_name').find('span').append(firstName);
 						} else { 
 							$('#profile_name').find('span').append("Unknown");
 						};
@@ -58,13 +58,31 @@
 									$('#eprofile_online_status').addClass("busy_status");
 									break
 							};
-						};				
+						};			
 					} else {
 						$('#wall_display').append("<li onmouseover=\'showInterest($(this), \""+field.interest_name+"\")\' onmouseout=\'hideInterest($(this))\' onmouseup=\'hideInterest($(this))\'><img src=\'images/interests/"+field.tile_filename+"\'></li>");
 					}
 				});
 			}, "json"
-		);		
+		);
+		
+		$('div.add_button').click(function() {
+			$.post(
+				"actions/addContact.php",
+				{user_id_contactee: <?php echo $externalID ?>},
+				function(data){
+					firstName = $('#profile_name').find('span').text();
+					if (data.success == 0){
+						$('#add_message').html('You have already added <span>'+firstName+'</span> to your contact list.');
+					};
+					if (data.success == 1){
+						$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');
+					};
+					modal('#modal_add','300','200');
+					return false;					
+				}, "json"
+			);
+		});
 	});
 		
 	function showInterest(obj, tag){

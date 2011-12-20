@@ -4,7 +4,7 @@
             <span>Welcome to the lounge</span>
             <p>We have selected several people that you might find interesting based on your mosaic wall. <br>Check out their profiles and start meeting new people from around the world!</p>
             <div id="lounge_profiles">
-                <div class="lounge_match">
+                <div id="lounge_col0" class="lounge_match" style="display: none;">
                     <div class="lounge_info">
                         <a class="lounge_external0" href="#">
                         <div class="lounge_photo">
@@ -30,7 +30,7 @@
                     </div>
                     <ul class="lounge_tiles" id="tile0"></ul>
                 </div>
-                <div class="lounge_match">
+                <div id="lounge_col1" class="lounge_match" style="display: none;">
                     <div class="lounge_info">
                         <a class="lounge_external1" href="#">
                         <div class="lounge_photo">
@@ -80,11 +80,11 @@
 				"actions/loungeSearch.php",
 				$('#loungeOffset').serialize(),
 				function(data){
-					$('#tile0').empty();
-					$('#tile1').empty();
+					$('#tile0, #tile1').empty();
 					
 					// Left profile panel
-					if (data.profile[0].user_id){	
+					if (data.profile[0].user_id){
+						$('#lounge_col0').show();
 						$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
 					};
 					if (data.profile[0].profile_filename_large){	
@@ -102,7 +102,8 @@
 					};
 					
 					// Right profile panel
-					if (data.profile[1].user_id){	
+					if (data.profile[1].user_id){
+						$('#lounge_col1').show();
 						$('.lounge_external1').attr('href','canvas.php?page=external&eid='+data.profile[1].user_id);			
 					};
 					if (data.profile[1].profile_filename_large){	

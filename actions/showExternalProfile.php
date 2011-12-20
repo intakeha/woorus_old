@@ -23,7 +23,7 @@ if ($user_blocked == 0){
 
 	$external_profile_array = array();
 	
-	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, city.city_name, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large 
+	$user_info_query = "SELECT  users.first_name, users.social_status, users.block_status, city.city_name, contacts.user_contactee, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large, profile_picture.profile_filename_small
 						FROM `users` 
 						LEFT OUTER JOIN `city` on users.user_city_id = city.id
 						LEFT OUTER JOIN `user_login` on  user_login.user_id = '".mysql_real_escape_string($other_user_id)."'
@@ -47,6 +47,7 @@ if ($user_blocked == 0){
 		
 		$external_profile_array[0]['first_name'] =  htmlentities($row['first_name'], ENT_QUOTES);
 		$external_profile_array[0]['profile_filename_large'] = $row['profile_filename_large'];
+		$external_profile_array[0]['profile_filename_small'] = $row['profile_filename_small'];
 		$external_profile_array[0]['social_status'] = $row['social_status'];
 		$external_profile_array[0]['block_status'] = $row['block_status'];
 		$external_profile_array[0]['city_name'] = htmlentities($row['city_name'], ENT_QUOTES);

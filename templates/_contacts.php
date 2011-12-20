@@ -97,6 +97,12 @@
 							var contactPages = Math.ceil(field.contact_count/20);	
 							var currentOffset = $('input[name=offset]').val();
 							var currentPage = (currentOffset/20)+1;
+							if (field.contact_count == 0) {
+								$('#contact_legend').hide();
+								$('#contact_mosaic').append('<div>Your contact list is currently empty.<br>When you start adding people, they will show up here.</div>')
+							} else {
+								$('#contact_legend').show();	
+							};
 							if (currentPage < contactPages) {
 								$("#contact_right").show();
 							} else {
@@ -133,7 +139,7 @@
 								profilePic = "images/global/silhouette_sm.png";
 							}
 							if (field.first_name){firstName = field.first_name} else {firstName = "Unknown"};
-							$('#contact_mosaic').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="#"><div class="contact_profile '+statusClass+'"><img src="'+profilePic+'"/></div><div>'+firstName+'</div></a></li>')
+							$('#contact_mosaic').append('<li onmouseover="showStatus($(this), \''+statusText+'\')" onmouseout="hideStatus($(this))"><a href="canvas.php?page=external&eid='+field.user_id+'"><div class="contact_profile '+statusClass+'"><img src="'+profilePic+'"/></div><div>'+firstName+'</div></a></li>')
 						}
 					});
 				}, "json"

@@ -1221,7 +1221,7 @@ div.transparent_tag {
 
 .online_status_sm a {
 	margin: 5px 0px 0px 22px;
-	padding-top: 2px;
+	padding-top: 4px;
 	display: block;
 	font-weight: bold;
 	width: 225px;
@@ -1268,6 +1268,11 @@ div.transparent_tag {
 	height: 125px;
 	cursor: pointer;
 	cursor: hand;
+}
+
+#contact_mosaic div {
+	font-size: 16px;
+	font-weight: bold;
 }
 
 .contact_profile {
@@ -1747,10 +1752,9 @@ div.lounge_transparent_tag {
 	margin-top: 10px;
 }
 
-#actions a {
+#actions div {
 	float: left;
 	margin-left: 45px;
+	cursor: pointer; 
+	cursor: hand; 
 }
-
-/* Chat Page */
-
