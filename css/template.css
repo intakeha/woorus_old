@@ -1212,6 +1212,11 @@ div.transparent_tag {
 	height: 50px;
 }
 
+.action_buttons div {
+	cursor: pointer; 
+	cursor: hand;
+}
+
 .pagination_search {
 	width: 70px;
 	height: 280px;

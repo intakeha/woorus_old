@@ -73,7 +73,7 @@
 				function(data){
 					firstName = $('#profile_name').find('span').text();
 					if (data.success == 0){
-						$('#add_message').html('You have already added <span>'+firstName+'</span> to your contact list.');
+						$('#add_message').html('You already added <span>'+firstName+'</span> to your contact list.');
 					};
 					if (data.success == 1){
 						$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');

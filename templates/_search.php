@@ -176,9 +176,9 @@
 										break;
 								};
 								if (i < 6) {
-									$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\'></div> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 								}else{
-									$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><a class=\'add_button_sm\' href=\'#\'></a> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\' title="+field.user_id+"></div> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
 								};
 							};
 						});
@@ -186,6 +186,25 @@
 				}, "json"
 			);
 		};
+
+		$('div.add_button_sm').live('click', function() {
+			contactID = $(this).parents('div:eq(1)').attr('id');
+			firstName = $(this).parents('div:eq(1)').find('div.online_status_sm a').text();
+			$.post(
+				"actions/addContact.php",
+				{user_id_contactee: contactID},
+				function(data){
+					if (data.success == 0){
+						$('#add_message').html('You already added <span>'+firstName+'</span> to your contact list.');
+					};
+					if (data.success == 1){
+						$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');
+					};
+					modal('#modal_add','300','200');
+					return false;					
+				}, "json"
+			);
+		});
 		
 		function searchReset(){
 			$('#search_left, #search_right').hide();
