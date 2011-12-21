@@ -22,7 +22,7 @@
                                 </div>
                             </div>
                             <div class="action_buttons">
-                                <a class="add_button_sm" href="#"></a>
+                                <div class="add_button_sm"></div>
                                 <a class="write_button_sm" href="#"></a>
                                 <a class="talk_button_sm" href="#"></a>
                             </div>
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="action_buttons">
-                                <a class="add_button_sm" href="#"></a>
+                                <div class="add_button_sm"></div>
                                 <a class="write_button_sm" href="#"></a>
                                 <a class="talk_button_sm" href="#"></a>
                             </div>
@@ -85,6 +85,7 @@
 					// Left profile panel
 					if (data.profile[0].user_id){
 						$('#lounge_col0').show();
+						$('#lounge_col0').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[0].user_id);
 						$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
 					};
 					if (data.profile[0].profile_filename_large){	
@@ -123,6 +124,25 @@
 			);
 		}
 		
+	});
+	
+	$('div.add_button_sm').live('click', function() {
+		contactID = $(this).parents('div:eq(1)').attr('id');
+		firstName = $(this).parents('div:eq(1)').find('div.lounge_userInfo span').text();
+		$.post(
+			"actions/addContact.php",
+			{user_id_contactee: contactID},
+			function(data){
+				if (data.success == 0){
+					$('#add_message').html('You already added <span>'+firstName+'</span> to your contact list.');
+				};
+				if (data.success == 1){
+					$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');
+				};
+				modal('#modal_add','300','200');
+				return false;					
+			}, "json"
+		);
 	});
 	
 	function showInterest(obj, tag){
