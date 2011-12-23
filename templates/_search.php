@@ -199,7 +199,7 @@
 			$('#modal_write_header').find('span').text(firstName);
 			$('#modal_write_header').find('p').html(city);
 			$('input[name=user_id_mailee]').val(contactID);
-			modal('#modal_write','400','100');
+			modal('#modal_write','400','200');
 		});
 
 		$('div.add_button_sm').live('click', function() {

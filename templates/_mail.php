@@ -204,7 +204,7 @@
 							statusClass = "online_status busy_status"
 							break
 					};
-					$('#mail_profile').append('<a class="search_profile" href="canvas.php?page=external&eid='+data.other_user_id+'"><img src="'+profilePic+'"></a><div id="message_user_info"><div class="social_status float_right"></div><div class="social_status warning_status float_right"></div>'+firstName+'<br /><span>'+data.sent_time+'</span><div id="message_online_status" class="'+statusClass+'"></div></div><div class="action_buttons"><a class="add_button_sm" href="#"></a><a class="write_button_sm" href="#"></a><a class="talk_button_sm" href="#"></a></div>');
+					$('#mail_profile').append('<a class="search_profile" href="canvas.php?page=external&eid='+data.other_user_id+'"><img src="'+profilePic+'"></a><div id="message_user_info"><div class="social_status float_right"></div><div class="social_status warning_status float_right"></div><p>'+firstName+'</p><span>'+data.sent_time+'</span><div id="message_online_status" class="'+statusClass+'"></div></div><div id="'+data.other_user_id+'" class="action_buttons"><div class="add_button_sm"></div><div class="talk_button_sm"></div></div>');
 					$('#message').append(data.message_text);
 				}
 			});
@@ -272,6 +272,25 @@
 				}
 			}
 		});
+	});
+	
+	$('div.add_button_sm').live('click', function() {
+		contactID = $(this).parents('div:eq(0)').attr('id');
+		firstName = $(this).parents('div:eq(1)').find('p').text();
+		$.post(
+			"actions/addContact.php",
+			{user_id_contactee: contactID},
+			function(data){
+				if (data.success == 0){
+					$('#add_message').html('You\'ve already added <span>'+firstName+'</span> to your contact list.');
+				};
+				if (data.success == 1){
+					$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');
+				};
+				modal('#modal_add','300','200');
+				return false;					
+			}, "json"
+		);
 	});
 		
 </script>

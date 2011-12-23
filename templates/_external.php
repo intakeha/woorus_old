@@ -50,6 +50,7 @@
 							$('#modal_write_header').find('span').text("Unknown");
 						};
 						if (field.city_name){
+							city = decodeHTML(field.city_name);
 							$('#profile_name').find('br').after(city);
 							$('#modal_write_header').find('p').text(city)
 						};		
@@ -76,7 +77,7 @@
 		$('div.write_button').click(function() {
 			clearModalMessages();
 			$('input[name=user_id_mailee]').val('<?php echo $externalID ?>');
-			modal('#modal_write','400','100');
+			modal('#modal_write','400','200');
 		});
 		
 		$('div.add_button').click(function() {
