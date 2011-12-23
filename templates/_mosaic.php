@@ -89,6 +89,21 @@
 			});
 		});	
 		
+		// Call imgAreaSelect to crop picture and associated coordinates
+		$('.tile_pic').imgAreaSelect({
+			handles: true,
+			aspectRatio: "1:1",
+			onSelectChange: previewTile,
+			onSelectEnd: function (img, selection) {				
+				$('input[name=x1]').val(selection.x1);
+				$('input[name=y1]').val(selection.y1);
+				$('input[name=x2]').val(selection.x2);
+				$('input[name=y2]').val(selection.y2); 
+				$('input[name=w]').val(selection.width);
+				$('input[name=h]').val(selection.height);
+			},
+		});
+		
 		// Create sortable lists between tile bank and mosaic wall
 		$("#wall_display").sortable({
 			update: function(event, ui) {

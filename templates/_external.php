@@ -50,9 +50,8 @@
 							$('#modal_write_header').find('span').text("Unknown");
 						};
 						if (field.city_name){
-							city = decodeHTML(field.city_name);
 							$('#profile_name').find('br').after(city);
-							$('#modal_write_header').find('br').after(city)
+							$('#modal_write_header').find('p').text(city)
 						};		
 						if (field.online_status){
 							switch (field.online_status){

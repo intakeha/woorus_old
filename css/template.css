@@ -43,6 +43,12 @@ img.btn_close {
 #modal_write_header {
 	text-align: left;
 }
+#modal_write_header span{
+	word-wrap: break-word; 
+	width: 268px;
+	display: block; 
+	float: left;
+}
 
 #modal_write_header img, #modal_write_to  {
 	float: left;

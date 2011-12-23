@@ -197,7 +197,7 @@
 
 			$('#modal_write').find('img').attr('src',profilePic);
 			$('#modal_write_header').find('span').text(firstName);
-			$('#modal_write_header').find('br').after(city);
+			$('#modal_write_header').find('p').html(city);
 			$('input[name=user_id_mailee]').val(contactID);
 			modal('#modal_write','400','100');
 		});

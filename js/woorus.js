@@ -826,37 +826,6 @@ $(document).ready(function(){
 		return false;
 	});
 	
-	// Call imgAreaSelect to crop picture and associated coordinates
-	$('.tile_pic').imgAreaSelect({
-		handles: true,
-		aspectRatio: "1:1",
-		onSelectChange: previewTile,
-		onSelectEnd: function (img, selection) {				
-			$('input[name=x1]').val(selection.x1);
-			$('input[name=y1]').val(selection.y1);
-			$('input[name=x2]').val(selection.x2);
-			$('input[name=y2]').val(selection.y2); 
-			$('input[name=w]').val(selection.width);
-			$('input[name=h]').val(selection.height);
-		},
-	});
-
-	// Function used by imgAreaSelect to preview thumbnail	
-	function previewTile(img, selection) {
-		if (!selection.width || !selection.height)
-		return;
-		
-		var scaleX = 75 / selection.width;
-		var scaleY = 75 / selection.height;
-		
-		$('#tile_preview img').css({
-		width: Math.round(scaleX*img.width),
-		height: Math.round(scaleY*img.height),
-		marginLeft: -Math.round(scaleX * selection.x1),
-		marginTop: -Math.round(scaleY * selection.y1)
-		});	
-	};
-	
 	// Validate Tile_Crop_Form and send data to backend
 	$("#tile_crop_form").validate({
 		onsubmit: true,
@@ -948,7 +917,7 @@ $(document).ready(function(){
 	});
 
 	// Idle timeout is in milliseconds (defaults to 30000)
-	$(document).idleTimer(60000);
+	$.idleTimer(60000);
 	
 	$(document).bind("idle.idleTimer", function(){
 		 // post when the user goes idle
@@ -1027,8 +996,25 @@ function modal(modalID, modalWidth, topMargin){
 
 };
 
+// Function to clear messages modal prior to loading receipient's info
 function clearModalMessages(){
 	$('#message_box, input[name=user_id_mailee]').val('');
 	$('#message_error').text('');
+};
+
+// Function used by imgAreaSelect to preview thumbnail	
+function previewTile(img, selection) {
+	if (!selection.width || !selection.height)
+	return;
+	
+	var scaleX = 75 / selection.width;
+	var scaleY = 75 / selection.height;
+	
+	$('#tile_preview img').css({
+	width: Math.round(scaleX*img.width),
+	height: Math.round(scaleY*img.height),
+	marginLeft: -Math.round(scaleX * selection.x1),
+	marginTop: -Math.round(scaleY * selection.y1)
+	});	
 };
 

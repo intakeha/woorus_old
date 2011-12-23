@@ -103,12 +103,12 @@
 						$('#profile_sm0').attr('src','images/global/silhouette_sm.png');
 					};
 					if (data.profile[0].first_name){
-						$('#name0').text(data.profile[0].first_name);			
+						$('#name0').html(data.profile[0].first_name);			
 					} else { 
 						$('#name0').text('Unknown');
 					};
 					if (data.profile[0].city_name){	
-						$('#city0').text(data.profile[0].city_name);
+						$('#city0').html(data.profile[0].city_name);
 					};
 					if (data.profile[0].online_status){
 						switch (data.profile[0].online_status){
@@ -150,7 +150,7 @@
 						$('#profile_sm1').attr('src','images/global/silhouette_sm.png');
 					};
 					if (data.profile[1].first_name){
-						$('#name1').text(data.profile[1].first_name);		
+						$('#name1').html(data.profile[1].first_name);		
 					} else { 
 						$('#name1').text('Unknown');
 					};
