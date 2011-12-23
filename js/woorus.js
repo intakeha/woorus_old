@@ -2,7 +2,7 @@
 $(document).ready(function(){
 	
 	//Close Popups and Fade Layer
-	$('a.close, #ok').live('click', function() {
+	$('a.close, #ok, #modal_cancel').live('click', function() {
 		$('#fade , .popup_block').fadeOut(function() {
 			$('#fade, a.close').remove();
 		});
@@ -1025,5 +1025,10 @@ function modal(modalID, modalWidth, topMargin){
 
 	return false;
 
+};
+
+function clearModalMessages(){
+	$('#message_box, input[name=user_id_mailee]').val('');
+	$('#message_error').text('');
 };
 

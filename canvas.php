@@ -4,6 +4,7 @@
     <title>Woorus - Connecting you to the world through interests</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
     <meta http-equiv="Content-language" content="en"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="keywords" content="video chats">
     <meta name="description" content="Connecting people through interests">
     <link href="css/woorus.css" rel="stylesheet" type="text/css">
@@ -24,7 +25,7 @@
 </head>
 <body>
 	<div class="globalContainer">
-    <div onclick="modal('#modal_add','300','200');" style="height: 10px;">Add to Contacts</div>
+    <div onclick="modal('#modal_write','400','100'); clearModalMessages();" style="height: 10px;">Add to Contacts</div>
 		<?php
 			include('templates/_modal.php');
 			include('templates/_header.php');

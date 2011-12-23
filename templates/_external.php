@@ -36,15 +36,23 @@
 						} else { 
 							$('#profile_pic img').attr('src','images/global/silhouette.png');
 						};
+						if (field.profile_filename_small){	
+							$('#modal_write').find('img').attr('src','images/users/small/'+field.profile_filename_small);			
+						} else { 
+							$('#modal_write').find('img').attr('src','images/global/silhouette_sm.png');
+						};
 						if (field.first_name){	
 							firstName = decodeHTML(field.first_name);
-							$('#profile_name').find('span').append(firstName);
+							$('#profile_name').find('span').text(firstName);
+							$('#modal_write_header').find('span').text(firstName);
 						} else { 
-							$('#profile_name').find('span').append("Unknown");
+							$('#profile_name').find('span').text("Unknown");
+							$('#modal_write_header').find('span').text("Unknown");
 						};
 						if (field.city_name){
 							city = decodeHTML(field.city_name);
 							$('#profile_name').find('br').after(city);
+							$('#modal_write_header').find('br').after(city)
 						};		
 						if (field.online_status){
 							switch (field.online_status){
@@ -66,6 +74,12 @@
 			}, "json"
 		);
 		
+		$('div.write_button').click(function() {
+			clearModalMessages();
+			$('input[name=user_id_mailee]').val('<?php echo $externalID ?>');
+			modal('#modal_write','400','100');
+		});
+		
 		$('div.add_button').click(function() {
 			$.post(
 				"actions/addContact.php",
@@ -73,7 +87,7 @@
 				function(data){
 					firstName = $('#profile_name').find('span').text();
 					if (data.success == 0){
-						$('#add_message').html('You already added <span>'+firstName+'</span> to your contact list.');
+						$('#add_message').html('You\'ve already added <span>'+firstName+'</span> to your contact list.');
 					};
 					if (data.success == 1){
 						$('#add_message').html('<span>'+firstName+'</span> has been added to your contact list.');
