@@ -224,11 +224,14 @@
 				url: "actions/deleteMessage.php",
 				data: "message_id="+event.target.id+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val(),
 				success: function(){
-					if ( $('#messages li').length == 1 ){	
+					if ( $('#messages li').length == 1 && $('input[name=offset]').val() > 0){
 						currentOffset = $('input[name=offset]').val();
 						$('input[name=offset]').val(currentOffset-5);
+						showMailbox();
+					} else {
+						showMailbox();	
 					};
-					showMailbox();
+					
 				}
 			 });
 		});
