@@ -20,7 +20,7 @@
                 <div id="response">
                     <form id="message_reply_form" action="../actions/sendMessage.php" method="POST">
                         <input type="hidden" name="user_id_mailee" value="" />
-                        <textarea id="response_box" name="mail_message" cols="62" rows="7"></textarea>
+                        <textarea id="response_box" name="mail_message"></textarea>
                         <input class="buttons float_right" id="reply_button" type="submit" name="reply" value="Reply">
                     </form>
                     <div id="reply_error"></div>
@@ -45,7 +45,7 @@
 			$('.pagination_mail').hide();
 			$('input[name=offset]').val('0');
 			$('#mail_current_page').empty();
-		}
+		};
 
 		// Load mailbox
 		function showMailbox(){
@@ -101,7 +101,7 @@
 					$('#messages li:first-child').attr("id","selected_message");
 				}, "json"
 			);
-		}
+		};
 		
 		// Inbox tab
 		$('#inbox').click(function() {
@@ -130,7 +130,7 @@
 			$('li').removeAttr('id');
 			$(this).parent('li').attr("id","selected_message");
 			messageID = $(this).find('div.mail_archive').attr('id');
-			if (messageID){showMessage(messageID);}
+			if (messageID){showMessage(messageID);};
 		});
 		
 		// Click to mark messages unread
@@ -168,7 +168,7 @@
 				success: function(){
 			 	}
 			});
-		}
+		};
 		
 		// Show messages
 		function showMessage(messageID){
@@ -208,7 +208,7 @@
 					$('#message').append(data.message_text);
 				}
 			});
-		}
+		};
 		
 		// Hover bar on mailbox message
 		$("li").live("mouseover mouseout",
@@ -236,15 +236,12 @@
 		// Validate form and send reply to messages
 		$("#message_reply_form").validate({
 			onsubmit: true,
-			onfocusout: false,
-			onkeyup: false,
-			onclick: false,
 			invalidHandler: function(form, validator) {
 				var errors = validator.numberOfInvalids();
 				if (errors) {
 					$('#reply_error').empty().removeClass().addClass('error_text');
 					$('#reply_error').append(validator.errorList[0].message);
-				}
+				};
 			},
 			submitHandler: function(form) {
 				$.post(
@@ -257,7 +254,7 @@
 						} else {
 							$('#reply_error').addClass('success_text').append(data.message);
 							$('#message_reply_form').hide();
-						}
+						};
 					}, "json"
 				);
 			},
@@ -274,8 +271,7 @@
 					required: "Please enter a reply message."
 				}
 			}
-		});	
-			
-	})
+		});
+	});
 		
 </script>
