@@ -10,10 +10,8 @@ require_once('contactHelperFunctions.php');
 
 session_start();
 $user_id_mailer = $_SESSION['id'];
-//$user_id_mailee = validateUserId(strip_tags($_POST["user_id_mailee"]));
+$user_id_mailee = validateUserId(strip_tags($_POST["user_id_mailee"]));
 $mail_message =  validateMessage(strip_tags($_POST["mail_message"])); 
-
-$user_id_mailee = "1";
 
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;

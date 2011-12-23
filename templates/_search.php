@@ -176,9 +176,9 @@
 										break;
 								};
 								if (i < 6) {
-									$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\'></div> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									$('#result_entries_left').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a><div style=\'display: none;\'>"+field.city_name+"</div></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\'></div> <div class=\'write_button_sm\'></div><div class=\'talk_button_sm\'></div></div></div></div></li>");
 								}else{
-									$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\' title="+field.user_id+"></div> <a class=\'write_button_sm\' href=\'#\'></a><a class=\'talk_button_sm\' href=\'#\'></a></div></div></div></li>");
+									$('#result_entries_right').append("<li class=\'"+resultEntryCSS+"\'> <div class=\'list_users\'><a class=\'search_profile\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img src=\'"+profilePic+"\' /></a><div id="+field.user_id+"><div class=\'user_info\'><div class=\'social_status float_right\'></div><div class=\'social_status warning_status float_right\'></div><div class=\'"+onlineStatus+"\'><a href=\'canvas.php?page=external&eid="+field.user_id+"\'>"+field.first_name+"</a><div style=\'display: none;\'>"+field.city_name+"</div></div></div><div class=\'action_buttons\'><a class=\'search_interest\' href=\'canvas.php?page=external&eid="+field.user_id+"\'><img class=\'search_interestTile\' src=\'images/interests/"+field.tile_filename+"\' /></a><div class=\'add_button_sm\' title="+field.user_id+"></div> <div class=\'write_button_sm\'></div><div class=\'talk_button_sm\'></div></div></div></div></li>");
 								};
 							};
 						});
@@ -186,6 +186,21 @@
 				}, "json"
 			);
 		};
+
+		$('div.write_button_sm').live('click', function() {
+			clearModalMessages();
+
+			contactID = $(this).parents('div:eq(1)').attr('id');
+			profilePic = $(this).parents('div:eq(3)').find('img').attr('src');
+			firstName = $(this).parents('div:eq(1)').find('div.online_status_sm a').text();
+			city = $(this).parents('div:eq(1)').find('div.online_status_sm div').text();
+
+			$('#modal_write').find('img').attr('src',profilePic);
+			$('#modal_write_header').find('span').text(firstName);
+			$('#modal_write_header').find('br').after(city);
+			$('input[name=user_id_mailee]').val(contactID);
+			modal('#modal_write','400','100');
+		});
 
 		$('div.add_button_sm').live('click', function() {
 			contactID = $(this).parents('div:eq(1)').attr('id');

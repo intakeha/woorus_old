@@ -54,7 +54,7 @@ if ($lounge_count <= ($offset*2)) //at this point, no matches (could be no match
 	//get any user ADD MORE CRITERIA--note users higher than 119 for testing purposes
 	$lounge_query = "SELECT DISTINCT users.id as other_user_id, users.first_name, users.social_status,  users.block_status, city.city_name,
 				    BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, 
-				    user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large
+				    user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_large, profile_picture.profile_filename_small
 				FROM `users`
 				LEFT OUTER JOIN `city` on users.user_city_id = city.id
 				LEFT OUTER JOIN `profile_picture` on profile_picture.user_id = users.id
@@ -71,7 +71,7 @@ else
 	//get sorted list of best USER matches
 	$lounge_query = "SELECT DISTINCT others_mosaic_wall.user_id as other_user_id, users.first_name, users.social_status, users.block_status, city.city_name, users.id as user_id,
 				    BLOCKER.user_blocker, BLOCKER.user_blockee, BLOCKEE.user_blocker, BLOCKEE.user_blockee, contacts.user_contactee, user_login.user_active, 
-				    user_login.session_set, user_login.on_call, profile_picture.profile_filename_large
+				    user_login.session_set, user_login.on_call, profile_picture.profile_filename_large, profile_picture.profile_filename_small
 				FROM `mosaic_wall` 
 				LEFT JOIN `mosaic_wall` AS others_mosaic_wall ON mosaic_wall.interest_id = others_mosaic_wall.interest_id 
 				LEFT JOIN `users` ON users.id = others_mosaic_wall.user_id
@@ -101,6 +101,7 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 	$tile_lounge_array['profile'][$user_iterator]['block_status'] = $row['block_status'];
 	$tile_lounge_array['profile'][$user_iterator]['city_name'] = htmlentities($row['city_name'], ENT_QUOTES);
 	$tile_lounge_array['profile'][$user_iterator]['profile_filename_large'] = $row['profile_filename_large'];
+	$tile_lounge_array['profile'][$user_iterator]['profile_filename_small'] = $row['profile_filename_small'];
 	
 	//calculate  online status
 	$session_set = $row['session_set'];
@@ -170,7 +171,7 @@ while ($row = mysql_fetch_assoc($lounge_result)){
 				$tiles_it= "tiles_".$user_iterator;
 				
 				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_filename'] = $row_mosaic ['tile_filename'];
-				$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = htmlentities($row['interest_name'], ENT_QUOTES); 
+				$tile_lounge_array[$tiles_it][$tile_iterator]['interest_name'] = htmlentities($row_mosaic['interest_name'], ENT_QUOTES); 
 				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_id'] = $tile_id;
 				$tile_lounge_array[$tiles_it][$tile_iterator]['interest_id'] =  $row_mosaic['interest_id'];
 				$tile_lounge_array[$tiles_it][$tile_iterator]['tile_type'] = $tile_type;

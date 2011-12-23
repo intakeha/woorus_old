@@ -1489,6 +1489,8 @@ div.offline {
 .lounge_userInfo span {
     display: block;
     margin-left: 5px;
+    width: 150px;
+    word-wrap: break-word;
 }
 
 .lounge_userInfo a:hover {

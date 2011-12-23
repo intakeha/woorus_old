@@ -785,7 +785,7 @@ $(document).ready(function(){
 		var encoded = $("#city").val();
 		var decoded = $('<textarea />').html(encoded).val();
 		$("#city").val(decoded);
-		$("#city_id").val(item.city_id);
+		$("#city_id").val(item.id);
 	});
 	
 	// Upload picture file for tile crop on mosaic wall

@@ -5,7 +5,7 @@
 	<div id="modal_write_header">
     	<img>
         <div id="modal_write_to">To:</div>
-		<span></span><br />
+		<span></span><br /><p></p>
     </div>
     <form id="send_message_form" action="actions/sendMessage.php" method="POST">
         <textarea id="message_box" name="mail_message"></textarea>

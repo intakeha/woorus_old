@@ -14,13 +14,9 @@ $user_id= $_SESSION['id'];
 $offset = validateOffset(strip_tags($_POST["offset"])); 
 $searchTerm = validateSearchTerm(strip_tags($_POST["first_name"])); 
 
-
-
 //connect
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
-
-
 
 //show all contacts the user hasnt deleted / blocked ---where the contact is an active user
 $show_contact_query = 	"SELECT  users.id, users.first_name, users.user_city_id, users.social_status, users.block_status, user_login.user_active, user_login.session_set, user_login.on_call, profile_picture.profile_filename_small
@@ -69,9 +65,7 @@ while ($row = mysql_fetch_assoc($show_contact_result)){
 	$contact_array[$contact_iterator]['user_city_id'] = $row['user_city_id']; //need to do lookup
 	$contact_array[$contact_iterator]['social_status'] = $row['social_status'];
 	$contact_array[$contact_iterator]['block_status'] = $row['block_status'];*/
-	
-	
-	
+		
 	$contact_iterator++;
 }
 
