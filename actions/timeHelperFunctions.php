@@ -10,7 +10,7 @@ convertTime_LargeMessage($date_time_in)
 
 */
 
-function convertTime($date_time_in){
+function convertTime($date_time_in, $user_timezone){
 
 	$date_time = date_create($date_time_in);
 	
@@ -18,9 +18,12 @@ function convertTime($date_time_in){
 	$yesterday =  date("Y-m-d ", time()-86400) ;
 
 	if ($date_time_in > $today)
-	{
-		
-		$date =  date_format($date_time, 'g:i A');
+	{		
+		$userTimezone = new DateTimeZone($user_timezone);
+		$serverTimezone = new DateTimeZone('America/Chicago');
+		$myDateTime = new DateTime($date_time_in, $serverTimezone);
+		$myDateTime->setTimezone($userTimezone);
+		$date = $myDateTime->format("g:i A");
 		
 	}elseif ($date_time_in > $yesterday)
 	{
@@ -37,17 +40,14 @@ function convertTime($date_time_in){
 
 }
 
-function convertTime_LargeMessage($date_time_in){
-		
-	//show date
-	$date_time = date_create($date_time_in);
-	$date =  date_format($date_time, 'F j, Y g:i A');
-	return $date;
+function convertTime_LargeMessage($date_time_in,  $user_timezone){
+	
+	$userTimezone = new DateTimeZone($user_timezone);
+	$serverTimezone = new DateTimeZone('America/Chicago');
+	$myDateTime = new DateTime($date_time_in, $serverTimezone);
+	$myDateTime->setTimezone($userTimezone);
+	return $myDateTime->format("F j, Y g:i A");
 
 }
-
-
-
-
 
 ?>

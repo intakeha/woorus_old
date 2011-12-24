@@ -13,6 +13,7 @@ session_start();
 $user_id= $_SESSION['id'];
 $message_id= validateNumber(strip_tags($_POST["message_id"])); 
 $inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
+$user_timezone = strip_tags($_POST["tz"]);
 
 if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
@@ -83,7 +84,7 @@ if(mysql_num_rows($show_message_result) > 0){
 	//check if anyone has blocked...so make sure all are NULL, otherwise return block flag
 	$block = checkBlock_search($BLOCKER_user_blocker, $BLOCKER_user_blockee, $BLOCKEE_user_blocker, $BLOCKEE_user_blockee);
 
-	$sent_time = convertTime_LargeMessage($row['sent_time']);
+	$sent_time = convertTime_LargeMessage($row['sent_time'], $user_timezone);
 
 	//add data to array to send to json
 	$mail_array['first_name'] = $row['first_name'];

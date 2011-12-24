@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/slides.min.jquery.js"></script> 
     <script type="text/javascript" src="js/jquery.idle-timer.js"></script>
     <script type="text/javascript" src="js/jquery.crop.js"></script> 
+    <script type="text/javascript" src="js/jstz.min.js"></script> 
     <script type="text/javascript" src="js/woorus.js"></script>
     <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 	<?php 
@@ -25,7 +26,7 @@
 </head>
 <body>
 	<div class="globalContainer">
-    <div onclick="modal('#modal_write','400','100'); clearModalMessages();" style="height: 10px;">Add to Contacts</div>
+    	<div onclick="modal('#modal_write','400','100'); clearModalMessages();" style="height: 10px;">Add to Contacts</div>
 		<?php
 			include('templates/_modal.php');
 			include('templates/_header.php');

@@ -30,6 +30,7 @@
         <form id="message_form" action="../actions/showMessages.php" method="POST">
             <input type="hidden" name="offset" value="0" />
             <input type="hidden" name="inbox_or_sent" value="inbox" />
+            <input type="hidden" name="tz" value="America/Los_Angeles" />
         </form>  
     </div>
 </div>
@@ -39,6 +40,10 @@
 		// Initialize inbox
 		mailboxReset();
 		showMailbox();
+
+		// Determine user timezone
+		var timezone = jstz.determine_timezone();
+		$('input[name=tz]').val(timezone.name());
 
 		//Remove pagination arrows and reset offset
 		function mailboxReset(){
@@ -175,7 +180,7 @@
 			$.ajax({
 				type: "POST",
 				url: "actions/readMessage.php",
-				data: "message_id="+messageID+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val(), dataType: "json",
+				data: "message_id="+messageID+"&inbox_or_sent="+$('input[name=inbox_or_sent]').val()+"&tz="+$('input[name=tz]').val(), dataType: "json",
 				success: function(data){
 					$('#mail_profile').empty();
 					$('#message').empty();

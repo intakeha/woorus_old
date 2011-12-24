@@ -13,7 +13,8 @@ require_once('constants.php');
 session_start();
 $user_id= $_SESSION['id'];
 $offset = validateOffset(strip_tags($_POST["offset"])); 
-$inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
+$inbox_or_sent = validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
+$user_timezone = strip_tags($_POST["tz"]);
 
 //$offset  = 0; //hardcode for testing
 //$inbox_or_sent = "sent"; //hardcode for testing
@@ -79,7 +80,7 @@ while ($row = mysql_fetch_assoc($show_message_result)){
 
 	
 	$message_text = $row['message_text'];
-	$sent_time = convertTime($row['sent_time']);
+	$sent_time = convertTime($row['sent_time'], $user_timezone);
 	
 	$session_set = $row['session_set'];
 	$on_call = $row['on_call'];

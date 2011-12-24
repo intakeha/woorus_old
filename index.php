@@ -86,15 +86,21 @@
                 </div>
                 <div id="register" style="display:none;">
                     <div id="facebook_login">
-                        <div id="fb-root"></div>
-                        <script src="http://connect.facebook.net/en_US/all.js"></script>
-                        <script>
-                             FB.init({appId:113603915367848, cookie:true, status:true, xfbml:true});
-                             FB.Event.subscribe('auth.login', function () {window.location = "../actions/facebookSession.php";});
+						<div id="fb-root"></div>
+						<script>
+                            window.fbAsyncInit = function() {
+                                FB.init({
+                                    appId: '113603915367848', status: true, cookie: true, xfbml: true, oauth: true,
+                                });
+                            };
+                            (function(d){
+                            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+                            js = d.createElement('script'); js.id = id; js.async = true;
+                            js.src = "//connect.facebook.net/en_US/all.js";
+                            d.getElementsByTagName('head')[0].appendChild(js);
+                            }(document));
                         </script>
-                        <fb:login-button perms="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">
-                             <span style="font-size:12px;">Login with Facebook</span>
-                        </fb:login-button><br>
+                        <div class="fb-login-button" scope="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">Login with Facebook</div>
                     <span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
                     </div>
                     <form id="registration_form" action="actions/register.php" method="POST">
