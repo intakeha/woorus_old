@@ -2,7 +2,8 @@
     <div id="lounge">
         <div id="lounge_area">
             <span>Welcome to the lounge</span>
-            <p>We have selected several people that you might find interesting based on your mosaic wall. <br>Check out their profiles and start meeting new people around the world!</p>
+            <p>We have selected several people that you might find interesting based on your mosaic wall. <br>See if you have something in common and start meeting new people around the world!</p>
+            <p style="display: none">Looks like there's no one left in the lounge. You can use the <a href="canvas.php?page=search">search page</a> to find people with specific interests.</p>
             <div id="lounge_profiles">
                 <div id="lounge_col0" class="lounge_match" style="display: none;">
                     <div class="lounge_info">
@@ -62,13 +63,14 @@
                 </div>
             </div>
         </div>
-        <div class="pagination_lounge"><a id="lounge_right" class="arrows pagination_right"></a></div>
+        <div id="lounge_right" class="arrows pagination_right"></div>
         <form id="loungeOffset" action="actions/loungeSearch.php" method="post"><input type="hidden" name="offset" value="0" /></form>
     </div>
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){	
 		// Get lounge information
+		$('input[name=offset]').val('0');
 		loungeUpdates();
 		
 		// Bind more pagination with lounge results
@@ -85,99 +87,111 @@
 				$('#loungeOffset').serialize(),
 				function(data){
 					$('#tile0, #tile1').empty();
-					
-					// Left profile panel
-					if (data.profile[0].user_id){
-						$('#lounge_col0').show();
-						$('#lounge_col0').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[0].user_id);
-						$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
-					};
-					if (data.profile[0].profile_filename_large){	
-						$('#photo_left').attr('src','images/users/large/'+data.profile[0].profile_filename_large);			
-					} else { 
-						$('#photo_left').attr('src','images/global/silhouette.png');
-					};
-					if (data.profile[0].profile_filename_small){	
-						$('#profile_sm0').attr('src','images/users/small/'+data.profile[0].profile_filename_small);
-					} else { 
-						$('#profile_sm0').attr('src','images/global/silhouette_sm.png');
-					};
-					if (data.profile[0].first_name){
-						$('#name0').html(data.profile[0].first_name);			
-					} else { 
-						$('#name0').text('Unknown');
-					};
-					if (data.profile[0].city_name){	
-						$('#city0').html(data.profile[0].city_name);
-					};
-					if (data.profile[0].online_status){
-						switch (data.profile[0].online_status){
-							case "online":
-								statusClass = "online_status lounge_online"
-								break
-							case "offline":
-								statusClass = "online_status offline_status lounge_online"
-								break
-							case "away":
-								statusClass = "online_status away_status lounge_online"
-								break
-							case "busy":
-								statusClass = "online_status busy_status lounge_online"
-								break
-						};
-						$('#lounge_onlineStatus0').addClass(statusClass);			
-					} else { 
-						$('#name0').html('Unknown');
-					};
-					for (i=0; i<data.tiles_count0; i++){
-						$('#tile0').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_0[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
+					resultCount = data.result_count;
+
+					if (resultCount == 0){
+							$('#lounge_right, #lounge_col0, #lounge_col1').hide();
+							$('#lounge_area').children('p:eq(0)').hide();
+							$('#lounge_area').children('p:eq(1)').show();
 					};
 					
-					// Right profile panel
-					if (data.profile[1].user_id){
-						$('#lounge_col1').show();
-						$('#lounge_col1').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[1].user_id);
-						$('.lounge_external1').attr('href','canvas.php?page=external&eid='+data.profile[1].user_id);			
-					};
-					if (data.profile[1].profile_filename_large){	
-						$('#photo_right').attr('src','images/users/large/'+data.profile[1].profile_filename_large);			
-					} else { 
-						$('#photo_right').attr('src','images/global/silhouette.png');
-					};
-					if (data.profile[1].profile_filename_small){	
-						$('#profile_sm1').attr('src','images/users/small/'+data.profile[1].profile_filename_small);
-					} else { 
-						$('#profile_sm1').attr('src','images/global/silhouette_sm.png');
-					};
-					if (data.profile[1].first_name){
-						$('#name1').html(data.profile[1].first_name);		
-					} else { 
-						$('#name1').text('Unknown');
-					};
-					if (data.profile[1].city_name){	
-						$('#city1').html(data.profile[1].city_name);
-					};
-					if (data.profile[1].online_status){
-						switch (data.profile[1].online_status){
-							case "online":
-								statusClass = "online_status lounge_online"
-								break
-							case "offline":
-								statusClass = "online_status offline_status lounge_online"
-								break
-							case "away":
-								statusClass = "online_status away_status lounge_online"
-								break
-							case "busy":
-								statusClass = "online_status busy_status lounge_online"
-								break
+					if (resultCount >= 1){
+						// Populate left profile panel
+						$('#lounge_col1').hide();
+						if (data.profile[0].user_id){
+							$('#lounge_col0').show();
+							$('#lounge_col0').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[0].user_id);
+							$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
 						};
-						$('#lounge_onlineStatus1').addClass(statusClass);			
-					} else { 
-						$('#name0').html('Unknown');
+						if (data.profile[0].profile_filename_large){	
+							$('#photo_left').attr('src','images/users/large/'+data.profile[0].profile_filename_large);			
+						} else { 
+							$('#photo_left').attr('src','images/global/silhouette.png');
+						};
+						if (data.profile[0].profile_filename_small){	
+							$('#profile_sm0').attr('src','images/users/small/'+data.profile[0].profile_filename_small);
+						} else { 
+							$('#profile_sm0').attr('src','images/global/silhouette_sm.png');
+						};
+						if (data.profile[0].first_name){
+							$('#name0').html(data.profile[0].first_name);			
+						} else { 
+							$('#name0').text('Unknown');
+						};
+						if (data.profile[0].city_name){	
+							$('#city0').html(data.profile[0].city_name);
+						};
+						if (data.profile[0].online_status){
+							switch (data.profile[0].online_status){
+								case "online":
+									statusClass = "online_status lounge_online"
+									break
+								case "offline":
+									statusClass = "online_status offline_status lounge_online"
+									break
+								case "away":
+									statusClass = "online_status away_status lounge_online"
+									break
+								case "busy":
+									statusClass = "online_status busy_status lounge_online"
+									break
+							};
+							$('#lounge_onlineStatus0').addClass(statusClass);			
+						} else { 
+							$('#name0').html('Unknown');
+						};
+						for (i=0; i<data.tiles_count0; i++){
+							$('#tile0').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_0[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_0[i].tile_filename+'"></li>');
+						};
 					};
-					for (i=0; i<data.tiles_count1; i++){
-						$('#tile1').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_1[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
+					
+					if (resultCount == 2){
+						// Populate right profile panel
+						if (data.profile[1].user_id){
+							$('#lounge_col1').show();
+							$('#lounge_col1').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[1].user_id);
+							$('.lounge_external1').attr('href','canvas.php?page=external&eid='+data.profile[1].user_id);			
+						};
+						if (data.profile[1].profile_filename_large){	
+							$('#photo_right').attr('src','images/users/large/'+data.profile[1].profile_filename_large);			
+						} else { 
+							$('#photo_right').attr('src','images/global/silhouette.png');
+						};
+						if (data.profile[1].profile_filename_small){	
+							$('#profile_sm1').attr('src','images/users/small/'+data.profile[1].profile_filename_small);
+						} else { 
+							$('#profile_sm1').attr('src','images/global/silhouette_sm.png');
+						};
+						if (data.profile[1].first_name){
+							$('#name1').html(data.profile[1].first_name);		
+						} else { 
+							$('#name1').text('Unknown');
+						};
+						if (data.profile[1].city_name){	
+							$('#city1').html(data.profile[1].city_name);
+						};
+						if (data.profile[1].online_status){
+							switch (data.profile[1].online_status){
+								case "online":
+									statusClass = "online_status lounge_online"
+									break
+								case "offline":
+									statusClass = "online_status offline_status lounge_online"
+									break
+								case "away":
+									statusClass = "online_status away_status lounge_online"
+									break
+								case "busy":
+									statusClass = "online_status busy_status lounge_online"
+									break
+							};
+							$('#lounge_onlineStatus1').addClass(statusClass);			
+						} else { 
+							$('#name0').html('Unknown');
+						};
+						for (i=0; i<data.tiles_count1; i++){
+							$('#tile1').append('<li onmouseover=\'showInterest($(this), \"'+data.tiles_1[i].interest_name+'\")\' onmouseout="hideInterest($(this))"><img class="lounge_interestTile" src="images/interests/'+data.tiles_1[i].tile_filename+'"></li>');
+						};
 					};
 				}, "json"
 			);

@@ -1316,7 +1316,6 @@ div.transparent_tag {
 
 #contact_mosaic div {
 	font-size: 12px;
-	font-weight: bold;
 }
 
 .contact_profile {
@@ -1437,12 +1436,10 @@ div.offline {
 	margin: 0 19px;
 }
 
-.pagination_lounge {
-	width: 70px;
-	height: 215px;
+#lounge_right {
+	width: 100px;
+	height: 100px;
 	float: left;
-	padding-top: 285px;
-	margin: 0px 20px;
 }
 
 .lounge_tiles {

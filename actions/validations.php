@@ -812,6 +812,7 @@ function validateMessage($message_text)
 
 }
 
+//------------------------- Woorus inbox validation functions-----------------------------------------//
 
 function validateInboxFlag($inbox_flag){
 
@@ -821,6 +822,16 @@ function validateInboxFlag($inbox_flag){
 	}else
 	{
 		$error_message = "Invalid mail command.";
+		sendToJS(0, $error_message);
+	}
+}
+
+function validateTimeZone($time_zone){
+	if (in_array($time_zone, DateTimeZone::listIdentifiers())) {
+		return $time_zone;
+	}
+	else {
+		$error_message = "Invalid timezone.";
 		sendToJS(0, $error_message);
 	}
 }

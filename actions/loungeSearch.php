@@ -91,6 +91,10 @@ else
 $lounge_result = mysql_query($lounge_query, $connection) or die ("Error 2");
 $user_iterator = 0;
 
+//send count of results
+$lounge_result_count = mysql_num_rows($lounge_result);
+$tile_lounge_array['result_count'] = $lounge_result_count;
+
 //iterate through all users who have matching interests (or the random users pulled from above)
 while ($row = mysql_fetch_assoc($lounge_result)){
 	$user_match_id = $row['other_user_id'];

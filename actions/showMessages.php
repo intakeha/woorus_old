@@ -14,7 +14,7 @@ session_start();
 $user_id= $_SESSION['id'];
 $offset = validateOffset(strip_tags($_POST["offset"])); 
 $inbox_or_sent = validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
-$user_timezone = strip_tags($_POST["tz"]);
+$user_timezone = validateTimeZone(strip_tags($_POST["tz"]));
 
 //$offset  = 0; //hardcode for testing
 //$inbox_or_sent = "sent"; //hardcode for testing

@@ -13,7 +13,7 @@ session_start();
 $user_id= $_SESSION['id'];
 $message_id= validateNumber(strip_tags($_POST["message_id"])); 
 $inbox_or_sent =validateInboxFlag(strip_tags($_POST["inbox_or_sent"])); 
-$user_timezone = strip_tags($_POST["tz"]);
+$user_timezone = validateTimeZone(strip_tags($_POST["tz"]));
 
 if ($inbox_or_sent == "inbox"){
 	$me_mail = 'user_mailee';
