@@ -3,7 +3,12 @@
         <div id="lounge_area">
             <span>Welcome to the lounge</span>
             <p>We have selected several people that you might find interesting based on your mosaic wall. <br>See if you have something in common and start meeting new people around the world!</p>
-            <p style="display: none">Looks like there's no one left in the lounge. You can use the <a href="canvas.php?page=search">search page</a> to find people with specific interests.</p>
+            <p style="display: none">Looks like there's no one left in the lounge. You can use the <a href="canvas.php?page=search">search page</a> to find people with specific interests.
+            </p>
+            <div id="sofa" style="margin-top: 150px; display: none;">
+	            <img src="images/global/sofa.jpg">
+            </div>
+            
             <div id="lounge_profiles">
                 <div id="lounge_col0" class="lounge_match" style="display: none;">
                     <div class="lounge_info">
@@ -63,7 +68,10 @@
                 </div>
             </div>
         </div>
-        <div id="lounge_right" class="arrows pagination_right"></div>
+        <div id="lounge_right">
+        	<div id="more">Click to see more</div>
+        	<div class="arrows pagination_right"></div>
+        </div>
         <form id="loungeOffset" action="actions/loungeSearch.php" method="post"><input type="hidden" name="offset" value="0" /></form>
     </div>
 </div>
@@ -93,6 +101,7 @@
 							$('#lounge_right, #lounge_col0, #lounge_col1').hide();
 							$('#lounge_area').children('p:eq(0)').hide();
 							$('#lounge_area').children('p:eq(1)').show();
+							$('#sofa').show();
 					};
 					
 					if (resultCount >= 1){
