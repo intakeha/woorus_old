@@ -20,8 +20,13 @@
     <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 	<?php 
 		$page = $_REQUEST['page'];
-		$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "external", "chat", "settings", "recover");
-		if (!in_array($page, $pages)) header("location: canvas.php?page=home");
+		session_start();  
+		if(isset($_SESSION['id'])){
+				$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "external", "chat", "settings", "recover");
+				if (!in_array($page, $pages)) header("location: canvas.php?page=home");
+		} else {
+			 header("location: http://pup.woorus.com");
+		}
 	?>
 </head>
 <body>
