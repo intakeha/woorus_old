@@ -23,34 +23,27 @@ $query_logout = "UPDATE `user_login`
 
 $result = mysql_query($query_logout, $connection) or die ("Error");
 
-//then can destroy the session
+//then destroy the session
 session_destroy();
 
 // Need to logout if a facebook user
 
-$facebook = new Facebook(array(
-  'appId'  => '113603915367848',
-  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
-  'cookie' => true,
-));
-
-$session = $facebook->getSession();
+$session = $facebook->getUser();
 $me = null;
 if ($session) {
 	try {
-	$me = $facebook->api('/me');
+		$me = $facebook->api('/me');
 	} catch (FacebookApiException $e) {
-	error_log($e);
-	}
+		error_log($e);
+	};
 }
 
 if ($me) {
-	$logoutUrl = $facebook->getLogoutUrl();
-	header('Location: '.$logoutUrl);
+	$logoutURL = $facebook->getLogoutUrl();
+	header('Location: '.$logoutURL) ;
 	flush();
-	exit();
 } 
 
-header('Location: ../') ;
+header('Location: http://pup.woorus.com/') ;
 
 ?>
