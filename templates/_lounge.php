@@ -98,7 +98,7 @@
 					resultCount = data.result_count;
 
 					if (resultCount == 0){
-							$('#lounge_right, #lounge_col0, #lounge_col1').hide();
+							$('#lounge_right, #lounge_col0, #lounge_col1, #lounge_profiles').hide();
 							$('#lounge_area').children('p:eq(0)').hide();
 							$('#lounge_area').children('p:eq(1)').show();
 							$('#sofa').show();
@@ -107,8 +107,8 @@
 					if (resultCount >= 1){
 						// Populate left profile panel
 						$('#lounge_col1').hide();
+						$('#lounge_col0, #lounge_profiles').show();
 						if (data.profile[0].user_id){
-							$('#lounge_col0').show();
 							$('#lounge_col0').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[0].user_id);
 							$('.lounge_external0').attr('href','canvas.php?page=external&eid='+data.profile[0].user_id);			
 						};
@@ -156,8 +156,8 @@
 					
 					if (resultCount == 2){
 						// Populate right profile panel
+						$('#lounge_col1').show();
 						if (data.profile[1].user_id){
-							$('#lounge_col1').show();
 							$('#lounge_col1').find('.lounge_info').children('div:eq(0)').attr("id",data.profile[1].user_id);
 							$('.lounge_external1').attr('href','canvas.php?page=external&eid='+data.profile[1].user_id);			
 						};

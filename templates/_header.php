@@ -14,7 +14,14 @@
             </ul>
         </div>
         <div id="sub_menu">
-            <?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a href="../actions/logout.php">logout</a> 
+            <?php session_start(); echo $_SESSION['email'];?> | invite a friend | <a href="canvas.php?page=settings">settings</a> | <a href="#" id="logout">logout</a> 
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	$('#logout').click(function() {
+		FB.logout(function(response) {
+			window.location = "actions/logout.php";
+		});
+	});
+</script>

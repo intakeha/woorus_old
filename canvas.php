@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">	
+<html xmlns:fb="http://www.facebook.com/2008/fbml">	
 <head>
     <title>Woorus - Connecting you to the world through interests</title>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -30,6 +30,37 @@
 	?>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '113603915367848', // App ID
+          status     : true, // check login status
+          cookie     : true, // enable cookies to allow the server to access the session
+          xfbml      : true, // parse XFBML
+          oauth      : true
+        });
+    
+        // Additional initialization code here
+        FB.Event.subscribe('auth.login', function () {
+            //window.location = "actions/facebookSession.php";
+            window.location.reload();
+        });
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            $('#facebook_login').hide();
+          }
+         });
+      };
+    
+      // Load the SDK Asynchronously
+      (function(d){
+         var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+         js = d.createElement('script'); js.id = id; js.async = true;
+         js.src = "//connect.facebook.net/en_US/all.js";
+         d.getElementsByTagName('head')[0].appendChild(js);
+       }(document));
+    </script>
 	<div class="globalContainer">
     	<div onclick="modal('#modal_write','400','100'); clearModalMessages();" style="height: 10px;">Add to Contacts</div>
 		<?php

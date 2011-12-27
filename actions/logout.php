@@ -8,7 +8,6 @@ Also log the user out of facebook if thats how they logged in.
 
 ob_start();
 require_once('connect.php');
-require_once('facebook.php');
 
 session_start();
 $user_id = $_SESSION['id'];
@@ -23,27 +22,7 @@ $query_logout = "UPDATE `user_login`
 
 $result = mysql_query($query_logout, $connection) or die ("Error");
 
-//then destroy the session
+//then can destroy the session
 session_destroy();
-
-// Need to logout if a facebook user
-
-$session = $facebook->getUser();
-$me = null;
-if ($session) {
-	try {
-		$me = $facebook->api('/me');
-	} catch (FacebookApiException $e) {
-		error_log($e);
-	};
-}
-
-if ($me) {
-	$logoutURL = $facebook->getLogoutUrl();
-	header('Location: '.$logoutURL) ;
-	flush();
-} 
-
-header('Location: http://pup.woorus.com/') ;
-
+header('Location: http://pup.woorus.com');
 ?>

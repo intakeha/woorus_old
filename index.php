@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html>
+<html xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 	<title>Woorus - The place to share your interests</title>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
@@ -14,11 +14,65 @@
     <script type="text/javascript" src="js/jquery.autocomplete.js"></script>
    	<script type="text/javascript" src="js/woorus.js"></script>
     <?php
+		require_once('actions/facebookSession.php');
+		/*require_once('actions/facebook.php');
+		
+		$facebook = new Facebook(array(
+		  'appId'  => '113603915367848',
+		  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
+		));
+		$user = $facebook->getUser();
+		if ($user) {
+		  try {
+			// Proceed knowing you have a logged in user who's authenticated.
+			$user_profile = $facebook->api('/me');
+			if($user_profile){
+				$facebook_id= $user_profile['id'];
+				print('hello world'.$facebook_id);
+			}
+		  } catch (FacebookApiException $e) {
+			echo '<pre>'.htmlspecialchars(print_r($e, true)).'</pre>';
+			$user = null;
+		  }
+		};*/
+	
 		session_start();
 		if ($_SESSION['id']) header('Location: canvas.php');
 	?>
 </head>
 <body>
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '113603915367848', // App ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true, // parse XFBML
+	  oauth      : true
+    });
+
+    // Additional initialization code here
+	FB.Event.subscribe('auth.login', function () {
+		//window.location = "actions/facebookSession.php";
+		window.location.reload();
+	});
+	FB.getLoginStatus(function(response) {
+	  if (response.status === 'connected') {
+		$('#facebook_login').hide();
+	  }
+	 });
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     d.getElementsByTagName('head')[0].appendChild(js);
+   }(document));
+</script>
+
 	<div class="fluid" id="globalContainerIndex">
 		<div id="header">
 			<a id="logo" href="http://woorus.com"></a>
@@ -86,22 +140,8 @@
                 </div>
                 <div id="register" style="display:none;">
                     <div id="facebook_login">
-						<div id="fb-root"></div>
-						<script>
-                            window.fbAsyncInit = function() {
-                                FB.init({
-                                    appId: '113603915367848', status: true, cookie: true, xfbml: true, oauth: true,
-                                });
-                            };
-                            (function(d){
-                            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-                            js = d.createElement('script'); js.id = id; js.async = true;
-                            js.src = "//connect.facebook.net/en_US/all.js";
-                            d.getElementsByTagName('head')[0].appendChild(js);
-                            }(document));
-                        </script>
-                        <div class="fb-login-button" scope="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">Login with Facebook</div>
-                    <span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
+                        <div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="1" scope="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">Login with Facebook</div><br>
+                        <span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
                     </div>
                     <form id="registration_form" action="actions/register.php" method="POST">
                         <ul id="userInfo">

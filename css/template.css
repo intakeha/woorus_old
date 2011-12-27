@@ -264,6 +264,10 @@ img.btn_close {
 	margin-left: 150px;
 }
 
+#register span {
+	font-size: 14px !important;
+}
+
 #registration_form li {
 	font-size: 18px;
 	color: #215086;	

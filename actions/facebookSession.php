@@ -23,42 +23,20 @@ $thumb_height = "75";		// Height of thumbnail image
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
   'appId'  => '113603915367848',
-  'secret' => 'ee894560c1bbdf11138848ce6a5620e3',
-  'cookie' => true,
+  'secret' => 'ee894560c1bbdf11138848ce6a5620e3'
 ));
 
-// We may or may not have this data based on a $_GET or $_COOKIE based session.
-//
-// If we get a session here, it means we found a correctly signed session using
-// the Application Secret only Facebook and the Application know. We dont know
-// if it is still valid until we make an API call using the session. A session
-// can become invalid if it has already expired (should not be getting the
-// session back in this case) or if the user logged out of Facebook.
-$session = $facebook->getSession();
+// Get facebook user
+$user = $facebook->getUser();
 
-$me = null;
-// Session based API call.
-if ($session) 
-{
-	$access_token = $facebook->getAccessToken();
-	
-	try {
-		$uid = $facebook->getUser();
+if ($user) {
+  try {
+		// Get facebook me if user is authenticated.
 		$me = $facebook->api('/me');
-		
-		/*
-		//testing for bday
-		$birthday_test = $facebook->api(array(  
-		'method' => 'fql.query',  
-		'query' => 'SELECT birthday_date FROM user WHERE uid = me()'
-		)); 
-		
-		print_r($birthday_test);
-		exit();
-		*/
-		
+
 		//get facebook id
 		$facebook_id= $me['id'];
+		print('Hello World');
 		
 		//get email
 		$facebook_email_address_visual = $me["email"];
@@ -118,10 +96,10 @@ if ($session)
 			//if theyve set all info, take to homepage, otherwise, take to settings
 			if ($user_info_set)
 			{
-				header( 'Location: ../canvas.php' );
+				//header( 'Location: ../canvas.php' );
 			}else
 			{
-				header( 'Location: ../canvas.php?page=settings' );
+				//header( 'Location: ../canvas.php?page=settings' );
 			}
 		}
 		else{
@@ -130,6 +108,7 @@ if ($session)
 			$fb_id_query = 	"SELECT email_address, id, password_set, user_info_set, active_user
 						FROM `users` 
 						WHERE facebook_id = '".mysql_real_escape_string($facebook_id)."'";
+												
 			$fb_id_result = mysql_query($fb_id_query, $connection) or die ("Error 1");
 			$fb_id_count = mysql_num_rows($fb_id_result);
 			if ($fb_id_count != 0) //if 1, this means that facebook_ID is in our database
@@ -158,7 +137,7 @@ if ($session)
 				
 				updateLoginTime($user_id); //need to also update the login table
 				
-				header( 'Location: ../canvas.php?page=settings&email_changed=1' );
+				header( 'Location: ../canvas.php?page=settings&email_changed=1' ); // Add modal to notified of email changed.
 				
 				
 			}else
@@ -184,10 +163,6 @@ if ($session)
 				$password_set = 0; //user hasn't set a password
 				$user_info_set = 0; //user hasn't set info
 				$active_user = 1;
-
-				//connect
-				$connection = mysql_connect($db_host, $db_user, $db_pass) or die("unable to connect to db");
-				mysql_select_db($db_name);
 				
 				//enter user into system
 				$query_users = "INSERT INTO `users` 
@@ -216,9 +191,9 @@ if ($session)
 				$result = mysql_query($query_settings, $connection) or die ("Error 3");
 				
 				//create mosaic wall tables
-				for ($tile_place = 1; $tile_place <= 36; $tile_place++){
-					$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id, update_time) VALUES (NULL, '".$user_id."', '".$tile_place."', 0 , 0, NOW()) ";
-					$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2");
+				for ($tile_counter = 1; $tile_counter <= 36; $tile_counter++){
+					$query_mosaic_wall = "INSERT into `mosaic_wall` (id, user_id, tile_placement, tile_id, interest_id) VALUES (NULL, '".$user_id."', '".$tile_counter."', 0 , 0) ";
+					$result = mysql_query($query_mosaic_wall, $connection) or die ("Error 2.5");
 				}
 				
 				//next step is to enter in all the interests we've taken from the facebook API
@@ -253,7 +228,6 @@ if ($session)
 					
 				}
 
-
 				//log the user in
 				updateLoginTime($user_id); //need to also update the login table
 
@@ -264,7 +238,7 @@ if ($session)
 				$_SESSION['facebook'] = 1;
 				$_SESSION['password_created'] = $password_set;
 				$_SESSION['user_info_set'] = $user_info_set;
-				header( 'Location: ../canvas.php?page=settings') ;
+				if ($_SESSION['id']) header('Location: http://pup.woorus.com/canvas.php?page=settings');
 			}
 
 		}
@@ -273,7 +247,6 @@ if ($session)
     error_log($e);
   }
 }
-
 
 function enterNewInterest($fb_interest, $category, $fb_interest_id, $fb_category, $user_id, $tile_placement, $connection, $thumb_width)
 {
