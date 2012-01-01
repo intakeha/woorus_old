@@ -54,8 +54,7 @@
 
     // Additional initialization code here
 	FB.Event.subscribe('auth.login', function () {
-		//window.location = "actions/facebookSession.php";
-		window.location.reload();
+		setTimeout('window.location.reload()',0);
 	});
 	FB.getLoginStatus(function(response) {
 	  if (response.status === 'connected') {
@@ -64,7 +63,7 @@
 	 });
   };
 
-  // Load the SDK Asynchronously
+  // Load the facebook SDK Asynchronously
   (function(d){
      var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
      js = d.createElement('script'); js.id = id; js.async = true;
@@ -140,7 +139,7 @@
                 </div>
                 <div id="register" style="display:none;">
                     <div id="facebook_login">
-                        <div class="fb-login-button" data-show-faces="true" data-width="200" data-max-rows="1" scope="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">Login with Facebook</div><br>
+                        <div class="fb-login-button" data-show-faces="true" data-width="250" data-max-rows="1" scope="email, user_activities, user_birthday, user_interests, user_likes, user_education_history, user_work_history">Login with Facebook</div><br>
                         <span>&mdash;&mdash;&mdash;&mdash; or &mdash;&mdash;&mdash;&mdash;</span>
                     </div>
                     <form id="registration_form" action="actions/register.php" method="POST">

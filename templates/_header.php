@@ -20,8 +20,15 @@
 </div>
 <script type="text/javascript">
 	$('#logout').click(function() {
-		FB.logout(function(response) {
+		 FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+			FB.logout(function(response) {
+				window.location = "actions/logout.php";
+			});
+          } else {
 			window.location = "actions/logout.php";
-		});
+		  };
+         });
+
 	});
 </script>
