@@ -16,11 +16,11 @@ $active = validateOnlineStatus(strip_tags($_POST["onlineStatus"]));
 $connection = mysql_connect($db_host, $db_user, $db_pass) or die;
 mysql_select_db($db_name);
 
-//save most recent active time if the user if active
+//save most recent active time if the user is active
 
-if ($active == 1){
+if ($active == 1 && $user_id){
 	$save_status_query = "UPDATE `user_login` 
-				SET user_active = NOW()
+				SET user_active = NOW(), session_set = 1
 				WHERE user_id = '".$user_id."' ";
 		
 	$result = mysql_query($save_status_query, $connection) or die ("Error 2");

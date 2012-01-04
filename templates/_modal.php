@@ -1,5 +1,35 @@
 <div id="modal_talk" class="popup_block">
-	
+	<div id="caller_info">
+    	<div id="caller_profile">
+            <div><img src="images/users/large/2_profile_1324364107.jpg"></div>
+            <div><span>John</span><br />San Francisco, CA</div>
+        </div>
+        <div id="talk_stream">
+            <div id="stream_callee" class="streams"></div>
+            <div id="stream_caller" class="streams"></div>
+        </div>
+        <div id="talk_actions">
+            <div>Time Remaining<br /><span>5:00</span><div id="talk_error">John is blocked.</div></div>
+			<div id="talk_buttons" class="action_buttons">
+                <div class="action_button_sm block_button_sm"></div>
+                <div class="action_button_sm add_button_sm"></div>
+                <div class="action_button_sm end_button_sm"></div>
+			</div>
+        </div>
+    </div>
+	<div id="caller_interests">
+    	<ul class="talk_tiles"><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Water&quot;)"><img src="images/interests/119_1306217416.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;David Beckham&quot;)"><img src="images/interests/facebook_84218631570.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Dock&quot;)"><img src="images/interests/119_1306217128.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Dock&quot;)"><img src="images/interests/142_1322134480.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Face&quot;)"><img src="images/interests/119_1306465015.jpg"></li></ul>
+        <ul class="talk_tiles" style="margin-left: 20px;"><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Water&quot;)"><img src="images/interests/119_1306217416.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;David Beckham&quot;)"><img src="images/interests/facebook_84218631570.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Dock&quot;)"><img src="images/interests/119_1306217128.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Dock&quot;)"><img src="images/interests/142_1322134480.jpg"></li><li onmouseout="hideInterest($(this))" onmouseover="showInterest($(this), &quot;Face&quot;)"><img src="images/interests/119_1306465015.jpg"></li></ul>
+	</div>
+</div>
+<div id="modal_calling" class="popup_block">
+	<p id="calling_message">Calling...</p><div class="ring_tone"></div>
+</div>
+<div id="modal_answer" class="popup_block">
+	<p id="calling_message">You have an incoming call.</p>
+    <button id="answer" class="buttons modal_buttons">Answer</button>
+    <button id="ignore" class="buttons modal_buttons cancel">Ignore</button>
+    <div class="ring_tone"></div>
 </div>
 <div id="modal_write" class="popup_block">
 	<div id="modal_write_header">
@@ -60,4 +90,57 @@
 			}
 		}
 	});
+	
+	// Modal popup function
+	function modal(modalID, modalWidth, topMargin){
+	
+		//Fade in the Popup and add close button
+		$(modalID).fadeIn().css({ 'width': modalWidth }).prepend('<a href="#" class="close"><img src="/images/global/close_modal.png" class="btn_close" title="Close Window" alt="Close" /></a>');
+	
+		//Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
+		//var popMargTop = ($(modalID).height() + 80) / 2;
+		var popMargLeft = ($(modalID).width() + 80) / 2;
+	
+		//Apply Margin to Popup
+		$(modalID).css({
+			//'margin-top' : -popMargTop,
+			'margin-top' : topMargin+'px',
+			'margin-left' : -popMargLeft
+		});
+	
+		//Fade in Background
+		$('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
+		$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'}) is used to fix the IE Bug on fading transparencies 
+	
+		return false;
+	
+	};
+	
+	// Modal popup function
+	function modal_message(modalID, modalWidth, topMargin){
+	
+		//Fade in the Popup
+		$(modalID).fadeIn().css({ 'width': modalWidth });
+	
+		//Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
+		//var popMargTop = ($(modalID).height() + 80) / 2;
+		var popMargLeft = ($(modalID).width() + 80) / 2;
+	
+		//Apply Margin to Popup
+		$(modalID).css({
+			//'margin-top' : -popMargTop,
+			'margin-top' : topMargin+'px',
+			'margin-left' : -popMargLeft
+		});
+	
+		return false;
+	
+	};	
+	
+	// Function to clear messages modal prior to loading receipient's info
+	function clearModalMessages(){
+		$('#message_box, input[name=user_id_mailee]').val('');
+		$('#message_error').text('');
+	};
+	
 </script>

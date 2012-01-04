@@ -15,21 +15,76 @@
     <script type="text/javascript" src="js/slides.min.jquery.js"></script> 
     <script type="text/javascript" src="js/jquery.idle-timer.js"></script>
     <script type="text/javascript" src="js/jquery.crop.js"></script> 
+	<script type="text/javascript" src="js/jquery.SWFObject.js"></script> 
     <script type="text/javascript" src="js/jstz.min.js"></script> 
     <script type="text/javascript" src="js/woorus.js"></script>
     <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
+    <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
+
 	<?php 
+	    include_once('actions/opentok/createSession.php');
+
 		$page = $_REQUEST['page'];
 		session_start();  
 		if(isset($_SESSION['id'])){
-				$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "external", "chat", "settings", "recover");
+				$pages = array("home", "mosaic", "search", "contacts", "lounge", "mail", "trends", "external", "settings", "recover");
 				if (!in_array($page, $pages)) header("location: canvas.php?page=home");
 		} else {
 			 header("location: http://pup.woorus.com");
 		}
 	?>
+    <script type="text/javascript" charset="utf-8">
+        var apiKey = <?php print API_Config::API_KEY?>;
+        var sessionId = '<?php print $session_id; ?>';
+        var token = '<?php print $apiObj->generate_token($session_id); ?>';
+        
+        TB.setLogLevel(TB.DEBUG);
+        
+        var session = TB.initSession(sessionId);   
+        session.connect(apiKey, token);
+        
+        session.addEventListener('sessionConnected', sessionConnectedHandlerSelf);
+        session.addEventListener('signalReceived', signalHandler);
+     
+        function sessionConnectedHandlerSelf(event) {
+            $('#talk_error').text('You are connected to your own session');
+        };
+        
+        function sessionConnectedHandlerOther(event) {
+            session.signal();
+        };
+        
+        function signalHandler(event) {
+			if ($('input[name=caller]').val() == 1){
+				if (event.fromConnection.connectionId != session.connection.connectionId) {
+					$('#modal_calling').fadeOut();
+					$('.ring_tone').flash().remove();
+					modal('#modal_talk','810','200');
+					$('input[name=caller]').val(0);
+					$('#talk_error').text("Signal received from callee.");
+				};
+			} else {
+				if (event.fromConnection.connectionId != session.connection.connectionId) {
+					$('.ring_tone').flash({swf:'media/ringtone.swf',height:1,width:1});
+					modal_message('#modal_answer','300','200');
+				} else {
+					$('#modal_answer').fadeOut();
+					$('.ring_tone').flash().remove();
+					modal('#modal_talk','810','200');
+					$('#talk_error').text("Signal received from caller.");
+				};
+			};
+        };
+        
+        function disconnect(){
+            session.disconnect();
+        };
+         
+    </script>    
+    
 </head>
 <body>
+	<input type="hidden" name="caller" value="0" />
     <div id="fb-root"></div>
     <script>
       window.fbAsyncInit = function() {
@@ -62,7 +117,7 @@
        }(document));
     </script>
 	<div class="globalContainer">
-    	<div onclick="modal('#modal_write','400','100'); clearModalMessages();" style="height: 10px;">Add to Contacts</div>
+    	<div onclick="modal('#modal_talk','810','200');" style="height: 10px;">Click to Talk</div>
 		<?php
 			include('templates/_modal.php');
 			include('templates/_header.php');

@@ -264,7 +264,7 @@ a#nav_trends_1 {
 
 .modal_buttons {
 	width: 100px;
-	margin: 10px 0 0 10px;
+	margin: 10px 10px 0 0;
 }
 
 .cancel {
@@ -274,9 +274,6 @@ a#nav_trends_1 {
 div.clear {
 	clear: both;
 }
-
-/* Chat Modal */
-
 
 /*	Pagination */
 
@@ -503,40 +500,32 @@ div.arrows {
 	background-position: -222px 0px;
 }
 
-.talk_button_sm {
+.action_button_sm {
 	display: block;
 	width: 62px;
 	height: 50px;
 	background:url(../images/global/action_buttons_sm.png) no-repeat;
-	background-position: 0px 0px;
 	float: right;
+}
+
+.talk_button_sm {
+	background-position: 0px 0px;
 }
 
 .write_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
 	background-position: -62px 0px;
-	float: right;
 }
 
 .add_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
 	background-position: -124px 0px;
-	float: right;
 }
 
 .block_button_sm {
-	display: block;
-	width: 62px;
-	height: 50px;
-	background:url(../images/global/action_buttons_sm.png) no-repeat;
 	background-position: -186px 0px;
-	float: right;
+}
+
+.end_button_sm {
+	background-position: -248px 0px;
 }
 
 .archive_button {

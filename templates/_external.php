@@ -96,6 +96,24 @@
 					return false;					
 				}, "json"
 			);
+		});	
+		
+		$('div.talk_button').click(function() {
+			modal_message('#modal_calling','300','200');
+			$('.ring_tone').flash({swf:'media/ringtone.swf',height:1,width:1});
+			disconnect();
+			$.post("actions/opentok/getSession.php", {callee_id: <?php echo $externalID ?>},
+			function(data) {
+				apiKey = <?php print API_Config::API_KEY?>;
+				if(data){
+					$('input[name=caller]').val(1);
+					token = data.token;
+					session = TB.initSession(data.session_id);
+					session.connect(apiKey, token);
+					session.addEventListener('sessionConnected', sessionConnectedHandlerOther);
+					session.addEventListener('signalReceived', signalHandler);
+				};
+			},"json");
 		});
 	});
 		

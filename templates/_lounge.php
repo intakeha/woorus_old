@@ -30,9 +30,9 @@
                                 </div>
                             </div>
                             <div class="action_buttons">
-                                <div class="add_button_sm"></div>
-                                <div class="write_button_sm"></div>
-                                <div class="talk_button_sm"></div>
+                                <div class="action_button_sm add_button_sm"></div>
+                                <div class="action_button_sm write_button_sm"></div>
+                                <div class="action_button_sm talk_button_sm"></div>
                             </div>
                         </div>
                     </div>
@@ -58,9 +58,9 @@
                                 </div>
                             </div>
                             <div class="action_buttons">
-                                <div class="add_button_sm"></div>
-                                <div class="write_button_sm"></div>
-                                <div class="talk_button_sm"></div>
+                                <div class="action_button_sm add_button_sm"></div>
+                                <div class="action_button_sm write_button_sm"></div>
+                                <div class="action_button_sm talk_button_sm"></div>
                             </div>
                         </div>
                     </div>

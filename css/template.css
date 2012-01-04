@@ -40,6 +40,7 @@ img.btn_close {
 	position: absolute;
 }
 
+/* Message Modal */
 #modal_write_header {
 	text-align: left;
 }
@@ -76,6 +77,81 @@ img.btn_close {
     margin-top: 10px;
     text-align: left;
     width: 180px;
+}
+
+/* Chat Modal */
+#caller_info {
+    float: left;
+    margin-top: 10px;
+	width: 810px;
+}
+
+#caller_profile {
+    float: left;
+    height: 165px;
+    text-align: left;
+    width: 175px;
+}
+
+#caller_profile img{
+    border: 1px solid #CCCCCC;
+    margin-bottom: 10px;
+    padding: 4px;
+    width: 155px;
+}
+
+.talk_tiles {
+    display: block;
+    float: left;
+    height: 75px;
+    overflow: hidden;
+    width: 390px;
+}
+
+.talk_tiles li {
+	float: left;
+	margin: 0px 3px 1px 0px;
+}
+
+#talk_stream {
+	float: left;	
+}
+
+#talk_actions {
+    float: left;
+	font-size: 20px;
+    height: 165px;
+    width: 190px;
+}
+
+#talk_actions span{
+    color: #6699CC;
+    display: block;
+    font-size: 40px;
+    margin-top: 15px;
+}
+
+#talk_error {
+    font-size: 12px;
+    height: 12px;
+    margin-top: 18px;
+}
+
+#talk_buttons {
+	width: 190px; 
+	margin-top: 15px;
+}
+
+.streams {
+	width: 220px;
+	height: 165px;
+	float: left;
+	border: 1px solid;
+}
+
+#caller_interests {
+    float: left;
+    margin: 20px 0 10px;
 }
 
 /* Index Page */

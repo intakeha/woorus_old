@@ -16,7 +16,6 @@ session_start();
 
 $user_id = $_SESSION['id'];
 $offset = validateOffset(strip_tags($_POST["offset"])); 
-
 //max offset?
 
 //---testing---//

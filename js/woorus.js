@@ -927,7 +927,17 @@ $(document).ready(function(){
 	$(document).bind("active.idleTimer", function(){
 		 // post when the user becomes active again
 		 $.post("actions/updateOnlineStatus.php", {onlineStatus: "1" } );
-		 $('#profile_online_status').removeClass('away_status');
+		 $('#profile_online_status').removeClass('away_status  offline_status');
+	});
+
+	// Answer or ignore calls	
+	$('#answer').click(function() {
+		session.signal();
+	});
+	
+	$('#ignore').click(function() {
+		$('#modal_answer').fadeOut();
+		$('.ring_tone').flash().remove();
 	});
 
 });
@@ -969,37 +979,6 @@ var RecaptchaOptions = {
 function decodeHTML(encodedStr) {
 	var decodedStr = $('<textarea />').html(encodedStr).val();
 	return decodedStr;			
-};
-
-// Modal popup function
-function modal(modalID, modalWidth, topMargin){
-
-	//Fade in the Popup and add close button
-	$(modalID).fadeIn().css({ 'width': modalWidth }).prepend('<a href="#" class="close"><img src="/images/global/close_modal.png" class="btn_close" title="Close Window" alt="Close" /></a>');
-
-	//Define margin for center alignment (vertical   horizontal) - we add 80px to the height/width to accomodate for the padding  and border width defined in the css
-	//var popMargTop = ($(modalID).height() + 80) / 2;
-	var popMargLeft = ($(modalID).width() + 80) / 2;
-
-	//Apply Margin to Popup
-	$(modalID).css({
-		//'margin-top' : -popMargTop,
-		'margin-top' : topMargin+'px',
-		'margin-left' : -popMargLeft
-	});
-
-	//Fade in Background
-	$('body').append('<div id="fade"></div>'); //Add the fade layer to bottom of the body tag.
-	$('#fade').css({'filter' : 'alpha(opacity=80)'}).fadeIn(); //Fade in the fade layer - .css({'filter' : 'alpha(opacity=80)'}) is used to fix the IE Bug on fading transparencies 
-
-	return false;
-
-};
-
-// Function to clear messages modal prior to loading receipient's info
-function clearModalMessages(){
-	$('#message_box, input[name=user_id_mailee]').val('');
-	$('#message_error').text('');
 };
 
 // Function used by imgAreaSelect to preview thumbnail	
