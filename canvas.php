@@ -18,8 +18,7 @@
 	<script type="text/javascript" src="js/jquery.SWFObject.js"></script> 
     <script type="text/javascript" src="js/jstz.min.js"></script> 
     <script type="text/javascript" src="js/woorus.js"></script>
-    <script src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
-    <script src="http://staging.tokbox.com/v0.91/js/TB.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="http://staging.tokbox.com/v0.91/js/TB.min.js"></script>
 
 	<?php 
 	    include_once('actions/opentok/createSession.php');
@@ -44,24 +43,29 @@
         session.connect(apiKey, token);
         
         session.addEventListener('sessionConnected', sessionConnectedHandlerSelf);
-        session.addEventListener('signalReceived', signalHandler);
-     
+		session.addEventListener('signalReceived', signalHandler);
+		session.addEventListener('streamCreated', streamCreatedHandler);
+	 
         function sessionConnectedHandlerSelf(event) {
-            $('#talk_error').text('You are connected to your own session');
+            return;
         };
         
         function sessionConnectedHandlerOther(event) {
             session.signal();
         };
         
+		function streamCreatedHandler(event) {
+			subscribeToStreams(event.streams);
+		}
+		
         function signalHandler(event) {
+			var subscriberProps = {width: 220, height: 165};
 			if ($('input[name=caller]').val() == 1){
 				if (event.fromConnection.connectionId != session.connection.connectionId) {
 					$('#modal_calling').fadeOut();
-					$('.ring_tone').flash().remove();
+					$('.ring_tone').flash().remove();				
 					modal('#modal_talk','810','200');
-					$('input[name=caller]').val(0);
-					$('#talk_error').text("Signal received from callee.");
+					session.publish('stream_caller', subscriberProps);
 				};
 			} else {
 				if (event.fromConnection.connectionId != session.connection.connectionId) {
@@ -71,10 +75,21 @@
 					$('#modal_answer').fadeOut();
 					$('.ring_tone').flash().remove();
 					modal('#modal_talk','810','200');
-					$('#talk_error').text("Signal received from caller.");
+					session.publish('stream_caller', subscriberProps);
 				};
 			};
         };
+		
+		function subscribeToStreams(streams) {
+			if (streams.length > 0){
+				for (var i = 0; i < streams.length; i++) {
+					var subscriberProps = {width: 220, height: 165};
+					if (streams[i].connection.connectionId != session.connection.connectionId) {
+						session.subscribe(streams[i], 'stream_callee', subscriberProps);
+					};
+				};
+			};
+		}
         
         function disconnect(){
             session.disconnect();

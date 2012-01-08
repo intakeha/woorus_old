@@ -145,6 +145,7 @@ img.btn_close {
 .streams {
 	width: 220px;
 	height: 165px;
+	display: block;
 	float: left;
 	border: 1px solid;
 }

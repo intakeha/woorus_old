@@ -5,8 +5,8 @@
             <div><span>John</span><br />San Francisco, CA</div>
         </div>
         <div id="talk_stream">
-            <div id="stream_callee" class="streams"></div>
-            <div id="stream_caller" class="streams"></div>
+            <div class="streams"><div id="stream_callee"></div></div>
+            <div class="streams"><div id="stream_caller"></div></div>
         </div>
         <div id="talk_actions">
             <div>Time Remaining<br /><span>5:00</span><div id="talk_error">John is blocked.</div></div>

@@ -112,6 +112,7 @@
 					session.connect(apiKey, token);
 					session.addEventListener('sessionConnected', sessionConnectedHandlerOther);
 					session.addEventListener('signalReceived', signalHandler);
+					session.addEventListener('streamCreated', streamCreatedHandler);
 				};
 			},"json");
 		});
